@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012H Assignment 2: My Mini Proof Assistant</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script src="prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+          <small>Honors Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Assignment 2
+          <span style="color:#660066">My Mini Proof Assistant</span>
+        </h3>
+
+        <!-- Objectives and Learning Outcomes -->
+        <div class="card mb-4">
+          <div class="card-body" id="objective">
+            <h3 class="card-title">Changelogs</h3>
+            <ul>
+              <li>2020-10-29 1:00</li>
+              Fix the test case 4 of the revealed test cases. Now this test case will test all the error messages correctly. You are recommended to test your submission again on ZINC. 
+              <li>2020-10-23 14:00</li>
+              Release the input of the revealed test cases. Please see the download part.
+              <li>2020-10-12 21:00</li>
+              Fix memory leak in <code>main.cpp</code> and demo programs. <strong>Please download the new <code>main.cpp</code> or add <code>delete_formula(stmt);</code> after line 224: <code>cout << "Proof aborted" << endl;</code> in the <code>else</code> case</strong>.
+              <li>2020-10-07 15:00</li>
+              Fix and add more description for the tasks. 
+              <li>2020-10-06 16:00</li>
+              Fix the bug in the demo program that using <code>destruct</code> will lead to crash.
+            </ul>
+          </div>
+          <div class="card-footer text-muted">
+            End of Objective and Learning Outcomes
+          </div>
+        </div>
+
+        <!-- FAQ section -->
+        <!-- ### Complete FAQ section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="faq">
+            <h3 class="card-title">FAQ</h3>
+            <h4>Frequently Asked Questions</h4>
+            <p class="card-text">This section will be expanded as your fellow classmates ask more questions about this
+              programming assignment. It is in your interest to <strong>check this section regularly for updates and
+                clarifications</strong> <em>even if you have already submitted your work then</em>.</p>
+            <!-- <p><em>This section is currently empty.</em></p> -->
+            <ul>
+              <li>What's the meaning of "finish the subgoal"?</li>
+              <p>It means to deallocate the current subgoal and switch the focus to the next one. </p>
+              <li>About "create 2 (or n) subgoals"</li>
+              <p>When we say "to create 2 new subgoals", the original subgoal is conceptually closed. Or you can just create one new subgoal and modify the original one. </p>
+              <li>Do we need to search the global context for "contradiction"?</li>
+              <p>In the description we also need to scan the proven results for "F". But it's impossible to prove "F" so "F" cannot appear in the proven results. Therefore actually you don't need to search the proven results. </p>
+              <li>What if there is naming conflict between premises and proven results?</li>
+              <p>There will be no such test cases. You can let the theorems in the premises have higher priority.</p>
+            </ul>
+          </div>
+          <div class="card-footer text-muted">
+            End of FAQ
+          </div>
+        </div>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the assignment content here ### -->
+          <img class="card-img-top" src="images/proof-assistant.png" alt="An interactive session in CoqIDE" />
+
+          <div class="card-body" id="introduction">
+            <p class="card-text"><small>Source: <a href="https://en.wikipedia.org/wiki/Proof_assistant"
+                  target="_blank">https://en.wikipedia.org/wiki/Proof_assistant</a></small></p>
+            <p class="card-text"><em>Did you know that computers can not only assist humans in computation, but also in
+                proofs?</em></p>
+            <h3 class="card-title">Introduction</h3>
+            <p class="card-text">In this programming assignment, we will be implementing a minimal <a
+                href="https://en.wikipedia.org/wiki/Proof_assistant" target="_blank">proof assistant</a> for <a
+                href="https://en.wikipedia.org/wiki/Propositional_calculus" target="_blank">propositional logic</a>,
+              using our knowledge of pointers, linked lists, and dynamic memory (de)allocation. With this tool, the
+              users can develop a formal proof conveniently. Don't be afraid because this is more like an editor instead
+              of an auto prover. And if you really cannot understand the formal proof, it is still possible to complete the tasks. </p>
+            <br><h4>What is a proof assistant?</h4>
+            <p>Proof assistants, also known as interactive theorem provers, are computer programs that assist humans in
+              the development, verification and construction of large-scale rigorous proofs that are often too tedious
+              to manually check by hand. They often provide the user with a much higher level of confidence in the
+              correctness of his/her proofs compared to pen-and-paper arguments since every logical step of the proof,
+              no matter how small, is checked by the machine right down to the axioms.</p>
+            <!-- <p>The first major milestone achieved through the use of a proof assistant was a formal (i.e. computerized) proof of the <a href="https://en.wikipedia.org/wiki/Four_color_theorem" target="_blank">four-color theorem</a> in the <a href="https://coq.inria.fr" target="_blank">Coq proof assistant</a>. The problem had previously stumped mathematicians for well over a century despite a similar (but much simpler) result - the <a href="https://en.wikipedia.org/wiki/Five_color_theorem" target="_blank">five-color theorem</a> - having been proved in the 1800s. The full proof (in Coq) involves the analysis of hundreds of possible cases and is therefore infeasible to review manually; however, since the kernel (i.e. trusted core) of Coq is relatively small, it is extremely unlikely for Coq to contain bugs that could compromise the soundness of this proof. As of today, this mechanized proof of the four-color theorem is generally accepted by computer scientists and mathematicians alike.</p> -->
+            <!-- <p>Since then, proof assistants have found various uses in both theoretical and practical computer science: in academia, proof assistants are often used to conduct and advance <a href="https://en.wikipedia.org/wiki/Programming_language_theory" target="_blank">programming language research</a>, and in industry, <a href="https://en.wikipedia.org/wiki/Electronic_design_automation#Analysis_and_verification" target="_blank">hardware verification</a>. More recently, <a href="https://xenaproject.wordpress.com" target="_blank">a growing minority of pure mathematicians are beginning to realize the potential of proof assistants in tertiary mathematics education and mathematical research</a>.</p> -->
+            <br><h4>Propositional logic</h4>
+            <h5>Atoms</h5>
+            <p>A proposition is something that we could attempt to provide a proof of. For example, the following
+              statements are said to express propositions:</p>
+            <ul>
+              <li>The sun is made of plasma</li>
+              <li>The moon is made of cheese</li>
+              <li>2 + 2 = 4</li>
+              <li>2 + 2 = 5</li>
+              <li>The <a href="https://en.wikipedia.org/wiki/Riemann_hypothesis" target="_blank">Riemann Hypothesis</a>
+                is true</li>
+              <li>The <a href="https://www.haskell.org" target="_blank">Haskell</a> programming language is type-safe
+                (i.e. programs that compile can never encounter a runtime error) as long as no unsafe features such as
+                <code>undefined</code> or unsafe coercions are used</li>
+            </ul>
+            <p>And the following do not:</p>
+            <ul>
+              <li>What is your name?</li>
+              <li>Remember to submit this programming assignment by the stipulated deadline</li>
+              <li>Go clean the dishes!</li>
+            </ul>
+            <p>Propositions that cannot be further decomposed from a purely logical perspective are called
+              <strong>atom</strong>s. An atom (i.e. a propositional variable) is often represented by a single capital
+              letter, e.g. <strong><em>P</em></strong>.</p>
+            <h5>Truth and Falsehood</h5>
+            <p>Apart from atoms, it is often convenient to define two additional notions:</p>
+            <ul>
+              <li>The trivially true proposition, also known as a <strong>tautology</strong>, is written as ⊤</li>
+              <li>Falsehood, also known as a <strong>contradiction</strong>, is written as ⊥</li>
+            </ul>
+            <p>Although they seems to be trivial, they are actually frequently used in our proofs.</p>
+            <h5>Negation</h5>
+            <p>We can also express the opposite side of a statement. If <strong><em>P</em></strong> is a proposition,
+              then <strong>¬<em>P</em></strong> is its negation.</p>
+            <h5>Connectives</h5>
+            <p>We can combine existing propositions (recursively) using <strong>logical connectives</strong> to create
+              new propositions. For example:</p>
+            <ul>
+              <li>Conjunction (And): Given two propositions <strong>P</strong> and <strong>Q</strong>,
+                <strong><em>P</em> ∧ <em>Q</em></strong> is the proposition that both <strong><em>P</em></strong> and
+                <strong><em>Q</em></strong> hold.</li>
+              <li>Disjunction (Or): <strong><em>P</em> ∨ <em>Q</em></strong> is the proposition that <em>at least</em>
+                one of <strong><em>P</em></strong> or <strong><em>Q</em></strong> hold (can be both).</li>
+              <li>Material Implication (If): <strong><em>P</em> → <em>Q</em></strong> has the following properties.</li>
+              <ul>
+                <li>Whenever <strong><em>P</em></strong> holds, <strong><em>Q</em></strong> must also hold.</li>
+                <li>When <strong><em>P</em></strong> does not hold, <strong><em>P</em> → <em>Q</em></strong> holds
+                  regardless of whether <strong><em>Q</em></strong> holds. We say in this case that the proposition
+                  <strong><em>P</em> → <em>Q</em></strong> is <a href="https://en.wikipedia.org/wiki/Vacuous_truth"
+                    target="_blank">vacuously true</a>, i.e. it is true but its truth does not tell us anything useful.
+                </li>
+              </ul>
+            </ul>
+            <p>Note that in the treatment of formal logic, the two sides of a material implication (called the
+              <strong>antecedent</strong> and <strong>consequent</strong> respectively) do <strong>NOT</strong> have
+              causal relation. For example, the following are considered valid implications:</p>
+            <ul>
+              <li>If the Riemann Hypothesis is true then Haskell is type-safe</li>
+              <li>If the moon is made of cheese then I am richer than Bill Gates</li>
+              <li>If the sun is made of plasma then there are infinitely many primes</li>
+            </ul>
+            <h5>Other Notes</h5>
+            <ul>
+              <li>The material implication <strong><em>P</em> → <em>Q</em></strong> is equivalent to <strong>¬<em>P</em>
+                  ∨ <em>Q</em></strong> (which can be proved by our system)</li>
+              <li>Following this property, the negation <strong>¬<em>P</em></strong> is equivalent to <strong><em>P</em>
+                  → ⊥</strong></li>
+            </ul>
+            <br><h4>Formal Proof</h4>
+            <p>In a proof, we start from a set of <strong>premises</strong> (assumptions) and would like to derive a
+              final <strong>conclusion</strong>. You may find that given a logical statement, we can always test the
+              correctness by test all the T/F assignment for all the atoms. But in formal proof, we aim at proving just
+              based on the form of the statements. Generally speaking, we make assumptions and derive new statements
+              based on proved or assumed ones. And to derive new statements, we only use a fixed set of rules of
+              inference. </p>
+            <p>A <a href="https://en.wikipedia.org/wiki/Rule_of_inference" target="_blank">rule of inference</a> is what
+              we accept as a valid step in logical reasoning. It is important to note that different logical systems may
+              have different rules of inference. For example, an inference rule called <strong>modus ponens</strong>
+              works as follows (example taken from <a
+                href="https://en.wikipedia.org/wiki/Propositional_calculus#Explanation" target="_blank">Wikipedia</a>):
+            </p>
+            <ul>
+              <li>If it's raining then it's cloudy.</li>
+              <li>It's raining.</li>
+              <li><em>Therefore</em>, it's cloudy.</li>
+            </ul>
+            <p>The first two bullet points are <strong>premises</strong>, i.e. what we know and/or assume to be true.
+              The third bullet point (starting with "therefore") is the <strong>conclusion</strong>.</p>
+            <p>More generally, given any two propositions of the <em>form</em> <strong><em>P</em> → <em>Q</em></strong>
+              and <strong><em>P</em></strong>, we can <strong>deduce</strong> <strong><em>Q</em></strong>. This rule of
+              inference can also be written as follows in <strong>inference rule notation</strong>:</p>
+            <p><img src="images/A_implies_B.svg" alt="Modus ponens" /><br /><img src="images/A.svg"
+                alt="Modus ponens" /><br /><img src="images/B.svg" alt="Modus ponens" /></p>
+            <p>Or, more succinctly: <img src="images/modus_ponens.svg" alt="Modus ponens" /> (the names of atoms are
+              immaterial so we may freely interchange P, Q with A, B or vice versa.)</p>
+            <p>Some other common rules of inference include:</p>
+            <ul>
+              <li>Conjunction introduction: <img src="images/conjunction_introduction.svg"
+                  alt="Conjunction introduction" /></li>
+              <li>Conjunction elimination (left): <img src="images/conjunction_elimination.svg"
+                  alt="Conjunction elimination (left)" />. Similarly for the right.</li>
+              <li>Disjunction introduction (left): <img src="images/disjunction_introduction.svg"
+                  alt="Disjunction introduction (left)" />. Similarly for the right.</li>
+              <li>Disjunction elimination: <img src="images/disjunction_elimination.svg"
+                  alt="Disjunction elimination" /></li>
+            </ul>
+            <p>Note that this list is not meant to be exhaustive by any means. And the inference rules in our system are
+              slightly different with these ones (which will be introduced later).</p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Introduction
+          </div>
+        </div>
+
+        <!-- Objectives and Learning Outcomes -->
+        <div class="card mb-4">
+          <div class="card-body" id="objective">
+            <h3 class="card-title">Objective and Learning Outcomes</h3>
+            <p class="card-text">The objective of this assignment is to provide you practice on structures, pointers,
+              linked lists and dynamic memory (de)allocation.</p>
+            <p class="card-text">Upon completion of this assignment, you should be able to:</p>
+            <ol>
+              <li>Use structures to group data together</li>
+              <li>Store, manage and manipulate data using pointers and linked lists</li>
+              <li>Manage memory properly in your program using <code>new</code> / <code>delete</code></li>
+              <li>Construct a program towards the OOP style</li>
+            </ol>
+          </div>
+          <div class="card-footer text-muted">
+            End of Objective and Learning Outcomes
+          </div>
+        </div>
+
+        <!-- Using MMPA -->
+        <div class="card mb-4">
+          <div class="card-body" id="using-mmpa">
+            <h3 class="card-title">Using MMPA</h3>
+            <p><em>From this point onwards, "My Mini Proof Assistant" will be abbreviated as MMPA.</em></p>
+            <p>In order to implement MMPA, you will need a basic understanding of how MMPA works, so here we go.</p>
+            <p>First of all, go to the <a href="#download">Download</a> section and download the demo program. Make sure
+              you download the correct demo program for your operating system. Then execute the demo program to start
+              following this brief tutorial on using MMPA.</p>
+              <br><h4>Syntax</h4>
+            <p>In MMPA, there are three things: <em>identifiers</em>, <em>propositional formulae</em> and
+              <em>tactics</em>.</p>
+            <h5>Identifiers</h5>
+            <p>An identifier in MMPA is the name of a theorem or hypothesis (premise). An identifier is considered valid
+              if all of the following conditions are met:</p>
+            <ul>
+              <li>It is at least one character long</li>
+              <li>The first character is a lowercase English letter (<code>a-z</code>) or an underscore (<code>_</code>)
+              </li>
+              <li>Every other character is an English letter (<code>a-zA-Z</code>), digit (<code>0-9</code>) or
+                underscore (<code>_</code>)</li>
+            </ul>
+            <p>So the following are valid identifiers:</p>
+            <ul>
+              <li><code>hyp</code></li>
+              <li><code>hP</code></li>
+              <li><code>hQ</code></li>
+              <li><code>h2_LKSJ298374__</code></li>
+              <li><code>qQQQQQhahaAHAHAHA298374923</code></li>
+              <li><code>_HP</code></li>
+            </ul>
+            <p>And the following are not:</p>
+            <ul>
+              <li><code>HP</code></li>
+              <li><code>HQ</code></li>
+              <li><code>3433hsjdklfjsl</code></li>
+              <li><code>H_A_H_A</code></li>
+            </ul>
+            <br><h5>Propositional Formulae</h5>
+            <p>Since it is difficult to type the special symbols found in propositional logic, we use their ASCII
+              equivalents instead:</p>
+            <ul>
+              <li>Truth: <code>T</code></li>
+              <li>Falsehood: <code>F</code></li>
+              <li>Atom: any single uppercase English letter <em>except</em> <code>T</code> / <code>F</code>, e.g.
+                <code>P</code></li>
+              <li>Conjunction: <code>/\</code></li>
+              <li>Disjunction: <code>\/</code></li>
+              <li>Implication: <code>-&gt;</code></li>
+              <li>Negation: <code>~</code></li>
+            </ul>
+            <br><h5>Precedence and Associativity</h5>
+            <p><code>~</code> has highest precedence of all, followed by <code>/\</code>, then <code>\/</code> and
+              finally <code>-></code>. So, for example, <code>~P /\ Q \/ R -&gt; S</code> should be interpreted as
+              <code>(((~P) /\ Q) \/ R) -&gt; S</code>. Of couse, brackets override any and all operator precedence rules
+              as usual.</p>
+            <p>Furthermore, even though <code>(P /\ Q) /\ R</code> and <code>P /\ (Q /\ R)</code> are logically
+              equivalent and therefore we can often write <code>P /\ Q /\ R</code> unambiguously on paper, we still need
+              to define an <strong>associativity</strong> for binary connectives for the sake of the computer. In MMPA,
+              all binary connectives are <em>right</em>-associative, so <code>P /\ Q /\ R</code> is
+              <code>P /\ (Q /\ R)</code>, and similarly for disjunction and implication.</p>
+            <!-- <p>Before we move on to tactics, a quick note about negation: as described above in the Introduction section, <code>~P</code> in MMPA is just syntactic sugar for <code>P -&gt; F</code>.</p> -->
+            <br><h5>Tactics</h5>
+            <!-- <p>A tactic is a procedure that often corresponds to some logical step(s) of deduction on paper. In many (but not all) real-world proof assistants which double as <a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank">functional programming language</a>s, the application of deduction steps corresponds to the construction of (part of) a program via <a href="https://en.wikipedia.org/wiki/Curry–Howard_correspondence" target="_blank">Curry-Howard correspondence</a>. So, in these systems, tactics are literally <em>meta</em>-programs that construct programs in the core language. But note that this correspondence does not apply to MMPA.</p> -->
+            <!-- <p>In MMPA, we only have a fixed set of tactics, and the syntax of each tactic is slightly different so we will not cover them here. Instead, we will motivate their use through examples in the next subsection.</p> -->
+            <p>A tactic is a procedure that often corresponds to some logical step(s) of deduction on paper. In MMPA,
+              the available tactics are different from the reference rules mentioned in the introduction. We will
+              motivate their use through examples in the next subsection.</p>
+              <br><h5>A note on the parser</h5>
+            <p>Note that the parser for MMPA is <em>optimistic</em>, meaning that if you feed it malformed input, it may
+              lead to weird behavior (or a program crash!).</p>
+            <p>In this programming assignment, all the parsing and pretty-printing have already been implemented for you
+              so you do not have to worry about handling syntactically invalid input, though most certainly, you will be
+              asked to handle other forms of invalid input (more on that later).</p>
+              <br><h4>Modus Ponens</h4>
+            <!-- <p>Start executing the demo program if you have not done so already. Type <code>B</code> to browse through the list of proven theorems and you will see nothing printed out at this stage (since we haven't proven anything yet). But, soon, this list will be populated with theorems - by you!</p>
+              <p>Type <code>P</code> to prove a theorem. Enter <code>p_implies_self</code> (or any other valid identifier) for the name of the theorem. The statement we will be proving is <code>P -&gt; P</code>, namely, that any proposition implies itself. Now you should see the following <strong>proof state</strong>:</p>
+              <pre>1 subgoal(s) remaining.
+Current focused subgoal:
+________________________________________________________________________________
+P -> P</pre>
+              <p>The proof state consists of <strong>subgoal</strong>s where each subgoal is a thing you are trying to prove (which always starts at 1 at the beginning of a proof, but may increase or decrease as you progress through the proof). Each subgoal consists of a list of <strong>premise</strong>s, i.e. stuff you know / assume to be true, above the line, followed by the <strong>conclusion</strong> you are trying to prove below the line. So now, you don't know anything yet and you're trying to prove that <code>P</code> implies itself.</p>
+              <p>Recall from pen and paper mathematics that to prove a theorem of the form "if P then Q", we assume P and try to deduce Q. So in our case of <code>P -&gt; P</code>, let us assume <code>P</code> to be true and try to deduce <code>P</code>. We do this by using the <code>intro</code> tactic as follows:</p>
+              <p><pre><code>&gt; intro hP</code></pre></p>
+              <p>You may safely replace <code>hP</code> with any valid identifier. Also, do <strong>NOT</strong> type the leading <code>&gt;</code> - it's just there to represent the prompt in MMPA (like in the command line).</p>
+              <p>Here, we assume that <code>P</code> is true and label our hypothesis with the name <code>hP</code> (or whatever identifier you chose). So now, you should see the following proof state:</p>
+              <p><pre><code>1 subgoal(s) remaining.
+Current focused subgoal:
+hP : P
+________________________________________________________________________________
+P</code></pre></p>
+              <p>Notice how the conclusion we're trying to prove has changed to just <code>P</code>. More importantly, notice that there is now a <code>hP : P</code> above the line - this is our newly added premise <code>hP</code> of "type" <code>P</code>, i.e. <code>hP</code> is the statement that <code>P</code> holds.</p>
+              <p>Okay, so now we know that <code>P</code> holds and we want to prove <code>P</code>. This should be trivial, and it is - we can just <code>apply</code> our hypothesis to prove our desired conclusion:</p>
+              <p><pre><code>&gt; apply hP</code></pre></p>
+              <p>MMPA should say that there are no subgoals remaining and that our theorem <code>P -&gt; P</code> has been added to the list of proven results. Now type <code>B</code> again and you should see the following:</p>
+              <p><pre><code>p_implies_self : P -> P</code></pre></p>
+              <p>Congratulations - you have proven a theorem named <code>p_implies_self</code> stating that (any proposition) <code>P</code> must imply itself!</p>
+              <p>You've just learned two new tactics: <code>intro</code> and <code>apply</code>. Below are some exercises that, while not compulsory by any means, may be useful in helping you familiarize yourself with how MMPA works, so you should definitely try to work on them. Or, if you're lazy, <em>at least</em> view the solutions given and enter them into the demo program line by line to observe how the proof state changes at each step of the proof.</p>
+              <h5>Exercise</h5>
+              <p>Try proving the statement <code>P -&gt; Q -&gt; P</code> using a combination of <code>intro</code> and <code>apply</code>. You may name the theorem whatever you like. <a href="files/p_imp_q_imp_p.txt" target="_blank">Solution</a></p> -->
+            <!-- <h4>Modus Ponens</h4> -->
+            <p>Let us prove Modus Ponens demonstrated in the introduction. In MMPA, we put all the premises and target
+              conclusion into one statement: <code>premise_1 -> premise_2 -> ... -> premise_n -> conclusion</code>
+              (think why they are equivalent). In this case, we have <code>(P -&gt; Q) -&gt; P -&gt; Q</code>. In the
+              main menu, we choose <code>P</code>, enter a name for this proof, and enter the statement. </p>
+            <pre><code>1 subgoal(s) remaining.
+Current focused subgoal:
+________________________________________________________________________________
+(P -> Q) -> P -> Q</code></pre>
+            <p>Currently all the premises are encoded in the conclusion. We use <code>intro</code> tactic to extract
+              them. </p>
+            <ul>
+              <li><code>intro &lt;name_of_new_hyp&gt;</code>: If conclusion is of the form <code>P -> Q</code>, add
+                <code>P</code> to the premise and change the conclusion to <code>Q</code></li>
+            </ul>
+            <pre><code>&gt; intro hPQ
+&gt; intro hP</code></pre>
+            <p>which leaves us with the following proof state:</p>
+            <pre><code>1 subgoal(s) remaining.
+Current focused subgoal:
+hP : P
+hPQ : P -&gt; Q
+________________________________________________________________________________
+Q</code></pre>
+            <p>Now, you would probably like to perform <strong>forward reasoning</strong> as follows: "From
+              <code>P</code> and <code>P -&gt; Q</code>, deduce <code>Q</code> and we're done."</p>
+            <p>But, at least in the realm of proof assistants, it is often more natural to perform <strong>backwards
+                reasoning</strong> instead. That is, instead of deducing <code>Q</code> from <code>P</code> and
+              <code>P -&gt; Q</code>, we say, "Okay, we want to prove <code>Q</code> and we know that
+              <code>P -&gt; Q</code>. So it <em>suffices</em> to prove <code>P</code> instead, which holds by assumption
+              and we're done." In other words, we keep finding the prerequisites for proving the conclusion until the
+              prerequisites are the ones we have. If there are multiple prerequisites, we will have multiple subgoals to
+              prove.</p>
+            <p>Now we use <code>apply</code> tactic. </p>
+            <ul>
+              <li><code>apply &lt;name_of_exist_hyp&gt;</code>: If we have a premise <code>P -> Q</code> and the
+                conclusion is exactly <code>Q</code>, change the conclusion to <code>P</code>; If the premise is
+                <code>Q</code>, the (sub)proof is finished; If the premise is <code>P1 -> P2 -> ... -> Pn -> Q</code>,
+                create <code>n</code> subproofs where the <code>i</code>-th subproof has conclusion <code>Pi</code></li>
+            </ul>
+            <pre><code>> apply hPQ
+1 subgoal(s) remaining.
+Current focused subgoal:
+hP : P
+hPQ : P -> Q
+________________________________________________________________________________
+P
+Enter a tactic:
+> apply hP
+No more subgoals.
+Theorem added to existing results</code></pre>
+            <p>Note that <code>apply</code> used in this way is exactly modus ponens (and therefore a valid logical
+              deduction step), but in a backwards fashion. </p>
+            <!-- <h5>Exercises</h5>
+              <ol>
+                <li>Try to find a shorter way (i.e. fewer tactics) to prove <code>(P -&gt; Q) -&gt; P -&gt; Q</code> using a different combination of <code>intro</code> and <code>apply</code>. <a href="files/modus_ponens1.txt" target="_blank">Solution</a></li>
+                <li>Prove <code>(P -&gt; Q -&gt; R) -&gt; P -&gt; Q -&gt; R</code>. How many different ways can you prove it? <a href="files/modus_ponens2.txt" target="_blank">Solution</a></li>
+              </ol> -->
+              <br><h4>De Morgan's Law</h4>
+            <p>We will prove the De Morgan's Law <code>~(P /\ Q) -> ~P \/ ~Q</code> as the second example. </p>
+            <pre><code>h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q</code></pre>
+            <p>Similarly, let's see what can we do with the conclusion. Since this is a disjunction, if we can derive
+              <code>~P</code>, then <code>~P \/ &lt;something_else&gt;</code> must hold (which refer to disjunction
+              introduction). To do this, let's try <code>left</code> tactic. </p>
+            <ul>
+              <li><code>left (right)</code>: if the conclusion is a disjunction, change the conclusion to the left
+                (right) part of the original one.</li>
+            </ul>
+            <pre><code>> left
+1 subgoal(s) remaining.
+Current focused subgoal:
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P</code></pre>
+            <p>But this is not correct. If P is true and Q is false, we will have true premises but false conclusion. So
+              this tactic is not appropriate. </p>
+            <p>If there is no breakthrough from the the existing statements, we consider to introduce new premises. Here
+              we introduce the <code>excluded_middle</code> tactic. The intuition is that between a statement
+              <code>P</code> and its negation <code>~P</code>, exactly one of them is true. If we consider two cases and
+              can derive the conclusion by assume <code>P</code> and <code>~P</code> respectively, we can prove the
+              conclusion. </p>
+            <ul>
+              <li><code>excluded_middle &lt;name_of_new_hyp&gt; : &lt;statement&gt;</code>: create two subgoals, and add
+                the input statement and its negation to the premises respectively. </li>
+              <li><code>rotate &lt;n&gt;</code>: switch to the <code>n</code>-th subgoal next to the current one.</li>
+            </ul>
+            <pre><code>> excluded_middle h2 : P
+2 subgoal(s) remaining.
+Current focused subgoal:
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> rotate 1
+2 subgoal(s) remaining.
+Current focused subgoal:
+h2 : ~P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q</code></pre>
+            <p>The second subgoal is provable by <code>left</code>. For the first one, we similarly use
+              <code>excluded_middle h3 : Q</code> and easily prove the subgoal with <code>~Q</code>. Now we only have
+              one subgoal. </p>
+            <pre><code>1 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q</code></pre>
+            <p>We find that the premises cannot be all true, which means this cases is impossible. So we just need to
+              show that the premises lead to a contradiction which then can imply everything (by the definition of
+              material implication). Now we use <code>exfalso</code> tactic. </p>
+            <ul>
+              <li><code>exfalso</code>: change the conclusion to <code>F</code>. </li>
+            </ul>
+            <pre><code>> exfalso
+1 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+F</code></pre>
+            <p>Recall that <code>~(P /\ Q)</code> is equivalent to <code>(P /\ Q) -> F</code>. So we can use the
+              <code>apply</code> tactic. </p>
+            <pre><code>> apply h1
+1 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+P /\ Q</code></pre>
+            <p>To prove this conjuction, we need to show that both sides hold. Luckily we have them in the premises. Now
+              we use <code>split</code> tactic to set the new goal.</p>
+            <ul>
+              <li><code>split</code>: if the conclusion is a conjunction, create 2 subgoals and set the conclusions as
+                the two sides of the conjunction respectively. </li>
+            </ul>
+            <pre><code>> split
+2 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+P
+Enter a tactic:
+> rotate 1
+2 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+Q</code></pre>
+            <p>Both subgoals trivially hold. </p>
+            <!-- <h4>left, right</h4>
+              <p>Obviously, if we know some proposition <code>P</code> to hold, then we must also know that either <code>P</code> or <code>Q</code> hold as well: <code>P -> P \/ Q</code>. To do this, perform an <code>intro</code> as usual. Then we have a hypothesis of "type" <code>P</code> and a conclusion <code>P \/ Q</code> we wish to prove. Since we know that the <code>left</code> branch of the disjunction holds, we can use the <code>left</code> tactic to change our desired conclusion to <code>P</code>, which then follows by assumption. Here is the full tactic proof:</p>
+              <p><pre><code>&gt; intro hP
+&gt; left
+&gt; apply hP</code></pre></p>
+              <p><code>right</code> does a similar thing. These two tactics correspond to disjunction introduction described above, but in a backwards fashion.</p>
+              <h5>Exercises</h5>
+              <p><em>N.B. if you take a wrong step and get stuck at any point, <code>abort</code> is a special tactic that gives up the proof immediately. A proof "completed" using <code>abort</code> is not recorded in the list of proven theorems.</em></p>
+              <ol>
+                <li>Prove <code>Q -&gt; P \/ Q</code>. <a href="files/left_right1.txt" target="_blank">Solution</a></li>
+                <li>Prove <code>T \/ F</code> (hint: a tautology is <code>trivial</code>ly true. Yes, that's a new tactic). <a href="files/left_right2.txt" target="_blank">Solution</a></li>
+                <li>Prove <code>Q -&gt; P \/ Q \/ R</code>. <a href="files/left_right3.txt" target="_blank">Solution</a></li>
+              </ol>
+              <h4>split</h4>
+              <p>When trying to prove a conjunction, <code>split</code> replaces your current conclusion with two new subgoals, one for the LHS of the conjunction and the other for the RHS. This tactic corresponds to conjunction introduction (but again, backwards).</p>
+              <h4>destruct</h4>
+              <p><code>destruct hyp as hyp1 hyp2</code> may do one of two things (when it succeeds), depending on the form of <code>hyp</code>:</p>
+              <ul>
+                <li>When <code>hyp : P /\ Q</code> is some conjunction, it adds two new hypotheses <code>hyp1 : P</code> and <code>hyp2 : Q</code> to the current subgoal. This corresponds to conjunction elimination.</li>
+                <li>When <code>hyp : P \/ Q</code> is some disjunction, it replaces the current subgoal with two (almost) identical subgoals, except in the first, a new hypothesis <code>hyp1 : P</code> is added and in the second, <code>hyp2 : Q</code> is added. This corresponds to disjunction elimination, i.e. case analysis in pen-and-paper proofs.</li>
+              </ul>
+              <p>You should now be able to prove some nontrivial propositions.</p> -->
+              <br><h4>Available Tactics</h4>
+            Here we show all the available tactics in MMPA (including the ones in the previous section).
+            <h5>Constructive Logic</h5>
+            <ul>
+              <li><code>trivial</code>: if the conclusion is <code>T</code>, finish the subgoal.</li>
+              <li><code>contradiction</code>: if the premises include <code>F</code>, finish the subgoal.</li>
+              <li><code>exfalso</code>: change the conclusion to <code>F</code>. </li>
+              <li><code>intro &lt;name_of_new_hyp&gt;</code>: If conclusion is of the form <code>P -> Q</code>, add
+                <code>P</code> to the premise and change the conclusion to <code>Q</code></li>
+              <li><code>apply &lt;name_of_exist_hyp&gt;</code>:</li>
+                <ul>
+                  <li>If we have a premise (<em>or proven theorem</em>)
+                    <code>P -> Q</code> and the conclusion is exactly <code>Q</code>, change the conclusion to
+                    <code>P</code>.</li>
+                  <li>If the premise is <code>Q</code> and the conclusion is exactly <code>Q</code>, the (sub)proof is finished.</li>
+                  <li>If the premise is
+                    <code>P1 -> P2 -> ... -> Pn -> Q</code> and the conclusion is exactly <code>Q</code>, create <code>n</code> subproofs where the <code>i</code>-th
+                    subproof has conclusion <code>Pi</code>.</li>
+                </ul>
+              <li>
+                <code>destruct &lt;name_of_exist_hyp&gt; as &lt;name_of_new_hyp_1&gt; &lt;name_of_new_hyp_2&gt;</code>:
+              </li>
+              <ul>
+                <li>if the premise (<em>or proven theorem</em>) <code>&lt;name_of_exist_hyp&gt;</code> is a conjunction
+                  <code>P /\ Q</code>, add <code>P</code> and <code>Q</code> to the premises.</li>
+                <li>if the premise (<em>or proven theorem</em>) <code>&lt;name_of_exist_hyp&gt;</code> is a disjunction
+                  <code>P \/ Q</code>, create 2 subgoals and add <code>P</code> and <code>Q</code> respectively to them (one subgoal has <code>P</code> and the other one subgoal has <code>Q</code>).
+                </li>
+              </ul>
+              <li><code>split</code>: if the conclusion is a conjunction <code>P /\ Q</code>, create 2 subgoals and set the conclusions as
+                the two sides of the conjunction respectively (one subgoal has conclusion <code>P</code> and the other one has <code>Q</code>). </li>
+              <li><code>left (right)</code>: if the conclusion is a disjunction, change the conclusion to the left
+                (right) part of the original one.</li>
+            </ul>
+            <h5>Classical Logic</h5>
+            <ul>
+              <li><code>excluded_middle &lt;name_of_new_hyp&gt; : &lt;statement&gt;</code>: create two subgoals, and add
+                the input statement and its negation to the premises respectively (if input <code>P</code>, one subgoal has <code>P</code> and the other one has <code>~P</code>). </li>
+              <li><code>by_contradiction &lt;name_of_new_hyp&gt;</code>: add the negation of the current conclusion to
+                the premises and change the conclusion to <code>F</code>.</li>
+            </ul>
+            <h5>Proof Management</h5>
+            <ul>
+              <li><code>rotate &lt;n&gt;</code>: switch to the <code>n</code>-th subgoal after the current one.</li>
+              <li><code>clear &lt;name_of_exist_hyp&gt;</code>: remove the premise.</li>
+              <li><code>abort</code>: give up the current proof and go back to the main menu.</li>
+            </ul>
+            <br><h4>More Exercises</h4>
+            <p>Here we provide more exercises for you if you want to get more familiar with the proving system. </p>
+            <ol>
+              <li>Prove that conjunction is commutative: <code>P /\ Q -&gt; Q /\ P</code>. <a
+                  href="files/more_exercises1.txt" target="_blank">Solution</a></li>
+              <li>Prove that disjunction is commutative: <code>P \/ Q -&gt; Q \/ P</code>. <a
+                  href="files/more_exercises2.txt" target="_blank">Solution</a></li>
+              <li>Prove that conjunction is associative: <code>P /\ Q /\ R -&gt; (P /\ Q) /\ R</code>;
+                <code>(P /\ Q) /\ R -&gt; P /\ Q /\ R</code>. <a href="files/more_exercises3.txt"
+                  target="_blank">Solution</a></li>
+              <li>Prove that disjunction is associative: <code>P \/ Q \/ R -&gt; (P \/ Q) \/ R</code>;
+                <code>(P \/ Q) \/ R -&gt; P \/ Q \/ R</code>. <a href="files/more_exercises4.txt"
+                  target="_blank">Solution</a></li>
+              <li>(Extended, no solution provided) Prove that conjunction distributes over disjunction, i.e.
+                <code>P /\ (Q \/ R) -&gt; P /\ Q \/ P /\ R</code> and its <strong>converse</strong> (the reverse
+                implication).</li>
+              <li>(Extended, no solution provided) Prove that disjunction also distributes over conjunction, but first
+                of all, what would the statement(s) even look like?</li>
+            </ol>
+          </div>
+          <div class="card-footer text-muted">
+            End of Using MMPA
+          </div>
+        </div>
+
+        <!-- Tactic Reference -->
+        <!-- <div class="card mb-4">
+            <div class="card-body" id="tactic-reference">
+              <h3 class="card-title">Tactic Reference</h3>
+              <p>This section describes the full set of tactics that MMPA supports (and therefore, the tactics you are required to implement in this programming assignment ;-).</p>
+              <p>You should not read this section from top to bottom; rather, you should refer to it as necessary as you are implementing each tactic in the tasks below.</p>
+              <h4 class="code-line" data-line-start=0 data-line-end=1 ><a id="Constructive_Logic_0"></a>Constructive Logic</h4> <p class="has-line-data" data-line-start="2" data-line-end="3">A branch of logic that does <em>not</em> assume the <a href="https://en.wikipedia.org/wiki/Law_of_excluded_middle" target="_blank">law of the excluded middle</a> or <a href="https://en.wikipedia.org/wiki/Double_negation#Elimination_and_introduction" target="_blank">double-negation elimination</a> (or any equivalent classical principle such as <a href="https://en.wikipedia.org/wiki/Peirce%27s_law" target="_blank">Peirce’s law</a>). So, for example, a mathematical proof that depends on the claim that “the <a href="https://en.wikipedia.org/wiki/Riemann_hypothesis" target="_blank">Riemann Hypothesis</a> must either be true or false” is non-constructive, though certain forms of “excluded middle”-like reasoning are still allowed, e.g. “every natural number is either even or odd”. By Curry-Howard correspondence (e.g. in Coq/Lean, but not applicable to MMPA), constructive proofs correspond to computable functional programs that can be executed on a machine.</p> <h5 class="code-line" data-line-start=4 data-line-end=5 ><a id="trivial_4"></a><code>trivial</code></h5> <p class="has-line-data" data-line-start="6" data-line-end="7">Closes the current subgoal if the conclusion is exactly <code>T</code>, i.e. a tautology that trivially holds.</p> <h5 class="code-line" data-line-start=8 data-line-end=9 ><a id="contradiction_8"></a><code>contradiction</code></h5> <p class="has-line-data" data-line-start="10" data-line-end="11">Closes the current subgoal if one of the premises or proven results is <code>F</code> (though, in principle, <code>F</code> should <em>never</em> appear in the list of proven results given that our system is logically consistent). This tactic corresponds to the <a href="https://en.wikipedia.org/wiki/Principle_of_explosion" target="_blank">principle of explosion</a> (<em>ex falso quodlibet</em> in Latin), namely, that anything follows from a contradiction.</p> <h5 class="code-line" data-line-start=12 data-line-end=13 ><a id="exfalso_12"></a><code>exfalso</code></h5> <p class="has-line-data" data-line-start="14" data-line-end="15">Unconditionally changes the conclusion to <code>F</code> in the current subgoal. Again, this is based on the principle of explosion - since anything follows from a contradiction, in order to prove any proposition <code>P</code>, it suffices to prove <code>F</code> instead.</p> <h5 class="code-line" data-line-start=16 data-line-end=17 ><a id="intro_16"></a><code>intro</code></h5> <p class="has-line-data" data-line-start="18" data-line-end="19">If the conclusion in the current subgoal is of the form <code>P -&gt; Q</code> (where <code>P</code>, <code>Q</code> may be any propositional formulae), <code>intro hyp</code> adds a premise <code>hyp : P</code> to the current context above the line and changes the conclusion to <code>Q</code>, provided that none of the previously introduced premises already have name <code>hyp</code>. This tactic corresponds to the following step on paper: to prove a statement of the form <code>P -&gt; Q</code>, we assume <code>P</code> and (try to) deduce <code>Q</code>.</p> <p class="has-line-data" data-line-start="20" data-line-end="21">Note that if <code>hyp</code> is the name of an already proved theorem but not the name of any local hypotheses, <code>intro hyp</code> still succeeds, with the local hypothesis <code>hyp</code> shadowing the global theorem <code>hyp</code>.</p> <h5 class="code-line" data-line-start=22 data-line-end=23 ><a id="apply_22"></a><code>apply</code></h5> <p class="has-line-data" data-line-start="24" data-line-end="25">If the conclusion in the current subgoal is <code>Q</code> and we have a hypothesis (or already proved theorem) <code>hyp</code> of the form <code>P_1 -&gt; P_2 -&gt; ... -&gt; P_n -&gt; Q</code>, <code>apply hyp</code> replaces the current subgoal with <code>n</code> subgoals for each of the <code>P_i</code>s. In the special case where <code>n = 0</code>, i.e. <code>hyp : Q</code>, the current subgoal is solved immediately and no new subgoals are generated. This tactic corresponds to the following argument on paper: since we want to prove <code>Q</code> and we know that <code>P_1</code>, <code>P_2</code>, …, <code>P_n</code> together imply <code>Q</code>, it suffices to prove each of the <code>P_i</code>s instead.</p> <h5 class="code-line" data-line-start=26 data-line-end=27 ><a id="destruct_26"></a><code>destruct</code></h5> <p class="has-line-data" data-line-start="28" data-line-end="29"><code>destruct hyp as hyp1 hyp2</code> (where <code>hyp</code> is some hypothesis in the current subgoal or a proven result) behaves in two different ways depending on the form of <code>hyp</code>:</p> <ul> <li class="has-line-data" data-line-start="30" data-line-end="31">If <code>hyp</code> is a conjunction, i.e. <code>hyp : P /\ Q</code> for some propositional formulae <code>P</code> and <code>Q</code>, <code>hyp1</code> and <code>hyp2</code> must be two distinct names not already taken by hypotheses in the current context. <code>destruct hyp as hyp1 hyp2</code> then adds two new hypotheses <code>hyp1 : P</code> and <code>hyp2 : Q</code> to the current context. This tactic corresponds to <a href="https://en.wikipedia.org/wiki/Conjunction_elimination" target="_blank">conjunction elimination</a></li> <li class="has-line-data" data-line-start="31" data-line-end="33">If <code>hyp</code> is a disjunction, i.e. <code>hyp : P \/ Q</code> for some propositional formulae <code>P</code> and <code>Q</code>, <code>hyp1</code> and <code>hyp2</code> must be two (not necessarily distinct) names not already taken by hypotheses in the current context. <code>destruct hyp as hyp1 hyp2</code> then replaces the current subgoal with two almost identical subgoals, except in the first, a new hypothesis <code>hyp1 : P</code> is added and in the second, a new hypothesis <code>hyp2 : Q</code> is added. This tactic corresponds to case analysis in paper proofs</li> </ul> <h5 class="code-line" data-line-start=33 data-line-end=34 ><a id="split_33"></a><code>split</code></h5> <p class="has-line-data" data-line-start="35" data-line-end="36">If the conclusion in the current subgoal is of the form <code>P /\ Q</code>, <code>split</code> replaces the current subgoal with two almost identical subgoals, except in the first, the conclusion is replaced with <code>P</code> and in the second, the conclusion is replaced with <code>Q</code>. This tactic corresponds to <a href="https://en.wikipedia.org/wiki/Conjunction_introduction" target="_blank">conjunction introduction</a>.</p> <h5 class="code-line" data-line-start=37 data-line-end=38 ><a id="left_37"></a><code>left</code></h5> <p class="has-line-data" data-line-start="39" data-line-end="40">If the conclusion in the current subgoal is of the form <code>P \/ Q</code>, <code>left</code> takes the left branch of the disjunction and changes the conclusion to <code>P</code>. This tactic corresponds to one side of <a href="https://en.wikipedia.org/wiki/Disjunction_introduction" target="_blank">disjunction introduction</a>.</p> <h5 class="code-line" data-line-start=41 data-line-end=42 ><a id="right_41"></a><code>right</code></h5> <p class="has-line-data" data-line-start="43" data-line-end="44">If the conclusion in the current subgoal is of the form <code>P \/ Q</code>, <code>right</code> takes the right branch of the disjunction and changes the conclusion to <code>Q</code>. This tactic corresponds to the other side of <a href="https://en.wikipedia.org/wiki/Disjunction_introduction" target="_blank">disjunction introduction</a>.</p> <h4 class="code-line" data-line-start=45 data-line-end=46 ><a id="Classical_Logic_45"></a>Classical Logic</h4> <p class="has-line-data" data-line-start="47" data-line-end="48">The branch of logic that mathematicians know and love. In particular, one may freely use proof by contradiction, or assume that the Riemann hypothesis is either true or false (without knowing which is actually the case).</p> <h5 class="code-line" data-line-start=49 data-line-end=50 ><a id="excluded_middle_49"></a><code>excluded_middle</code></h5> <p class="has-line-data" data-line-start="51" data-line-end="52">Given that <code>hyp</code> is not the name of an existing hypothesis in the current subgoal, <code>excluded_middle hyp : P</code> replaces the current subgoal with two almost identical subgoals, except in the first, a new hypothesis <code>hyp : P</code> is added and in the second, a new hypothesis <code>hyp : ~P</code> is added. This tactic corresponds to the <a href="https://en.wikipedia.org/wiki/Law_of_excluded_middle" target="_blank">law of the excluded middle</a> which enables a form of case analysis not available in constructive logic.</p> <h5 class="code-line" data-line-start=53 data-line-end=54 ><a id="by_contradiction_53"></a><code>by_contradiction</code></h5> <p class="has-line-data" data-line-start="55" data-line-end="56">Given that <code>hyp</code> is not the name of an existing hypothesis in the current subgoal, <code>by_contradiction hyp</code> works on any subgoal with conclusion <code>P</code> (where <code>P</code> may be any propositional formula at all) by replacing the conclusion with <code>F</code> and adding a hypothesis <code>hyp : ~P</code>. This corresponds to <a href="https://en.wikipedia.org/wiki/Proof_by_contradiction" target="_blank">proof by contradiction</a> which is based on <a href="https://en.wikipedia.org/wiki/Double_negation#Elimination_and_introduction" target="_blank">double negation elimination</a>.</p> <h4 class="code-line" data-line-start=57 data-line-end=58 ><a id="Proof_Management_57"></a>Proof Management</h4> <p class="has-line-data" data-line-start="59" data-line-end="60">These tactics do not correspond to any particular rule of deduction, but are included for convenience in proof development.</p> <h5 class="code-line" data-line-start=61 data-line-end=62 ><a id="rotate_61"></a><code>rotate</code></h5> <p class="has-line-data" data-line-start="63" data-line-end="64"><code>rotate n</code> (where <code>n</code> is any (possibly negative) integer) rotates the subgoals in the proof state by <code>n</code> units. This tactic can be used to focus on a different subgoal than the default one.</p> <h5 class="code-line" data-line-start=65 data-line-end=66 ><a id="clear_65"></a><code>clear</code></h5> <p class="has-line-data" data-line-start="67" data-line-end="68">Given that <code>hyp</code> is the name of an existing hypothesis in the current subgoal, <code>clear hyp</code> removes the hypothesis <code>hyp</code> from the local context. This can be useful for reducing visual clutter by removing useless premises</p> <h5 class="code-line" data-line-start=69 data-line-end=70 ><a id="abort_69"></a><code>abort</code></h5> <p class="has-line-data" data-line-start="71" data-line-end="72">A special tactic that gives up the current proof. The theorem given up on is not added to the list of proven results.</p>
+              <p>replace excluded_middle to F intro, add neg elim</p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Tactic Reference
+            </div>
+          </div> -->
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="tasks">
+            <h3 class="card-title">Tasks</h3>
+            <h4>Code Structure</h4>
+            <h5>Propositional Formulae</h5>
+            <p>In MMPA, each propositional formula is represented as an <a
+                href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">abstract syntax tree
+                (AST)</a>:</p>
+            <p>
+            <pre><code class="language-c++">struct Formula {
+  // The type of this formula
+  // A propositional formula is either a constant (T/F), atom (P/Q/R/etc.) or connective
+  // (/\ / \/ / ->)
+  enum Type { CONSTANT, ATOM, CONNECTIVE };
+  Type type;
+
+  // Name/symbol of this part of the formula
+  // This is at most 2 characters in length, excluding the trailing NUL byte
+  char name[3];
+
+  // Subformulae of this formula, if any (e.g. the subformulae of P -> Q are P and Q)
+  // These are encoded as left and right subtrees of the corresponding tree in C++
+  // For logical constants and atoms, both fields should be nullptr; otherwise, e.g. in
+  // P -> Q, the left subtree is P and the right subtree is Q
+  Formula *left;
+  Formula *right;
+};</code></pre>
+            </p>
+            <p>
+              You do <strong>not</strong> need to understand this structure in order to complete the programming
+              assignment (though you are more than welcome to, if you are interested in compiler and/or programming
+              language theory); suitable helper functions have been provided for you which should allow you to deal with
+              them abstractly as propositions.
+            </p>
+            <h5>List of proven theorems / list of premises</h5>
+            <p>The list of proven theorems, as well as the list of premises in each subgoal are represented via the
+              following structure:</p>
+            <p>
+            <pre><code class="language-c++">struct Theorem {
+  // The name of our theorem
+  char *name;
+  // The statement of our theorem
+  Formula *stmt;
+  // Other theorems
+  Theorem *next;
+};</code></pre>
+            </p>
+            <p>
+              This is just a <strong>singly linked list</strong> with each node storing the name of the theorem /
+              hypothesis, the
+              corresponding statement, and a pointer to the next theorem / hypothesis (or <code>nullptr</code> if the
+              given theorem / hypothesis is the last one).
+              Note in particular that the <code>name</code> field is expected to be dynamically allocated (or
+              <code>nullptr</code>).
+            </p>
+            <h5>Subgoals and Proof State</h5>
+            <p>Each subgoal is represented by the following structure:</p>
+            <p>
+            <pre><code class="language-c++">struct Context {
+  // List of local facts
+  Theorem *premises;
+  // Desired conclusion
+  Formula *conclusion;
+  // Previous/next subgoal
+  Context *prev;
+  Context *next;
+};</code></pre>
+            </p>
+            <p>
+              The <code>premises</code> data member is the list of hypotheses above the line in the given subgoal, and
+              <code>conclusion</code> is the conclusion below the line which we're trying to prove.
+              <code>prev</code> and <code>next</code> are pointers to the previous and next subgoals in the current
+              proof respectively, with the <code>prev</code> pointer of the first subgoal pointing towards the last
+              subgoal (i.e. we have a circular doubly linked list of subgoals).
+            </p>
+            <p>The proof state is then given by the following structure:</p>
+            <p>
+            <pre><code class="language-c++">struct ProofState {
+  // Current focused subgoal
+  Context *focus;
+};</code></pre>
+            </p>
+            <p>The <code>focus</code> data member should point to the current focused subgoal, which is <em>always</em>
+              the first subgoal in our circular doubly linked list (or <code>nullptr</code> if there are no subgoals
+              remaining).</p>
+              <br><h4>Utility Functions</h4>
+            <p>
+              As hinted earlier, the parsing and pretty-printing of propositional formulae, tactics, etc., have already
+              been implemented for you and you do not need to (and in fact should not) modify them in any way. The
+              functions are declared in <code>formula.h</code> and are listed as follows.
+            </p>
+            <p>
+            <pre><code class="language-c++">// Pretty-printer for propositional formulae
+void print_formula(const Formula *);
+
+// Parser for propositional formulae
+Formula *parse_formula(char *);
+
+// Identifier validator
+bool is_valid_id(const char *);</code></pre>
+            </p>
+            <p>Additionally, the following helper functions for manipulating <code>Formula</code>e are provided so you
+              should never need to manipulate the AST directly:</p>
+            <ul>
+              <li><code>void delete_formula(Formula *formula)</code>: Recursively deallocates memory previously
+                allocated to <code>formula</code></li>
+              <li><code>Formula *formula_deep_copy(const Formula *formula)</code>: Returns a deep copy of
+                <code>formula</code></li>
+              <li><code>bool formulae_equal(const Formula *formula1, const Formula *formula2)</code>: Checks whether
+                <code>formula1</code> and <code>formula2</code> are syntactically equal</li>
+              <li><code>bool formula_is_T(const Formula *formula)</code>: Returns whether <code>formula == T</code></li>
+              <li><code>Formula *formula_F()</code>: Allocates and returns a <code>Formula</code> representing bottom
+              </li>
+              <li><code>bool formula_is_disj(const Formula *formula)</code>: Returns whether the proposition is a
+                disjunction</li>
+              <li><code>Formula *&formula_disj_left(Formula *formula)</code>: Returns a reference to the left side of a
+                disjunction, or exits the program with an error otherwise</li>
+              <li><code>Formula *&formula_disj_right(Formula *formula)</code>: Returns a reference to the right side of
+                a disjunction, or exits the program with an error otherwise</li>
+              <li><code>bool formula_is_impl(const Formula *formula)</code>: Returns whether the proposition is an
+                implication</li>
+              <li><code>Formula *&formula_impl_antecedent(Formula *formula)</code>: Returns a reference to the
+                antecedent of an implication, or exits the program with an error otherwise</li>
+              <li><code>Formula *&formula_impl_consequent(Formula *formula)</code>: Returns a reference to the
+                consequent of an implication, or exits the program with an error otherwise</li>
+              <li><code>bool formula_is_conj(const Formula *formula)</code>: Returns whether the proposition is a
+                conjunction</li>
+              <li><code>Formula *&formula_conj_left(Formula *formula)</code>: Returns a reference to the left side of a
+                conjunction, or exits the program with an error otherwise</li>
+              <li><code>Formula *&formula_conj_right(Formula *formula)</code>: Returns a reference to the right side of
+                a conjunction, or exits the program with an error otherwise</li>
+              <li><code>bool formula_is_F(const Formula *formula)</code>: Returns whether <code>formula == F</code></li>
+              <li><code>Formula *formula_neg_of(Formula *formula)</code>: Given <code>P</code>, allocates and returns
+                <code>~P</code>. Keep in mind that <code>P</code> is <em>not</em> copied in the AST representation of
+                <code>~P</code>.</li>
+            </ul>
+            <p>The functions for printing the premises, theorems and subgoals are also given. They may be helpful for
+              you to implement other functions. </p>
+              <br><pre><code class="language-c++">void print_thms(const Theorem *thms)</code></pre>
+            <p>Given a list of hypotheses / proven theorems <code>thms</code>, print them to the console. Each theorem /
+              hypothesis should be displayed on a separate line, in the form <code>hyp : P</code> where <code>hyp</code>
+              is the theorem/hypothesis name and <code>P</code> its statement.</p>
+              <br><pre><code class="language-c++">void display_focus(const ProofState &amp;proof_state)</code></pre>
+            <p>
+              Display the current focused subgoal onto the console, i.e. print the list of hypotheses, followed by a
+              horizontal rule (consisting of <em>exactly</em> 80 underscores), followed by the conclusion to be proven.
+              <!-- Consult the demo program if in doubt. Again, make sure that your displayed output matches EXACTLY that of
+              the demo program; in particular, pay extra attention to newlines and whitespace. -->
+            </p>
+            <p>In the functions to be completed, you may also need to print some messages. Consult the demo program and compare your output with it in case of doubt. <strong>Note in particular
+              that your output must match EXACTLY that of the demo program, INCLUDING all whitespace and
+              newlines.</strong></p>
+              <br><h4>Task 1: Preliminaries (0%)</h4>
+            <p>
+              Implement each of the functions described below.
+              Note that <strong>even though there is no explicit allocation of marks for this task, these functions are
+                essential for the basic functioning of MMPA so implementing them incorrectly may severely impact your
+                marks in subsequent tasks</strong>.
+              Anyway, most of these functions should be straightforward to implement and should serve as a warm-up for
+              subsequent tasks.
+            </p>
+            <br><pre><code class="language-c++">void delete_thms(Theorem *thms)</code></pre>
+            <p>Recursively deallocates the memory allocated to the given linked list of theorems / hypotheses. You need to deallocate <strong>all</strong> the elements in the linked list.
+              <em>Remember in particular that the <code>name</code> field is also assumed to be dynamically allocated
+                (or <code>nullptr</code>) so you will have to delete it as well (and make sure you use the correct
+                variant of delete ;-).</em></p>
+                <br><pre><code class="language-c++">const Theorem *id_exists(const char *id, const Theorem *thms)</code></pre>
+            <p>Returns the pointer to a theorem / hypothesis with name <code>id</code> if it is present in
+              <code>thms</code> and <code>nullptr</code> otherwise.</p>
+              <br><pre><code class="language-c++">void init_proof(ProofState &amp;proof_state, Formula *stmt)</code></pre>
+            <p>Initialize the given <code>proof_state</code> with exactly 1 subgoal with no premises and
+              <code>stmt</code> as the conclusion to be proven. You may assume that <code>stmt</code> has already been
+              dynamically allocated for you; therefore, you do <em>not</em> need to perform a deep copy of it - just use
+              the given pointer.</p>
+              <br><pre><code class="language-c++">bool has_subgoals(const ProofState &amp;proof_state)</code></pre>
+            <p>Returns <code>true</code> if the given state contains at least 1 subgoal and <code>false</code>
+              otherwise.</p>
+              <br><pre><code class="language-c++">void add_thm_to_database(Theorem *&amp;thms, const char *name, Formula *stmt)</code></pre>
+            <p>
+              Add a theorem / hypothesis with name <code>name</code> and statement <code>stmt</code> to the head of the
+              given list <code>thms</code>.
+              Note that parameter <code>name</code> is statically allocated while the <code>name</code> field of a
+              theorem / hypothesis should be dynamically allocated so you will have to dynamically allocate a new buffer
+              and copy over the contents of <code>name</code> to your theorem / hypothesis.
+              On the other hand, you may assume that <code>stmt</code> has been dynamically allocated for you already.
+            </p>
+            <br><pre><code class="language-c++">int num_subgoals(const ProofState &amp;proof_state)</code></pre>
+            <p>Returns the number of subgoals in the current proof state.</p>
+            <br><pre><code class="language-c++">void clear_proof_state(ProofState &amp;proof_state)</code></pre>
+            <p>Clears the given proof state by removing (and deallocating) all subgoals, then setting the
+              <code>focus</code> to <code>nullptr</code>.</p>
+              <br><h4>Task 2: Tactics for constructive logic, Part I (24%)</h4>
+            <p>Preliminaries aside, let us now implement some of the simpler tactics related to constructive logic in
+              MMPA. You may wish to refer to the <a href="#tactic-reference">Tactic Reference</a> for more details if
+              necessary.</p>
+              <br><pre><code class="language-c++">void tactic_trivial(ProofState &amp;proof_state)</code></pre>
+            <p>Implement the <code>trivial</code> tactic. The current proof state is provided as argument. In addition,
+              you need to handle the following invalid inputs:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the tactic is applied where the conclusion to be proven is not <code>T</code>, print the message
+                <code>Tactic 'trivial' failed: conclusion is not 'T'</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_exfalso(ProofState &amp;proof_state)</code></pre>
+            <p>Implement the <code>exfalso</code> tactic. In addition, you should handle the following invalid input:
+            </p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_left(ProofState &amp;proof_state)</code></pre>
+            <p>Implement the <code>left</code> tactic. In addition, you should handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the tactic is applied to a conclusion that is not a disjunction, print the message
+                <code>Tactic 'left' failed: conclusion is not a disjunction</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_right(ProofState &amp;proof_state)</code></pre>
+            <p>Implement the <code>right</code> tactic. In addition, you should handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the tactic is applied to a conclusion that is not a disjunction, print the message
+                <code>Tactic 'right' failed: conclusion is not a disjunction</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_intro(ProofState &amp;proof_state, const char *hyp)</code></pre>
+            <p>Implement the <code>intro</code> tactic; <code>hyp</code> is the name of the hypothesis, e.g. as in
+              <code>intro hyp</code>. Note again that <code>hyp</code> is statically allocated so you'll need to make a
+              copy. In addition, you should handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the tactic is applied to a conclusion that is not an implication, print the message
+                <code>Tactic 'intro' failed: conclusion is not an implication</code>.</li>
+              <li>If the hypothesis name is already taken, print the message
+                <code>Tactic 'intro' failed: hypothesis name is already taken</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_split(ProofState &amp;proof_state)</code></pre>
+            <p>Implement the <code>split</code> tactic. In addition, handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the tactic is applied to a conclusion that is not a conjunction, print the message
+                <code>Tactic 'split' failed: conclusion is not a conjunction</code>.</li>
+            </ul>
+            <br><h4>Task 3: Tactics for constructive logic, Part II (28%)</h4>
+            <p>Implement 3 more tactics related to constructive logic. The marks for this task are calculated separately
+              from Task 2 since these tactics (except <code>contradiction</code>) are rather tricky to implement.</p>
+              <br><pre><code class="language-c++">void tactic_contradiction(ProofState &amp;proof_state, const Theorem *proven_results)</code></pre>
+            <p>Implement the <code>contradiction</code> tactic. <code>proven_results</code> is the list of currently
+              proven theorems. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If there is no hypothesis or proven theorem of "type" <code>F</code>, print the message
+                <code>Tactic 'contradiction' failed: no contradiction found in local or global context</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_destruct(ProofState &amp;proof_state, const Theorem *proven_results, const char *hyp, const char *hyp1, const char *hyp2)</code></pre>
+            <p>Implement the <code>destruct</code> tactic. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If <code>hyp</code> is not the name of an existing theorem / hypothesis, print the message
+                <code>Tactic 'destruct' failed: given hypothesis name not found in local or global context</code>.</li>
+              <li>If <code>hyp</code> is neither a conjunction nor disjunction, print the message
+                <code>Tactic 'destruct' failed: the given hypothesis is not a conjunction or disjunction</code>.</li>
+              <li>If either of <code>hyp1</code> or <code>hyp2</code> are already taken names by hypotheses in the local
+                context, print the message <code>Tactic 'destruct' failed: hypothesis name is already taken</code>.</li>
+              <li>If we are destructing over a conjunction but <code>hyp1</code> and <code>hyp2</code> are the same
+                name, print the message <code>Tactic 'destruct' failed: the two hypothesis names must be unique</code>.
+                <strong>This restriction does not apply to disjunctions.</strong></li>
+            </ul>
+            <p>Furthermore, it is EXTREMELY important (for the purposes of grading) that you get the order of hypotheses
+              right when adding them to the local context (i.e. they must match the demo program EXACTLY). For example,
+              given the following context:</p>
+            <p>
+            <pre><code>hAB : A /\ B
+hC : C
+hD : D
+________________________________________________________________________________
+E</code></pre>
+            </p>
+            <p><code>destruct hAB as hA hB</code> should give the following new context:</p>
+            <p>
+            <pre><code>hA : A
+hB : B
+hAB : A /\ B
+hC : C
+hD : D
+________________________________________________________________________________
+E</code></pre>
+            </p>
+            <br><pre><code class="language-c++">void tactic_apply(ProofState &amp;proof_state, const Theorem *proven_results, const char *hyp)</code></pre>
+            <p>Implement the <code>apply</code> tactic. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If <code>hyp</code> is not the name of any theorem / hypothesis, print the message
+                <code>Tactic 'apply' failed: hypothesis not found in local or global context</code>.</li>
+              <li>If the consequent of the hypothesis does not match the conclusion we are trying to prove, print the
+                message <code>Tactic 'apply' failed: hypothesis is not applicable to conclusion</code>.</li>
+            </ul>
+            <br><h4>Task 4: Tactics for classical logic (14%)</h4>
+            <p>If you managed to complete Task 3 then this task (and subsequent tasks) should be easy for you ;-)</p>
+            <br><pre><code class=";language-c++">void tactic_excluded_middle(ProofState &amp;proof_state, const char *hyp, Formula *ex_mid_P)</code></pre>
+            <p>Implement <code>excluded_middle</code>. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the hypothesis name is already taken, print the message
+                <code>Tactic 'excluded_middle' failed: hypothesis name is already taken</code>.</li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_by_contradiction(ProofState &amp;proof_state, const char *hyp)</code></pre>
+            <p>Implement <code>by_contradiction</code>. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If the hypothesis name is already taken, print the message
+                <code>Tactic 'by_contradiction' failed: hypothesis name is already taken</code>.</li>
+            </ul>
+            <br><h4>Task 5: Tactics for proof management (14%)</h4>
+            <pre><code class="language-c++">void tactic_rotate(ProofState &amp;proof_state, int n)</code></pre>
+            <p>Implement <code>rotate</code>. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+            </ul>
+            <br><pre><code class="language-c++">void tactic_clear(ProofState &amp;proof_state, const char *hyp)</code></pre>
+            <p>Implement <code>clear</code>. Handle the following invalid input:</p>
+            <ul>
+              <li>Do nothing if <code>focus</code> is <code>nullptr</code></li>
+              <li>If <code>hyp</code> is not the name of an existing hypothesis, print the message
+                <code>Tactic 'clear' failed: no hypothesis of the given name found</code>.</li>
+            </ul>
+            <br><h4>Memory Management (20%)</h4>
+            <p>For each test case, there will be additional score for memory management. Once you implement all of the
+              tasks above correctly, make sure to manage your memory properly since it
+              accounts for 20% of your assignment grade.</p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Description
+          </div>
+        </div>
+
+        <!-- Download section -->
+        <!-- ### Complete download section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Resources & Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="files/pa2_skeleton.zip">pa2_skeleton.zip</a></li>
+              <li>
+                Makefile
+                <ul>
+                  <li>Windows: <a href="files/make/windows/Makefile" target="_blank">Makefile</a></li>
+                  <li>Mac/Linux: <a href="files/make/nix/Makefile" target="_blank">Makefile</a></li>
+                </ul>
+              </li>
+              <li>
+                Demo executables:
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="files/windows/i386/main.exe" target="_blank">main.exe</a></li> -->
+                  <li>Windows: <a href="files/windows/x86_64/pa2_demo.exe" target="_blank">pa2_demo.exe</a></li>
+                  <li>macOS: <a href="files/mac/pa2_demo" target="_blank">pa2_demo</a></li>
+                  <li>Linux: <a href="files/linux/pa2_demo" target="_blank">pa2_demo</a></li>
+                </ul>
+                <em>Note for macOS: the executable will likely be blocked from executing. If you trust the
+                    executable, go to &quot;System Preferences &gt; Security &amp; Privacy &gt; General&quot; to unblock
+                    it.</em>
+              </li>
+              <li>Revealed test cases: <a href="files/revealed.zip">revealed.zip</a></li>
+            </ul>
+            <br><h4>Run demo program on CS lab 2 machines</h4>
+            <p>In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/assignments/pa2/files/linux/pa2_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x pa2_demo
+./pa2_demo
+</code></pre>
+            <!-- <p>
+              Create a standard Eclipse C++ project (MinGW gcc compiler on Windows) and add all files from the zip
+              package to it.
+            </p>
+            <p>
+              <span style="font-weight:bold">It is required that your program can be compiled and run successfully in
+                the pre-installed Eclipse environment on our lab machines.</span> If you use other IDE/compiler/OS to
+              work out your solution, you should test your program in the aforementioned official environment before
+              submission.
+            </p>
+            <p>
+              Using our Windows Eclipse zipped package downloaded from the "Using Eclipse at home (Windows) " section <a
+                href="https://course.cse.ust.hk/comp2012/labs/eclipse_intro/index.html#">here</a> on a standard Windows
+              machine (e.g., <a
+                href="http://itsc.ust.hk/services/academic-teaching-support/facilities/virtual-barn/overview/">HKUST
+                virtual barn</a>) is also good enough to verify that your program can be compiled by us. Notice that the
+              Desktop there has limited space, you may use C:\temp there to unzip the Eclipse package, but don't leave
+              your source code there in C:\temp.
+            </p> -->
+            <br><h4>Sample I/O</h4>
+            <p>
+              Your program should produce the following output.
+              You may wish to compare your program output against the expected output using a <a
+                href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+            </p>
+            <pre><code>Welcome!
+You are using My Mini Proof Assistant (TM), v0.1.0beta
+Choose an option:
+P. Prove a theorem
+B. Browse existing theorems
+Q. Quit
+> <span style="color: red;">P</span>
+Enter the name of the theorem to be proven:
+> <span style="color: red;">demorgan</span>
+Enter the statement of the theorem to be proven:
+> <span style="color: red;">~(P /\ Q) -> ~P \/ ~Q</span>
+1 subgoal(s) remaining.
+Current focused subgoal:
+________________________________________________________________________________
+~(P /\ Q) -> ~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">intro h1</span>
+1 subgoal(s) remaining.
+Current focused subgoal:
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">excluded_middle h2 : P</span>
+2 subgoal(s) remaining.
+Current focused subgoal:
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">excluded_middle h3 : Q</span>
+3 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">exfalso</span>
+3 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+F
+Enter a tactic:
+> <span style="color: red;">apply h1</span>
+3 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+P /\ Q
+Enter a tactic:
+> <span style="color: red;">split</span>
+4 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+P
+Enter a tactic:
+> <span style="color: red;">apply h2</span>
+3 subgoal(s) remaining.
+Current focused subgoal:
+h3 : Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+Q
+Enter a tactic:
+> <span style="color: red;">apply h3</span>
+2 subgoal(s) remaining.
+Current focused subgoal:
+h3 : ~Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">right</span>
+2 subgoal(s) remaining.
+Current focused subgoal:
+h3 : ~Q
+h2 : P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~Q
+Enter a tactic:
+> <span style="color: red;">apply h3</span>
+1 subgoal(s) remaining.
+Current focused subgoal:
+h2 : ~P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P \/ ~Q
+Enter a tactic:
+> <span style="color: red;">left</span>
+1 subgoal(s) remaining.
+Current focused subgoal:
+h2 : ~P
+h1 : ~(P /\ Q)
+________________________________________________________________________________
+~P
+Enter a tactic:
+> <span style="color: red;">apply h2</span>
+No more subgoals.
+Theorem added to existing results
+Choose an option:
+P. Prove a theorem
+B. Browse existing theorems
+Q. Quit
+> <span style="color: red;">b</span>
+demorgan : ~(P /\ Q) -> ~P \/ ~Q
+Choose an option:
+P. Prove a theorem
+B. Browse existing theorems
+Q. Quit
+> <span style="color: red;">q</span>
+See you next time!</code></pre>
+          </div>
+          <div class="card-footer text-muted">
+            End of Download
+          </div>
+        </div>
+
+        <!-- Submission and deadline section -->
+        <!-- ### Complete submission and deadline section for the assignment ### -->
+        <!-- <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission and Deadline</h3>
+            <p>
+              Deadline: 23:59:00 on ??, 2020.
+            </p>
+            <br />
+            <h4>Canvas Submission</h4>
+            <p>
+              Create a single zip file containing <strong>mmpa.cpp</strong>. The zip file should be named <span
+                style="font-weight:bold">&lt;YOUR_STUDENT_ID_HERE&gt;.zip</span>, e.g. if your student ID is 12345678
+              then your zip file should be 12345678.zip. And then you should submit only the zip file through the <a
+                href="#">Canvas Assignment 2 Submission Page</a>. <span style="font-weight:bold">The filename MUST be
+                exactly the same</span>. Your submission MUST be a zip file, not rar, not 7z, not tar, not gz, etc.
+              Inside the zip file, the name of the C++ source file MUST also be exactly <strong>mmpa.cpp</strong>.
+            </p>
+            <p>
+              Make sure your source file can be successfully compiled. It is required that your program can be compiled
+              and run successfully in the pre-installed Eclipse environment on our lab machines. If we cannot even
+              compile your source file, your work will not be graded. Therefore, you should at least put in dummy
+              implementations to the parts that you cannot finish so that there will be no compilation error.
+            </p>
+            <p>
+              <span style="font-weight:bold">Make sure you actually upload the correct version of your source file - we
+                only grade what you upload</span>. Some students in the past submitted an empty file or a wrong file or
+              an exe file which is worth zero marks. So <span style="font-weight:bold">you must double-check the file
+                you have submitted</span>.
+            </p>
+            <p>
+              You may submit your file multiple times, but only the latest version will be graded.
+            </p>
+            <p>
+              Submit early to avoid any last-minute problems. Only canvas submissions will be accepted.
+            </p>
+            <p>
+              Canvas may append a number to the filename of the file you have submitted. e.g. ???-1.zip. It is OK as
+              long as you have named your file as ???.zip when you submit it.
+            </p>
+            <p>
+              If you have no idea how to create a zip file, you may see <a
+                href="https://www.laptopmag.com/articles/how-to-zip-files-windows-10">How to create a zip file in
+                Windows 10</a> or <a href="http://osxdaily.com/2012/01/10/how-to-zip-files-in-mac-os-x/">How to create a
+                zip file in Mac OS X</a>
+            </p>
+            <br />
+            <h4>Late Submission Policy</h4>
+            <p>
+              There will be a penalty of -1 point (out of a maximum 100 points) for every minute you are late. For
+              instance, since the deadline of assignment ? is 23:59:00 on ??? ?th, if you submit your solution at
+              1:00:00 on ??? ??th , there will be a penalty of -61 points for your assignment. However, the lowest grade
+              you may get from an assignment is zero: any negative score after the deduction due to late penalty (and
+              any other penalties) will be reset to zero.
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Grading Scheme
+          </div>
+        </div> -->
+
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission &amp; Grading</h3>
+            <p class="card-text">
+              <strong>Deadline: <span style="text-decoration: line-through">19 October 2020 Monday 23:59 HKT</span> 30 October 2020 Friday 23:59 HKT.</strong><br>
+              You may earn 8% course grade for each PA via Automated Grading on the ZINC Online Submission System.
+              Please zip <code>mmpa.cpp</code> as <code>pa2.zip</code> for submission to ZINC. </p>
+            <p>We will have multiple standard I/O tests to grade the submission. Apart from them, we will also provide
+              sample test cases for you to validate your code. </p>
+            <p class="card-text">
+              Please note that the samples do not show all possible cases. It is part of the
+              assessment for you to design your own test cases to test your program.
+              Please also remember to remove or comment out any debugging message(s) that you might have added, before
+              submitting your code.
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Submission &amp; Grading
+          </div>
+        </div>
+
+        
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="#faq">FAQ</a>
+                    </li>
+                    <li>
+                      <a href="#introduction">Introduction</a>
+                    </li>
+                    <li>
+                      <a href="#objective">Objective and Learning Outcomes</a>
+                    </li>
+                    <li>
+                      <a href="#using-mmpa">Using MMPA</a>
+                    </li>
+                    <!-- <li>
+                      <a href="#tactic-reference">Tactic Reference</a>
+                    </li> -->
+                    <li>
+                      <a href="#tasks">Tasks</a>
+                    </li>
+                    <li>
+                      <a href="#download">Resources & Sample I/O</a>
+                    </li>
+                    <li>
+                      <a href="#submission">Submission &amp; Grading</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintenance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Jingyang Zhang
+                    </li>
+                    <li>
+                      Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">document.write(document.lastModified);</script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2019 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

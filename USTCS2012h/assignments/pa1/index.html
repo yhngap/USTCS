@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012H Assignment 1: Minesweeper</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+    <!-- Prism syntax highlighter -->
+    <link href="prism.css" rel="stylesheet" />
+
+	<style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+	
+	table, th, td {
+	  border: 1px solid black;
+	}
+	th, td {
+	  padding: 5px;
+	}
+	th {
+	  text-align: left;
+	}
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4">
+            <span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+
+          <!-- ### Change assignment number and title ### -->
+          <h3 class="my-4">
+            Assignment 1 
+            <span style="color:#660066">Minesweeper</span>
+          </h3>
+		  
+		  <!-- Honor Code section -->
+		  <div class="card mb-4">
+			<div class="card-body" id="honor" style="background-color:#f4f4f4">
+			  <h3 class="card-title">Honor Code</h3>
+			  <p class="card-text">
+				We value academic integrity very highly. Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> section on our course webpage to make sure you understand what is considered as plagiarism and what the penalties are. 
+				The following are some of the highlights:
+				<ul>
+				  <li>
+					Do NOT try your "luck" - we use sophisticated plagiarism detection software to find cheaters. 
+					We also review codes for potential cases manually.
+				  </li>
+				  <li>
+					The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your assignment. 
+					Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> thoroughly. 
+				  </li>
+				  <li>
+					Serious offenders will fail the course immediately, and there will be additional disciplinary actions from the department and university, upto and including expulsion.
+				  </li>
+				</ul>
+			  </p>
+			</div>
+			<div class="card-footer text-muted">
+              End of Honor Code
+            </div>
+		  </div>
+
+          <!-- Introduction section -->
+          <!-- ### Complete introduction section for the assignment ### -->
+          <div class="card mb-4">
+            <!-- ### Add an image representing the assignment content here ### -->
+            <img class="card-img-top" src="images/pic.png" alt="Card image cap">
+            <div class="card-body" id="introduction">
+              <p class="card-text">
+                <small>
+                  <em>
+                    Source: <a href="http://minesweeperonline.com/" target="_blank">http://minesweeperonline.com/</a>
+                  </em>
+                </small>
+              </p>
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+                In this programming assignment, you are going to implement the well-known video game Minesweeper. You can check this Wikipedia link <a href="https://en.wikipedia.org/wiki/Minesweeper_(video_game)" target="_blank">here</a> for the gameplay rules and for a historical overview. You can also play an online version of it <a href="https://minesweeper.online/" target="_blank">here</a>. For more details on the programming assignment's implementation of the video game, important specifications are provided below.
+              </p>
+              <br>
+              <h4>Grid Cells &amp; Global Game State Variables</h4>
+			  <p class="card-text">
+			  The Minesweeper grid is represented by two global 2D arrays: 
+			  <ul>
+				<li>
+				  <code>Cell grid[MAX_ROWS][MAX_COLS]</code> - Keeps track of the current gameplay state of all cells in the grid (i.e. hidden, revealed with number, flagged by player, etc). Also used for displaying the grid with <code>cout</code>.
+				</li>
+				<li>
+				  <code>bool has_mine[MAX_ROWS][MAX_COLS]</code> - Contains the solution for internal gameplay functions (e.g. when player clicked on a cell, check if it has a mine). Otherwise it is not revealed to the player during regular gameplay.
+				</li>
+			  </ul>
+			  </p>
+			  <br/>
+              <p class="card-text">
+                The cells of the grid are implemented as an enum type <code>Cell</code> which can have the following states/values:
+                <ul>
+                  <li>
+                    <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code> - The cell has been revealed to have neigbouring mines. Cells in this state are called <strong>constraints</strong>.
+                  </li>
+                  <li>
+                    <code>0</code> - The cell has been revealed to have no neigbouring mines. Revealing such a cell automatically reveals all of its neighbors.
+                  </li>
+                  <li>
+                    <code>HIDDEN</code> - The cell has not been revealed, and it is currently unflagged.
+                  </li>
+                  <li>
+                    <code>FLAGGED</code> - The cell has not been revealed, and it is currently flagged.
+                  </li>
+                  <li>
+                    <code>SAFE</code> - The cell has not been revealed, but it is considered safe and not having a mine. 
+					This is a special state that is only used for the automated solver, and also to display an incorrectly flagged cell in the game over answer screen.
+                  </li>
+                  <li>
+                    <code>MINE</code> - The cell has been revealed to have a mine.
+                  </li>
+                </ul>
+              </p>
+			  <br/>
+			  <p class="card-text">
+				Important game state values are stored in a global array <code>int game_stats[5]</code>:
+				<ul>
+				  <li><code>game_stats[0]</code> - Actual number of rows between 5-25, player inputted.</li>
+				  <li><code>game_stats[1]</code> - Actual number of columns between 5-25, player inputted.</li>
+				  <li><code>game_stats[2]</code> - Number of flags remaining. Can go negative if the player flags incorrectly. Displayed to the player.</li>
+				  <li><code>game_stats[3]</code> - Actual number of hidden safe cells remaining. Ignores player flag errors. The game is successfully finished if this counter reaches zero. Not displayed to the player.</li>
+				  <li><code>game_stats[4]</code> - Number of incorrect flags. The automated solvers are disabled if the player has placed incorrect flags on the grid.</li>
+				</ul>
+				<code>bool mine_exploded</code> is set to <code>true</code> whenever the player clicks on a hidden mine, and triggers a game over.
+			  </p>
+              <br>
+              <h4>Game Actions</h4>
+              <p class="card-text">
+                The programming assignment's version of Minesweeper supports the following game actions:
+                <ul>
+                  <li>
+                    <code>Reveal cell</code> - Reveal the selected hidden cell (i.e. "left-click" on the cell) according to Minesweeper gameplay rules.
+                  </li>
+                  <li>
+                    <code>Toggle flag</code> - Toggle the flagging of the selected hidden cell (i.e. "right-click" on the cell).
+                  </li>
+                  <li>
+                    <code>Solve locally</code> - Attempt to automatically solve the game, considering only one constraint (cell with a number revealed) at a time. 
+					The local solver will still iterate through the whole grid, but only views one constraint and its neighboring cells at a single time, similar to how most human players play. 
+                  </li>
+                  <li>
+                    <code>Solve globally</code> - Attempt to automatically solve the game, considering all constraints simultaneously, as well as the number of remaining flags.
+                  </li>
+                </ul>
+				Note: The solvers can only consider constraints that have already been revealed, either by player actions or by previous solver executions. 
+				For a new and completely unrevealed board, the solvers can't do anything. In other words, the solvers pretend that they cannot see <code>has_mine[][]</code>, and thus only use information that the player normally has. 
+				Finally, the solvers are disabled if there are incorrect flags on the grid. Determining and fixing incorrect flags is feasible but not included in the scope of PA1.
+              </p>
+              <br>
+              <h4>Global Solver</h4>
+              <p class="card-text">
+                The global solver uses an enumerative/exhaustive approach which has an exponential running time. 
+				As naive implementations would have unfeasible running times (and may crash your computer), we make use of an optimization wherein only a certain subset of unrevealed cells are considered for enumeration/exhaustion. 
+				In order to guide you on building this algorithm and to avoid grading this large feature as all-or-nothing, the global solver is modularized into several more approachable functions in the task description below. <br/>
+				<br/>
+				Optional Extra Info: The reason for the enumerative/exhaustive approach is because Minesweeper is an NP-Complete problem. 
+				For more information, please take COMP 3721 Theory of Computation, and have a look at <a href="https://en.wikipedia.org/wiki/NP-completeness">the Wikipedia entry</a>. 
+				However, this theoretical information is just for your curiosity, and is not required to understand and implement PA1.
+              </p>
+              <br>
+			  <h4>Unordered Sets of Cells</h4>
+              <p class="card-text">
+				For the functions related to the solvers, we will need to keep track of certain cells (e.g. these cells are calculated to be revealed, those cells are calculated to be flagged) and pass this information between the functions. 
+				The straightforward representation of cell coordinates as a boolean 2D array is intuitive, but has high memory and runtime costs, because we need to check the whole 2D array to find which cells we are actually concerned with. 
+				Instead, we will use a more condensed representation of cell coordinates. <br/>
+			  </p>
+			  <p class="card-text">
+				The functions only need to tell each other about the cells' coordinates, since <code>grid[][]</code> is a global variable. 
+				Thus, for each cell, we only need to keep track of its <code>row</code> and <code>col</code>, which we can represent as <code>int cell_coordinates[2]</code>, where <code>cell_coordinates[0]</code> and <code>cell_coordinates[1]</code> stores the <code>row</code> and <code>col</code> respectively. 
+				However, we want to pass the coordinates of multiple cells, not just one cell. We can do this as an array of cells coordinates, i.e. an array of size-2 integer arrays containing <code>row</code> and <code>col</code> values. 
+				This can be implemented as <code>int cells_coordinates[num_cells][2]</code>, where <code>cells_coordinates[i][0]</code> and <code>cells_coordinates[i][1]</code> store the row and col respectively of the <code>i</code>-th cell. 
+				For our use case, the ordering of the cells doesn't matter. <br/>
+				<br/>
+				However, we haven't yet taught how to create arrays with dynamic sizes. 
+				As a workaround, instead we will use a <code>const int MAX_CELLS = MAX_ROWS * MAX_COLS</code>, such that <code>int cells_coordinates[MAX_CELLS][2]</code> is statically sized. 
+				In addition, the functions need to pass another argument <code>int num_interested_cells</code> (the exact argument name will be different depending on the function), so that we know how much of the <code>cells_coordinates[MAX_CELLS][2]</code> array is actually in-use. <br/>
+				<br/>
+				Unfortunately, this means that we are still hit with the same high memory cost as the naive solution of a boolean 2D array for cells coordinates. 
+				We only managed to avoid the high runtime cost, as we only need to check <code>num_interested_cells</code> instead of <code>MAX_CELLS</code>. Most functions (e.g. as the local solver) only check a subset of the grid at a time, so it is very rare for <code>num_interested_cells == MAX_CELLS</code>.
+				Still, this serves as a good exercise and mini-introduction to the concept of data structures, and how to evaluate their pros and cons (e.g. readability, intuitive understanding, implementation difficulty, memory and runtime costs, etc) depending on the use case. 
+              </p>
+			  <br/>
+              <h4>Additional Remarks</h4>
+              <p class="card-text">
+                <ul>
+				  <li>
+				    All the tasks are located in <code>PA1.cpp</code>. You are discouraged from modifying the other skeleton code files, as you are only allowed to submit your version of <code>PA1.cpp</code> to ZINC, which will then be compiled with the skeleton code versions of the remaining files.
+				  </li>
+                  <li>
+                    All console I/O formatting is handled by the skeleton code, and ZINC grading will be done via direct testing of the game state variables and function return values (Unit Testing).
+                  </li>
+				  <li>
+					You are allowed to define your own helper functions, but be careful as ZINC won't be able to know of their existence. This shouldn't be a problem as long as the changes to the game state variables and task function return values are as expected.
+				  </li>
+                  <li>
+                    All the task functions are in global scope, and you are allowed to have the task functions call each other for easier implementation. Be careful when two or more functions call each other reciprocally, as they may enter an infinite loop.
+                  </li>
+                  <li>
+                    You are free (but not strictly required) to use recursion in any of the task functions. Some recursion hints are given in the tasks, but otherwise the final decision is up to you. Avoid accidental infinite recursion.
+                  </li>
+				  <li>
+					Be mentally prepared to spend hours and days hunting for bugs.
+				  </li>
+				  <li>
+					Apologies in advance for the ugly Console Text UI and tedious usage. You'll probably acquire an appreciation for the classic Minesweeper GUI.
+				  </li>
+                </ul>
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Description section -->
+          <!-- ### Complete description section for the assignment ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="description">
+              <h3 class="card-title">Description</h3>
+			  <p class="card-text">
+				Please read the <a href="#faq">FAQ</a> section for some common clarifications. 
+				You should check that a day before the deadline to make sure you don't miss any clarification, even if you have already submitted your work by then.
+			  </p>
+			  <br/>
+              <h4>Task 1 - Implement the <code>reveal()</code> function</h4>
+			  <p class="card-text">
+                Reveal the specified cell.
+              </p>
+              <pre class="prettyprint">void reveal(int row, int col);</pre>
+			  <p class="card-text">
+				Arguments:
+				<ul>
+				  <li>
+					<code>row</code> - Input - Row coordinate of specified cell.
+				  </li>
+				  <li>
+					<code>col</code> - Input - Col coordinate of specified cell.
+				  </li>
+				</ul>
+              </p>
+			  <p class="card-text">
+                Subtasks:
+				<ul>
+				  <li>
+					If the cell is already revealed, do nothing.
+				  </li>
+                  <li>
+					If the cell has a mine, display it and set <code>mine_exploded</code>.
+                  </li>
+				  <li>
+					If the cell is not a mine, update <code>num_safe_reveals_left</code> in <code>game_stats[3]</code>, and display the number of neighbor mines.
+                  </li>
+				  <li>
+					If there are no neighboring mines, unflag and reveal all neighbors.
+				  </li>
+				</ul>
+				Note: Be careful not to multi-count when updating <code>game_stats[3]</code>.
+			  </p>
+              <br/>
+			  
+              <h4>Task 2 - Implement the <code>flag()</code> function</h4>
+              <p class="card-text">
+                Toggle the flagging of the specified cell.
+              </p>
+              <pre class="prettyprint">void flag(int row, int col);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+                  <li>
+					<code>row</code> - Input - Row coordinate of specified cell.
+                  </li>
+                  <li>
+					<code>col</code> - Input - Col coordinate of specified cell.
+                  </li>
+				</ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					If the specified cell is hidden, flag it, and vice versa.
+                  </li>
+                  <li>
+					Update <code>num_flags_left</code> in <code>game_stats[2]</code>.
+                  </li>
+				  <li>
+					Update <code>num_incorrect_flags</code> in <code>game_stats[4]</code>.
+				  </li>
+				</ul>
+			  </p>
+              <br>
+
+              <h4>Task 3 - Implement the <code>local_solver()</code> function</h4>
+              <p class="card-text">
+                Determine hidden cells to reveal and to flag, considering only one constraint at a time.
+              </p>
+              <pre class="prettyprint">bool local_solver(int cells_to_reveal[MAX_CELLS][2], int cells_to_flag[MAX_CELLS][2], int num_cells[2]);</pre>
+              <p class="card-text">
+                Arguments and return value:
+				<ul>
+                  <li>
+					<code>cells_to_reveal</code> - Output - Unordered set of cells to reveal.
+                  </li>
+                  <li>
+					<code>cells_to_flag</code> - Output - Unordered set of cells to flag.
+                  </li>
+                  <li>
+					<code>num_cells</code> - Output - Number of returned cells: 
+					<ul>
+					  <li><code>[0]</code> = Number of <code>cells_to_reveal</code>.</li>
+					  <li><code>[1]</code> = Number of <code>cells_to_flag</code>.</li>
+					</ul>
+                  </li>
+                  <li>
+					Return value: Success of solver.
+                  </li>
+              </ul>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+				  <li>
+					If the number of flagged cells surrounding a constraint is equal to the constraint, then reveal all surrounding unflagged hidden cells.
+				  </li>
+				  <li>
+					If the number of hidden + flagged cells surrounding a constraint is equal to the constraint, then flag all surrounding unflagged hidden cells.
+				  </li>
+				  <li>
+					Return whether or not these two rules are successful in determining at least one cell to reveal or to flag.
+				  </li>
+				</ul>
+			  </p>
+              <br>
+			  
+			  <h3>Global Solver</h3>
+			  <h5>Task 4 - 10 are all modularized functions of the global solver.</h5>
+			  <p class="card-text">
+				Global Solver Algorithm Overview:
+				<ol>
+				  <li>
+					For each hidden cell on the grid, classify it as either constrained or unconstrained.
+					<ul>
+					  <li>
+						Constrained - Has one or more numbered cell(s) among its neighbors.
+					  </li>
+					  <li>
+						Unconstrained - All of its neighbors are not numbered cells.
+					  </li>
+					</ul>
+				  </li>
+				  <li>
+					Calculate the lower and upper bounds of mines that can be placed among the constrained cells.
+					<ul>
+					  <li>
+						Lower bound - If we assume that all the unconstrained cells are mines, then the remaining mines (if any) must be among the constrained cells.
+					  </li>
+					  <li>
+						Upper bound - Equal to the number of unflagged mines remaining on the gird. Also implies that all the unconstrained cells are safe.
+					  </li>
+					</ul>
+				  </li>
+				  <li>
+					Enumerate all possible mine configurations among the constrained cells,
+					i.e. every possible safe or flagged setting on each constrained cell. 
+					<ul>
+					  <li>
+						Example: If there are 3 constrained cells, then there are a total of 8 mine configurations: 
+						(safe, safe, safe), (safe, safe, flagged), (safe, flagged, safe), (safe, flagged, flagged), (flagged, safe, safe), (flagged, safe, flagged), (flagged, flagged, safe), (flagged, flagged, flagged).
+					  </li>
+					</ul>
+				  </li>
+				  <li>
+					Validate the possible mine configurations. Discard invalid mine configurations.
+					<ul>
+					  <li>
+						For each constrained cell, whether it is set to safe or flagged, check that it doesn't break the numbering rules of its neighbors.
+					  </li>
+					  <li>
+						Check that the number of flags used in the configurations are within the bounds as calculated in Step 2.
+					  </li>
+					</ul>
+				  </li>
+				  <li>
+					Record all valid mine configurations. 
+					For each constrained cell, record how many times it is set as safe or flagged in all the valid mine configurations. 
+					Also record how many flags are used for each of the valid mine configurations. 
+				  </li>
+				  <li>
+					For each constrained cell, if it is always set as safe in all the recorded valid mine configurations, then we can left-click it. Similar logic if it is always set as flagged.
+				  </li>
+				  <li>
+					If the number of flags used in all the recorded valid mine configurations is always equal to the lower bound in Step 2, then we are sure that all the unconstrained cells are mines. Similar logic for the upper bound.
+				  </li>
+				  <li>
+					Reveal and/or flag the hidden cells according to the logic of Step 6 and 7.
+				  </li>
+				  <li>
+					Repeat from Step 1. (This part is already done for you by the skeleton code.)
+				  </li>
+				</ol>
+				Optimization: Steps 3-5 generates all possible mine configurations, then validates them. 
+				Instead, we can validate the configuration as we are generating it, and abandon the configuration partway if it is invalid. 
+				Using the 3 constrained cells example in Step 3, if the second cell cannot be a mine because of its neighbors numbering rules, then theres no need to continue generating and checking (safe, flagged, safe), (safe, flagged, flagged), (flagged, flagged, safe), (flagged, flagged, flagged).
+			  </p>
+			  <br/>
+			  
+              <h4>Task 4 - Implement the <code>classify_hidden_cells()</code> function</h4>
+              <p class="card-text">
+                Record all unflagged hidden cells and classify each as either constrained or unconstrained.
+              </p>
+              <pre class="prettyprint">void classify_hidden_cells(int constrained_cells[MAX_CELLS][2], int unconstrained_cells[MAX_CELLS][2], int num_cells[2]);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+                  <li>
+					<code>constrained_cells</code> - Output - Unordered set of constrained cells.
+                  </li>
+                  <li>
+					<code>unconstrained_cells</code> - Output - Unordered set of unconstrained cells.
+                  </li>
+                  <li>
+					<code>num_cells</code> - Output - Number of classified unflagged hidden cells: 
+					<ul>
+					  <li><code>[0]</code> = Number of <code>constrained_cells</code>.</li>
+					  <li><code>[1]</code> = Number of <code>unconstrained_cells</code>.</li>
+					</ul>
+                  </li>
+				</ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+				  <li>
+					If an unflagged hidden cell has a neighboring constraint, record it as constrained.
+				  </li>
+				  <li>
+					If an unflagged hidden cell has no neighboring constraints, record it as unconstrained.
+				  </li>
+				</ul>
+			  </p>
+              <br>
+			  
+              <h4>Task 5 - Implement the <code>has_satisfiable_neighbor_constraints()</code> function</h4>
+              <p class="card-text">
+                Check whether or not all neighboring constraints of the specified cell can still be satisfied.
+              </p>
+              <pre class="prettyprint">bool has_satisfiable_neighbor_constraints(int row, int col);</pre>
+              <p class="card-text">
+                Arguments and return value:
+				<ul>
+                  <li>
+					<code>row</code> - Input - Row coordinate of specified cell.
+                  </li>
+                  <li>
+					<code>col</code> - Input - Col coordinate of specified cell.
+                  </li>
+                  <li>
+					Return value: Satisfiability of neighboring constraints.
+                  </li>
+				</ul>
+              </p>
+			  <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					Return <code>true</code> if there exists a possible configuration of mines which agrees with all neighboring constraints, without considering the total number of mines in the grid. Otherwise, return <code>false</code>.
+                  </li>
+				</ul>
+			  </p>
+			  <p class="card-text">
+				Usage: <code>enumerate_possibilities()</code> will test-set the specified cell as <code>FLAGGED</code>/<code>SAFE</code>, and then call this function to check for validity.<br/>
+				<br/>
+				Hint: For each of the specified cell (<code>A</code>)'s neighbors (<code>N1</code> - <code>N8</code>), if <code>Ni</code> is revealed with a number, count <code>Ni</code>'s neighboring hidden and flagged cells (one of them is <code>A</code> itself) and check if it is still solvable.
+			  </p>
+              <br>
+			  
+              <h4>Task 6 - Implement the <code>record_possibility()</code> function</h4>
+              <p class="card-text">
+                Validate and record the current configuration of the constrained cells.
+              </p>
+              <pre class="prettyprint">void record_possibility(int constrained_cells[MAX_CELLS][2], int num_constrained_cells, int num_flags_bounds_used[4], int num_safe_config_records[MAX_CELLS], int num_flagged_config_records[MAX_CELLS]);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+				  <li>
+					<code>constrained_cells</code> - Input - Unordered set of constrained cells.
+                  </li>
+				  <li>
+					<code>num_constrained_cells</code> - Input - Number of constrained cells.
+                  </li>
+                  <li>
+					<code>num_flags_bounds_used</code> - Input/Output - Bounds on the number of flags used in the configurations of the constrained cells: 
+					<ul>
+					  <li>
+						<code>[0]</code> = Lower bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be mines.
+					  </li>
+					  <li>
+						<code>[1]</code> = Upper bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be safe.
+					  </li>
+					  <li>
+						<code>[2]</code> = Lowest number of flags used across all recorded configurations so far.
+					  </li>
+					  <li>
+						<code>[3]</code> = Highest number of flags used across all recorded configurations so far.
+					  </li>
+					</ul>
+                  </li>
+				  <li>
+					<code>num_safe_config_records</code> - Input/Output - <code>num_safe_config_records[i]</code> is the number of recorded configurations so far where <code>constrained_cells[i]</code> was specified as <code>SAFE</code>.
+                  </li>
+                  <li>
+					<code>num_flagged_config_records</code> - Input/Output - Same as <code>num_safe_config_records</code> but for <code>FLAGGED</code>.
+                  </li>
+				</ul>
+              </p>
+			  <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					Check if the number of flags used in the current configuration of the constrained cells is within the lower and upper bounds.
+                  </li>
+                  <li>
+					If within, record the <code>SAFE</code>/<code>FLAGGED</code> states of the constrained cells, and update the lowest and the highest number of flags used across all recorded configurations so far.
+                  </li>
+				</ul>
+			  </p class="card-text">
+			  <p>
+				Usage: <code>enumerate_possibilities()</code> will test-set all the constrained cells as <code>FLAGGED</code>/<code>SAFE</code> (all possible configurations), and then call this function to validate and record fully-specified configurations.
+			  </p>
+              <br/>
+			  
+              <h4>Task 7 - Implement the <code>enumerate_possibilities()</code> function</h4>
+              <p class="card-text">
+                Enumerate, validate, and record all possible configurations of the constrained cells.
+              </p>
+              <pre class="prettyprint">void enumerate_possibilities(int constrained_cells[MAX_CELLS][2], int index, int num_constrained_cells, int num_flags_bounds_used[4], int num_safe_config_records[MAX_CELLS], int num_flagged_config_records[MAX_CELLS]);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+                  <li>
+					<code>constrained_cells</code> - Input - Unordered set of constrained cells.
+                  </li>
+                  <li>
+					<code>index</code> - Input - Current index of the enumeration. Assumes that <code>constrained_cells[0]</code> to <code>constrained_cells[index-1]</code> have been set to <code>SAFE</code>/<code>FLAGGED</code>, and now we are testing <code>constrained_cells[index]</code>.
+                  </li>
+                  <li>
+					<code>num_constrained_cells</code> - Input - Number of constrained cells.
+                  </li>
+                  <li>
+					<code>num_flags_bounds_used</code> - Input/Output - Bounds on the number of flags used in the configurations of the constrained cells: 
+					<ul>
+					  <li>
+						<code>[0]</code> = Lower bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be mines.
+					  </li>
+					  <li>
+						<code>[1]</code> = Upper bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be safe.
+					  </li>
+					  <li>
+						<code>[2]</code> = Lowest number of flags used across all recorded configurations so far.
+					  </li>
+					  <li>
+						<code>[3]</code> = Highest number of flags used across all recorded configurations so far.
+					  </li>
+					</ul>
+                  </li>
+                  <li>
+					<code>num_safe_config_records</code> - Input/Output - <code>num_safe_config_records[i]</code> is the number of recorded configurations so far where <code>constrained_cells[i]</code> was specified as <code>SAFE</code>.
+                  </li>
+                  <li>
+					<code>num_flagged_config_records</code> - Input/Output - Same as <code>num_safe_config_records</code> but for <code>FLAGGED</code>.
+                  </li>
+				</ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					Enumerate through all possibilities of the constrained cells by setting them one-by-one to <code>FLAGGED</code>/<code>SAFE</code> in the grid, then checking for validity. Use <code>index</code> to keep track of progress.
+                  </li>
+                  <li>
+					Stop and backtrack from the exploration of a configuration, if setting the current constrained cell as <code>FLAGGED</code>/<code>SAFE</code> causes it to have unsatisfiable neighbor constraints.
+                  </li>
+                  <li>
+					If the exploration of a configuration reaches the end, (i.e. all constrained cells successfully set to <code>FLAGGED</code>/<code>SAFE</code> while satisfying all neighboring constraints), validate the number of flags used and record this configuration of the constrained cells.
+                  </li>
+				  <li>
+					Remember to reset the constrained cells back to <code>HIDDEN</code> in the grid when finished with a configuration.
+				  </li>
+				</ul>
+			  </p>
+			  <p class="card-text">
+				Warning: This function potentially has exponential runtime, as the number of possible configurations is <code>2^num_constrained_cells</code> if not checking validity via satisfiable neighbor constraints. <br/>
+				<br/>
+				Note: Good usage of recursion will greatly reduce the amount of coding required to implement this function (The TA solution has fewer lines than the TODO comment block).</br>
+				<br/>
+				Hint: You may draw a "binary branching tree graph" to help you visualize all the configurations as well as the recursion pathways. <br/>
+				Example enumeration with 4 constrained cells (2^4 = 16 configurations):
+<pre>
+ * START ----> SAFE -----> SAFE -----> SAFE -----> SAFE
+ *         |           |           |           |
+ *         |           |           |           --> FLAGGED
+ *         |           |           |
+ *         |           |           --> FLAGGED --> SAFE
+ *         |           |                       |
+ *         |           |                       --> FLAGGED
+ *         |           |
+ *         |           --> FLAGGED --> SAFE -----> SAFE
+ *         |                       |           |
+ *         |                       |           --> FLAGGED
+ *         |                       |
+ *         |                       --> FLAGGED --> SAFE
+ *         |                                   |
+ *         |                                   --> FLAGGED
+ *         |
+ *         --> FLAGGED --> SAFE -----> SAFE -----> SAFE
+ *                     |           |           |
+ *                     |           |           --> FLAGGED
+ *                     |           |
+ *                     |           --> FLAGGED --> SAFE
+ *                     |                       |
+ *                     |                       --> FLAGGED
+ *                     |
+ *                     --> FLAGGED --> SAFE -----> SAFE
+ *                                 |           |
+ *                                 |           --> FLAGGED
+ *                                 |
+ *                                 --> FLAGGED --> SAFE
+ *                                             |
+ *                                             --> FLAGGED
+</pre>
+			  </p>
+              <br>
+			  
+              <h4>Task 8 - Implement the <code>handle_constrained_cells()</code> function</h4>
+              <p class="card-text">
+                Determine which constrained cells must be revealed or flagged.
+              </p>
+              <pre class="prettyprint">void handle_constrained_cells(int constrained_cells[MAX_CELLS][2], int num_constrained_cells, int num_safe_config_records[MAX_CELLS], int num_flagged_config_records[MAX_CELLS], int cells_to_reveal[MAX_CELLS][2], int cells_to_flag[MAX_CELLS][2], int num_cells[2]);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+                  <li>
+					<code>constrained_cells</code> - Input - Unordered set of constrained cells.
+                  </li>
+                  <li>
+					<code>num_constrained_cells</code> - Input - Number of constrained cells.
+                  </li>
+                  <li>
+					<code>num_safe_config_records</code> - Input - <code>num_safe_config_records[i]</code> is the number of recorded configurations so far where <code>constrained_cells[i]</code> was specified as <code>SAFE</code>.
+                  </li>
+                  <li>
+					<code>num_flagged_config_records</code> - Input - Same as <code>num_safe_config_records</code> but for <code>FLAGGED</code>.
+                  </li>
+                  <li>
+					<code>cells_to_reveal</code> - Output - Unordered set of cells to reveal.
+                  </li>
+                  <li>
+					<code>cells_to_flag</code> - Output - Unordered set of cells to flag.
+                  </li>
+                  <li>
+					<code>num_cells</code> - Output - Number of cells to reveal and to flag: 
+					<ul>
+					  <li><code>[0]</code> = Number of <code>cells_to_reveal</code>.</li>
+					  <li><code>[1]</code> = Number of <code>cells_to_flag</code>.</li>
+					</ul>
+                  </li>
+				</ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					If a constrained cell has always been recorded as <code>SAFE</code>, reveal it.
+                  </li>
+                  <li>
+					If a constrained cell has always been recorded as <code>FLAGGED</code>, flag it.
+                  </li>
+				</ul>
+			  </p>
+              <br>
+			  
+              <h4>Task 9 - Implement the <code>handle_unconstrained_cells()</code> function</h4>
+              <p class="card-text">
+                Determine if all unconstrained cells must be revealed or flagged.
+              </p>
+              <pre class="prettyprint">void handle_unconstrained_cells(int unconstrained_cells[MAX_CELLS][2], int num_unconstrained_cells, int num_flags_bounds_used[4], int cells_to_reveal[MAX_CELLS][2], int cells_to_flag[MAX_CELLS][2], int num_cells[2]);</pre>
+              <p class="card-text">
+                Arguments:
+				<ul>
+                  <li>
+					<code>unconstrained_cells</code> - Input - Unordered set of unconstrained cells.
+                  </li>
+                  <li>
+					<code>num_unconstrained_cells</code> - Input - Number of unconstrained cells.
+                  </li>
+                  <li>
+					<code>num_flags_bounds_used</code> - Input - Bounds on the number of flags used in the configurations of the constrained cells: 
+					<ul>
+					  <li>
+						<code>[0]</code> = Lower bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be mines.
+					  </li>
+					  <li>
+						<code>[1]</code> = Upper bound. If all the constrained cells only have this number of mines, then all the unconstrained cells must be safe.
+					  </li>
+					  <li>
+						<code>[2]</code> = Lowest number of flags used across all recorded configurations so far.
+					  </li>
+					  <li>
+						<code>[3]</code> = Highest number of flags used across all recorded configurations so far.
+					  </li>
+					</ul>
+                  </li>
+                  <li>
+					<code>cells_to_reveal</code> - Output - Unordered set of cells to reveal.
+                  </li>
+                  <li>
+					<code>cells_to_flag</code> - Output - Unordered set of cells to flag.
+                  </li>
+				  <li>
+					<code>num_cells</code> - Output - Number of cells to reveal and to flag: 
+					<ul>
+					  <li><code>[0]</code> = Number of <code>cells_to_reveal</code>.</li>
+					  <li><code>[1]</code> = Number of <code>cells_to_flag</code>.</li>
+					</ul>
+                  </li>
+              </ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+                  <li>
+					If the number of flags used in all configurations of the constrained cells is always equal to the upper bound, then all unconstrained cells must be revealed.
+                  </li>
+                  <li>
+					If the number of flags used in all configurations of the constrained cells is always equal to the lower bound, then all unconstrained cells must be flagged.
+                  </li>
+				</ul>
+			  </p>
+              <br/>
+			  
+              <h4>Task 10 - Implement the <code>global_solver()</code> function</h4>
+              <p class="card-text">
+                Determine hidden cells to reveal and to flag, considering all constraints simultaneously.
+              </p>
+              <pre class="prettyprint">bool global_solver(int cells_to_reveal[MAX_CELLS][2], int cells_to_flag[MAX_CELLS][2], int num_cells[2]);</pre>
+              <p class="card-text">
+                Arguments and return value:
+				<ul>
+                  <li>
+					<code>cells_to_reveal</code> - Output - Unordered set of cells to reveal.
+                  </li>
+                  <li>
+					<code>cells_to_flag</code> - Output - Unordered set of cells to flag.
+                  </li>
+                  <li>
+					<code>num_cells</code> - Output - Number of cells to reveal and to flag: 
+					<ul>
+					  <li><code>[0]</code> = Number of <code>cells_to_reveal</code>.</li>
+					  <li><code>[1]</code> = Number of <code>cells_to_flag</code>.</li>
+					</ul>
+                  </li>
+                  <li>
+					Return value: Success of solver.
+                  </li>
+				</ul>
+			  </p>
+              <p class="card-text">
+                Subtasks:
+				<ul>
+				  <li>
+					Record all unflagged hidden cells and classify each as either constrained or unconstrained.
+				  </li>
+				  <li>
+					Calculate the upper and lower bounds on the number of flags used in the configurations of the constrained cells. Upper bound assumes all unconstrained cells are safe, while lower bound assumes all unconstrained cells are mines.
+				  </li>
+				  <li>
+					Enumerate and record all possible configurations of the constrained cells and number of flags used.
+				  </li>
+				  <li>
+					Determine which constrained cells must be revealed or flagged.
+				  </li>
+				  <li>
+					Determine if all unconstrained cells must be revealed or flagged.
+				  </li>
+				  <li>
+					Return whether or not this strategy is successful in determining at least one cell to reveal or to flag.
+				  </li>
+				</ul>
+			  </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Description
+            </div>
+          </div>
+
+          <!-- Download section -->
+		  <!-- ### Complete download section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="download">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+			  <ul>
+			    <li>Skeleton code: <a href="code/PA1_skeleton.zip">PA1_skeleton.zip</a></li>
+				<li>Demo program (executable for Windows): <a href="code/PA1_demo_win.exe">PA1_demo_win.exe</a></li>
+			  </ul>
+			  <br/>
+			  <h4>Sample I/O</h4>
+			  <p class="card-text">
+                Grid Output Display Format:
+				<ul>
+				  <li>Hidden - o</li>
+				  <li>Flagged - x</li>
+				  <li>Safe - ?</li>
+				  <li>Mine - !</li>
+				  <li>Zero/Empty - .</li>
+				  <li>Numbered - 1, 2, 3, 4, 5, 6, 7, 8</li>
+				</ul>
+              </p>
+			  <pre>Welcome to COMP 2012H PA 1!
+MINESWEEPER!
+
+Please input the following:
+Number of rows (5-25): <span style="color:red">25</span>
+Number of cols (5-25): <span style="color:red">25</span>
+Number of mines (1 mine - 20% mines): <span style="color:red">100</span>
+Game ID (0-100): <span style="color:red">0</span>
+
+   A B C D E F G H I J K L M N O P Q R S T U V W X Y
+ 1 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 2 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 3 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 4 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 5 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 6 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 7 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 8 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 9 o o o o o o o o o o o o o o o o o o o o o o o o o
+10 o o o o o o o o o o o o o o o o o o o o o o o o o
+11 o o o o o o o o o o o o o o o o o o o o o o o o o
+12 o o o o o o o o o o o o o o o o o o o o o o o o o
+13 o o o o o o o o o o o o o o o o o o o o o o o o o
+14 o o o o o o o o o o o o o o o o o o o o o o o o o
+15 o o o o o o o o o o o o o o o o o o o o o o o o o
+16 o o o o o o o o o o o o o o o o o o o o o o o o o
+17 o o o o o o o o o o o o o o o o o o o o o o o o o
+18 o o o o o o o o o o o o o o o o o o o o o o o o o
+19 o o o o o o o o o o o o o o o o o o o o o o o o o
+20 o o o o o o o o o o o o o o o o o o o o o o o o o
+21 o o o o o o o o o o o o o o o o o o o o o o o o o
+22 o o o o o o o o o o o o o o o o o o o o o o o o o
+23 o o o o o o o o o o o o o o o o o o o o o o o o o
+24 o o o o o o o o o o o o o o o o o o o o o o o o o
+25 o o o o o o o o o o o o o o o o o o o o o o o o o
+
+Flags Left: 100
+
+Choose one of the following actions:
+0: Reveal cell
+1: Toggle flag
+2: Solve locally
+3: Solve globally
+<span style="color:red">0</span>
+Please enter cell coordinates: <span style="color:red">J9</span>
+
+   A B C D E F G H I J K L M N O P Q R S T U V W X Y
+ 1 o o o o o o o o o o o o o o o o o o o o o o o o o
+ 2 o o o 3 1 1 o o o o o o o o o o o o o o o o o o o
+ 3 o o o 2 . 1 o o o o o o 3 1 1 1 1 3 o 4 2 1 1 1 o
+ 4 o o o 1 . 1 o o o o o o 1 . . . . 1 1 1 . . . 1 o
+ 5 o o o 1 . 1 o o o 1 1 1 1 . . . . . . . . . . 1 o
+ 6 o o o 1 . 1 1 2 1 1 . . . . . . 1 1 1 . 1 2 2 3 o
+ 7 o o o 2 . . . . . . . . . . . . 2 o 2 . 1 o o o o
+ 8 o o o 1 1 1 1 . . . . . . . . . 2 o 2 . 1 2 o o o
+ 9 o o o o o o 3 1 . . 1 1 1 . . 1 2 2 1 . . 1 o o o
+10 o o o o o o o 1 . . 1 o 1 . . 1 o 1 . . . 2 o o o
+11 o o o o o o o 1 . . 1 2 2 1 . 1 1 1 . . . 3 o o o
+12 o o o o o o o 1 . . . 1 o 1 . . . . . . . 2 o o o
+13 o o o o o o o 1 . . . 1 1 1 . . . . . . . 2 o o o
+14 o o o o o o o 1 . 1 2 2 1 . . . . . . . . 1 o o o
+15 o o o o o o o 1 1 2 o o 1 . 1 1 1 . . . . 1 1 2 o
+16 o o o o o o o o o o o o 1 1 3 o 3 1 1 . . . . 1 o
+17 o o o o o o o o o o o o o o o o o o 3 1 1 1 1 1 o
+18 o o o o o o o o o o o o o o o o o o o o o o o o o
+19 o o o o o o o o o o o o o o o o o o o o o o o o o
+20 o o o o o o o o o o o o o o o o o o o o o o o o o
+21 o o o o o o o o o o o o o o o o o o o o o o o o o
+22 o o o o o o o o o o o o o o o o o o o o o o o o o
+23 o o o o o o o o o o o o o o o o o o o o o o o o o
+24 o o o o o o o o o o o o o o o o o o o o o o o o o
+25 o o o o o o o o o o o o o o o o o o o o o o o o o
+
+Flags Left: 100
+
+Choose one of the following actions:
+0: Reveal cell
+1: Toggle flag
+2: Solve locally
+3: Solve globally
+<span style="color:red">3</span>
+
+   A B C D E F G H I J K L M N O P Q R S T U V W X Y
+ 1 . 1 2 x 1 1 1 1 . 1 x 2 2 1 1 1 1 2 2 3 2 1 1 1 1
+ 2 . 2 x 3 1 1 x 1 . 1 2 x 2 x 1 1 x 3 x x x 1 1 x 1
+ 3 . 2 x 2 . 1 2 2 1 . 2 2 3 1 1 1 1 3 x 4 2 1 1 1 1
+ 4 1 2 2 1 . 1 2 x 2 1 1 x 1 . . . . 1 1 1 . . . 1 1
+ 5 1 x 2 1 . 1 x 3 x 1 1 1 1 . . . . . . . . . . 1 x
+ 6 1 2 x 1 . 1 1 2 1 1 . . . . . . 1 1 1 . 1 2 2 3 2
+ 7 . 2 2 2 . . . . . . . . . . . . 2 x 2 . 1 x x 4 x
+ 8 . 1 x 1 1 1 1 . . . . . . . . . 2 x 2 . 1 2 4 x x
+ 9 . 1 1 1 2 x 3 1 . . 1 1 1 . . 1 2 2 1 . . 1 4 x o
+10 1 1 1 . 2 x x 1 . . 1 x 1 . . 1 x 1 . . . 2 x x o
+11 2 x 2 . 1 2 2 1 . . 1 2 2 1 . 1 1 1 . . . 3 x o o
+12 2 x 2 . . 1 1 1 . . . 1 x 1 . . . . . . . 2 x 4 x
+13 2 2 1 1 1 2 x 1 . . . 1 1 1 . . . . . . . 2 2 3 1
+14 x 2 . 1 x 2 1 1 . 1 2 2 1 . . . . . . . . 1 x 1 .
+15 x 3 2 4 3 2 1 1 1 2 x x 1 . 1 1 1 . . . . 1 1 2 1
+16 2 3 x x x 1 1 x 1 2 x 3 1 1 3 x 3 1 1 . . . . 1 x
+17 x 4 5 x 3 1 1 1 1 2 2 2 . 1 x x 4 x 3 1 1 1 1 1 1
+18 2 x x 2 1 . . . . 1 x 1 . 1 2 2 3 x x 1 1 x 2 1 .
+19 1 2 3 3 2 1 . . . 1 1 2 1 1 . 1 3 4 3 1 1 2 x 1 .
+20 . . 1 x x 1 . 1 1 2 1 2 x 3 2 3 x x 3 1 1 1 1 1 .
+21 . . 1 3 3 2 . 1 x 2 x 2 3 x x 3 x x 4 x 2 . . . .
+22 . . . 1 x 1 . 1 1 3 2 2 3 x 4 2 2 2 3 x 2 . 1 1 1
+23 1 1 . 1 1 1 . . . 1 x 2 3 x 3 1 1 2 3 3 3 2 2 x 1
+24 x 2 . . 1 1 1 . . 1 3 x 3 2 x 2 2 x x 3 x x 2 1 1
+25 x 2 . . 1 x 1 . . . 2 x 2 1 2 x 2 2 3 x 3 2 1 . .
+
+Flags Left: 2
+
+Choose one of the following actions:
+0: Reveal cell
+1: Toggle flag
+2: Solve locally
+3: Solve globally
+<span style="color:red">1</span>
+Please enter cell coordinates: <span style="color:red">X11</span>
+
+   A B C D E F G H I J K L M N O P Q R S T U V W X Y
+ 1 . 1 2 x 1 1 1 1 . 1 x 2 2 1 1 1 1 2 2 3 2 1 1 1 1
+ 2 . 2 x 3 1 1 x 1 . 1 2 x 2 x 1 1 x 3 x x x 1 1 x 1
+ 3 . 2 x 2 . 1 2 2 1 . 2 2 3 1 1 1 1 3 x 4 2 1 1 1 1
+ 4 1 2 2 1 . 1 2 x 2 1 1 x 1 . . . . 1 1 1 . . . 1 1
+ 5 1 x 2 1 . 1 x 3 x 1 1 1 1 . . . . . . . . . . 1 x
+ 6 1 2 x 1 . 1 1 2 1 1 . . . . . . 1 1 1 . 1 2 2 3 2
+ 7 . 2 2 2 . . . . . . . . . . . . 2 x 2 . 1 x x 4 x
+ 8 . 1 x 1 1 1 1 . . . . . . . . . 2 x 2 . 1 2 4 x x
+ 9 . 1 1 1 2 x 3 1 . . 1 1 1 . . 1 2 2 1 . . 1 4 x o
+10 1 1 1 . 2 x x 1 . . 1 x 1 . . 1 x 1 . . . 2 x x o
+11 2 x 2 . 1 2 2 1 . . 1 2 2 1 . 1 1 1 . . . 3 x x o
+12 2 x 2 . . 1 1 1 . . . 1 x 1 . . . . . . . 2 x 4 x
+13 2 2 1 1 1 2 x 1 . . . 1 1 1 . . . . . . . 2 2 3 1
+14 x 2 . 1 x 2 1 1 . 1 2 2 1 . . . . . . . . 1 x 1 .
+15 x 3 2 4 3 2 1 1 1 2 x x 1 . 1 1 1 . . . . 1 1 2 1
+16 2 3 x x x 1 1 x 1 2 x 3 1 1 3 x 3 1 1 . . . . 1 x
+17 x 4 5 x 3 1 1 1 1 2 2 2 . 1 x x 4 x 3 1 1 1 1 1 1
+18 2 x x 2 1 . . . . 1 x 1 . 1 2 2 3 x x 1 1 x 2 1 .
+19 1 2 3 3 2 1 . . . 1 1 2 1 1 . 1 3 4 3 1 1 2 x 1 .
+20 . . 1 x x 1 . 1 1 2 1 2 x 3 2 3 x x 3 1 1 1 1 1 .
+21 . . 1 3 3 2 . 1 x 2 x 2 3 x x 3 x x 4 x 2 . . . .
+22 . . . 1 x 1 . 1 1 3 2 2 3 x 4 2 2 2 3 x 2 . 1 1 1
+23 1 1 . 1 1 1 . . . 1 x 2 3 x 3 1 1 2 3 3 3 2 2 x 1
+24 x 2 . . 1 1 1 . . 1 3 x 3 2 x 2 2 x x 3 x x 2 1 1
+25 x 2 . . 1 x 1 . . . 2 x 2 1 2 x 2 2 3 x 3 2 1 . .
+
+Flags Left: 1
+
+Choose one of the following actions:
+0: Reveal cell
+1: Toggle flag
+2: Solve locally
+3: Solve globally
+<span style="color:red">3</span>
+
+   A B C D E F G H I J K L M N O P Q R S T U V W X Y
+ 1 . 1 2 x 1 1 1 1 . 1 x 2 2 1 1 1 1 2 2 3 2 1 1 1 1
+ 2 . 2 x 3 1 1 x 1 . 1 2 x 2 x 1 1 x 3 x x x 1 1 x 1
+ 3 . 2 x 2 . 1 2 2 1 . 2 2 3 1 1 1 1 3 x 4 2 1 1 1 1
+ 4 1 2 2 1 . 1 2 x 2 1 1 x 1 . . . . 1 1 1 . . . 1 1
+ 5 1 x 2 1 . 1 x 3 x 1 1 1 1 . . . . . . . . . . 1 x
+ 6 1 2 x 1 . 1 1 2 1 1 . . . . . . 1 1 1 . 1 2 2 3 2
+ 7 . 2 2 2 . . . . . . . . . . . . 2 x 2 . 1 x x 4 x
+ 8 . 1 x 1 1 1 1 . . . . . . . . . 2 x 2 . 1 2 4 x x
+ 9 . 1 1 1 2 x 3 1 . . 1 1 1 . . 1 2 2 1 . . 1 4 x x
+10 1 1 1 . 2 x x 1 . . 1 x 1 . . 1 x 1 . . . 2 x x 4
+11 2 x 2 . 1 2 2 1 . . 1 2 2 1 . 1 1 1 . . . 3 x x 3
+12 2 x 2 . . 1 1 1 . . . 1 x 1 . . . . . . . 2 x 4 x
+13 2 2 1 1 1 2 x 1 . . . 1 1 1 . . . . . . . 2 2 3 1
+14 x 2 . 1 x 2 1 1 . 1 2 2 1 . . . . . . . . 1 x 1 .
+15 x 3 2 4 3 2 1 1 1 2 x x 1 . 1 1 1 . . . . 1 1 2 1
+16 2 3 x x x 1 1 x 1 2 x 3 1 1 3 x 3 1 1 . . . . 1 x
+17 x 4 5 x 3 1 1 1 1 2 2 2 . 1 x x 4 x 3 1 1 1 1 1 1
+18 2 x x 2 1 . . . . 1 x 1 . 1 2 2 3 x x 1 1 x 2 1 .
+19 1 2 3 3 2 1 . . . 1 1 2 1 1 . 1 3 4 3 1 1 2 x 1 .
+20 . . 1 x x 1 . 1 1 2 1 2 x 3 2 3 x x 3 1 1 1 1 1 .
+21 . . 1 3 3 2 . 1 x 2 x 2 3 x x 3 x x 4 x 2 . . . .
+22 . . . 1 x 1 . 1 1 3 2 2 3 x 4 2 2 2 3 x 2 . 1 1 1
+23 1 1 . 1 1 1 . . . 1 x 2 3 x 3 1 1 2 3 3 3 2 2 x 1
+24 x 2 . . 1 1 1 . . 1 3 x 3 2 x 2 2 x x 3 x x 2 1 1
+25 x 2 . . 1 x 1 . . . 2 x 2 1 2 x 2 2 3 x 3 2 1 . .
+
+Flags Left: 0
+
+CONGRATULATIONS! YOU WIN!
+
+Press [ENTER] to exit...
+</pre>
+            </div>            
+			<div class="card-footer text-muted">
+              End of Resources &amp; Sample I/O
+            </div>
+          </div>
+		  
+		  <!-- Submission and grading section -->
+		  <!-- ### Complete submission and grading section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="submission">
+              <h3 class="card-title">Submission &amp; Grading</h3> 
+			  <p class="card-text">
+			    <strong>Deadline: 12 October 2020 Monday HKT 23:59.</strong><br/>
+				You may earn 8% course grade for each PA via Automated Grading on the <a href="https://zinc.cse.ust.hk/">ZINC Online Submission System</a>. <br/>
+				Rename your source file as <code>PA1.cpp</code> and zip it by itself as <code>PA1.zip</code> for submission to ZINC. <br/>
+				<br/>
+				There are two revealed <code>stdio</code> test cases (one of them is just the Sample I/O) on ZINC which are both worth 0 points. 
+				Their main purpose is to double-confirm that your code can successfully compile and execute on ZINC, and also to provide you with straightforward tests. <br/>
+				<br/>
+				It is a good indicator that your code is mostly correct (but not a 100% guarantee) if you can pass both revealed <code>stdio</code> test cases. 
+				Please note that the <a href="#download">Sample I/O</a> and the revealed <code>stdio</code> test cases on ZINC don't show all possible cases. It is part of the assessment for you to design your own test cases to test your program. 
+				Please also remember to remove or comment out any debugging message(s) that you might have added, before submitting your code. <br/>
+				<br/>
+				Download the textfiles of the two <code>stdio</code> test cases here: <a href="code/PA1_stdio_revealed.zip">PA1_stdio_revealed.zip</a>
+			  </p>
+			  <br/>
+			  <h4>Grading Scheme</h4>
+			  <p class="card-text">
+				The actual grading is with <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Googletest C++ Unit Testing (GTest)</a>. 
+				Each test case will be worth 5% in the Grading Scheme table below, for a total of 20 test cases. 
+				The actual grading will also only be triggered, with the scores and test cases revealed, after the deadline. 
+				This hidden grading policy is for all the PAs in order to prevent reverse-engineering of the test cases, since the PAs are a significant part of the course assessment and course grade. 
+				On the other hand, the Labs have a more visible grading policy, as their primary purpose is for hands-on programming practice, with full Lab marks being the expectation. <br/>
+				<br/>
+				Please ensure that you submit to ZINC well before the deadline as <strong>all late submissions will be automatically rejected</strong>.
+			  </p>
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">Task Function</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td>Task 1 - <code>reveal()</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td>Task 2 - <code>flag()</code></td>
+				  <td>5%</td>
+				</tr>
+				<tr>
+				  <td>Task 3 - <code>local_solver()</code></td>
+				  <td>20%</td>
+				</tr>
+				<tr>
+				  <td>Task 4 - <code>classify_hidden_cells()</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td>Task 5 - <code>has_satisfiable_neighbor_constraints()</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td>Task 6 - <code>record_possibility()</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td>Task 7 - <code>enumerate_possibilities()</code></td>
+				  <td>20%</td>
+				</tr>
+				<tr>
+				  <td>Task 8 - <code>handle_constrained_cells()</code></td>
+				  <td>5%</td>
+				</tr>
+				<tr>
+				  <td>Task 9 - <code>handle_unconstrained_cells()</code></td>
+				  <td>5%</td>
+				</tr>
+				<tr>
+				  <td>Task 10 - <code>global_solver()</code></td>
+				  <td>5%</td>
+				</tr>				
+			  </table>
+            </div>
+			<div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+		  
+		  <!-- FAQ section -->
+		  <!-- ### Complete FAQ section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="faq">
+              <h3 class="card-title">FAQ</h3> 			  
+		      <h4>Frequently Asked Questions</h4>
+			  <p>
+  			    <b>Q</b>: My code doesn't work, there is an error/bug, here is the code, can you help me fix it?<br/>
+			    <b>A</b>: As the assignment is a major course assessment, to be fair, you are supposed to work on it on your own and we should not finish the tasks for you. 
+				We are happy to help with explanations and advice, but we shall not directly debug the code for you.<br/>
+				<br/>
+				<b>Q</b>: When will the Mac demo program be uploaded? It is tedious to use HKUST Virtual Barn. <br/>
+				<b>A</b>: Unfortunately, Apple has recently updated their security policies. Our Mac demo programs are not verified by Apple, so they cannot be executed. 
+				For the time being, please use HKUST Virtual Barn to run the Windows demo program. We are still trying to find a better solution. <br/>
+				<br/>
+				<b>Q</b>: The demo program enters an infinite loop when given unexpected input (e.g. inputting a character when expecting an integer). Is this a bug? <br/>
+				<b>A</b>: This is just the behavior of <code>cin >> variable;</code> when given input that is not type-matched. 
+				You don't need to worry about these user-input-error cases for PA1, as all console I/O is already handled for you by the skeleton code in <code>main.cpp</code>. 
+				In other words, only your code in <code>PA1.cpp</code> is graded. <br/>
+				<br/>
+				<b>Q</b>: What are the restrictions regarding modifying the header files, writing our own helper functions, including extra header files, etc? <br/>
+				<b>A</b>: The only hard restriction is that you can only submit <code>PA1.cpp</code> to ZINC, which will use the skeleton code versions of <code>PA1.h</code> and <code>main.cpp</code>. 
+				Anything else that you do, while not strictly prohibited, <strong>will be at your own risk regarding the PA1 grading result</strong>. 
+				Please keep in mind that there is a grade penalty for all grade appeals that include modifications to your already submitted code (no matter how trivial the modification is). <br/>
+				<br/>
+				<b>Q</b>: There this strange bug that causes different outputs in my <code>local_solver()</code>/<code>global_solver()</code> whenever I change unrelated code. Why does this happen? <br/>
+				<b>A</b>: There are many possible causes. The most common cause is declaring but forgetting to initialize local variables and/or arrays, which would then be filled with garbage values that change randomly during runtime, especially whenever you modify nearby code. <br/>
+				<br/>
+				<b>Q</b>: Am I allowed to use local function declarations (function declaration inside an existing function) for my helper functions? <br/>
+				<b>A</b>: You are strongly discouraged from doing so, as that "feature" is a leftover merely for backwards compatibility with C. In C++, it is superseded with class functions and lambda functions, which will be taught later in this course. <br/> 
+				<br/>
+				<b>Q</b>: Regarding the Global Solver Mine/Flag Lower and Upper Bounds, how about cases where there are more unconstrained cells than flags remaining (Lower Bound should be 0 or negative?), and where there are less constrained cells than flags remaining (Upper Bound should be number of constrained cells or number of flags remaining)? <br/>
+				<b>A</b>: Since the Lower and Upper Bounds are doing double-duty to also help determine whether or not to flag or reveal all unconstrained cells, for both of these cases, the Lower Bound should go negative, and the Upper Bound should still be set to the number of flags remaining (even though this number is more than the number of constrained cells). 
+				Even though this (<code>lower_bound &lt; 0</code> and/or <code>upper_bound &gt; num_constrained_cells</code>) makes no logical sense, it is required to correctly handle the unconstrained cells, otherwise the Global Solver would incorrectly flag/reveal them during these two edge cases. <br/>
+				Of course, the optimal solution would be to have two separate sets of Lower and Upper Bounds (one set to deal with the constrained cells, and one set to deal with the unconstrained cells) even though most of the time they would be equal to each other. <br/>
+			  </p>			  
+            </div>
+		    <div class="card-footer text-muted">
+              End of FAQ
+            </div>          
+          </div>
+        </div>
+				
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+					  <li>
+						<a href="#honor">Honor Code</a>
+					  </li>
+                      <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#description">Description</a>
+                      </li>
+                      <li>
+                        <a href="#download">Resources &amp; Sample I/O</a>
+                      </li>
+			  		  <li>
+					    <a href="#submission">Submission &amp; Grading</a>
+					  </li>
+					  <li>
+					    <a href="#faq">FAQ</a>
+					  </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+            </div>
+		  
+		    <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        CHANG Bing Yen
+                      </li>
+                      <li>
+                        Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                      </li>
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  
+		  
+		    <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>
+

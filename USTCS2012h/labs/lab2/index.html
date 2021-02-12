@@ -1,0 +1,800 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change lab number ### -->
+    <title>COMP 2012H Lab 2: Functions, Arrays, and Recursion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+    <!-- Prism syntax highlighter -->
+    <link href="prism.css" rel="stylesheet" />	
+    <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+	
+    <!-- Page Content -->	
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4">
+            <span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+
+          <!-- ### Change lab number and title ### -->
+          <h3 class="my-4">
+            Lab 2 
+            <span style="color:#660066">Functions, Arrays, and Recursion</span>
+          </h3>
+
+          <!-- Review section -->
+          <!-- ### Complete review section for the lab ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="review">
+              <h3 class="card-title">Review</h3>
+              <br>
+              <h4>Functions</h4>
+              <p class="card-text">
+                A function is a group of statements that together perform a task. Every C++ program has at least one function, which is <code>int main()</code>.
+              </p>
+              <ul>
+                <li>
+                  Basic Function Components:
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/function1.png">
+                </li>
+                <li>
+                  Parameter Passing Methods:
+                  <ul>
+                    <li>
+                      Pass-by-Value: The formal parameter copies the value of the corresponding actual parameter.
+                    </li>
+                    <li>
+                      Pass-by-Reference: The formal parameter becomes a reference variable or alias of the corresponding actual parameter.
+                    </li>
+                  </ul>
+                </li>
+                <br>
+                <li>
+                  Function Declaration: A function is declared by writing down its interface - its function prototype. This simply informs the compiler about the function's interface without generating any machine codes.
+                </li>
+                <br>
+                <li>
+                  Function Definition: A function is defined by writing down its function header plus its function body. This will ask the compiler to generate machine codes according to the C++ codes in its function body.
+                </li>
+                <br>
+                <li>
+                  Function Overloading: Two C++ functions CANNOT have the same name and same signature. However, two C++ functions CAN have the same name but different signature, i.e., function overloading.
+                </li>
+                <br>
+                <li>
+                  Scope of Identifiers: Scope is the region of codes in which an identifier declaration is active.
+                </li>
+              </ul>
+              <br>
+              <h4>Arrays</h4>
+              <p class="card-text">
+                An array is a collection of homogeneous objects.
+              </p>
+              <ul>
+                <li>
+                  1-Dimensional Array
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/array1.png">
+                </li>
+                <li>
+                  2-Dimensional Array
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/array2.png">
+                </li>
+              </ul>
+              <br>
+              <h4>Recursion</h4>
+              <p class="card-text">
+                In computer science, recursion is a problem-solving method wherein the solution relies on solving smaller versions of the same problem. Typically, a recursive solution is implemented by a function which calls itself.
+              </p>
+			  <br/>
+			  <h4>Separate Compilation</h4>
+			  <p class="card-text">
+				As we write larger and more complex programs, eventually a single large source file would become very hard to read and maintain. 
+				To solve this situation, we can separate the source code into multiple files. 
+				With proper organization, large and complex amounts of code can be subdivided into functions which are logically grouped into multiple different files, analogous to how complex topics can be organized into a series of textbooks, chapters, and subchapters. 
+				Please read the <a href="https://course.cse.ust.hk/comp2012h/notes/function-separate-compilation-full.pdf">lecture notes</a> for more details and examples.
+			  </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Review
+            </div>
+          </div>
+
+          <!-- Introduction section -->
+          <!-- ### Complete introduction section for the lab ### -->
+          <div class="card mb-4">
+            <!-- ### Add an image representing the lab content here ### -->
+            <img class="card-img-top" src="images/pic.png" alt="Card image cap">
+            <div class="card-body" id="introduction">
+              <p class="card-text">
+                <small>
+                  <em>
+                    Source: <a href="https://play.google.com/store/apps/details?id=com.BuddyMattEnt.ChainReaction&hl=en" target="_blank">https://play.google.com/store/apps/details?id=com.BuddyMattEnt.ChainReaction&hl=en</a>
+                  </em>
+                </small>
+              </p>
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+                This lab is about functions, arrays, and recursion. Let's implement the game "Chain Reaction" with simplified features. 
+				If you're interested in the full game, please check out the Source link of the image above.
+              </p>
+              <br>
+              <h4>How to Play?</h4>
+              <ul>
+                <li>
+                  On a 9-by-6 grid, two players O and X take turns placing their labelled orbs on one of the 54 cells.
+                </li>
+                <li>
+                  A player can place an orb on a cell if that cell does not have an opponent's orb, i.e. the cell is either empty or has any number of the player's orbs.
+                </li>
+                <li>
+                  If a cell has at least as many orbs as neighbors cells*, it undergoes "explosion" by distributing an orb to each of its neighbors (itself becoming empty). 
+				  Those neighbor cells' orbs will also also convert into the same label as the exploded orbs.
+                </li>
+                <li>
+                  As this explosion process increases the number of orbs of neighboring cells, this event can repeat and cause a chain reaction.
+                </li>
+                <li>
+                  The game ends if at some point in time, there are at least two orbs on the grid and all such orbs have the same label. The player corresponding to the dominating label wins.
+                </li>
+              </ul>
+              <p class="card-text">
+                <em>
+                  *Two distinct cells are considered neighbors if they are adjacent, but not diagonal. Hence, a corner cell has 2 neighbors, an edge cell has 3 neighbors, and an interior cell has 4 neighbors.
+                </em>
+              </p>
+			  <a href="https://www.youtube.com/watch?v=RgrWeBLh-1M">YouTube video</a> gameplay example.
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Lab work section -->
+          <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="labwork">
+              <h3 class="card-title">Lab Work</h3>
+			  <p class="card-text">
+				The skeleton code consists of three files:
+				  <ul>
+					<li><code>lab2.h</code></li>
+					<li><code>lab2.cpp</code></li>
+					<li><code>main.cpp</code></li>
+				  </ul>
+				  You are only allowed to modify and submit <code>lab2.cpp</code>. 
+				  ZINC will inject the skeleton code versions of <code>lab2.h</code> and <code>main.cpp</code> during automated compilation and grading.
+			  </p>
+              <br/>
+              <h4>Task 1 - Implement the <code>get_input()</code> function</h4>
+              <p class="card-text">
+                For this function, your tasks are the following:
+                <ul>
+                  <li>
+                    Ask the <code>current_player</code> for cell coordinates, and convert to array coordinates <code>[row][col]</code>.
+                  </li>
+				  <li>
+					<code>cin</code> format is column-letter followed immediately by row-number (e.g. C4).
+				  </li>
+				  <li>
+					Note that the variable <code>col</code> is <code>int</code>; perform the appropriate type conversion on column-letter.
+				  </li>
+                  <li>
+                    Note that C++ arrays are zero-indexed (i.e. index starts at 0).
+                  </li>
+                  <li>
+                    If the cell coordinates are invalid, output the corresponding error messages, and ask for input again.
+                  </li>
+				  <li>
+					Out-of-bounds error: <code>[row][col]</code> is outside the grid.
+				  </li>
+				  <li>
+					Opponent-orb(s) error: <code>[row][col]</code> contains opponent's orb(s).
+				  </li>
+                </ul>
+				Similar to Lab1, the skeleton code contains preset outputs in comment blocks that you may directly copy-paste.<br/>
+                For more details on the game's coordinate system, kindly refer to the <a href="#resources">Sample I/O</a>.
+              </p>
+              <br>
+              <h4>Task 2 - Implement the <code>place_orb()</code> function</h4>
+              <p class="card-text">
+                For this function, your tasks are the following:
+                <ul>
+                  <li>
+                    Do nothing if <code>[row][col]</code> does not exist.
+                  </li>
+                  <li>
+                    Add an orb with <code>current_player</code>'s label to <code>[row][col]</code> (similarly for explosion), also update <code>num_O_orbs</code> and <code>num_X_orbs</code>.
+                  </li>
+                  <li>
+                    Update <code>is_game_over</code>, i.e. if all orbs on the grid are the same label, and there are at least two orbs.
+                  </li>
+                  <li>
+                    If the game is not over, check explosion condition and implement explosion recursion if appropriate.
+                  </li>
+				  <li>
+					Remember to correctly determine the number of neighbor cells; only adjacent, not diagonal.
+				  </li>
+				  <li>
+					If the cell has exploded and is now empty, remember to update with the <code>EMPTY_CELL</code> label.
+				  </li>
+                  <li>
+                    For ease of automated grading, recursive calls must be in the order Up-Down-Left-Right.
+                  </li>
+				  <li>
+					In addition, please code the subtasks in the above listed order.
+				  </li>
+                </ul>
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Lab Work
+            </div>
+          </div>
+
+          <!-- Resources section -->
+          <!-- ### Complete resources section for the lab ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+              <ul>
+                <li>Skeleton code: <a href="code/lab2_skeleton.zip">lab2_skeleton.zip</a></li>
+				<li>Makefile: <a href="code/Makefile">Makefile</a></li>
+                <li>Demo program (executable for Windows): <a href="code/lab2_demo_win.exe">lab2_demo_win.exe</a></li>
+              </ul>
+			  <br/>
+              <h4>Sample I/O</h4>
+              <pre>Welcome to COMP 2012H Lab 2!
+CHAIN REACTION!
+
+
+    A   B   C   D   E   F
+
+1   .   .   .   .   .   .
+
+2   .   .   .   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 0
+Number of X Orbs: 0
+
+Player O, please enter cell coordinates: <span style="color:red">A1</span>
+
+    A   B   C   D   E   F
+
+1  O1   .   .   .   .   .
+
+2   .   .   .   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 1
+Number of X Orbs: 0
+
+Player X, please enter cell coordinates: <span style="color:red">A0</span>
+Given coordinates are out of bounds!
+Invalid input. Please enter again.
+
+Player X, please enter cell coordinates: <span style="color:red">A1</span>
+Selected cell has an opponent's orb!
+Invalid input. Please enter again.
+
+Player X, please enter cell coordinates: <span style="color:red">C2</span>
+
+    A   B   C   D   E   F
+
+1  O1   .   .   .   .   .
+
+2   .   .  X1   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 1
+Number of X Orbs: 1
+
+Player O, please enter cell coordinates: <span style="color:red">B1</span>
+
+    A   B   C   D   E   F
+
+1  O1  O1   .   .   .   .
+
+2   .   .  X1   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 2
+Number of X Orbs: 1
+
+Player X, please enter cell coordinates: <span style="color:red">C2</span>
+
+    A   B   C   D   E   F
+
+1  O1  O1   .   .   .   .
+
+2   .   .  X2   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 2
+Number of X Orbs: 2
+
+Player O, please enter cell coordinates: <span style="color:red">B1</span>
+
+    A   B   C   D   E   F
+
+1  O1  O2   .   .   .   .
+
+2   .   .  X2   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 3
+Number of X Orbs: 2
+
+Player X, please enter cell coordinates: <span style="color:red">C2</span>
+
+    A   B   C   D   E   F
+
+1  O1  O2   .   .   .   .
+
+2   .   .  X3   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 3
+Number of X Orbs: 3
+
+Player O, please enter cell coordinates: <span style="color:red">A1</span>
+
+    A   B   C   D   E   F
+
+1  O1   .  O1   .   .   .
+
+2  O1  O1  X3   .   .   .
+
+3   .   .   .   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 4
+Number of X Orbs: 3
+
+Player X, please enter cell coordinates: <span style="color:red">C2</span>
+
+    A   B   C   D   E   F
+
+1  O1   .  X2   .   .   .
+
+2  O1  X2   .  X1   .   .
+
+3   .   .  X1   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 2
+Number of X Orbs: 6
+
+Player O, please enter cell coordinates: <span style="color:red">B1</span>
+
+    A   B   C   D   E   F
+
+1  O1  O1  X2   .   .   .
+
+2  O1  X2   .  X1   .   .
+
+3   .   .  X1   .   .   .
+
+4   .   .   .   .   .   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 3
+Number of X Orbs: 6
+
+Player X, please enter cell coordinates: <span style="color:red">E4</span>
+
+    A   B   C   D   E   F
+
+1  O1  O1  X2   .   .   .
+
+2  O1  X2   .  X1   .   .
+
+3   .   .  X1   .   .   .
+
+4   .   .   .   .  X1   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 3
+Number of X Orbs: 7
+
+Player O, please enter cell coordinates: <span style="color:red">B1</span>
+
+    A   B   C   D   E   F
+
+1  O1  O2  X2   .   .   .
+
+2  O1  X2   .  X1   .   .
+
+3   .   .  X1   .   .   .
+
+4   .   .   .   .  X1   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 4
+Number of X Orbs: 7
+
+Player X, please enter cell coordinates: <span style="color:red">C1</span>
+
+    A   B   C   D   E   F
+
+1   .  X1  X1  X1   .   .
+
+2  X2  X3  X1  X1   .   .
+
+3   .   .  X1   .   .   .
+
+4   .   .   .   .  X1   .
+
+5   .   .   .   .   .   .
+
+6   .   .   .   .   .   .
+
+7   .   .   .   .   .   .
+
+8   .   .   .   .   .   .
+
+9   .   .   .   .   .   .
+
+Number of O Orbs: 0
+Number of X Orbs: 12
+
+GAME OVER! Player X wins! CONGRATULATIONS!
+
+Press [ENTER] to exit...
+</pre>
+            </div>
+            <div class="card-footer text-muted">
+              End of Resources &amp; Sample I/O
+            </div>
+          </div>
+
+          <!-- Grading scheme section -->
+          <!-- ### Complete grading section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="grading">
+              <h3 class="card-title">Submission &amp; Grading</h3>
+              <p class="card-text">
+                <strong>Deadline: 6 October 2020 Tuesday HKT 23:59.</strong><br/>
+				You may earn 1% course grade for each lab via Automated Grading on the <a href="https://zinc.cse.ust.hk/">ZINC Online Submission System</a>. <br/>
+				<br/>
+				Rename your source file as <code>lab2.cpp</code> and zip it by itself as <code>lab2.zip</code> for submission to ZINC.<br/>
+				There should be two test cases that are both graded automatically: 
+				<ol>
+				  <li>Revealed and worth 1 out of 4 points.</li>
+				  <li>Hidden and worth 3 out of 4 points.</li>
+				</ol>
+			  </p>
+			  <p class="card-text">
+                As this is the first live deployment of ZINC, we apologize in advance for any unexpected problems that may occur, and humbly request for your patience and understanding. In such cases, please contact the TAs and/or Prof. Desmond for resolution.
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+		  
+		  <!-- FAQ scheme section -->
+          <!-- ### Complete FAQ section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="faq">
+              <h3 class="card-title">Frequently Asked Questions</h3>
+              <p class="card-text">
+				<b>Q</b>: Sometimes the demo program shows a victory screen with some cells having more orbs than adjacent neighbors (e.g. O4), is this a bug? <br/>
+				<b>A</b>: Actually it is an expected side effect of our solution to prevent infinite recursion during chain reaction explosion. As stated in Task 2, "If the game is not over, check explosion condition and implement explosion recursion if appropriate", meaning that we don't enter an explosion recursion if the game is already over. 
+				This has the side effect that the game may end with some cells containing more than the usual possible number of orbs (e.g. O4), as they should have exploded but we did not process the recursion as specified above. This is the expected behavior for Lab2. <br/>
+				<br/>
+				<b>Q</b>: In the Sample I/O, although the neighbor cells of C2 have less than 2 orbs, but C2 still needs 4 orbs to explode. Why? <br/> 
+				<b>A</b>: The explosion condition of each cell only based on how many neighbor cells it has, NOT neighbor cells' orbs. 
+				Therefore, the four corner cells explode with 2 orbs, the non-corner edge cells explode with 3 orbs, and all other interior cells explode with 4 orbs. <br/>
+				<br/>
+				<b>Q</b>: What is the recursion pathway in the last step of the Sample I/O? <br/>
+				<b>A</b>: <ol>
+				  <li>Player X places an orb at C1.</li>
+				  <li>C1 is X3, game is not over, C1 explodes (new set of recursion) and is now empty.</li>
+				  <li>C1_Up - Outside grid boundaries, nothing happens.</li>
+				  <li>C1_Down - Place one X orb at C2. C2 is now X1.</li>
+				  <li>C1_Left - Place one X orb at B1 and convert all B1 orbs into X orbs. B1 is X3, game is not over, B1 explodes (new set of recursion) and is now empty.
+					<ol>
+					  <li>B1_Up - Outside grid boundaries, nothing happens.</li>
+					  <li>B1_Down - Place one X orb at B2 and convert all B2 orbs into X orbs. B2 is now X3.</li>
+					  <li>B1_Left - Place one X orb at A1 and convert all A1 orbs into X orbs. A1 is X2, game is not over, A1 explodes (new set of recursion) and is now empty.
+						<ol>
+						  <li>A1_Up - Outside grid boundaries, nothing happens.</li>
+						  <li>A1_Down - Place one X orb at A2 and convert all orbs into X orbs. A2 is now X2.</li>
+						  <li>A1_Left - Outside grid boundaries, nothing happens.</li>
+						  <li>A1_Right - Place one X orb at B1. B1 is now X1.</li>
+						</ol>
+					  </li>
+					  <li>B1_Right - Place one X orb at C1. C1 is now X1.</li>
+					</ol>
+				  </li>
+				  <li>C1_Right - Place one X orb at D1. D1 is now X1.</li>
+				</ol>
+				<br/>
+				<b>Q</b>: Task 2 states "If the game is not over, check explosion condition and implement explosion recursion if appropriate". But after the "A1_Down" step, all orbs are X orbs, shouldn't the demo program end at that point? <br/>
+				<b>A</b>: The expected behavior is to only check once for game-over per set of Up-Down-Left-Right explosion recursion, which is why the demo program continues. 
+				However, let's say D1 was X2 or O2 instead of empty - C1_Right would add one X orb to it (D1 is now X3), check for game-over (game is indeed over), and end without exploding D1. <br/>
+			  </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Frequently Asked Questions
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+          <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+                      <li>
+                        <a href="#review">Review</a>
+                      </li>
+                      <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#labwork">Lab Work</a>
+                      </li>
+                      <li>
+                        <a href="#resources">Resources &amp; Sample I/O</a>
+                      </li>
+                      <li>
+                        <a href="#grading">Submission &amp; Grading</a>
+                      </li>
+					  <li>
+						<a href="#faq">Frequently Asked Questions</a>
+					  </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+            </div>
+
+            <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        CHANG Bing Yen
+                      </li>
+                      <li>
+                        Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                      </li>
+                      <li>
+                        Last Modified: <script type="text/javascript">document.write(document.lastModified);</script>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+
+            <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>

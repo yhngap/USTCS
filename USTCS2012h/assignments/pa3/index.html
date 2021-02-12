@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012H Assignment 3: Mini Turn-Based Strategy Game with Console UI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+    <!-- Prism syntax highlighter -->
+    <link href="prism.css" rel="stylesheet" />
+
+	<style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.25 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+	
+	table, th, td {
+	  border: 1px solid black;
+	}
+	th, td {
+	  padding: 5px;
+	}
+	th {
+	  text-align: left;
+	}
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4">
+            <span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+
+          <!-- ### Change assignment number and title ### -->
+          <h3 class="my-4">
+            Assignment 3
+            <span style="color:#660066">Mini Turn-Based Strategy Game with Console UI</span>
+          </h3>
+		  
+		  <!-- Honor Code section -->
+		  <!--<div class="card mb-4">
+			<div class="card-body" id="honor" style="background-color:#f4f4f4">
+			  <h3 class="card-title">Honor Code</h3>
+			  <p class="card-text">
+				We value academic integrity very highly. Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> section on our course webpage to make sure you understand what is considered as plagiarism and what the penalties are. 
+				The following are some of the highlights:
+				<ul>
+				  <li>
+					Do NOT try your "luck" - we use sophisticated plagiarism detection software to find cheaters. 
+					We also review codes for potential cases manually.
+				  </li>
+				  <li>
+					The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your assignment. 
+					Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> thoroughly. 
+				  </li>
+				  <li>
+					Serious offenders will fail the course immediately, and there will be additional disciplinary actions from the department and university, upto and including expulsion.
+				  </li>
+				</ul>
+			  </p>
+			</div>
+			<div class="card-footer text-muted">
+              End of Honor Code
+            </div>
+		  </div>-->
+		  
+		  <!-- Changelogs section -->
+          <!-- ### Complete changelogs section for the assignment ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="changelogs">
+              <h3 class="card-title">Changelogs</h3>
+              <p class="card-text">
+				<ul>
+				  <li>
+					2020-11-13 11:05 <br/>
+					Added a FAQ to explain the compiler warning of "type qualifiers ignored on function return type [-Wignored-qualifiers]" in <code>Player</code> class <code>Unit* const* const get_units() const</code> member function.
+				  </li>
+				  <br/>	
+				  <li>
+					2020-11-12 15:11 <br/>
+					Minor update to the Grading Scheme.
+				  </li>
+				  <br/>	
+				  <li>
+					2020-11-11 12:13 <br/>
+					Added links to the revealed test-case input and output textfiles in the Submissions &amp; Grading section.
+				  </li>
+				  <br/>	
+				  <li>
+					2020-11-09 18:11 <br/>
+					Added a FAQ to clarify the term "simultaneous" regarding the Turn-Based Combat.
+				  </li>
+				  <br/>				
+				  <li>
+					2020-11-07 21:55 <br/>
+					Fixed a typo in the Grading Scheme table - "<code>Spearman</code>" should instead be "<code>Pikeman</code>".
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-06 16:53 <br/>
+					Added Grading Scheme details in the Submissions &amp; Grading section.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-06 14:14 <br/>
+					Added a remark to the Resources section that no Makefile is provided. Please try to create one by yourself.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-06 11:23 <br/>
+					Fixed a memory leak in <code>GameEngine</code> Destructor, forgot to call <code>delete</code> the individual <code>Player</code>s in the <code>players</code> dynamic array. Skeleton code updated.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-05 00:15 <br/>
+					Added clarifications to the Task Description Unit section regarding how much to <code>heal()</code>, as well as to avoid overflowing/underflowing <code>health</code> with <code>heal()</code>/<code>receive_damage_actual()</code>.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 23:55 <br/>
+					Added late submission penalty policy in Submission &amp; Grading section.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 23:45 <br/>
+					Updated Linux workstation commands in the Resources section to also download <code>GameMap.txt</code> and <code>PlayersAndUnits.txt</code>.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 14:40 <br/>
+					Added a Objectives &amp; Intended Learning Outcomes section.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 11:21 <br/>
+					Added a minor elaboration on the term "simultaneous" in the Turn-Based Combat subsection.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 11:04 <br/>
+					Added list of stats for the 4 Units in the Unit Affinity subsection.
+				  </li>
+				  <br/>
+				  <li>
+					2020-11-04 10:57 <br/>
+					Fixed typos in the Unit Affinity subsection. Bonus damage modifier should be only 1.5, not 2.0.
+				  </li>
+				</ul>
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Changelogs
+            </div>
+          </div>
+		  
+		  <!-- Objectives section -->
+          <!-- ### Complete Objectives section for the assignment ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="objectives">
+              <h3 class="card-title">Objectives &amp; Intended Learning Outcomes</h3>
+              <p class="card-text">
+				The objective of this assignment is to provide you with practice on the OOP concepts of Inheritance and Polymorphism, as well as writing code with less reliance on a provided skeleton code.
+              </p>
+			  Upon completion of this assignment, you should be able to:
+			  <ol>
+				<li>Write appropriate header files on your own, without being provided them as part of the skeleton code.</li>
+				<li>Manage dynamic memory effectively with the use of class Constructors and Destructors.</li>
+				<li>Use Inheritance to allow for significant code reuse between Base classes and Derived classes.</li>
+				<li>Use function overriding in Derived classes to provide different function implementations for the same member function prototype.</li>
+				<li>Understand how Base class pointers/references can point/refer to Derived class objects, yet polymorphically call Derived class functions that are declared <code>virtual</code>.</li>
+				<li>Code a program following the OOP paradigm.</li>
+			  </ol>
+            </div>
+            <div class="card-footer text-muted">
+              End of Objectives &amp; Intended Learning Outcomes
+            </div>
+          </div>
+
+          <!-- Introduction section -->
+          <!-- ### Complete introduction section for the assignment ### -->
+          <div class="card mb-4">
+            <!-- ### Add an image representing the assignment content here ### -->
+            <img class="card-img-top" src="images/wargroove.jpg" alt="Card image cap">
+            <div class="card-body" id="introduction">
+              <p class="card-text">
+                <small>
+                  <em>
+                    Source: <a href="https://wargroove.com/">https://wargroove.com/</a>
+                  </em>
+                </small>
+              </p>
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+				In this programming assignment, we will be implementing a Mini Turn-Based Strategy Game with Console UI, inspired by games such as Wargroove and the Langrisser series. 
+				Players (2 or more) take turns to command their Units in battle on a grid-based coordinate system. The winner is the last Player with unit(s) remaining. 
+				It is possible for there to be no winner, if all remaining units are wiped out in a single turn of battle.
+              </p>
+			  <pre>
+GAME START
+Red's Turn:
+
+##############################
+#                            #
+#                            #
+#     C            ##X       #
+#    D A            ##Y      #
+#     B              ##      #
+#            ##              #
+#          ####              #
+#        #####               #
+#         ###                #
+#                    ###     #
+#                    #Z      #
+#                    #       #
+#                            #
+##############################
+
+Red:
+	[A]  H:10  A:10  D: 5  AR: 1  MR: 5  row: 4  col: 7  READY  Swordsman
+	[B]  H:10  A:10  D: 5  AR: 1  MR: 5  row: 5  col: 6  READY  Swordsman
+	[C]  H:10  A:14  D: 3  AR: 1  MR:10  row: 3  col: 6  READY  Knight
+	[D]  H:10  A:14  D: 3  AR: 1  MR:10  row: 4  col: 5  READY  Knight
+
+Blue:
+	[X]  H:10  A: 8  D: 7  AR: 1  MR: 3  row: 3  col:21  DONE   Pikeman
+	[Y]  H:10  A: 8  D: 7  AR: 1  MR: 3  row: 4  col:22  DONE   Pikeman
+	[Z]  H:10  A: 9  D: 1  AR: 5  MR: 3  row:11  col:22  DONE   Archer
+
+Select Unit [ABCD]: 
+			  </pre>
+              <br>
+			  <h4>System Overview</h4>
+			  <ul>
+			    <li><code>PA3_main</code> merely creates a <code>GameEngine</code> instance and invokes it to start the game.</li>
+				<li><code>GameEngine</code> contains the actual "main" portion of the program, and handles most of the gameplay and Console UI code.</li>
+				<li><code>GameMap</code> handles the grid state and grid display to Console UI.</li>
+				<li><code>Player</code> represents a Player in the game, with a set of <code>Unit</code>s to command.</li>
+				<li><code>Unit</code> is the base class that represents a combat unit in the game. All the different kinds of units inherit from this base class.</li>
+			  </ul>
+			  <br/>
+			  
+              <h4>GameMap &amp; Grid-Based Coordinate System</h4>
+			  <p class="card-text">
+				The grid-based coordinate system is a simple (row, column) system with the origin (0, 0) at the top-left corner.
+				(1, 0) is one cell below the origin, while (0, 1) is one cell to the right of the origin. 
+				Distance in this game is calculated as Manhattan distance, which is <code>|destination_row - starting_row| + |destination_col - starting_col|</code>.
+				E.g. the distance between (5, 6) and (10, 3) is 8. Diagonal traversal doesn't exist in this grid-based coordinate system.
+			  </p>
+			  
+			  The game map is stored in two mirrored dynamic arrays:
+			  <ul>
+				<li><code>terrain_map</code> stores internal terrain state information, such as terrain obstacles, occupied by units, or empty.</li>
+				<li><code>display_map</code> stores the actual display characters to be printed on the console.</li>
+			  </ul>
+			  <p class="card-text">
+				For the sake of simplicity, we only have one type of terrain obstacle, represented by the '#' character, which is completely impassable. 
+				Units are each represented by a single character, which also serves as the Unit ID. Empty terrain is represented by a single blank space character.
+			  </p>
+			  
+			  The game map is loaded from a textfile. The following is an example:
+<pre>15 30
+##############################
+#                            #
+#                            #
+#                  ##        #
+#                   ##       #
+#                    ##      #
+#            ##              #
+#          ####              #
+#        #####               #
+#         ###                #
+#                    ###     #
+#                    #       #
+#                    #       #
+#                            #
+##############################
+</pre>
+
+			  <p class="card-text">
+				The first two numbers represent the number of rows and columns respectively in this game map. 
+				The following lines then specify the actual game map with '#' and space characters.
+				To make the game map easier to view, it is recommended to delineate the borders of the game map with the '#' character. 
+				For the sake of simplicity, no error-checking nor input-sanitization is performed on the game map input textfile.
+			  </p>
+			  <br/>
+			  
+			  <h4>Players &amp; Units</h4>
+			  <p class="card-text">
+				<code>Player</code>s have a name (stored as C++ <code>string</code>) and a set of <code>Unit</code>s (stored as a dynamic array).
+			  </p>
+			  <code>Unit</code>s have:
+			  <ul>
+				<li><code>char id</code>: Used to uniquely identify units, and also for display on the game map. This also limits the number of units possible in a game.</li>
+				<li><code>UnitType unit_type</code>: A scoped <code>enum</code>. Unit Types will be further elaborated in the Unit Affinity System section.</li>
+				<li><code>int health</code>: A unit is defeated/dead if its health drops to 0.</li>
+				<li><code>int attack</code>: Represents the unit's damage potential.</li>
+				<li><code>int defense</code>: Represents the unit's resistance to damage.</li>
+				<li><code>int attack_range</code>: Represents the distance from enemy units that a unit can attack.</li>
+				<li><code>int movement_range</code>: Represents the distance that a unit can move in a single turn.</li>
+				<li><code>int position_row, position_col</code>: Represents a unit's current position on the game map.</li>
+				<li><code>bool ready_state</code>: Used to keep track if a unit has already used up its turn.</li>
+			  </ul>
+			  
+			  The players and units are also loaded from a textfile. The following is an example:
+<pre>
+2
+Red 4
+A Swordsman 4 7
+B Swordsman 5 6
+C Knight 3 6
+D Knight 4 5
+Blue 3
+X Pikeman 3 21
+Y Pikeman 4 22
+Z Archer 11 22
+</pre>
+
+			  <p class="card-text">
+				The first number represents the number of players. 
+				The following string and number represents the player's name and number of units respectively.
+				Finally, each unit begins with its character ID, followed by the Unit Type, then its starting location (row then column). 
+				Likewise, no error-checking nor input-sanitization is performed on the players and units input textfile.
+			  </p>
+			  <br/>
+			  
+			  <h4>Turn-Based Combat</h4>
+			  <p class="card-text">
+				Within a player's turn, he/she can issue commands to all of his/her units. This provides a strategic advantage for having a larger number of units.
+			  </p>
+			  
+			  Each of player's unit within the turn can choose to perform two sets of actions: Move &amp; Attack, or Heal:
+			  <ul>
+				<li>
+				  Move &amp; Attack
+				  <ul>
+					<li>Move a distance upto the movement range of the unit. Unused movement range is NOT carried over to the next turn.</li>
+					<li>After Moving, a unit can choose to subsequently Attack a single Enemy Unit within its attack range.</li>
+					<li>A unit can choose to directly Attack without first Moving, but it cannot then Move afterwards (i.e. no Hit-and-Run).</li>
+				  </ul>
+				</li>
+				<li>Heal: Restores health to the unit, but that unit cannot Move nor Attack for the rest of that turn.</li>
+			  </ul>
+			  
+			  <p class="card-text">
+				When Unit A attacks Unit B, if Unit A is also within the attack range of Unit B, then both Units will attack each other <b>simultaneously</b> - 
+				damage is calculated for both units at the same time with their current stats at the moment the attack is confirmed, 
+				and damage is applied to both units at the same time after the attack ends. <br/>
+				<br/>
+				In other words, no matter who starts the attack, the defender will automatically counterattack at the same time, as long as the attacker is within range of the defender. 
+				Thus, ranged units have a strategic advantage when attacking melee units, as the ranged units will be out-of-range of the melee units. 
+				On the other hand, it is risky for weaker units to attack stronger units, as the weaker unit may end up being defeated in the process. <br/>
+				<br/>
+				Damage is calculated based on a simple formula of <code>{ (A.attack - B.defense) * (A.health / A.max_health) * Unit_Affinity_Modifier }</code> rounded (<strong>NOT</strong> casted) to an integer.
+			  </p>
+			  <br/>
+			  
+			  <h4>Unit Affinity System</h4>
+			  <p class="card-text">
+			  For our simple game, we only have 4 <code>UnitType</code>s. 
+			  Each Unit Type has strength(s) and weakness(es) towards other Unit Type(s), which are represented as a simple modifier to the damage formula.
+			  
+			  <ul>
+				<li>Sword: 1.5 to Spear, 0.5 to Horse.</li>
+				<li>Spear: 1.5 to Horse, 0.5 to Sword.</li>
+				<li>Horse: 1.5 to Sword, 0.5 to Spear.</li>
+				<li>Arrow: No modifiers.</li>
+			  </ul>
+			  </p>
+			  
+			  The 4 Unit Types correspond to the 4 Units in our game:
+			  <ul>
+				<li>Swordsman: Sword Type.</li>
+				<li>Pikeman: Spear Type.</li>
+				<li>Knight: Horse Type.</li>
+				<li>Archer: Arrow Type.</li>
+			  </ul>
+			  
+			  The stats for our 4 Units are as follows:
+			  <ul>
+				<li>Swordsman: Health 10, Attack 10, Defense 5, Attack Range 1, Movement Range 5.</li>
+				<li>Pikeman: Health 10, Attack 8, Defense 7, Attack Range 1, Movement Range 3.</li>
+				<li>Knight: Health 10, Attack 14, Defense 3, Attack Range 1, Movement Range 10.</li>
+				<li>Archer: Health 10, Attack 9, Defense 1, Attack Range 5, Movement Range 3.</li>
+			  </ul>
+			  
+			  <p class="card-text">
+				A more complex game would have multiple units of different stats but with shared Unit Type (e.g. Light Cavalry and Armored Cavalry can both be Horse Type and differ on defense and movement range).
+			  </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Description section -->
+          <!-- ### Complete description section for the assignment ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="description">
+              <h3 class="card-title">Task Description</h3>
+			  <p class="card-text">
+				This time the skeleton code is incomplete and cannot be immediately compiled, in order to provide practice in creating and coding source files from scratch.
+			  </p>
+			  <br/>
+			  
+			  <h4>GameEngine</h4>
+			  <p class="card-text">
+				Almost everything is given to you in the skeleton code. The entry point is the <code>run_game()</code> function. 
+				Recommend reading through all the other functions and control flow in order to get an overview of the whole program. <br/>
+				<br/>
+				Only the <code>bool is_game_over() const</code> function definition is missing. It should return <code>true</code> when there is only 1 Player with alive units remaining, or when all Players and Units are wiped out.
+			  </p>
+			  <br/>
+			  
+			  <h4>GameMap</h4>
+			  <p class="card-text">
+				Similarly, almost everything is given to you in the skeleton code, and recommend reading through it.
+			  </p>
+			  
+			  Only two function definitions are missing:
+			  <ul>
+				<li><code>void update_terrain_map(int row, int col, TerrainState state)</code> is straightforward.</li>
+				<li>
+				  <code>bool is_valid_path(int starting_row, int starting_col, int delta_row, int delta_col, int movement_range)</code> has 4 considerations:
+				  <ul>
+					<li>GameMap Out-of-Bounds.</li>
+					<li>Terrain Blocked (the '#' character).</li>
+					<li>Terrain Occupied by another Unit.</li>
+					<li>Outside of movement range.</li>
+				  </ul>
+				</li>
+			  </ul>
+			  <p class="card-text">
+				For the sake of simplicity, we assume that Units can "teleport" past obstacles and other Units, so we don't need to do any actual pathway calculations.
+			  </p>
+			  <br/>
+			  
+			  <h4>Player</h4>
+			  <p class="card-text">
+				Only the header file is given in the skeleton code. Create and code the <code>Player.cpp</code> source file accordingly. 
+				The required function definitions are all straightforward, based on the descriptive function names, parameter names, and return value. 
+			  </p>
+			  <br/>
+			  
+			  <h4>Unit</h4>
+			  <p class="card-text">
+				Only the <code>to_string_base()</code> function is given, so you don't have to worry about the Console I/O tedium. <br/>
+				Most of the other functions are similarly straightforward. Only special cases will be listed here. 
+				
+				<ul>
+				  <li><code>virtual void heal()</code> - Restore health equal to the <code>static const int HEAL_RATE</code> variable. Remember to cap according to the <code>static const int MAX_HEALTH</code> variable, and not overflow.</li>
+				  <li><code>virtual void move_delta(int delta_row, int delta_col)</code> - In terms of relative change to row and column position, instead of the absolute destination, so it is more convenient when inputting Move commands.</li>
+				  <li><code>virtual void attack_unit(Unit* const defender)</code> - Keep in mind that the defender also "fights back" at the same time if the attacker is inside the defender's attack range.</li>
+				  <li><code>void receive_damage_actual(double actual_damage)</code> - Helper function. You can place code that is the same across all Units here. Remember not to go below 0 health.</li>
+				</ul>
+				Note that the function declarations with <code>= 0</code> signify that they are <code>pure virtual</code>, i.e. have no function definition, thus are expected to and must be overriden in the derived classes.
+			  </p>
+			  <br/>
+			  
+			  <h4>Derived Unit Classes</h4>
+			  <p class="card-text">
+				No skeleton code provided. The topic of this assignment is OOP Inheritance and Polymorphism, and coding the derived class declarations is part of the fundamentals.
+				<ul>
+				  <li><code>virtual void receive_damage_affinity(double raw_damage, UnitType attacker_unit_type)</code> - Refer to the Unit Affinity section in the Introduction.</li>
+				  <li><code>virtual string to_string() const</code> - The derived Unit classes should append their class name to the end of the base string. E.g. <code>Archer</code> should append "Archer".</li>
+				</ul>
+			  </p>
+			  <br/>
+			  
+			  <h4>Additional Remarks</h4>
+              <p class="card-text">
+                <ul>
+				  <li>
+					You are allowed to use the <code>&lt;cmath&gt;</code> library for the rounding and absolute-value math functions, which is already included in the skeleton code.
+				  </li>
+				  <li>
+					You are allowed to, but discouraged from, using the C/C++ standard libraries. However, you are NOT allowed to use external libraries.
+				  </li>
+				  <li>
+					You are allowed to define your own helper code (functions, structs, classes, etc), but be careful not to crash ZINC.
+				  </li>
+				  <li>
+					Remember to properly deallocate (<code>delete</code>) dynamic memory in the class Destructors (if applicable).
+				  </li>
+				  <li>
+					Apologies in advance again for the ugly Console UI and tedious usage.
+				  </li>
+                </ul>
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Task Description
+            </div>
+          </div>
+
+          <!-- Download section -->
+		  <!-- ### Complete download section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="download">
+              <h3 class="card-title">Resources</h3>
+			  <ul>
+			    <li>Skeleton code: <a href="code/PA3_skeleton.zip">PA3_skeleton.zip</a></li>
+				<li>Makefile: None provided. Please try to create one by yourself.</li>
+				<li>Sample input textfiles: 
+				  <ul>
+					<li>Game Map: <a href="code/GameMap.txt">GameMap.txt</a></li>
+					<li>Players and Units: <a href="code/PlayersAndUnits.txt">PlayersAndUnits.txt</a></li>
+				  </ul>
+				</li>
+				<li>Demo program: 
+				  <ul>
+					<li>Windows: <a href="code/windows/PA3_demo.exe">PA3_demo.exe</a></li>
+					<li>Mac: <a href="code/mac/PA3_demo">PA3_demo</a></li>
+					<li>Linux: <a href="code/linux/PA3_demo">PA3_demo</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			  <p class="card-text">
+				No Sample Console I/O this time, as it takes up too much space to display. Please try the demo programs directly.
+			  </p>
+			  
+			  <h4>Run demo program on CS lab 2 machines</h4>
+			  <p class="card-text">In case you cannot run demo program on Mac, you can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+<pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/linux/PA3_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/GameMap.txt --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/PlayersAndUnits.txt --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x PA3_demo
+./PA3_demo
+</code></pre>
+            </div>            
+			<div class="card-footer text-muted">
+              End of Resources
+            </div>
+          </div>
+		  
+		  <!-- Submission and grading section -->
+		  <!-- ### Complete submission and grading section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="submission">
+              <h3 class="card-title">Submission &amp; Grading</h3> 
+			  <p class="card-text">
+			    <strong>Deadline: 16 November 2020 Monday HKT 23:59.</strong><br/>
+				<strong>No deadline extensions are possible</strong>, as we still have PA4 and the Final Project.<br/>
+				<strong>Late submission penalty</strong>: Linearly decreasing score multiplier from 100% to 0% score for the next 48 hours from the deadline. 
+				E.g. If you are exactly 24 hours late (i.e. submitted on 17 November 2020 Tuesday HKT 23:59), your ZINC score will be multiplied by 0.5 to calculate your final score.<br/>
+				<br/>
+				You may earn 8% course grade for each PA via Automated Grading on the <a href="https://zinc.cse.ust.hk/">ZINC Online Submission System</a>. <br/>
+				Zip the appropriate combination of header and source files as <code>PA3.zip</code> for submission to ZINC.
+			  </p>
+				Currently on ZINC is a revealed test-case with Console IO, which is worth 0 points and is only for you to verify that your submission can compile and run on ZINC (just like in PA1). <br/>
+				You can download the input and output textfiles here:
+				<ul>
+				  <li>Revealed Test Input: <a href="code/revealed/input.txt">input.txt</a></li>
+				  <li>Revealed Test Output: <a href="code/revealed/output.txt">output.txt</a></li>
+				</ul>
+			  <br/>
+			  
+			  <h4>Grading Scheme</h4>
+			  <p class="card-text">
+				The actual grading is with <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Googletest C++ Unit Testing (GTest)</a>. 
+				The actual grading will also only be triggered, with the scores and test cases revealed, after the deadline. 
+				This hidden grading policy is for all the PAs in order to prevent reverse-engineering of the test cases, since the PAs are a significant part of the course assessment and course grade. 
+				On the other hand, the Labs have a more visible grading policy, as their primary purpose is for hands-on programming practice, with full Lab marks being the expectation.
+			  </p>
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">GameEngine</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td><code>is_game_over()</code></td>
+				  <td>5%</td>
+				</tr>			
+				<tr>
+				  <td><em>Subtotal</em></td>
+				  <td><em>5%</em></td>
+				</tr>
+			  </table>
+			  <br/>
+			  
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">GameMap</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td><code>update_terrain_map()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>is_valid_path()</code></td>
+				  <td>5%</td>
+				</tr>
+				<tr>
+				  <td><em>Subtotal</em></td>
+				  <td><em>7%</em></td>
+				</tr>
+			  </table>
+			  <br/>
+			  
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">Player</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td><code>get_unit_by_id()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>has_units_alive()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>has_units_ready()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>ready_all_units()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>get_name()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_num_units()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_units()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><em>Subtotal</em></td>
+				  <td><em>11%</em></td>
+				</tr>				
+			  </table>
+			  <br/>
+			  
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">Unit</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td><code>begin_turn()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>end_turn()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>move_delta()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>attack_unit()</code></td>
+				  <td>13%</td>
+				</tr>
+				<tr>
+				  <td><code>heal()</code></td>
+				  <td>2%</td>
+				</tr>
+				<tr>
+				  <td><code>get_id()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_unit_type()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_attack_range()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_movement_range()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_position_row()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>get_position_col()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>is_ready()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><code>is_alive()</code></td>
+				  <td>1%</td>
+				</tr>
+				<tr>
+				  <td><em>Subtotal</em></td>
+				  <td><em>27%</em></td>
+				</tr>				
+			  </table>
+			  <br/>
+			  
+			  <table style="width:95%">
+				<tr>
+				  <th style="width:90%">Unit Derived Classes</th>
+				  <th>Grade</th>
+				</tr>
+				<tr>
+				  <td><code>Swordsman</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td><code>Pikeman</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td><code>Knight</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td><code>Archer</code></td>
+				  <td>10%</td>
+				</tr>
+				<tr>
+				  <td><em>Subtotal</em></td>
+				  <td><em>40%</em></td>
+				</tr>				
+			  </table>
+			  <br/>
+			  Finally, no Memory Leak Errors is 10%.
+            </div>
+			<div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+		  
+		  <!-- FAQ section -->
+		  <!-- ### Complete FAQ section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="faq">
+              <h3 class="card-title">Frequently Asked Questions</h3> 			
+			  <p class="card-text">
+				This section will be expanded as your fellow classmates ask more questions about this programming assignment. 
+				It is in your interest to <strong>check this section regularly for updates and clarifications</strong> <em>even if you have already submitted your work by then</em>.
+			  </p>
+			  
+			  <p class="card-text">
+				<b>Q</b>: The demo program enters an infinite loop when given unexpected input (e.g. inputting a character when expecting an integer). Is this a bug? <br/>
+				<b>A</b>: This is just the behavior of <code>cin >> variable;</code> when given input that is not type-matched. 
+				You don't need to worry about these user-input-error cases for PA3, as all console I/O is already handled for you by the skeleton code. 
+				ZINC will perform the final grading with GTest, similar to PA1. <br/>
+				<br/>
+				<b>Q</b>: What are the restrictions regarding modifying the header files, including extra header files, etc? <br/>
+				<b>A</b>: The only hard restriction is that your code should compile and not crash on ZINC, though this is discouraged.<br/>
+				<br/>
+				<b>Q</b>: Can you give an example of what "simultaneous" means for the Turn-Based Combat? <br/>
+				<b>A</b>: Please have a look at <a href="https://www.youtube.com/watch?v=5Jl5aqPnIOs">this YouTube video</a>. Regardless of who initiates the attack, as long as the attacker is not out-of-range of the defender, then both units will enter combat simultaneously. 
+				It is <b>NOT</b> attacker deals damage then defender deals damage. <br/>
+				<br/>
+				<b>Q</b>: Why does ZINC compiler show this warning for the function <code>Unit* const* const get_units() const</code> in <code>Player</code> class? 
+				"warning: type qualifiers ignored on function return type [-Wignored-qualifiers]" <br/>
+				<b>A</b>: That warning just means the underlined <code>const</code> in <code>Unit* const* <u>const</u> get_units() const</code> is redundant. 
+				<code>get_units()</code> is returning-by-value a pointer-to-a-pointer <code>Unit**</code>, so <code>Unit** <u>const</u> func()</code> is similarly redundant as a return-by-value <code><u>const</u> int func()</code>. 
+				No changes in the behavior of the code, which is why it is only a warning and not an error.
+			  </p>			  
+            </div>
+		    <div class="card-footer text-muted">
+              End of FAQ
+            </div>          
+          </div>
+        </div>
+				
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+					  <!--<li><a href="#honor">Honor Code</a></li>-->
+					  <li><a href="#changelogs">Changelogs</a></li>
+					  <li><a href="#objectives">Objectives &amp; Intended Learning Outcomes</a></li>
+                      <li><a href="#introduction">Introduction</a></li>
+                      <li><a href="#description">Task Description</a></li>
+                      <li><a href="#download">Resources</a></li>
+			  		  <li><a href="#submission">Submission &amp; Grading</a></li>
+					  <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+            </div>
+		  
+		    <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        CHANG Bing Yen
+                      </li>
+                      <li>
+                        Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                      </li>
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  
+		  
+		    <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>
+

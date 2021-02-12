@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change lab number ### -->
+  <title>COMP 2012H Lab 3: Structures, Pointers &amp; Dynamic Memory Allocation of Arrays</title>
+  
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"> -->
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+      /* white-space: pre-line; */
+    }
+    /* code {
+      white-space: pre-line;
+    } */
+  </style>
+  <!-- <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script> -->
+
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />
+</head>
+
+<body>
+  <script src="prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+          <small>Honors Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change lab number and title ### -->
+        <h3 class="my-4">Lab 3
+          <span style="color:#660066">Structures, Pointers &amp; Dynamic Memory Allocation of Arrays</span>
+        </h3>
+
+        <!-- Review section -->
+        <div class="card mb-4">
+          <div class="card-body" id="review">
+            <h3 class="card-title">Review</h3>
+            <p class="card-text">
+              This lab is about structures, pointers and dynamic
+              memory allocation of arrays.
+              <br><br>
+            </p>
+            <h4>Structures</h4>
+            A structure is, in general, a collection of heterogeneous
+            objects - different kinds of objects. (c.f. array which is a collection of
+            homogeneous objects.)<br><br>
+            <center><img class="card-img-top" style="width:75%" src="images/struct.png" alt="Structure"></center>
+            <br><br>
+            <h4>Pointers</h4>
+            A pointer is a variable that stores the
+            <strong>address</strong> of another variable. Also, it provides a way to pass large non-primitive
+            data-type objects as arguments to functions. In addition, it is the essentials of <strong>dynamic memory
+              allocation</strong>. The following shows some pointer operators.
+            <br><br>
+
+            <table cellpadding="5px" border="1">
+              <thead>
+                <tr>
+                  <th>Operator</th>
+                  <th>Functions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center"><code>*</code></td>
+                  <td>
+                    <ul>
+                      <li>Pointer declaration: To
+                        <strong>declare</strong> a variable as a pointer.</li>
+                      <li>Dereference: To <strong>reference</strong> to
+                        the variable pointed by a pointer variable.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align:center"><code>&amp;</code></td>
+                  <td>
+                    <ul>
+                      <li>Address of: Use it before a variable to get
+                        the <strong>address</strong> of it. </li>
+                      <li>Reference variable declaration: Used for
+                        <strong>passing arguments by reference</strong>.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align:center"><code>-&gt;</code></td>
+                  <td>
+                    <ul>
+                      <li>Member selection operator: Deferences the
+                        pointer, then accesses its members.
+                        <span style="white-space:
+nowrap;">p-&gt;member</span> is equivalent to (*p).member.</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br><br>
+            <h4>Dynamic Memory Allocation of Arrays</h4>
+            C++ allows you to create an array of objects - <span style="font-weight:bold">dynamic objects</span> -
+            on-the-fly at runtime.
+            <span style="font-weight:bold">The memory of dynamic objects has to be
+              allocated</span> at runtime explicitly by you using the <span style="font-weight:bold">operator
+              new</span>. The dynamic
+            objects will persist even after the object goes out of scope. Also, they
+            have <span style="font-weight:bold">to be deallocated at runtime</span>
+            explicitly by you using the <span style="font-weight:bold">operator
+              delete</span>. Dynamic objects are managed using a data structure called
+            heap.<br><br>
+            <center>
+              <img style="width:75%" src="images/dynamic-array-new.png">
+              <br>
+              <img style="width:75%" src="images/dynamic-array-delete.png">
+            </center>
+            <br>
+            The following gives an example (<a href="code/array-ptrs-objects.cpp">array-ptrs-objects.cpp</a>)
+            demonstrating how to do dynamic memory
+            allocation to create an array of pointers to objects, and all the objects.
+            Also, it demonstrates how to deallocate the objects and array to avoid memory leak.
+            <br><br>
+            <pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+
+struct Integer {
+  int x;
+};
+
+int main() {
+  int n;
+  cout &lt;&lt; &quot;Number of objects: &quot;;
+  cin &gt;&gt; n;
+
+  // Dynamically allocate array of n Integer pointers and then
+  // dynamiically allocate n Integer objects, both using operator new
+
+  cout &lt;&lt; &quot;Dynamically allocate memory ...&quot; &lt;&lt; endl;
+  Integer** array = new Integer*[n];
+  for(int i=0; i&lt;n; ++i) {
+    array[i] = new Integer;
+    array[i]-&gt;x = i + 1;
+  }
+
+  cout &lt;&lt; &quot;Processing ...&quot; &lt;&lt; endl;
+
+  // Deallocate n Integer objects and then deallocate the array of n
+  // Integer pointers, both using operator delete
+
+  cout &lt;&lt; &quot;Deallocate memory ...&quot; &lt;&lt; endl;
+  for(int i=0; i&lt;n; ++i)
+    delete array[i];
+  delete [] array;
+
+  return 0;
+}</code></pre>
+
+            <!--<h4>Linked List</h4>
+	       A common application of pointers is in linked lists. A
+linked list is a data structure similar to an array, but it
+	       is dynamically allocated with no pre-defined size, and is
+not contiguous in memory. Each node in a linked list
+	       stores a pointer to the next node.
+	       <center><img class="card-img-top" style="width:75%"
+src="images/linked-list.png" alt="Linked List Image"> </center>-->
+            <p></p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Review
+          </div>
+        </div>
+
+        <!-- New concepts section -->
+        <div class="card mb-4">
+          <div class="card-body" id="new-concepts">
+            <h3 class="card-title">New Concepts</h3>
+            <!-- <h4>Separate Compilation (Functions)</h4>
+              <p>
+                C++ allows us to divide a program into separate files, and therefore could be compiled separately.
+                To generate an executable program, all the compiled files can be linked together.
+                For details, please refer to the following notes.
+              </p>
+              <p>Download: <a href="pdf/sepcomp-full.pdf" target="_blank">Full</a> / <a href="pdf/sepcomp-4page.pdf" target="_blank">4-Page</a></p> -->
+            <h4>Stack (Abstract Data Type)</h4>
+            <center><img src="images/Lifo_stack.png" style="width:90%"></center>
+            <span style="font-size: 10px;">https://en.wikipedia.org/wiki/Stack_(abstract_data_type)</span>
+            <p>A stack is a &quot;Last In, First Out&quot; (LIFO) data structure that supports the following operations:
+            </p>
+            <ul>
+              <li><strong>push</strong>: Add an element to the top of the stack</li>
+              <li><strong>pop</strong>: Remove an element from the top of the stack</li>
+              <li><strong>peek</strong>: Return the element at the top of the stack</li>
+              <li><strong>empty</strong>: Check whether the stack is currently empty</li>
+            </ul>
+            <p>
+              They are commonly used in algorithms such as
+              <a href="https://en.wikipedia.org/wiki/Depth-first_search" target="_blank">depth-first search (DFS)</a>
+              and forms the basis of recursion in many languages including C++ - when you execute a recursive function
+              in C++, C++ maintains a function call stack internally to deal with the recursion. Common implementations
+              of stacks include using a dynamically resizing array and using a linked list. We will be using the former
+              implementation in this lab, with the latter left as an optional task for self-motivated individuals.
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of New Concepts
+          </div>
+        </div>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the lab ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the lab content here ### -->
+          <img class="card-img-top" src="images/stack.png" alt="Card image cap">
+
+          <div class="card-body" id="introduction">
+            <h3 class="card-title">Introduction</h3>
+            <p>In this lab, we will model a stack of documents on an office desk using a simple wrapper around a dynamic
+              array of pointers.</p>
+            <h4><code>Document.h</code></h4>
+            <p>A document is represented by a <code>Document</code> structure with three variables: a <code>name</code>
+              containing the name of the document, a <code>description</code> containing more information on the
+              document and a <code>num_pages</code> indicating the number of pages in that document.</p>
+            <p>
+            <pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Document</span> {</span>
+  <span class="hljs-built_in">string</span> name;
+  <span class="hljs-built_in">string</span> description;
+  <span class="hljs-keyword">int</span> num_pages;
+};</div></code></pre>
+            </p>
+            <h4><code>Stack.h</code></h4>
+            <p>
+              Our document stack will be implemented as a simple wrapper around a dynamic array <code>stack_array</code>
+              of <code>Document *</code> (pointers to <code>Document</code>).
+              <code>stack_size</code> keeps track of how many documents are currently on the stack, while
+              <code>stack_capacity</code> keeps track of the currently dynamically allocated space of
+              <code>stack_array</code>.
+              Note that <code>stack_size &lt;= stack_capacity</code> should always be true at all times.
+              Whenever <code>stack_size &lt; stack_capacity</code>, the extra array elements are garbage values.
+            </p>
+            <p>
+            <pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span> {</span>
+  Document **stack_array = <span class="hljs-literal">nullptr</span>;
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> stack_size = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> stack_capacity = <span class="hljs-number">0</span>;
+};</div></code></pre>
+            </p>
+            <p>
+              The elements at the bottom and the top of the stack are at indices <code>0</code> and
+              <code>stack_size - 1</code> respectively.
+              Since arrays allow for direct access via indexing, we can efficiently add elements to and remove elements
+              from the top of the stack.
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Introduction
+          </div>
+        </div>
+
+        <!-- Lab work section -->
+        <!-- ### Complete the lab work section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="labwork">
+            <h3 class="card-title">Lab Work</h3>
+            <h4>Task 1 - Passing arguments by reference and as pointers</h4>
+            <p>In <code>Document.cpp</code>, implement the following functions to initialize and swap the data members
+              of <code>Document</code> objects:</p>
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initialize_document_by_reference</span><span class="hljs-params">(Document &amp;document, <span class="hljs-built_in">string</span> name, <span class="hljs-built_in">string</span> description, <span class="hljs-keyword">int</span> num_pages)</span>
+<span class="hljs-keyword">void</span> <span class="hljs-title">initialize_document_by_pointer</span><span class="hljs-params">(Document *document, <span class="hljs-built_in">string</span> name, <span class="hljs-built_in">string</span> description, <span class="hljs-keyword">int</span> num_pages)</span></span></div></code></pre>
+            <p>Initialize the data members of the given ticket according to the arguments provided. Do nothing if the
+              function argument is <code>nullptr</code>.</p>
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap_documents_by_reference</span><span class="hljs-params">(Document &amp;document1, Document &amp;document2)</span>
+<span class="hljs-keyword">void</span> <span class="hljs-title">swap_documents_by_pointer</span><span class="hljs-params">(Document *document1, Document *document2)</span></span></div></code></pre>
+            <p>Swap the data members of the given documents. Do nothing if the function arguments are
+              <code>nullptr</code>.</p>
+            <h4>Task 2 - Dynamically create <code>Document</code> objects using operator <code>new</code></h4>
+            <p>Implement the following functions in <code>Document.cpp</code>:</p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function">Document *<span class="hljs-title">create_document</span><span class="hljs-params">(<span class="hljs-built_in">string</span> name, <span class="hljs-built_in">string</span> description, <span class="hljs-keyword">int</span> num_pages)</span></span></div></code></pre>
+            <p>Dynamically create an initialize a document with the given arguments on every call.</p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">destroy_document</span><span class="hljs-params">(Document *document)</span></span></div></code></pre>
+            <p>Dynamically deallocate the document provided. Do nothing in the case of <code>nullptr</code>.</p>
+
+
+            <h4>Task 3 - Simulating a document stack using a simple wrapper around a dynamically resizeable array</h4>
+            <p>Implement the following functions in <code>Stack.cpp</code>:</p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reallocate_stack_array</span><span class="hljs-params">(Stack &amp;<span class="hljs-built_in">stack</span>, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> stack_capacity)</span></span></div></code></pre>
+            <p>
+              Create a new dynamic array of the specified size.
+              Remember to copy the <code>Document</code> pointers from the old <code>stack_array</code> to the new
+              array, then destroy the old <code>stack_array</code>.
+            </p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stack_push</span><span class="hljs-params">(Stack &amp;<span class="hljs-built_in">stack</span>, Document *document)</span></span></div></code></pre>
+            <p>Add the given <code>Document</code> to the top of the stack. Resize <code>stack_array</code> if
+              needed.</p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stack_pop</span><span class="hljs-params">(Stack &amp;<span class="hljs-built_in">stack</span>)</span></span></div></code></pre>
+            <p>
+              Remove the <code>Document</code> from the top of the stack and deallocate memory accordingly if the
+              stack is non-empty; otherwise, do nothing.
+              It is not necessary to resize <code>stack_array</code>.
+            </p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">const</span> Document *<span class="hljs-title">stack_peek</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Stack &amp;<span class="hljs-built_in">stack</span>)</span></span></div></code></pre>
+            <p>Return a pointer to the <code>Document</code> at the top of the stack if the stack is non-empty;
+              otherwise, return <code>nullptr</code>.</p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">stack_is_empty</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Stack &amp;<span class="hljs-built_in">stack</span>)</span></span></div></code></pre>
+            <p>
+              Return a boolean value indicating whether the stack is currently empty, meaning no valid elements in
+              the stack (i.e. no <code>Document</code>s in the queue).
+              A stack with non-zero <code>stack_capacity</code> but otherwise no valid elements is also considered
+              empty.
+            </p>
+
+
+            <pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">destroy_stack</span><span class="hljs-params">(Stack &amp;<span class="hljs-built_in">stack</span>)</span></span></div></code></pre>
+            <p>Destroy all <code>Document</code> objects in the stack if any, and also destroy the
+              <code>stack_array</code> itself.</p>
+
+
+            <p>Note that you should manage your memory properly. The ZINC will check memory leak issues.</p>
+            <h4>Optional - Amortized <code>O(1)</code> Stack Operations</h4>
+            <p>
+              Depending on how you implemented your stack operations, the efficiency of your <code>stack_push</code>
+              operation may vary.
+              While a naive implementation of <code>stack_push</code> may take time linear to the number of elements in
+              the stack, it is actually possible to implement it such that it takes a constant amount of time regardless
+              of the size of the stack on average.
+              This is known as <a href="https://stackoverflow.com/questions/200384/constant-amortized-time"
+                target="_blank">amortized constant time</a>.
+            </p>
+            <p>
+              If you're feeling ambitious, read the link above carefully, and try to apply the concepts presented
+              therein to your array-based stack implementation if you haven't done so already.
+              Then run the program by <code>./lab3_main b</code> from terminal.
+              Your program should complete within an order of magnitude of seconds (e.g. 5-10 seconds) instead of
+              hanging indefinitely.
+            </p>
+            <p>Just in case, remember to backup your naive implementation before trying this task.</p>
+            <!-- <h4>Going Further - Linked-list based implementation</h4>
+            <p>
+              In the next lab, you will learn about the fundamentals of linked lists.
+              Perhaps challenge yourself to (unofficially) <a
+                href="https://www.codewars.com/kata/5b24bcecd74b5be066000054" target="_blank">re-implement this lab
+                using linked lists</a> by then.
+            </p> -->
+          </div>
+          <div class="card-footer text-muted">
+            End of Lab Work
+          </div>
+        </div>
+
+        <!-- Resources section -->
+        <!-- ### Complete resources section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="resources">
+            <h3 class="card-title">Resources &amp; Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="code/lab3_skeleton.zip" target="_blank">lab3_skeleton.zip</a></li>
+              <li>
+                Demo programs
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="code/windows/i386/lab3_main.exe" target="_blank">lab3_main.exe</a></li> -->
+                  <li>Windows: <a href="code/windows/x86_64/lab3_demo.exe" target="_blank">lab3_demo.exe</a>
+                  </li>
+                  <li>macOS: <a href="code/macos/lab3_demo" target="_blank">lab3_demo</a></li>
+                  <li>Linux: <a href="code/linux/lab3_demo" target="_blank">lab3_demo</a></li>
+                </ul>
+              </li>
+            </ul>
+            <h4>Run demo program on CS lab 2 machines</h4>
+            <p>In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>
+ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab3/code/linux/lab3_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab3_demo
+./lab3_demo
+</code></pre>
+            <h4>Sample I/O</h4>
+            <p>
+              Your program should produce the following output.
+              You may wish to compare your program output against the expected output using a <a
+                href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+            </p>
+            <pre><code>
+Task 1 tests
+Name: ABCD
+Description: EFGH
+No. of pages: 100
+Name: IJKL
+Description: MNOP
+No. of pages: 200
+Name: IJKL
+Description: MNOP
+No. of pages: 200
+Name: ABCD
+Description: EFGH
+No. of pages: 100
+Name: ABCD
+Description: EFGH
+No. of pages: 100
+Name: IJKL
+Description: MNOP
+No. of pages: 200
+Task 1 tests complete
+Task 2 tests
+Name: Dynamic document
+Description: Document created using dynamic allocation
+No. of pages: 123
+Name: Dynamic document II
+Description: Document created using dynamic allocation, again
+No. of pages: 456
+Task 2 tests complete
+Task 3 tests
+true
+nullptr
+true
+nullptr
+false
+Name: Doc #1
+Description: Doc Desc #1
+No. of pages: 10
+false
+Name: Doc #2
+Description: Doc Desc #2
+No. of pages: 20
+false
+Name: Doc #3
+Description: Doc Desc #3
+No. of pages: 35
+false
+Name: Doc #2
+Description: Doc Desc #2
+No. of pages: 20
+false
+Name: Doc #4
+Description: Doc Desc #4
+No. of pages: 42
+false
+Name: Doc #5
+Description: Doc Desc #5
+No. of pages: 45
+false
+Name: Doc #6
+Description: Doc Desc #6
+No. of pages: 37
+false
+Name: Doc #7
+Description: Doc Desc #7
+No. of pages: 138
+false
+Name: Doc #6
+Description: Doc Desc #6
+No. of pages: 37
+false
+Name: Doc #5
+Description: Doc Desc #5
+No. of pages: 45
+false
+Name: Doc #4
+Description: Doc Desc #4
+No. of pages: 42
+false
+Name: Doc #2
+Description: Doc Desc #2
+No. of pages: 20
+false
+Name: Doc #1
+Description: Doc Desc #1
+No. of pages: 10
+true
+nullptr
+true
+nullptr
+false
+Name: Doc #8
+Description: Doc Desc #8
+No. of pages: 242
+false
+Name: Doc #9
+Description: Doc Desc #9
+No. of pages: 1004
+false
+Name: Doc #10
+Description: Doc Desc #10
+No. of pages: 102
+false
+Name: Doc #11
+Description: Doc Desc #11
+No. of pages: 112
+false
+Name: Doc #12
+Description: Doc Desc #12
+No. of pages: 46
+false
+Name: Doc #13
+Description: Doc Desc #13
+No. of pages: 25
+false
+Name: Doc #14
+Description: Doc Desc #14
+No. of pages: 20
+false
+Name: Doc #15
+Description: Doc Desc #15
+No. of pages: 3
+false
+Name: Doc #16
+Description: Doc Desc #16
+No. of pages: 7
+false
+Name: Doc #17
+Description: Doc Desc #17
+No. of pages: 17
+false
+Name: Doc #18
+Description: Doc Desc #18
+No. of pages: 18
+false
+Name: Doc #19
+Description: Doc Desc #19
+No. of pages: 5
+false
+Name: Doc #20
+Description: Doc Desc #20
+No. of pages: 52
+false
+Name: Doc #21
+Description: Doc Desc #21
+No. of pages: 65
+false
+Name: Doc #22
+Description: Doc Desc #22
+No. of pages: 77
+false
+Name: Doc #23
+Description: Doc Desc #23
+No. of pages: 1
+Name: Doc #23
+Description: Doc Desc #23
+No. of pages: 1
+Name: Doc #22
+Description: Doc Desc #22
+No. of pages: 77
+Name: Doc #21
+Description: Doc Desc #21
+No. of pages: 65
+Name: Doc #20
+Description: Doc Desc #20
+No. of pages: 52
+Name: Doc #19
+Description: Doc Desc #19
+No. of pages: 5
+Name: Doc #18
+Description: Doc Desc #18
+No. of pages: 18
+Name: Doc #17
+Description: Doc Desc #17
+No. of pages: 17
+Name: Doc #16
+Description: Doc Desc #16
+No. of pages: 7
+Name: Doc #15
+Description: Doc Desc #15
+No. of pages: 3
+Name: Doc #14
+Description: Doc Desc #14
+No. of pages: 20
+Name: Doc #13
+Description: Doc Desc #13
+No. of pages: 25
+Name: Doc #12
+Description: Doc Desc #12
+No. of pages: 46
+Name: Doc #11
+Description: Doc Desc #11
+No. of pages: 112
+Name: Doc #10
+Description: Doc Desc #10
+No. of pages: 102
+Name: Doc #9
+Description: Doc Desc #9
+No. of pages: 1004
+Name: Doc #8
+Description: Doc Desc #8
+No. of pages: 242
+true
+Task 3 tests complete
+</code></pre>
+          </div>
+          <div class="card-footer text-muted">
+            End of Resources and Sample I/O
+          </div>
+        </div>
+
+        <!-- Submission & Grading section -->
+        <!-- ### Complete grading section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="grading">
+            <h3 class="card-title">Submission & Grading</h3>
+            <p>
+              <strong>Deadline: <span 
+style="text-decoration: line-through">9 October 2020 
+Friday</span> 12 October 2020 Monday HKT 
+23:59.</strong><br>
+              You may earn 1 point for each lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC
+                Online Submission System</a>.
+            </p>
+            <p>Please compress <code>Document.cpp</code> and <code>Stack.cpp</code> as <code>lab3.zip</code>.</p>
+            <p>There are 1 visible test case and 1 hidden test case. In addition, there is a test case for the optional task with 0 score. You will get the score for this lab if and only if you pass the first 2 tests. </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Submission & Grading
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="#review">Review</a>
+                    </li>
+                    <li>
+                      <a href="#new-concepts">New Concepts</a>
+                    </li>
+                    <li>
+                      <a href="#introduction">Introduction</a>
+                    </li>
+                    <li>
+                      <a href="#labwork">Lab Work</a>
+                    </li>
+                    <li>
+                      <a href="#resources">Resources &amp; Sample I/O</a>
+                    </li>
+                    <li>
+                      <a href="#grading">Submission & Grading</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Jingyang Zhang
+                    </li>
+                    <li>
+                      Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">document.write(document.lastModified);</script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const code = document.querySelectorAll("pre code");
+    [...code].forEach(el => el.textContent = el.textContent.replace(/^\n/,''));
+  </script>
+</body>
+
+</html>

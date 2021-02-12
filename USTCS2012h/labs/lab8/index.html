@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+  <!-- ### Change lab number ### -->
+    <title>COMP 2012H Lab 8: Binary Search Tree and Tree Traversals</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+
+    <style>
+      pre {
+        background: #f4f4f4 !important;
+        border: 1px solid #ddd !important;
+        border-left: 3px solid #f36d33 !important;
+        color: #666 !important;
+        page-break-inside: avoid !important;
+        font-family: monospace !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1.6em !important;
+        max-width: 100% !important;
+        overflow: auto !important;
+        padding: 1em 1.5em !important;
+        display: block !important;
+        word-wrap: break-word !important;
+      }
+    
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+      </style>
+  
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>  
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+  
+    <!-- Page Content --> 
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+      
+      <!-- ### Change lab number and title ### -->
+      <h3 class="my-4">Lab 8
+            <span style="color:#660066">Binary Search Tree and Tree Traversals</span>
+          </h3>
+
+         <!-- Review section -->
+<!-- ### Complete Review section for the assignment ### -->
+<div class="card mb-4">            
+<div class="card-body" id="review">
+<h3 class="card-title">Review</h3>
+<br/>
+<h5 style="color:darkblue">Trees</h5>
+A tree T is a collection of nodes connected by edges.
+<ul>
+  <li>Base case: T is empty</li>
+  <li>Recursive case: If not empty, a tree T consists of
+    <ul>
+	  <li>A root node r, and</li>
+	  <li>zero or more non-empty sub-trees: T<sub>1</sub>, T<sub>2</sub>, ..., T<sub>k</sub></li>
+	</ul>
+  </li>
+</ul>
+<br/>
+<h5 style="color:darkblue">Binary Tree</h5>
+A binary tree is a tree in which no node can have more than two children.
+A typical implementation of Binary Tree ADT is shown below.
+<br/><br/>
+<pre><code class="language-c++">#include &lt;iostream&gt;     /* File: btree.h */
+using namespace std;
+
+template &lt;typename T&gt;
+class BTnode
+{
+  public:
+    BTnode(const T& x, BTnode* L = nullptr, BTnode* R = nullptr)
+      : data(x), left(L), right(R) { }
+
+    ~BTnode()
+    {
+      delete left;
+      delete right;
+      cout << "delete the node with data = " << data << endl;
+    }
+
+    const T& get_data() const { return data; }
+    BTnode* get_left()  const { return left; }
+    BTnode* get_right() const { return right; }
+    void set_left(BTnode* left) { this->left = left; }
+    void set_right(BTnode* right) { this->right = right; }
+
+  private:
+    T data;             // Stored information
+    BTnode* left;       // Left child
+    BTnode* right;      // Right child
+};</code></pre>
+<br/>
+<h5 style="color:darkblue">Binary Search Tree</h5>
+A binary search tree is a binary tree such that for every node x:
+<ul>
+	<li>All the keys in its left sub-tree are smaller than the key value in node x.</li>
+	<li>All the keys in its right sub-tree are larger than the key value in node x.</li>
+</ul>
+A typical implementation of Binary Search Tree is shown below.
+<br/><br/>
+<pre><code class="language-c++">#include &lt;iostream&gt;  /* File: bst.h */
+using namespace std;
+
+template&lt;typename T&lt; 
+class BST
+{
+  private:
+	struct BSTnode // A node in a binary search tree
+	{
+		T value;
+		BST left; // Left sub-tree or called left child
+		BST right; // Right sub-tree or called right child
+		BSTnode(const T &x) : value(x), left(), right() { }
+					// Assume a copy constructor for T
+		BSTnode(const BSTnode &node) // Copy constructor
+			:value(node.value), left(node.left), right(node.right) { }
+		~BSTnode() { cout &lt;&lt; "delete: " &lt;&lt; value &lt;&lt; endl; }
+	};
+	BSTnode *root = nullptr;
+
+  public:
+	BST() = default; // Empty BST
+	~BST() { delete root; } // Actually recursive
+	// Shallow BST copy using move constructor
+	BST(BST &&bst) { root = bst.root; bst.root = nullptr; }
+	BST(const BST &bst) // Deep copy using copy constructor
+	{
+		if (bst.is_empty())
+			return;
+
+		root = new BSTnode(*bst.root); // Recursive
+	}
+
+	bool is_empty() const {
+		return root == nullptr;
+	}
+	bool contains(const T &x) const;
+	void print(int depth = 0) const;
+	const T& find_max() const; // Find the maximum value
+	const T& find_min() const; // Find the minimum value
+	void insert(const T&); // Insert an item with a policy
+	void remove(const T&); // Remove an item
+};</code></pre>
+</div>    
+<div class="card-footer text-muted">
+End of Review
+</div>
+</div>
+
+<div class="card mb-4">
+  <img class="card-img-top" src="images/tree.jpg" alt="Card image cap">     
+ <div class="card-body" id="introduction">
+ 	<h3 class="card-title">Introduction</h3>
+ 	<br/>
+	<h4>A Different BST</h4>
+ 	<p> In the typical BST implementation above, the left child and the right child of a <code>BSTnode</code> are both BST trees. This definition of BSTnode, despite being slightly unintuitive, makes the implementation shorter and cleaner. In this lab, however, we are going to define a BST in the traditional way, where a child of a <code>BSTnode</code> is still a <code>BSTnode</code>.</p>
+ 	Here is our new definition of <code>BSTnode</code>:
+ 	<pre><code class="language-c++">struct BSTnode {
+	T data;
+	BSTnode *ls;
+	BSTnode *rs;
+	BSTnode(T a) : data(a), ls(nullptr), rs(nullptr) { }
+	~BSTnode() {
+		delete ls;
+		delete rs;
+	}
+};</code></pre>
+ 	<p>The goal of this lab is to implement a BST using the above definition of <code>BSTnode</code>.</p>
+ 	<p>Please note the following constraints on our BST in this lab:
+ 		<ul>
+ 			<li>All inserted values are distinct.</li>
+ 			<li>During deletion, replace the deleted node with its successor (i.e. the smallest node that is larger than the deleted node), if it has one.</li>
+ 		</ul>
+ 	<p>These constraints let us uniquely define the structure of our BST after a series of insertions and deletions.</p>
+   <br/>
+   <h4>Traversals</h4>
+   <p>Recall the three common tree traversal algorithms:</p>
+ 	<ul>
+ 		<li>In-order traversal</li>
+ 		<li>Pre-order traversal</li>
+ 		<li>Post-order traversal</li>
+   </ul>
+   <p>For example, for in-order traversal, we will do in-order traversal for the left subtree, print the current node, and do in-order traversal for the right subtree. </p>
+   <p>Consider the following BST: </p>
+ 	        <pre>
+          _____G_____
+        /           \
+      __D__         __J
+    /     \       /
+  __B__     E     H
+/     \     \     \
+A       C     F     I</pre>
+      <ul>
+        <li>in-order traversal is { A, B, C, D, E, F, G, H, I, J }.</li>
+        <li>pre-order traversal is { G, D, B, A, C, E, F, J, H, I }.</li>
+        <li>post-order traversal is { A, C, B, F, E, D, I, H, J, G }.</li>
+      </ul>
+ 	<!-- <h4>Level-order Traversal:</h4>
+ 	<p>Besides the three algorithms above, we are also going to implement another tree traveral algorithm: level-order traversal. During this traversal, we visit each node level-by-level from the root to the leaves, in a breadth-first manner. </p>
+ 	<p>Still consider the following BST: </p>
+ 	        <pre>
+
+                   _____G_____
+                  /           \
+               __D__         __J
+              /     \       /
+           __B__     E     H
+          /     \     \     \
+         A       C     F     I</pre>
+    <p>Its level-order traversal is { G, D, J, B, E, H, A, C, F, I }.</p>
+   <br/> -->
+   <!-- <h4>Implementation</h4>
+	<p>Unlike the three common traversals, level-order traversal cannot be implemented with a simple recursive function. A basic implementation has the following three steps.</p>
+	<ol>
+		<li>Write a function to find the height <code>h</code> (i.e. number of levels) of the tree.</li>
+		<li>Write a function called <code>print_level</code> to print all nodes at the given level.</li>
+		<li>Call the <code>print_level</code> function <code>h</code> times to print all levels in order.</li>
+	</ol>
+	<p>However, this implementation is slow since each node may be visited many times.</p>
+	<p>A more efficient implementation makes use of <a href="http://www.cplusplus.com/reference/queue/queue/">std::queue</a>, a FIFO data structure to scan each node in the tree exactly once. This implementation, along with the slower one, is part of the tasks.</p> -->
+ </div>
+ <div class="card-footer text-muted">
+	End of Introduction
+</div>
+</div>
+          <!-- Lab work section -->
+      <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4"> 
+            <div class="card-body" id="labwork">
+              <h3 class="card-title">Lab Work</h3>
+              <p>The following functions have been implemented for you, and you may call any one of them in your functions.
+                <ul>
+                  <li>
+                    <code>bool BST&lt;T&gt;::contains(BSTnode *&p, const T &x) const</code>: Check if a value <code>xT</code> is already in the tree or not.</li>
+                  <li>
+                    <code>void BST&lt;T&gt;::print_node(BSTnode *&p)</code>: Print the node <code>p</code>. You should call this function in your traversal functions.</li>
+                </ul>
+        <h4>Task 1 & 2 - BST insertion and deletion</h4>
+        <p class="card-text">
+          Implement the following member functions for <code>BST</code>.
+        </p>
+           <ul>
+            <li><code>void BST&lt;T&gt;::insert(BSTnode *&p, const T &x)</code>: Insert the given value <code>x</code> into the subtree rooted at node <code>p</code>. To insert <code>x</code> into the entire BST, we can pass <code>root</code> into this function.
+           <li><code>void BST&lt;T&gt;::remove(BSTnode *&p, const T &x)</code>: Remove the given value <code>x</code> from the subtree rooted at node <code>p</code>. Do nothing if x does not exist in the subtree. To remove <code>x</code> from the entire BST, we can pass <code>root</code> into this function.
+          </ul>
+        <h4>Task 3 - BST traversals</h4>
+        <p class="card-text">
+          Implement the following traversal algorithms for <code>BST</code>
+          <ul>
+            <li><code>void BST&lt;T&gt;::in_order_traversal(BSTnode *&p)</code>: Print out the in-order traversal of the subtree rooted at p. Note that the in-order traversal of a BST is in sorted order</li>
+           <li><code>void BST&lt;T&gt;::pre_order_traversal(BSTnode *&p)</code>: Print out the pre-order traversal of the subtree rooted at p.</li>
+           <li><code>void BST&lt;T&gt;::post_order_traversal(BSTnode *&p)</code>: Print out the post-order traversal of the subtree rooted at p.</li>
+          </ul>
+          <!-- <h4>Task 3 - Naive level-order traversal</h4>
+        <p class="card-text">
+            Implement the first two steps of the 3-step naive way of finding level-order traversal of BST, by completing the functions below:
+            <ul>
+            	<li><code>int BST&lt;T&gt;::height(BSTnode *&p) const</code> Find the height of the BST. The root is at height 1.</li>
+            	<li><code>void BST&lt;T&gt;::print_level(BSTnode *&p, int level)</code> Print out the given level of the tree from left to right. (Hint: decrement <code>level</code> in each recursive call, and print out the node pointed at by <code>p</code> when <code>level=0</code>).</li>
+            </ul>  -->
+          <!-- <h4>Task 4 - Efficient level-order traversal</h4>
+        <p class="card-text">
+            Implement the function<code>int BST&lt;T&gt;::level_order_traversal()</code> with <code>std::queue</code>. Your function must be non-recursive and visit each node exactly once.
+         </p> -->
+            </div>
+      <div class="card-footer text-muted">
+              End of Lab Work
+            </div>
+          </div>
+
+          <!-- Resources section -->
+      <!-- ### Complete resources section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="code/lab8_skeleton.zip" target="_blank">lab8_skeleton.zip</a></li>
+              <!-- <li>
+                Makefile
+                <ul>
+                  <li>Windows: <a href="code/make/windows/Makefile" target="_blank">Makefile</a></li>
+                  <li>Mac/Linux: <a href="code/make/nix/Makefile" target="_blank">Makefile</a></li>
+                </ul>
+              </li> -->
+              <li>
+                Demo programs
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="code/windows/i386/lab5_main.exe" target="_blank">lab5_main.exe</a></li> -->
+                  <li>Windows: <a href="code/windows/lab8_demo.exe" target="_blank">lab8_demo.exe</a>
+                  </li>
+                  <li>macOS: <a href="code/macos/lab8_demo" target="_blank">lab8_demo</a></li>
+                  <li>Linux: <a href="code/linux/lab8_demo" target="_blank">lab8_demo</a></li>
+                </ul>
+              </li>
+            </ul>
+            <h4>Run demo program on CS lab 2 machines</h4>
+            <p>In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab8/code/linux/lab8_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab8_demo
+./lab8_demo
+</code></pre>
+              <h4>Sample I/O</h4>
+              <p>
+                In order to pass this lab, your submission should produce the output below (modulo execution time).
+                You may want to compare your program output against the expected output using a <a href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+              </p>
+              <p><pre><code>Task 1 Tests
+OK. Tree is still a BST after inserting 5
+OK. Tree is still a BST after inserting 2
+OK. Tree is still a BST after inserting 8
+OK. Tree is still a BST after inserting 9
+OK. Tree is still a BST after inserting 7
+OK. Tree is still a BST after inserting 11
+OK. Tree is still a BST after inserting 15
+OK. Tree is still a BST after inserting 1
+OK. Tree is still a BST after inserting 14
+OK. Tree is still a BST after inserting 6
+OK. Tree is still a BST after inserting 3
+OK. Tree is still a BST after inserting 4
+OK. Tree is still a BST after inserting 10
+OK. Tree is still a BST after inserting 12
+OK. Tree is still a BST after inserting 13
+Task 1 Tests Complete
+
+Task 2 preparation...
+Task 2 Tests
+OK. Tree is still a BST after removing 9
+OK. Tree is still a BST after removing 13
+OK. Tree is still a BST after removing 12
+OK. Tree is still a BST after removing 2
+OK. Tree is still a BST after removing 5
+OK. Tree is still a BST after removing 4
+OK. Tree is still a BST after removing 3
+OK. Tree is still a BST after removing 15
+OK. Tree is still a BST after removing 14
+OK. Tree is still a BST after removing 7
+OK. Tree is still a BST after removing 8
+OK. Tree is still a BST after removing 11
+OK. Tree is still a BST after removing 6
+OK. Tree is still a BST after removing 1
+OK. Tree is still a BST after removing 10
+Is tree empty? true
+Task 2 Tests Complete
+
+Task 3 preparation...
+Task 3 Tests
+
+Pre-order Traversal:
+(5,5)
+(2,2)
+(1,1)
+(3,3)
+(4,4)
+(8,8)
+(7,7)
+(6,6)
+(9,9)
+(11,11)
+(10,10)
+(15,15)
+(14,14)
+(12,12)
+(13,13)
+
+In-order Traversal:
+(1,1)
+(2,2)
+(3,3)
+(4,4)
+(5,5)
+(6,6)
+(7,7)
+(8,8)
+(9,9)
+(10,10)
+(11,11)
+(12,12)
+(13,13)
+(14,14)
+(15,15)
+
+Post-order Traversal:
+(1,1)
+(4,4)
+(3,3)
+(2,2)
+(6,6)
+(7,7)
+(10,10)
+(13,13)
+(12,12)
+(14,14)
+(15,15)
+(11,11)
+(9,9)
+(8,8)
+(5,5)
+
+Task 3 Tests Complete</code></pre></p>
+            </div>            
+      <div class="card-footer text-muted">
+              End of Resources and Sample I/O
+            </div>
+          </div>
+      
+      <!-- Grading scheme section -->
+      <!-- ### Complete grading section for the lab ### -->
+      <div class="card mb-4">
+        <div class="card-body" id="grading">
+          <h3 class="card-title">Submission & Grading</h3>
+          <p>
+            <strong>Deadline: 
+              <span style="text-decoration: line-through">27 November 2020 Friday</span> 
+              30 November 2020 Monday HKT 23:59.</strong><br>
+            You may earn 1 point for this lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC
+              Online Submission System</a>. <strong>You can get partial credits. </strong>
+          </p>
+          <p>Please compress <code>BST.cpp</code> as <code>lab8.zip</code>.</p>
+          <p>There are 4 visible test cases and 1 hidden test case. </p>
+        </div>
+        <div class="card-footer text-muted">
+          End of Grading Scheme
+        </div>
+      </div>
+        
+        
+        
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+      <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+                      <li>
+                        <a href="#review">Review</a>
+                      </li>
+                       <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#labwork">Lab Work</a>
+                      </li>
+                      <li>
+                        <a href="#resources">Resources &amp; Sample I/O</a>
+                      </li>
+              <li>
+                <a href="#grading">Submission & Grading</a>
+            </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+        </div>
+                
+        <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        ZHANG Jingyang
+                      </li>
+                      <li>
+                        Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                      </li>
+            <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>        
+                </div>
+              </div>
+      </div>          
+            
+        <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>        
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+  </body>
+
+</html>

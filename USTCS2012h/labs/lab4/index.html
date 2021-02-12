@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change lab number ### -->
+  <title>COMP 2012H Lab 4: Linked List</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+  </style>
+  
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+</head>
+
+<body>
+  <script src="prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+          <small>Honors Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change lab number and title ### -->
+        <h3 class="my-4">Lab 4
+          <span style="color:#660066">Linked List</span>
+        </h3>
+
+        <!-- Review section -->
+        <div class="card mb-4">
+          <div class="card-body" id="review">
+            <h3 class="card-title">Review</h3><br>
+            <h4>Linked List</h4>
+			<p class="card-text">
+            <ul>
+              <li>A list is a linear sequence of objects.</li>
+              <li>You may implement a list by an array. e.g. <code>int x[5];</code>
+                <ul>
+                  <li><span style="color:red">Advantage</span>: array is an efficient data structure that
+                    works well with
+                    loops and recursion.
+                  </li>
+                  <li><span style="color:red">Disadvantage</span>: size of the array is fixed once it is
+                    created.
+                  </li>
+                </ul>
+              </li>
+              <li>A linked list links objects together by pointers so that each object is pointing to the next
+                object in the
+                sequence (list).
+                <ul>
+                  <li><span style="color:red">Advantage</span>: It is <span style="color:red">dynamic</span>; it grows
+                    and
+                    shrinks to any size as you want at <span style="color:red">runtime</span>.
+                  </li>
+                  <li><span style="color:red">Disadvantage</span>:
+                    <ul>
+                      <li>requires additional memory for the linking pointers.</li>
+                      <li>takes more time to manipulate its items.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+			</p>
+            <img style="width:100%" src="images/linked-list.png">
+          </div>
+          <div class="card-footer text-muted">
+            End of Review
+          </div>
+        </div>
+
+        <!-- Lab Tasks section -->
+        <!-- ### Complete introduction section for the lab ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the lab content here ### -->
+          <img class="card-img-top" src="images/deque.jpg" alt="Card image cap">
+
+          <div class="card-body" id="lab-tasks">
+            <p style="font-size:smaller;font-style:italic">Lab inspired by <a
+                href="https://www.codewars.com/kata/5b2771fab6989dd87d0000f1" target="_blank">Computer Science 101 - #3
+                Deques</a></p>
+            <h3 class="card-title">Lab Tasks</h3>
+            <p class="card-text">
+              In this lab, we will be implementing a <a href="https://en.wikipedia.org/wiki/Double-ended_queue"
+                target="_blank">double-ended queue</a>, also known as a deque, using C++ <code>struct</code>s and doubly linked
+              lists.
+              A deque is a data structure that allows for (efficient) insertion and removal of elements on both ends;
+              thus, it is more general than a Last-In-First-Out (LIFO) stack (which you have implemented in Lab3) or a First-In-First-Out (FIFO) queue.
+            </p>
+            <center><img src="images/1920px-Doubly-linked-list.svg.png" style="width:100%"></center>
+            <span style="font-size: 10px;"><a href="https://en.wikipedia.org/wiki/Doubly_linked_list">https://en.wikipedia.org/wiki/Doubly_linked_list</a></span>
+            <br><br><br>
+			
+            <h4>Task 1 - Construction and Destruction Functions of <code>Node</code> and <code>Deque</code></h4>
+            <p class="card-text">
+              Complete the following construction and destruction functions of <code>Node</code> and <code>Deque</code>.
+              <code>Node</code> is a node in our doubly linked list. <code>Deque</code> is a simple <code>struct</code> wrapper around
+              our doubly linked list with <code>front</code> and <code>back</code> pointers, which allows us to treat it abstractly as a deque.
+              Note that <code>Node</code>-related functions should be implemented in <code>Node.cpp</code>, while those for <code>Deque</code> should be implemented in <code>Deque.cpp</code>.
+            </p>
+            <ul>
+              <li><code>Node* create_node(int data)</code>: Initialize <code>data</code> accordingly, and both pointers to <code>nullptr</code>. Allocate memory accordingly.</li>
+              <li><code>Node* create_node(int data, Node* prev, Node* next)</code>: Initialize each data-member of <code>Node</code> accordingly. Allocate memory accordingly.</li>
+              <li><code>void destroy_node(Node* node)</code>: Destroy the given <code>Node</code>. Deallocate memory accordingly.</li>
+              <li><code>Deque create_deque()</code>: Initialize both pointers to <code>nullptr</code>, representing an empty deque.</li>
+              <li><code>void destroy_deque()</code>: Destroy the internally maintained linked list, and reset both pointers to <code>nullptr</code>. Deallocate memory accordingly.</li>
+            </ul>
+            <br>
+			
+			<h4>Task 2 - Essential operations for <code>Deque</code></h4>
+            <p class="card-text">Implement the following functions for <code>Deque</code>, which correspond to the essential operations on a deque:</p>
+            <ul>
+              <li><code>void push_front(Deque& deque, int data)</code>: Push <code>data</code> to the front of the deque.</li>
+              <li><code>void push_back(Deque& deque, int data)</code>: Push <code>data</code> to the back of the deque.</li>
+              <li><code>void pop_front(Deque& deque)</code>: Pop a node from the front of the deque. Do nothing if the deque is empty.</li>
+              <li><code>void pop_back(Deque& deque)</code>: Pop a node from the back of the deque. Do nothing if the deque is empty.</li>
+              <li><code>const Node* peek_front(const Deque& deque)</code>: Return the node at the front of the deque, or <code>nullptr</code> if the deque is empty.</li>
+              <li><code>const Node* peek_back(const Deque& deque)</code>: Return the node at the back of the deque, or <code>nullptr</code> if the deque is empty.</li>
+              <li><code>bool is_empty(const Deque& deque)</code>: Return whether or not the deque is empty.</li>
+            </ul>
+            <p class="card-text">These operations are similar to those of the Lab3 stack, and you may reuse your Lab3 code. <br/>
+			All these operations should complete in <code>O(1)</code> constant time, and your submission should finish execution within seconds without timeout on ZINC.</p>
+            <br>
+			
+			<h4>Task 3 - Extended operations for <code>Deque</code></h4>
+            <p class="card-text">
+              We now have a deque that supports efficient insertion/querying/deletion of elements on both ends. 
+              Now let's extend our deque to support indexed access of elements in-between as well. 
+			  Note that our doubly-linked-list node-indexing will start at 0, to be consistent with C++ array-indexing.
+            </p>
+            <ul>
+              <li><code>const Node* peek(const Deque& deque, int index)</code>: Return the node at <code>index</code>, or <code>nullptr</code> if out-of-bounds.</li>
+              <li>
+                <code>void insert(Deque& deque, int index, int data)</code>: Insert a node with <code>data</code> at <code>index</code> (this inserted node will become the new <code>index</code>-th node). 
+				Do nothing if out-of-bounds. 
+				Two special cases, insert at index <code>0</code> and <code>n</code> for a deque of size <code>n</code> is equivalent to <code>push_front()</code> and <code>push_back()</code> respectively.
+              </li>
+              <li><code>void remove(Deque& deque, int index)</code>: Remove the node at <code>index</code>. Do nothing if out-of-bounds.</li>
+            </ul>
+			<p class="card-text">These operations will necessarily take <code>O(n)</code> time linear to the number of elements in the deque, due to
+              the linked-list implementation, without the possibility of <code>O(1)</code> amortization. 
+			  This is the reason why the choice between a dynamic-array or linked-list implementation is not trivial.</p>
+            <br>
+			
+            <h4>General Tips on Linked List</h4>
+            <p class="card-text">To implement a bug-free linked list, it's important to consider all cases. 
+			Check whether your code works well in the following conditions.</p>
+			
+			<p class="card-text">Task 2 cases:</p>
+            <ul>
+              <li>There are 0 nodes (empty linked-list).</li>
+              <li>There is exactly 1 node.</li>
+			  <li>There are 2 or more nodes.</li>
+            </ul>
+            <p class="card-text">Task 3 cases:</p>
+            <ul>
+              <li>The index is the first one.</li>
+              <li>The index is the last one.</li>
+              <li>The index is neither the first nor the last one.</li>
+            </ul>
+            <p class="card-text">An elegant implementation can have less cases than those listed above.</p>
+            <br>
+			  
+			<h4>Optional Extras</h4>
+            <p class="card-text">In this lab, we introduced doubly linked list where each node also knows the previous node. One of the
+              benefits is that you don't need to additionally supply the previous node as a function parameter during deletion (compared to a singly linked list with only next nodes).</p>
+            <p class="card-text">Generally speaking, when we have more complicated linked lists, we will have more variables to maintain and more memory usage, but will have less special cases during insertion and deletion. 
+			Please read this <a href="https://en.wikipedia.org/wiki/Linked_list">Wikipedia entry</a> for more examples of the commonly used linked list features. 
+			One of the most common/popular set of features for general usage is "circular doubly-linked list with sentinel node".</p>
+			<p class="card-text">As an additional personal exercise (not in this lab because you will not be submitting the header files), see if you can eliminate all the special cases with the help of these features. </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Lab Tasks
+          </div>
+        </div>
+
+        <!-- Resources section -->
+        <!-- ### Complete resources section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="resources">
+            <h3 class="card-title">Resources &amp; Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="code/lab4_skeleton.zip" target="_blank">lab4_skeleton.zip</a></li>
+              <li>
+                Makefile
+                <ul>
+                  <li>Windows: <a href="code/make/windows/Makefile" target="_blank">Makefile</a></li>
+                  <li>Mac/Linux: <a href="code/make/nix/Makefile" target="_blank">Makefile</a></li>
+                </ul>
+              </li>
+              <li>
+                Demo programs
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="code/windows/i386/lab4_main.exe" target="_blank">lab4_main.exe</a></li> -->
+                  <li>Windows: <a href="code/windows/lab4_demo.exe" target="_blank">lab4_demo.exe</a></li>
+                  <li>macOS: <a href="code/macos/lab4_demo" target="_blank">lab4_demo</a></li>
+                  <li>Linux: <a href="code/linux/lab4_demo" target="_blank">lab4_demo</a></li>
+                </ul>
+              </li>
+            </ul>
+            <br><h4>Run demo program on CS lab 2 machines</h4>
+            <p class="card-text">In case you cannot run the demo program on Mac, you can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>
+ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab4/code/linux/lab4_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab4_demo
+./lab4_demo
+</code></pre>
+<br><h4>Sample I/O</h4>
+            <p class="card-text">
+              Your code should produce the following output.
+              You may wish to compare your code output against the expected output using a <a
+                href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+            </p>
+            <p class="card-text">
+			<pre><code>
+Task 1 tests:
+37 
+42 37 
+42 37 47 
+42 52 37 47 
+42 52 37 
+
+nullptr
+nullptr
+42 52 37 
+nullptr
+nullptr
+Task 1 tests complete.
+
+
+
+Task 2 tests: 
+nullptr
+nullptr
+&lt;empty&gt;
+true
+
+13
+13
+13 
+false
+
+13
+15
+13 15 
+false
+
+27
+15
+27 13 15 
+false
+
+27
+29
+27 13 15 29 
+false
+
+13
+29
+13 15 29 
+false
+
+15
+29
+15 29 
+false
+
+15
+15
+15 
+false
+
+nullptr
+nullptr
+&lt;empty&gt;
+true
+
+100
+100
+100 
+false
+
+200
+100
+200 100 
+false
+
+200
+300
+200 100 300 
+false
+
+400
+300
+400 200 100 300 
+false
+
+400
+500
+400 200 100 300 500 
+false
+
+400
+600
+400 200 100 300 500 600 
+false
+
+700
+600
+700 400 200 100 300 500 600 
+false
+
+700
+800
+700 400 200 100 300 500 600 800 
+false
+
+700
+900
+700 400 200 100 300 500 600 800 900 
+false
+
+1000
+900
+1000 700 400 200 100 300 500 600 800 900 
+false
+
+700
+900
+700 400 200 100 300 500 600 800 900 
+false
+
+400
+900
+400 200 100 300 500 600 800 900 
+false
+
+400
+800
+400 200 100 300 500 600 800 
+false
+
+200
+800
+200 100 300 500 600 800 
+false
+
+200
+600
+200 100 300 500 600 
+false
+
+200
+500
+200 100 300 500 
+false
+
+100
+500
+100 300 500 
+false
+
+100
+300
+100 300 
+false
+
+100
+100
+100 
+false
+
+nullptr
+nullptr
+&lt;empty&gt;
+true
+
+nullptr
+nullptr
+&lt;empty&gt;
+true
+
+nullptr
+nullptr
+&lt;empty&gt;
+true
+
+Task 2 tests complete.
+
+
+
+Task 3 tests: 
+nullptr
+nullptr
+1000
+700
+400
+200
+100
+300
+500
+600
+800
+900
+nullptr
+nullptr
+
+1000 700 400 200 100 300 500 600 800 900 
+1000 700 400 200 100 300 500 600 800 900 
+1024 1000 700 400 200 100 300 500 600 800 900 
+1024 1000 700 400 200 1024 100 300 500 600 800 900 
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024 
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024 
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024 
+
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024 
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024 
+1000 700 400 200 1024 100 300 500 600 800 900 1024 
+1000 700 400 200 1024 300 500 600 800 900 1024 
+1000 700 400 200 1024 300 500 600 800 900 
+1000 700 400 200 1024 300 500 600 800 900 
+1000 700 400 200 1024 300 500 600 800 900 
+
+Task 3 tests complete.
+			</code></pre>
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Resources &amp; Sample I/O
+          </div>
+        </div>
+
+        <!-- Grading scheme section -->
+        <!-- ### Complete grading section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="grading">
+            <h3 class="card-title">Submission &amp; Grading</h3>
+            <p class="card-text">
+              <strong>Deadline: 27 October 2020 Tuesday HKT 23:59.</strong><br>
+              You may earn 1 point for this lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC Online Submission System</a>.
+            </p>
+            <p class="card-text">Please submit <code>Node.cpp</code> and <code>Deque.cpp</code> as <code>lab4.zip</code>.</p>
+            <p class="card-text">There are 3 visible test cases (corresponding to the 3 test cases in the <a href="#resources">Sample I/O</a>) and 1 hidden test case. Memory leak check is also included as part of the test cases.</p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Submission &amp; Grading
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="#review">Review</a>
+                    </li>
+                    <li>
+                      <a href="#lab-tasks">Lab Tasks</a>
+                    </li>
+                    <li>
+                      <a href="#resources">Resources &amp; Sample I/O</a>
+                    </li>
+                    <li>
+                      <a href="#grading">Submission &amp; Grading</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      CHANG Bing Yen
+                    </li>
+                    <li>
+                      Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">document.write(document.lastModified);</script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const code = document.querySelectorAll("pre code");
+    [...code].forEach(el => el.textContent = el.textContent.replace(/^\n/,''));
+  </script>
+</body>
+
+</html>

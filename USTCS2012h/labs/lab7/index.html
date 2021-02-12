@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+  <!-- ### Change lab number ### -->
+    <title>COMP 2012H Lab 7: Generic Programming and Standard Template Library</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+
+    <style>
+      pre {
+        background: #f4f4f4 !important;
+        border: 1px solid #ddd !important;
+        border-left: 3px solid #f36d33 !important;
+        color: #666 !important;
+        page-break-inside: avoid !important;
+        font-family: monospace !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1.6em !important;
+        max-width: 100% !important;
+        overflow: auto !important;
+        padding: 1em 1.5em !important;
+        display: block !important;
+        word-wrap: break-word !important;
+      }
+    
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+      </style>
+  
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />  
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+  
+    <!-- Page Content --> 
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+      
+      <!-- ### Change lab number and title ### -->
+      <h3 class="my-4">Lab 7
+            <span style="color:#660066">Generic Programming and Standard Template Library</span>
+          </h3>
+
+         <!-- Review section -->
+          <!-- Copied directly from the lab description for COMP 2012H Fall 2018-19 Lab 7 Generic Programming and Standard Template Library -->
+          <div class="card mb-4">
+            <div class="card-body" id="review">
+              <h3 class="card-title">Review</h3>
+              <br/>
+              <h5 style="color:darkblue">Generic Programming</h5>
+              Generic Programming (GP) means programming with types as parameters. C++ supports GP through the template mechanism.
+              <br/><br/>
+              <ul>
+                <li>Function templates allow you to create functions that work on
+                  different types of objects. For example, a max function template can be defined as
+                  follows:<br/><br/>
+<pre><code class="language-c++">template &lt;typename T&gt;
+T my_max(const T& a, const T& b) {
+  return (a > b) ? a : b; 
+}</code></pre></li>
+                <li>Class templates allow you to create classes that support different types of data.
+For example, a general container class can be defined as follows:<br/><br/>
+<pre><code class="language-c++">template &lt;typename T&gt;
+class List_Node {
+  public:
+    List_Node(const T& x) : data{x} {}
+    T data;
+};</code></pre></li>
+                <li>Operator overloading further allows the generic operator function
+syntax to work for objects of user-defined new types.</li>
+              </ul>
+        <br/>
+        
+        <h5 style="color:darkblue">Standard Template Library</h5>
+              <p>
+                The Standard Template Library (STL) is a collection of powerful, template-based, reusable codes. It implements many general-purpose containers (data structures) together with algorithms that work on them.
+                <br/><br/>
+                The three pillars of STL are containers, iterators, and algorithms.
+                <ul>
+                  <li> A container class is a class template that holds a collection of homogeneous
+                    objects of the same type. For example, a <code>vector</code> container class (dynamic array with resizing handled by the STL) can be utilized as
+                    follows:<br/><br/>
+<pre><code class="language-c++">#include &lt;vector&gt;
+std::vector&lt;int&gt; myVector; // STL vector of ints.
+myVector.emplace_back(10); // Add int value "10" to the back of the vector.</code></pre></li>
+(See <a href="http://candcplusplus.com/c-difference-between-emplace_back-and-push_back-function">here</a> for the difference between push_back and emplace_back.)
+<br/><br/>
+                  <li>Iterators are generalized pointers. For example, the following shows how to scan through a list container using an iterator:
+                    <br/><br/>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;list&gt;
+std::list&lt;int&gt; myList; // STL doubly linked list of ints.
+myList.emplace_back(10);
+myList.emplace_back(20);
+myList.emplace_back(30);
+// std::list&lt;int&gt;::iterator is STL list of ints iterator.
+for (std::list&lt;int&gt;::iterator it{myList.begin()}; it != myList.end(); ++it) {
+  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}</code></pre>
+Iterators allow us to separate algorithms from containers when they are used with templates.
+It can be tedious to specify the full and correct templated <code>typename</code> when declaring an iterator, so the <code>auto</code> keyword is typically used instead. <br/><br/>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;list&gt;
+std::list&lt;int&gt; myList; // STL doubly linked list of ints.
+myList.emplace_back(10);
+myList.emplace_back(20);
+myList.emplace_back(30);
+for (auto it = myList.begin(); it != myList.end(); ++it) {
+  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}</code></pre>
+</li>
+<br/>
+                  <li> STL algorithms are implemented as global function templates. 
+          For example, use STL find algorithm to find an element in a list (though most STL Containers have their own find function or similar, which is generally faster and better):
+<br/><br/>
+<pre><code class="language-c++">#include &lt;string&gt;
+#include &lt;list&gt;
+std::list&lt;string&gt; composers;
+composers.emplace_back("Bach");
+composers.emplace_back("Mozart");
+composers.emplace_back("Beethoven");
+auto it = std::find(composers.begin(), composers.end(), "Bach");
+</code></pre></li>
+                </ul>
+              </div>
+              <div class="card-footer text-muted">
+                End of Review
+              </div>
+            </div>
+
+          <!-- Lab work section -->
+      <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">
+          <img class="card-img-top" src="images/dclls.png" alt="Card image cap">      
+            <div class="card-body" id="labwork">
+              <h3 class="card-title">Lab Work</h3>
+               <p>
+                In lab 4, we have implemented a doubly-linked list for integers only. In this lab, we will use generic programming to make our list capable of handling any user-defined object, so that our <code>myList</code> has similar functions as  <a href="http://www.cplusplus.com/reference/list/list/">std::list</a>. To access the elements in our list more easily, we will also build a custom iterator called <code>listIter</code> for <code>myList</code>.
+               </p>
+               <p>
+                Besides constructors and destructors, the following member functions of doubly circular linked list <code>myList</code> have <strong>already been implemented for you</strong>, and you can call any one of them in your lab tasks.</p>
+                <ul>
+                  <li>
+                    <code>void myList&lt;T&gt;::insert(Node<T> *prev, Node<T> *ins)</code>: Insert the node <code>ins</code> after the node <code>prev</code> in the list.</li>
+                  <li>
+                    <code>void myList&lt;T&gt;::remove(Node<T> *del)</code>: Delete the node <code>del</code> from the list.</li>
+                  <li>
+                    <code>int myList&lt;T&gt;::size() const</T></code>: Return the size of the list.</li>
+                  <li>
+                    <code>bool myList&lt;T&gt;::empty() const</T></code>: Check if the list is empty.</li>
+                </ul>
+        <h4>Task 1 - Essential Operators for <code>myList</code></h4>
+        <p class="card-text">
+          Implement the following member functions in <code>myList.cpp</code>, corresponding to the key operators on the list. Note that <code>peek_front()</code> and <code>peek_back()</code> are not implemented here, as their functions will be taken care of by <code>listIter</code> in the later tasks.
+        </p>
+           <ul>
+            <li><code>void myList&lt;T&gt;::push_back(T content)</code>: Insert <code>content</code> at the back of the list</li>
+            <li><code>void myList&lt;T&gt;::push_front(T content)</code>: Insert <code>content</code> at the front of the list</li>  
+            <li><code>void myList&lt;T&gt;::pop_back()</code>: Remove the element at the back of the list. Do nothing if the list is empty</li>
+            <li><code>void myList&lt;T&gt;::pop_front()</code>: Remove the element at the front of the list. Do nothing if the list is empty</li>
+          </ul>
+        <h4>Task 2 - Custom iterator <code>listIter</code> for <code>myList</code></h4>
+        <p class="card-text">
+          Overload the following operators in <code>listIter.cpp</code> so that it can traverse <code>myList</code> bi-directionally.</p>
+          <ul>
+            <li><code>listIter&lt;T&gt;&::operator++()</code>: Pre-increment operator called when executing <code>++x</code>. Note the return type is a reference.</li>
+            <li><code>listIter&lt;T&gt;&::operator--()</code>: Pre-decrement operator called when executing <code>--x</code>. Note the return type is a reference.</li>
+            <li><code>listIter&lt;T&gt;&::operator++(int)</code>: Post-increment operator called when executing <code>x++</code>. The int parameter is a dummy parameter whose only function is to differentiate beween pre-increment and post-increment operators. Note the return type is a value.</li>
+            <li><code>listIter&lt;T&gt;&::operator--(int)</code>: Post-decrement operator called when executing <code>x--</code>. The int parameter is a dummy parameter whose only function is to differentiate beween pre-decrement and post-decrement operators. Note the return type is a value.</li>
+          </ul>
+          <p class="card-text">
+            In <code>myList.cpp</code>, also implement the following two functions.</p>
+            <ul>
+            <li><code>listIter&lt;T&gt; myList&lt;T&gt;::begin()</code>: Return a <code>listIter</code> iterator that points to the first element in the list. If there is no element in the list, point to the sentinel, in which case this iterator should not be dereferenced.</li>
+            <li><code>listIter&lt;T&gt; myList&lt;T&gt;::end()</code>: Return a <code>listIter</code> iterator that points to the past-the-end element in the list. The past-the-end element is a theoretical element that would follow the last element in the list. If there is no element in the list, point to the sentinel. This iterator should be not dereferenced in any case.</li>
+            </ul>
+            <p>Note that all the iterator instances will no longer be valid anymore if the list is modified by the functions in Task 1. </p>
+          <h4>Task 3 - Print <code>myList</code> to std::cout</h4>
+        <p class="card-text">
+            In <code>myList.cpp</code>, implement the following <code>friend</code> function of <code>myList</code></p>
+            <ul><li>
+            <code>ostream& operator&lt;&lt;(ostream &os, myList&lt;T&gt; &list)</code>: The implementation of this function should enable us to print an entire <code>myList&lt;T&gt; list</code> using <code>std::cout&lt;&lt;list;</code>
+            <ul>
+              <li>If the list is empty, print <code>&lt;empty&gt;</code> without a newline</li>
+              <li>Otherwise, print the elements separate by a space. <strong>For simplicity, also print a space after the last element.</strong></li>
+            </ul>
+          </li></ul>
+          <h4>Task 4 - Insertions and Deletions using <code>listIter</code></h4>
+        <p class="card-text">
+            Implement the following functions in <code>myList.cpp</code>, which take <code>listIter</code> as an argument</p>
+            <ul>
+              <li>
+            <code>void myList&lt;T&gt;::insert(listIter&lt;T&gt; &p, T content)</code>: Insert <code>content</code> at the position immediately <strong>before</strong> the iterator. After this, the iterator should point to the <strong>same</strong> element after the insertion (i.e. if inserting <code>2</code> into <code>{1,3}</code> before <code>3</code>, the iterator should still point to <code>3</code> after the insertion).
+              </li>
+            <li>
+            <code>void myList&lt;T&gt;::erase(listIter&lt;T&gt; &p)</code>: Remove the element at the position of the iterator. After this, the iterator should point to the <strong>next</strong> element in the pre-modified list. (i.e. if removing <code>2</code> from <code>{1,2,3}</code>, the iterator should point to <code>3</code> after the removal). If the removed element used to be at the end of the list, then the iterator should point to <code>end()</code> after the removal.
+            </li>
+
+          </ul>
+          <p>Note that after modification, the iterator <code>p</code> in the parameters is still valid, but rest of the instances may not. </p>
+
+            </div>
+      <div class="card-footer text-muted">
+              End of Lab Work
+            </div>
+          </div>
+
+          <!-- Resources section -->
+      <!-- ### Complete resources section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="code/lab7_skeleton.zip" target="_blank">lab7_skeleton.zip</a></li>
+              <!-- <li>
+                Makefile
+                <ul>
+                  <li>Windows: <a href="code/make/windows/Makefile" target="_blank">Makefile</a></li>
+                  <li>Mac/Linux: <a href="code/make/nix/Makefile" target="_blank">Makefile</a></li>
+                </ul>
+              </li> -->
+              <li>
+                Demo programs
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="code/windows/i386/lab5_main.exe" target="_blank">lab5_main.exe</a></li> -->
+                  <li>Windows: <a href="code/windows/lab7_demo.exe" target="_blank">lab7_demo.exe</a>
+                  </li>
+                  <li>macOS: <a href="code/macos/lab7_demo" target="_blank">lab7_demo</a></li>
+                  <li>Linux: <a href="code/linux/lab7_demo" target="_blank">lab7_demo</a></li>
+                </ul>
+              </li>
+            </ul>
+            <h4>Run demo program on CS lab 2 machines</h4>
+            <p>In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab7/code/linux/lab7_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab7_demo
+./lab7_demo
+</code></pre>
+              <h4>Sample I/O</h4>
+              <p>
+                In order to pass this lab, your submission should produce the output below (modulo execution time).
+                You may want to compare your program output against the expected output using a <a href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+              </p>
+              <p><pre><code>Task 1 tests
+nil
+nil
+&lt;empty&gt;
+true
+13
+13
+13 
+false
+13
+15
+13 15 
+false
+27
+15
+27 13 15 
+false
+27
+29
+27 13 15 29 
+false
+13
+29
+13 15 29 
+false
+15
+29
+15 29 
+false
+15
+15
+15 
+false
+nil
+nil
+&lt;empty&gt;
+true
+100
+100
+100 
+false
+200
+100
+200 100 
+false
+200
+300
+200 100 300 
+false
+400
+300
+400 200 100 300 
+false
+400
+500
+400 200 100 300 500 
+false
+400
+600
+400 200 100 300 500 600 
+false
+700
+600
+700 400 200 100 300 500 600 
+false
+700
+800
+700 400 200 100 300 500 600 800 
+false
+700
+900
+700 400 200 100 300 500 600 800 900 
+false
+1000
+900
+1000 700 400 200 100 300 500 600 800 900 
+false
+700
+900
+700 400 200 100 300 500 600 800 900 
+false
+400
+900
+400 200 100 300 500 600 800 900 
+false
+400
+800
+400 200 100 300 500 600 800 
+false
+200
+800
+200 100 300 500 600 800 
+false
+200
+600
+200 100 300 500 600 
+false
+200
+500
+200 100 300 500 
+false
+100
+500
+100 300 500 
+false
+100
+300
+100 300 
+false
+100
+100
+100 
+false
+nil
+nil
+&lt;empty&gt;
+true
+nil
+nil
+&lt;empty&gt;
+true
+nil
+nil
+&lt;empty&gt;
+true
+Task 1 tests complete
+
+Task 2 tests
+1000 700 400 200 100 
+300 500 600 800 900 
+900 800 600 500 300 100 200 
+700 1000 
+false
+true
+true
+true
+false
+true
+Task 2 tests complete
+
+Task 3 tests
+&lt;empty&gt;
+200 100 700 900 
+100 700 900 
+100 700 
+400 100 700 300 500 
+400 100 700 300 500 600 1000 
+400 100 700 300 500 600 
+300 
+&lt;empty&gt;
+Task 3 tests complete
+
+Task 4 tests
+100 
+100 
+300 500 700 
+true
+300 500 
+300 
+&lt;empty&gt;
+700 500 300 
+500 300 
+300 
+&lt;empty&gt;
+1000 700 400 200 100 300 500 600 800 900 
+5000 1000 700 400 200 100 300 500 600 800 900 
+1000 700 400 200 100 300 500 600 800 900 
+1000 700 400 200 100 300 500 600 800 900 5000 
+1000 700 400 200 100 300 500 600 800 900 
+300 1000 700 400 200 100 300 500 600 800 900 
+300 1000 300 700 400 200 100 300 500 600 800 900 
+300 1000 300 700 300 400 200 100 300 500 600 800 900 
+300 1000 300 700 300 400 300 200 100 300 500 600 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 500 600 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 500 600 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 600 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 300 800 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 300 800 300 900 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 300 800 300 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 300 800 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 300 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 600 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 300 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 500 
+300 1000 300 700 300 400 300 200 300 100 300 300 300 
+300 1000 300 700 300 400 300 200 300 100 300 300 
+300 1000 300 700 300 400 300 200 300 100 300 
+300 1000 300 700 300 400 300 200 300 100 
+300 1000 300 700 300 400 300 200 300 
+300 1000 300 700 300 400 300 200 
+300 1000 300 700 300 400 300 
+300 1000 300 700 300 400 
+300 1000 300 700 300 
+300 1000 300 700 
+300 1000 300 
+300 1000 
+300 
+&lt;empty&gt;
+Task 4 tests complete
+              </code></pre></p>
+            </div>            
+      <div class="card-footer text-muted">
+              End of Resources and Sample I/O
+            </div>
+          </div>
+      
+      <!-- Grading scheme section -->
+      <!-- ### Complete grading section for the lab ### -->
+          <!-- Grading scheme section -->
+        <!-- ### Complete grading section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="grading">
+            <h3 class="card-title">Submission & Grading</h3>
+            <p>
+              <strong>Deadline: 
+                <!-- <span style="text-decoration: line-through">30 October 2020 Friday</span>  -->
+                20 November 2020 Friday HKT 23:59.</strong><br>
+              You may earn 1 point for this lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC
+                Online Submission System</a>.
+            </p>
+            <p>Please compress <code>myList.cpp</code> and <code>listIter.cpp</code> as <code>lab7.zip</code>.</p>
+            <p>There are 4 visible test cases and 1 hidden test case. </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Grading Scheme
+          </div>
+        </div>
+
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+      <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+                      <li>
+                        <a href="#review">Review</a>
+                      </li>
+                      <li>
+                        <a href="#labwork">Lab Work</a>
+                      </li>
+                      <li>
+                        <a href="#resources">Resources &amp; Sample I/O</a>
+                      </li>
+              <li>
+                <a href="#grading">Submission & Grading</a>
+            </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+        </div>
+                
+        <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        ZHANG Jingyang
+                      </li>
+                      <li>
+                        Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                      </li>
+            <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>        
+                </div>
+              </div>
+      </div>          
+            
+        <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>        
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+  </body>
+
+</html>

@@ -1,0 +1,902 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change lab number ### -->
+    <title>COMP 2012H Lab 1: VS Code, Fundamentals of C++, and Program Flow Control</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+    <!-- Prism syntax highlighter -->
+    <link href="prism.css" rel="stylesheet" />	
+
+    <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+	
+    <!-- Page Content -->	
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4">
+            <span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+
+          <!-- ### Change lab number and title ### -->
+          <h3 class="my-4">
+            Lab 1 
+            <span style="color:#660066">VS Code, Fundamentals of C++, and Program Flow Control</span>
+          </h3>
+
+          <!-- Registering for a CSD Account section -->
+          <div class="card mb-4">
+            <div class="card-body" id="csd">
+              <h3 class="card-title">Registering for a CSD Account</h3>
+	      <br/>
+			  A CSD (Computer Science Department) account is required to:
+			  <ul>
+				<li>Access the lab rooms (when they are open) and use the lab machines.</li>
+				<li>Access the official course website from an off-campus network.</li>
+				<li>SSH (Secure Shell) remote access lab machines or Linux servers (cslwk?@cse.ust.hk), where ? is a number from 1 to 52 (e.g. cslwk44@cse.ust.hk).</li>
+			  </ul>
+			  <p class="card-text">
+				If you do not have a CSD  account yet, you may create it with the instructions here. <strong>Please pay special attention to which two checkboxes you need to check.</strong>
+				You may already have it if you have studied some other COMP courses at HKUST.
+              </p>
+			  <ol>
+				<li>Go to <a href="https://password.cse.ust.hk:8443/pass.html">this</a> webpage.</li>
+				<li>CSD Account Name: Enter your ITSC Username (HKUST Student Username), which is the same as your HKUST Email Username, e.g. cwingho.</li>
+				<li>Password is independent from your ITSC Password. Recommended to be different for security.</li>
+				<li>Check the <b>two</b> checkboxes of <b>"Unix account at UG domain"</b> and <b>"PC account at domain CSD"</b>.</li>
+				<li>Click on the "Go UPDATE" button.</li>
+			  </ol>
+			  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/csd.png">
+            </div>
+            <div class="card-footer text-muted">
+              End of Registering for a CSD Account
+            </div>
+          </div>		  
+		  
+		  <!-- Setting Up VS Code section -->
+          <!-- ### Complete section for the lab ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="vscode">
+              <h3 class="card-title">Setting Up VS Code</h3>
+              <p class="card-text">
+                VS Code will be used as the IDE (Integrated Development Environment) for COMP2011, COMP2012, and COMP2012H. Please check <a href="https://course.cse.ust.hk/comp2012h/labs/vscode/">here</a> for more information about setting up VS Code.
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Setting Up VS Code
+            </div>
+          </div>
+
+          <!-- Review section -->
+          <!-- ### Complete review section for the lab ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="review">
+              <h3 class="card-title">Review</h3>
+              <br>
+              <h4>Operators</h4>
+              <p class="card-text">
+                To express condition/s that we will use to control program flow, relational and logical operators can be used.
+              </p>
+              <ul>
+                <li>
+                  Relational Operators
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/operators1.png">
+                </li>
+                <li>
+                  Logical Operators
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/operators2.png">
+                </li>
+              </ul>
+              <br>
+              <h4>Selection/Branching</h4>
+              <p class="card-text">
+                To select or to branch according to certain condition/s, the following selection/branching statements can be used.
+              </p>
+              <ul>
+                <li>
+                  if Statement
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/selection1.png">
+                </li>
+                <li>
+                  if-else Statement
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/selection2.png">
+                </li>
+                <li>
+                  if-else-if Statement
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/selection3.png">
+                </li>
+                <li>
+                  switch Statement
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/selection4.png">
+                </li>
+              </ul>
+              <br>
+              <h4>Iteration/Looping</h4>
+              <p class="card-text">
+                To iterate or to loop according to certain condition/s, the following iteration/looping statements can be used. The break and continue statements provide additional control to these iteration/looping statements.
+              </p>
+              <ul>
+                <li>
+                  while Loop
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/iteration1.png">
+                </li>
+                <li>
+                  do-while Loop
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/iteration2.png">
+                </li>
+                <li>
+                  for Loop
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/iteration3.png">
+                </li>
+                <li>
+                  break and continue
+                  <br>
+                  <img style="width:75%;margin-left:auto;margin-right:auto;" src="images/iteration4.png">
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer text-muted">
+              End of Review
+            </div>
+          </div>
+
+          <!-- Introduction section -->
+          <!-- ### Complete introduction section for the lab ### -->
+          <div class="card mb-4">
+            <!-- ### Add an image representing the lab content here ### -->
+            <img class="card-img-top" src="images/pic.png" alt="Card image cap">
+            <div class="card-body" id="introduction">
+              <p class="card-text">
+                <small>
+                  <em>
+                    Source: <a href="https://www.esquireme.com/content/20945-how-to-win-at-rock-paper-scissors" target="_blank">https://www.esquireme.com/content/20945-how-to-win-at-rock-paper-scissors</a>
+                  </em>
+                </small>
+              </p>
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+                This is a lab about program flow control: Implement a simple rock-paper-scissors-based game against a computer-controlled opponent.
+              </p>
+              <br>
+              <h4>How to Play?</h4>
+              <ul>
+                <li>
+                  The Player and the Computer both start with maximum HEALTH and no CHARGE.
+                </li>
+                <li>
+                  In each round, the Player and the Computer simultaneously choose one of the following actions:
+                  <ul>
+                    <li>
+                      ATTACK: 
+					  <ul>
+						<li>Decreases opponent's HEALTH with DAMAGE depending on one's CHARGE.</li>
+						<li>Consumes all of one's CHARGE if any (reset to 0).</li> 
+						<li>Interrupts if opponent is CHARGING (reset opponent's CHARGE to 0).</li>
+					  </ul>
+                    </li>
+                    <li>
+                      DEFEND: 
+					  <ul>
+						<li>Reduces DAMAGE from opponent's ATTACK.</li>
+						<li>Possibly NULLIFYING or even REFLECTING DAMAGE.</li>
+						<li>Protects against being interrupted and preserves CHARGE.</li>
+					  </ul>
+                    </li>
+                    <li>
+                      CHARGE: 
+					  <ul>
+						<li>Increases one's CHARGE by 1, empowering a future ATTACK.</li>
+						<li>Can be interrupted if the opponent ATTACKS at the same time.</li>
+						<li>CHARGE count is preserved when DEFENDING.</li>
+					  </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The game ends when someone's HEALTH reaches 0, and the winner is the one with non-zero HEALTH. 
+				  If both the Player's and the Computer's HEALTH reach 0 simultaneously, the game ends in a tie.
+                </li>
+              </ul>
+              <br>
+              <h4>Letting the Computer Play</h4>
+              <p class="card-text">
+                In order to keep the game dynamic and unpredictable, the computer opponent will choose its actions randomly. You need not to worry on coding this as it is already done for you in the skeleton code. However, it is useful for you to be aware of random number generators.
+              </p>
+              <p class="card-text">
+                Random number generators (RNGs) generate sequences of numbers which have the desired properties of randomness. Since generating truly random numbers is relatively costly, a class of RNGs called pseudo-random number generators (PRNGs) output numbers which have the desired properties without being truly random. Typically, PRNGs are composed of an internal state and an algorithm which generates the next pseudo-random number according to the internal state and which also updates the current internal state. Hence, the non-deterministic property of a PRNG mainly relies on not knowing its internal state and its algorithm. On the other hand, if the internal state can be set, we can return to a previous internal state in order to repeat the sequence of numbers generated. This property is useful for replicating experiments with PRNGs, and thus, most technical reports include the random seed which is the number programmers used to set the initial internal state.
+              </p>
+			  <p class="card-text">
+			  For our lab, it is easier to debug and also to perform automated grading if we can fix the seed and know the pseudo-random sequence beforehand. 
+			For other use cases where this is undesirable, usually an easy solution is to use the current time as the seed, which is always incrementing (and thus always changing). 
+			You may have rarely received an error with HKUST's Duo 2FA system with the message of "failed to synchronize with time server" or something similar. 
+			More advanced random number generation systems are typically used in security and cryptography applications, such as financial authentication systems.
+			  </p>
+              <p class="card-text">
+                For simple use cases, usually the PRNG used in C++ is the <code>srand()</code> and <code>rand()</code> functions in the <code>cstdlib</code> library, which must be imported or included at the beginning of the program. 
+	      The following is a code example:</p> 
+	      <pre class="prettyprint">
+#include &lt;iostream&gt; // For cout
+#include &lt;cstdlib&gt;  // For srand, rand
+#include &lt;ctime&gt;    // For time
+using namespace std;
+
+int main() {
+  /*
+     srand is a function used to initialize the pseudo-random number generator.
+     An unsigned int is a parameter being used to generate a sequence of integers.
+     We call it a seed.
+
+     In the following statement,
+     - time(nullptr) returns the current time of the system in number of seconds elapsed
+       since Jan 1, 1970 and is used as the seed to generate the sequence.
+  */
+  srand(static_cast&lt;unsigned int&gt;(time(nullptr)));
+
+  /*
+     In each iteration, get the next number in the sequence, make it in the range 0 to 9
+     and print it on screen.
+  */
+  for(int i=0; i<10; ++i) {
+    cout << rand() % 10 << ( (i != 9) ? " " : "\n" );
+  }
+
+  // Question: Check the following code and see what you observe.
+
+  srand(100);
+  for(int i=0; i<5; ++i) {
+    cout << rand() % 10 << ( (i != 4) ? " " : "\n" );
+  }
+
+  srand(100);
+  for(int i=0; i<5; ++i) {
+    cout << rand() % 10 << ( (i != 4) ? " " : "\n" );
+  }
+
+  return 0;
+}
+	      </pre>
+		  <br/>
+		  <p class="card-text">
+			However, for this lab we are using our own custom PRNG implementation, in order to ensure consistency for automated grading. 
+			Please do not modify the PRNG code blocks in the skeleton code, otherwise you may break the automated grading pipeline and result in a false "0" grade. <br/>
+			<br/>
+			The <code>"Choose Computer Player (0-100): "</code> portion of the code asks the player for an integer input between 0-100 to be the seed of our PRNG. 
+			As explained above, reusing the same seed will produce the same sequence of pseudo-random numbers across multiple runs of the game. 
+			 <br/>
+			<br/>
+			Here is what the code looks like, though it is unnecessary for you to understand it when coding the lab tasks.
+		  </p>
+		  <pre class="prettyprint">
+// Our own simple implementation of a pseudo-random number generator, for debugging and automated grading consistency.
+static unsigned long rng_lab1 = 0;
+
+static void _srand(unsigned seed) {
+	rng_lab1 = seed;
+}
+
+static int _rand() {
+	rng_lab1 = (1103515245 * rng_lab1 + 12345) % (1 << 31);
+    return rng_lab1 & 0x7FFFFFFF;
+}
+
+int main() {
+	// Welcoming Message.
+	cout << "Welcome to COMP 2012H Lab 1!" << '\n';
+	cout << "ATTACK, DEFEND, CHARGE!" << '\n';
+	cout << endl;
+	
+	// Setting Computer Player.
+	cout << "Choose Computer Player (0-100): ";
+	unsigned int id;
+	cin >> id;
+	_srand(id + 2012); // Initialize pseudo-random number generator.
+	
+	...
+}
+		  </pre>
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Lab work section -->
+          <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="labwork">
+              <h3 class="card-title">Lab Work</h3>
+			  <p class="card-text">
+				Please refer to the <a href="#resources">Demo Program and Sample I/O</a> for the appropriate output string formatting. 
+				A large comment block of Output Messages has been included in the skeleton code for your copy-paste convenience. 
+			  </p>
+			  <br/>
+              <h4>Task 1 - Handle Player's ACTION and Computer's ACTION</h4>
+              <p class="card-text">
+                Ask the Player to choose between ATTACK(0), DEFEND(1), and CHARGE(2).<br/>
+				If the Player chooses CHARGE while at FULL CHARGE, notify the Player and ask again.<br/>
+				If the Player's input is invalid, notify the Player and ask again.<br/>
+				Announce the Player's action, and afterwards, announce the Computer's action.<br/>
+				Note: You can safely ignore the situation of wrong data type cin input (it will crash the program).
+              </p>
+              <br>
+              <h4>Task 2 - Determine Player's DAMAGE and Computer's DAMAGE</h4>
+              <p class="card-text">
+                Determine <code>player_damage</code> and <code>computer_damage</code> according to the provided chart.<br/>
+				Announce REFLECTED DAMAGE and NULLIFIED DAMAGE whenever they occur.
+              </p>
+              <table style="width:50%;margin-left:auto;margin-right:auto;">
+                <tr>
+                  <th rowspan="2" style="text-align:center">ATTACK's<br>CHARGE</th>
+                  <th colspan="2" style="text-align:center">ATTACK's DAMAGE</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">without DEFEND</th>
+                  <th style="text-align:center">with DEFEND</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">0</th>
+                  <th style="text-align:center">1</th>
+                  <th style="text-align:center">-1*</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">1</th>
+                  <th style="text-align:center">2</th>
+                  <th style="text-align:center">0**</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">2</th>
+                  <th style="text-align:center">5</th>
+                  <th style="text-align:center">2</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">3</th>
+                  <th style="text-align:center">10</th>
+                  <th style="text-align:center">5</th>
+                </tr>
+              </table>
+              <p class="card-text">
+                <small>
+                  <em>
+                    *REFLECTED DAMAGE
+                    **NULLIFIED DAMAGE
+                  </em>
+                </small>
+              </p>
+              <br>
+              <h4>Task 3 - Update Player's CHARGE and Computer's CHARGE</h4>
+              <p class="card-text">
+                Update <code>player_charge</code> and <code>computer_charge</code> according to the following rules:
+                <ul>
+                  <li>
+                    If one ATTACKS, one loses all CHARGE.
+                  </li>
+                  <li>
+                    If one CHARGES and the opponent ATTACKS, one's CHARGING is INTERRUPTED and one's CHARGE resets.
+                  </li>
+                  <li>
+                    If one CHARGES and the opponent does not ATTACK, one's CHARGE increments.
+                  </li>
+                </ul>
+                Announce INTERRUPTED CHARGING whenever it occurs.
+              </p>
+              <br>
+              <h4>Task 4 - Update Player's HEALTH and Computer's HEALTH</h4>
+              <p class="card-text">
+                Update <code>player_damage</code> and <code>computer_damage</code>.<br/>
+				Cap DAMAGE received to current HEALTH (no overkill).<br/>
+				Announce <code>player_damage</code> (only if non-zero) and update <code>player_health</code>.<br/>
+				Similarly, announce <code>computer_damage</code> (only if non-zero) and update </code>computer_health</code>.
+              </p>
+              <br>
+              <h4>Task 5 - Check for winner</h4>
+              <p class="card-text">
+                Set <code>winner</code> to 1 if the Player wins, 2 if the Computer wins, and 3 for a tie.<br/>
+				One wins if the opponent's HEALTH reaches 0.<br/>
+				A tie occurs if both HEALTHs simultaneously reach 0.
+              </p>
+              <br>
+              <h4>Task 6 - Display Ending Message</h4>
+              <p class="card-text">
+                Output appropriate ending message according to <code>winner</code>.
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Lab Work
+            </div>
+          </div>
+
+          <!-- Resources section -->
+          <!-- ### Complete resources section for the lab ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+              <ul>
+                <li>Skeleton code: <a href="code/lab1_skeleton.cpp">lab1_skeleton.cpp</a></li>
+                <li>Demo program (executable for Windows): <a href="code/lab1_demo_win.exe">lab1_demo_win.exe</a></li>
+                <li>Demo program (executable for MacOS): <a href="code/lab1_demo_mac">lab1_demo_mac</a></li>
+              </ul>
+              <h4>Sample I/O</h4>
+              <p class="card-text">
+                For simplicity, the following sample I/O has <code>MAX_HEALTH</code> set to 10. For grading purposes, <code>MAX_HEALTH</code> must be set to 30.
+              </p>
+              <pre>Welcome to COMP 2012H Lab 1!
+ATTACK, DEFEND, CHARGE!
+
+Choose Computer Player (0-100): <span style="color:red">0</span>
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 10/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">3</span>
+Invalid input. Please enter again.
+
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 10/10
+Player CHARGE: 1/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 10/10
+Player CHARGE: 2/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer CHARGES!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 10/10
+Player CHARGE: 3/3	Computer CHARGE: 1/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player, you are already at FULL CHARGE!
+Invalid input. Please enter again.
+
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">0</span>
+Player ATTACKS!
+Computer DEFENDS!
+Computer receives 5 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 5/10
+Player CHARGE: 0/3	Computer CHARGE: 1/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">0</span>
+Player ATTACKS!
+Computer CHARGES!
+Computer's CHARGING INTERRUPTED!
+Computer receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 4/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer ATTACKS!
+Player REFLECTED DAMAGE!
+Computer receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 3/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 3/10
+Player CHARGE: 1/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer CHARGES!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 3/10
+Player CHARGE: 2/3	Computer CHARGE: 1/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer ATTACKS!
+Player NULLIFIED DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 3/10
+Player CHARGE: 2/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 10/10	Computer HEALTH: 3/10
+Player CHARGE: 2/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer ATTACKS!
+Player's CHARGING INTERRUPTED!
+Player receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 9/10	Computer HEALTH: 3/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">0</span>
+Player ATTACKS!
+Computer ATTACKS!
+Player receives 1 DAMAGE!
+Computer receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 8/10	Computer HEALTH: 2/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 8/10	Computer HEALTH: 2/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer ATTACKS!
+Player's CHARGING INTERRUPTED!
+Player receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 7/10	Computer HEALTH: 2/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer ATTACKS!
+Player REFLECTED DAMAGE!
+Computer receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 7/10	Computer HEALTH: 1/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer ATTACKS!
+Player's CHARGING INTERRUPTED!
+Player receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer CHARGES!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 1/3	Computer CHARGE: 1/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer CHARGES!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 2/3	Computer CHARGE: 2/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">2</span>
+Player CHARGES!
+Computer CHARGES!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 3/3	Computer CHARGE: 3/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">1</span>
+Player DEFENDS!
+Computer DEFENDS!
+
+--------------------------------------------------
+Player HEALTH: 6/10	Computer HEALTH: 1/10
+Player CHARGE: 3/3	Computer CHARGE: 3/3
+--------------------------------------------------
+Player, choose one of the following actions:
+0: ATTACK
+1: DEFEND
+2: CHARGE
+<span style="color:red">0</span>
+Player ATTACKS!
+Computer ATTACKS!
+Player receives 6 DAMAGE!
+Computer receives 1 DAMAGE!
+
+--------------------------------------------------
+Player HEALTH: 0/10	Computer HEALTH: 0/10
+Player CHARGE: 0/3	Computer CHARGE: 0/3
+--------------------------------------------------
+SURPRISE! It's a tie!
+
+Press [ENTER] to exit...</pre>
+            </div>
+            <div class="card-footer text-muted">
+              End of Resources &amp; Sample I/O
+            </div>
+          </div>
+
+          <!-- Grading section -->
+          <!-- ### Complete grading section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="grading">
+              <h3 class="card-title">Submission &amp; Grading</h3>
+              <p class="card-text">
+                <strong>Deadline: 21 September 2020 Monday HKT 23:59.</strong><br/>
+				You may earn 1 point for each lab via Automated Grading on the <a href="https://zinc.cse.ust.hk/">ZINC Online Submission System</a>. <br/>
+				Please check <a href="https://course.cse.ust.hk/comp2012h/zinc-submission/">here</a> for a usage overview of ZINC. <br/>
+				Rename your source file as <code>lab1.cpp</code> and zip it by itself as <code>lab1.zip</code> for submission to ZINC.
+			  </p>
+			  <p class="card-text">
+                As this is the first live deployment of ZINC, we apologize in advance for any unexpected problems that may occur, and humbly request for your patience and understanding. In such cases, please contact the TAs and/or Prof. Desmond for resolution.
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+          <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+					  <li>
+						<a href="#csd">Registering for a CSD Account</a>
+					  </li>
+                      <li>
+                        <a href="#vscode">Setting Up VS Code</a>
+                      </li>
+                      <li>
+                        <a href="#review">Review</a>
+                      </li>
+                      <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#labwork">Lab Work</a>
+                      </li>
+                      <li>
+                        <a href="#resources">Resources &amp; Sample I/O</a>
+                      </li>
+                      <li>
+                        <a href="#grading">Submission &amp; Grading</a>
+                      </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+            </div>
+
+            <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        CHANG Bing Yen
+                      </li>
+                      <li>
+                        Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                      </li>
+                      <li>
+                        Last Modified: <script type="text/javascript">document.write(document.lastModified);</script>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+
+            <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="https://course.cse.ust.hk/comp2012h/">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>

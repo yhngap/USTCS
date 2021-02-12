@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012H Assignment 4: Mini Turn-Based Strategy Game with GUI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+    <!-- Prism syntax highlighter -->
+    <link href="prism.css" rel="stylesheet" />
+
+	<style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.25 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+	
+	table, th, td {
+	  border: 1px solid black;
+	}
+	th, td {
+	  padding: 5px;
+	}
+	th {
+	  text-align: left;
+	}
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4">
+            <span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+
+          <!-- ### Change assignment number and title ### -->
+          <h3 class="my-4">
+            Assignment 4
+            <span style="color:#660066">Mini Turn-Based Strategy Game with GUI</span>
+          </h3>
+		  
+		  <!-- Honor Code section -->
+		  <!--<div class="card mb-4">
+			<div class="card-body" id="honor" style="background-color:#f4f4f4">
+			  <h3 class="card-title">Honor Code</h3>
+			  <p class="card-text">
+				We value academic integrity very highly. Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> section on our course webpage to make sure you understand what is considered as plagiarism and what the penalties are. 
+				The following are some of the highlights:
+				<ul>
+				  <li>
+					Do NOT try your "luck" - we use sophisticated plagiarism detection software to find cheaters. 
+					We also review codes for potential cases manually.
+				  </li>
+				  <li>
+					The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your assignment. 
+					Please read the <a href="https://course.cse.ust.hk/comp2012h/#honorcode">Honor Code</a> thoroughly. 
+				  </li>
+				  <li>
+					Serious offenders will fail the course immediately, and there will be additional disciplinary actions from the department and university, upto and including expulsion.
+				  </li>
+				</ul>
+			  </p>
+			</div>
+			<div class="card-footer text-muted">
+              End of Honor Code
+            </div>
+		  </div>-->
+		  
+		  <!-- Changelogs section -->
+          <!-- ### Complete changelogs section for the assignment ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="changelogs">
+              <h3 class="card-title">Changelogs</h3>
+              <p class="card-text">
+				<ul>
+				  <li>
+					2020-11-20 15:00 <br/>
+					Fix "out-of-range indicators cause crash" and "double movement" problem in the demo program. 
+				  </li>
+				</ul>
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Changelogs
+            </div>
+          </div>
+		  
+		  <!-- Objectives section -->
+          <!-- ### Complete Objectives section for the assignment ### -->
+          <div class="card mb-4">
+            <div class="card-body" id="objectives">
+              <h3 class="card-title">Objectives &amp; Intended Learning Outcomes</h3>
+              <p class="card-text">
+				The objective of this assignment is to provide you with practice on the OOP concepts of Inheritance and Polymorphism, as well as writing code with less reliance on a provided skeleton code.
+              </p>
+			  Upon completion of this assignment, you should be able to:
+			  <ol>
+				<li>Write appropriate header files on your own, without being provided them as part of the skeleton code.</li>
+				<li>Manage dynamic memory effectively with the use of class Constructors and Destructors.</li>
+				<li>Use Inheritance to allow for significant code reuse between Base classes and Derived classes.</li>
+				<li>Use function overriding in Derived classes to provide different function implementations for the same member function prototype.</li>
+				<li>Understand how Base class pointers/references can point/refer to Derived class objects, yet polymorphically call Derived class functions that are declared <code>virtual</code>.</li>
+				<li>Code a program following the OOP paradigm.</li>
+				<li>Have an overview of Qt GUI programming.</li>
+				<li>Learning to use new library by searching the document.</li>
+			  </ol>
+            </div>
+            <div class="card-footer text-muted">
+              End of Objectives &amp; Intended Learning Outcomes
+            </div>
+          </div>
+
+          <!-- Introduction section -->
+          <!-- ### Complete introduction section for the assignment ### -->
+          <div class="card mb-4">
+            <!-- ### Add an image representing the assignment content here ### -->
+            <img class="card-img-top" src="images/wargroove.jpg" alt="Card image cap">
+            <div class="card-body" id="introduction">
+              <p class="card-text">
+                <small>
+                  <em>
+                    Source: <a href="https://wargroove.com/">https://wargroove.com/</a>
+                  </em>
+                </small>
+              </p>
+              <h3 class="card-title">Introduction</h3>
+			  <p class="card-text">In this assignment, we will implement a GUI for the Mini Turn-Based Strategy Game. </p><br>
+			  <h4>Introduction to Qt GUI Programming</h4>
+			<p class="card-text">Please refer to <a href="qt_inst.html">here</a> for the installation of Qt on Windows. </p>
+			<p>Please refer to the following for a list of resources for learning Qt GUI programming.</p>
+			<ol>
+				<li>Qt for Beginners (Tutorial)</li>
+				<a href="https://wiki.qt.io/Qt_for_Beginners">https://wiki.qt.io/Qt_for_Beginners</a>
+				<li>Qt Examples (Examples)</li>
+				<a href="https://doc.qt.io/qt-5/all-examples.html">https://doc.qt.io/qt-5/all-examples.html</a>
+				<li>Learn Qt 5 (E-book)</li>
+				<a href="https://www.oreilly.com/library/view/learn-qt-5/9781788478854/?ar">https://www.oreilly.com/library/view/learn-qt-5/9781788478854/?ar</a>
+				<li>COMP 2012H Resources</li>
+				<ul>
+					<li>(Fall 2019) Qt Lab</li>
+					<a href="https://course.cse.ust.hk/comp2012h/labs/supp-lab/">https://course.cse.ust.hk/comp2012h/labs/supp-lab/</a>
+					<li>(Fall 2018) Assignment: Pipes Game</li>
+					<a href="https://course.cse.ust.hk/comp2012h/practice2018/assignments/pa3/">https://course.cse.ust.hk/comp2012h/practice2018/assignments/pa3/</a>
+					<li>(Fall 2018) Assignment: International Chess Game</li>
+					<a href="https://course.cse.ust.hk/comp2012h/practice2018/assignments/pa4/">https://course.cse.ust.hk/comp2012h/practice2018/assignments/pa4/</a>
+				</ul>
+			</ol>
+			<br>
+			  <h4>Manual of the Demo Program</h4>
+			<p class="card-text">First, click "Map" in the toolbar. Open an map file (which follows the same format as PA3). You will see the game map in the upper panel.</p>
+			<p class="card-text">Click "Players" and open the player and unit file. You will see the units in the map and a list of all the players and their units in the lower panel. You can expand the players to see the units. </p>
+			<p class="card-text">Click the items in the list or the icon in the map to choose a unit. You will see the moving range of the unit. </p>
+			<p class="card-text">Click one of the square in the range to move the unit. Or click "Heal" to heal the health point of the unit. </p>
+			<p class="card-text">If there are enemies in the attacking range, you will see the attacking range. Click the enemy to deal damage. </p>
+			<p class="card-text">When the ending condition is met, you will see a message box. </p><br>
+			  <h4>Project Overview</h4>
+			<p class="card-text">The major changes are in the <code>gamewindow.cpp</code>, which is basically a rewrite of <code>GameEngine.cpp</code> in PA3. It contains the game logic control and most of the UI update. </p>
+			<p class="card-text">Other files are from PA3 with minor changes. For example, <code>GameMap.cpp</code> contains the rendering of the game map UI, <code>Unit.cpp</code> handles the UI update of the status of the units. </p>
+			<p class="card-text">In particular, <code>gamewindow.ui</code> defines the widget layout in the window. <code>clickableview</code> is a derived class of a built-in Qt class used for the game map display. We override the mouse click handler of the base class. </p>
+			<p class="card-text">Most of the classes of PA3 are still in use for the game logic control except <code>GameEngine</code> which is replaced by <code>GameWindow</code>. The <code>GameWindow</code> also have a <code>ClickableView</code> and a <code>QTreeWidget</code> for the upper and lower panel of the main window respectively. </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Description section -->
+          <!-- ### Complete description section for the assignment ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="description">
+              <h3 class="card-title">Task Description</h3>
+			  <br><h4>Task 1 - Display Game Map and Units</h4>
+			  <p class="card-text">In this task, you need to</p>
+			  <ol>
+				  <li>Have a handler of the "Map" and "Players" button</li>
+				  <li>Ask user for a file name. </li>
+				  <li>Read the file and create the map and units in the core logic. </li>
+				  <li>Implement the UI rendering part of the map in <code>GameMap</code>, units rendering in <code>Unit</code> and its derived classes. The rendering includes both the icon in the upper panel and the list items in the lower panel. Call the implemented functions in the button handler.  </li>
+			  </ol>
+			  <br><h4>Task 2 - Free Movement</h4>
+			  <p class="card-text">It's recommended to first let the unit move and attack ignoring the game rule. In this task, you need to</p>
+			  <ol>
+				  <li>Have a handler of clicking the upper panel and the lower panel. </li>
+				  <li>Figure out the map coordinate/unit that user clicked in the upper panel handler.</li>
+				  <li>Figure out the unit that the clicked item referring to in the lower panel handler. </li>
+				  <li>Use a variable to record the stage we are in (waiting for unit selection/moving/attacking). </li>
+				  <li>Based on the stage and the clicked position, update both game logic control and UI. </li>
+			  </ol>
+			  <p class="card-text">The control of the unit is described as follows.</p>
+			  <ol>
+				  <li>Click a unit in the map to select it. Now the unit is waiting for moving or healing command. </li>
+				  <ul>
+					  <li>Now if click a place out of range, with another unit or with obstacle, do nothing and wait for next input. </li>
+					  <li>If click the unit itself or an empty place, do the movement and entering the attacking stage. </li>
+					  <li>If click "Heal" button, do healing and finish the operating of this unit. </li>
+				  </ul>
+				  <li>Now the unit should be in the attacking stage. </li>
+				  <ul>
+					  <li>If there is no enemies in the attacking range, finish the operating of this unit.</li>
+					  <li>Otherwise, wait for user input. If click a place with no unit or friendly unit, do nothing and wait for next input. </li>
+					  <li>If click the unit itself, give up the attacking and finish the operating of the this unit. </li>
+					  <li>If click an enemy, do the attacking and finish the operating of this unit. </li>
+				  </ul>
+			  </ol>
+			  <br><h4>Task 3 - Complete the Game</h4>
+			  <p class="card-text">Now modify your code so that the game follows the rule. In this task, you need to</p>
+			  <ul>
+				  <li>Make sure only the ready units can move.</li>
+				  <li>End the unit's turn after finishing the operating.</li>
+				  <li>Maintain and consider whether the unit is alive. If the unit is dead, update the UI accordingly.</li>
+				  <li>When all the units finish, switch to the next player.</li>
+				  <li>Check the ending condition and pop up a message box if the game ends.</li>
+			  </ul>
+			  <br><h4>Remarks</h4>
+			  <ul>
+				  <li>You <strong>CAN</strong> modify the skeleton code as you wish. We will grade only based on the final performance of your program. You may find that there are some member variables in the class declaration. You can consider to use them. </li>
+				  <li>You <strong>CAN</strong> use STL containers and Qt containers (like <code>QList</code>).</li>
+				  <li>We don't check memory leak this time. The Qt widgets can be automatically deallocated if it has a parent.</li>
+			  </ul>
+            </div>
+            <div class="card-footer text-muted">
+              End of Task Description
+            </div>
+          </div>
+
+          <!-- Download section -->
+		  <!-- ### Complete download section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="download">
+              <h3 class="card-title">Resources</h3>
+			  <ul>
+			    <li>Skeleton code: <a href="code/pa4_skeleton.zip">pa4_skeleton.zip</a></li>
+				<li>Sample input textfiles: (also in the demo program package)
+				  <ul>
+					<li>Game Map: <a href="code/GameMap.txt">GameMap.txt</a></li>
+					<li>Players and Units: <a href="code/PlayersAndUnits.txt">PlayersAndUnits.txt</a></li>
+				  </ul>
+				</li>
+				<li>
+					Another set of input files used in the demo video: (also in the demo program package)
+					<ul>
+						<li><a href="code/GameMap2.txt">GameMap2.txt</a></li>
+						<li><a href="code/PlayersAndUnits2.txt">PlayersAndUnits2.txt</a></li>
+					</ul>
+				</li>
+				<li>Demo program: 
+				  <ul>
+					<li>Windows: <a href="code/windows/pa4_demo.zip">pa4_demo.zip</a></li>
+					<li>Mac: <a href="code/mac/pa4_demo.zip">pa4_demo.zip</a></li>
+					<!-- <li>Linux: <a href="code/linux/pa4_demo">pa4_demo</a></li> -->
+				  </ul>
+				</li>
+				<li>Demo Timetable: <a href="code/pa4_demo_timetable.xlsx">pa4_demo_timetable.xlsx</a></li>
+			  </ul>
+			  
+			  <!-- <h4>Run demo program on CS lab 2 machines</h4>
+			  <p class="card-text">In case you cannot run demo program on Mac, you can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+<pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/linux/PA3_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/GameMap.txt --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+wget https://course.cse.ust.hk/comp2012h/assignments/pa3/code/PlayersAndUnits.txt --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x PA3_demo
+./PA3_demo
+</code></pre> -->
+            </div>            
+			<div class="card-footer text-muted">
+              End of Resources
+            </div>
+          </div>
+		  
+		  <!-- Submission and grading section -->
+		  <!-- ### Complete submission and grading section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="submission">
+              <h3 class="card-title">Submission &amp; Grading</h3> 
+			  <p class="card-text">
+			    <strong>Deadline: 29 November 2020 Sunday HKT 23:59.</strong><br/>
+				<strong>No deadline extensions are possible.</strong> Please compress all the source code as <code>pa4_&lt;stuid&gt;.zip</code> and submit to <strong>CANVAS</strong> (<a href="https://canvas.ust.hk/courses/33229/assignments/129171">Link</a>).</p>
+				<p class="card-text"><strong>Late submission penalty</strong>: Linearly decreasing score multiplier from 100% to 0% score for the next 48 hours from the deadline. 
+				E.g. If you are exactly 24 hours late (i.e. submitted on 30 November 2020 Tuesday HKT 23:59), your score will be multiplied by 0.5 to calculate your final score.
+			  </p>
+			  <p class="card-text">You will demo your program in the lab session on Nov 30. If you are late, you cannot demo your program by yourself. </p>
+			  
+			  <br><h4>Grading Scheme</h4>
+			  <video controls width="640"><source src="images/demo.mp4" type="video/mp4"></video>
+			  <ol>
+				  <li>5% open a map</li>
+				  <li>2% open a map when there is already one, old map should be removed</li>
+				  <li>5% open player and units</li>
+				  <li>2% open player and units when there is already one, old units should be removed</li>
+				  <li>3% open a map after opening player and units, old map and units should be removed</li>
+				  <li>2% nothing happen if click any units</li>
+				  <li>3% click start, red team should all be ready</li>
+				  <li>2% cannot load map and units now</li>
+				  <li>2% cannot select blue units</li>
+				  <li>6% select red units, movement range indicator should appear</li>
+				  <li>4% click another item in the list, a new unit should be selected</li>
+				  <li>3% click out-of-range square, nothing happen</li>
+				  <li>3% click friendly units, nothing happen</li>
+				  <li>3% click blocked square, nothing happen</li>
+				  <li>5% click a valid square, successfully do a movement</li>
+				  <li>3% the status of the unit should become DONE</li>
+				  <li>3% select another unit and click itself, it should remain the original place and its turn ends</li>
+				  <li>3% move all the units, the blue units should be all ready</li>
+				  <li>5% move units so that some units can be attacked. the attack range indicator should appear</li>
+				  <li>2% now the unit cannot do healing</li>
+				  <li>4% click itself in the attacking stage, health should not be deducted and its turn ends</li>
+				  <li>3% click friendly units, nothing happen</li>
+				  <li>3% click empty square, nothing happen</li>
+				  <li>5% attack the enemy, health should be deducted</li>
+				  <li>3% if a unit choose not to move by clicking itself, it can still attack. </li>
+				  <li>5% if unit has 0 health, it should disappear from the map. The status in the list should be updated.</li>
+				  <li>4% select a unit whose health is not full and do healing, health should be recovered.</li>
+				  <li>4% dead units cannot be selected. </li>
+				  <li>3% player the game until the end, there should be a message box. </li>
+			  </ol>
+            </div>
+			<div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+		  
+		  <!-- FAQ section -->
+		  <!-- ### Complete FAQ section for the assignment ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="faq">
+              <h3 class="card-title">Frequently Asked Questions</h3> 			
+			  <p class="card-text">
+				This section will be expanded as your fellow classmates ask more questions about this programming assignment. 
+				It is in your interest to <strong>check this section regularly for updates and clarifications</strong> <em>even if you have already submitted your work by then</em>.
+			  </p>		  
+            </div>
+		    <div class="card-footer text-muted">
+              End of FAQ
+            </div>          
+          </div>
+        </div>
+				
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+					  <!--<li><a href="#honor">Honor Code</a></li>-->
+					  <li><a href="#changelogs">Changelogs</a></li>
+					  <li><a href="#objectives">Objectives &amp; Intended Learning Outcomes</a></li>
+                      <li><a href="#introduction">Introduction</a></li>
+                      <li><a href="#description">Task Description</a></li>
+                      <li><a href="#download">Resources</a></li>
+			  		  <li><a href="#submission">Submission &amp; Grading</a></li>
+					  <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+            </div>
+		  
+		    <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        ZHANG Jingyang
+                      </li>
+                      <li>
+                        Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                      </li>
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  
+		  
+		    <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>
+

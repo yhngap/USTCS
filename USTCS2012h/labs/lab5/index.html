@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change lab number ### -->
+  <title>COMP 2012H Lab 5: Class, Object, Constructors, Destructor and Linked List</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- Prism syntax highlighter -->
+  <link href="prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+          <small>Honors Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change lab number and title ### -->
+        <h3 class="my-4">Lab 5
+          <span style="color:#660066">Class, Object, Constructors, Destructor and Linked List</span>
+        </h3>
+
+        <!-- FAQ section -->
+        <!-- ### Complete FAQ section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="faq">
+            <h3 class="card-title">FAQ</h3>
+            <h4>Frequently Asked Questions</h4>
+            <p class="card-text">This section will be expanded as your fellow classmates ask more questions about this
+              programming assignment. It is in your interest to <strong>check this section regularly for updates and
+                clarifications</strong> <em>even if you have already submitted your work then</em>.</p>
+            <!-- <p><em>This section is currently empty.</em></p> -->
+            <ul>
+              <li>Why the program runs normally but get "double deletion" error on ZINC?</li>
+              <p>Please do NOT delete the whole linked list in the destructor of Node. You may think that there will be memory leak in task 1 test, but the problem is fixed in the <code>main.cpp</code> on ZINC. </p>
+            </ul>
+          </div>
+          <div class="card-footer text-muted">
+            End of FAQ
+          </div>
+        </div>
+
+        <!-- Review section -->
+        <div class="card mb-4">
+          <div class="card-body" id="review">
+            <h3 class="card-title">Review</h3><br>
+            <p class="card-text">This lab is about class, object, constructor, destructor, and linked list<br>
+              <br>
+              A class is a user-defined type representing a set of objects with the same structure and
+              behavior. Objects are
+              variables of class type. Each object of a class has its own copies and values of its data
+              members. All objects of a class
+              share a common set of member functions. In addition, C++ allows access control to each data
+              member and member function:</p>
+            <ul>
+              <li><span style="color:blue">public</span>: accessible to any functions (both member functions
+                of the class or other functions)
+              </li>
+              <li><span style="color:blue">private</span>: accessible only to member functions of the class
+              </li>
+              <li><span style="color:blue">protected</span>: (will be discussed when we talk about
+                inhertiance)
+              </li>
+            </ul>
+            <p>There are at least 4 types of member functions:</p>
+            <ul>
+              <li>Constructors: used to create and initialize object.
+                <ul>
+                  <li>They are special member functions <span style="color:red">having the same name as the class</span>
+                    and they are used to <span style="color:red">initialize the data members of objects</span> of the
+                    class.
+                  </li>
+                  <li>They are <span style="color:red">automatically invoked when a class object is created</span>.
+                  </li>
+                  <li>Constructors <span style="color:red">must not specify a return type</span> or
+                    explicitly return a value.
+                  </li>
+                  <li>Can have many different versions, but different constructors should take different
+                    parameters.
+                  </li>
+                </ul>
+              </li>
+              <li>Destructor: used to destruct class objects. It is needed only when objects contain dynamic
+                data
+                member(s).
+              </li>
+              <li>Accessor: <span style="color:red">const member functions</span> that inspect data members;
+                they <span style="color:red">do not modify any data members</span> though.
+              </li>
+              <li>Mutator: will modify some data member(s).</li>
+            </ul>
+            The member functions may be defined
+            <ul>
+              <li>inside the class definition in a .h header file</li>
+              <li>outside the class definition in a .cpp source file. In that case, each function name must be
+                prepended with the class name and the special class scope <code>operator::</code>.
+              </li>
+            </ul>
+            <br>
+            <h4>Default Constructor</h4>
+            <ul>
+              <li>A default constructor is a constructor that is <span style="color:red">called with NO argument</span>.
+                E.g. X::X() for class X.
+              </li>
+              <li>It is <span style="color:red">given by the compiler automatically if no constructor is defined</span>
+                and it only creates an object with enough space for the data members, but their initial
+                values <span style="color:red">CANNOT</span> be trusted.
+              </li>
+              <li>If you overload the default constructor, you <span style="color:red">can specify default values</span>
+                as initial values for the data members.
+              </li>
+            </ul>
+            <br>
+            <!--<h4>Copy constructor</h4>-->
+            <!--<ul>-->
+            <!--<li>A copy constructor <span style="color:red">creates a clone of an existing object by initializing a new object with an existing object of the same class</span>.</li>-->
+            <!--<li>If you have <span style="color:red">no copy constructor defined, the compiler will supply a default "copy constructor"</span> to create the clone, which simply copy data members over (i.e., <span style="color:red">memberwise-->
+            <!--copying</span>).</li>-->
+            <!--<li>Copying an object using the default copy constructor may work for simple objects. However, if there are pointers in the original object, only the pointers will be duplicated, not the data that are pointed to.</li>-->
+            <!--</ul><br>-->
+            <h4>Destructor</h4>
+            <ul>
+              <li>A destructor is a <span style="color:red">special member function of a class which has same name as
+                  the class and prefixed with a tilde (~)</span>.
+              </li>
+              <li>It is <span style="color:red">executed whenever an object of its class goes out of scope or whenever
+                  the delete expression is applied</span>
+                to a pointer to the object of that class.
+              </li>
+              <li>It can <span style="color:red">neither return a value nor can it take any parameters</span>.
+              </li>
+              <li>Destructor can be very useful <span style="color:red">for releasing resources</span>.</li>
+            </ul>
+            <br>
+
+            <h4>Linked List</h4>
+            <ul>
+              <li>A list is a linear sequence of objects.</li>
+              <li>You may implement a list by an array. e.g. <code>int x[5];</code>
+                <ul>
+                  <li><span style="color:red">Advantage</span>: array is an efficient data structure that
+                    works well with
+                    loops and recursion.
+                  </li>
+                  <li><span style="color:red">Disadvantage</span>: size of the array is fixed once it is
+                    created.
+                  </li>
+                </ul>
+              </li>
+              <li>A linked list links objects together by pointers so that each object is pointing to the next
+                object in the
+                sequence (list).
+                <ul>
+                  <li><span style="color:red">Advantage</span>: It is <span style="color:red">dynamic</span>; it grows
+                    and
+                    shrinks to any size as you want at <span style="color:red">runtime</span>.
+                  </li>
+                  <li><span style="color:red">Disadvantage</span>:
+                    <ul>
+                      <li>requires additional memory for the linking pointers</li>
+                      <li>takes more time to manipulate its items</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <img style="width:100%" src="images/linked-list.png">
+          </div>
+          <div class="card-footer text-muted">
+            End of Review
+          </div>
+        </div>
+
+        <!-- Lab Tasks section -->
+        <!-- ### Complete introduction section for the lab ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the lab content here ### -->
+          <img class="card-img-top" src="images/deque.jpg" alt="Card image cap">
+
+          <div class="card-body" id="lab-tasks">
+            <p style="font-size:smaller;font-style:italic">Lab inspired by <a
+                href="https://www.codewars.com/kata/5b2771fab6989dd87d0000f1" target="_blank">Computer Science 101 - #3
+                Deques</a></p>
+            <h3 class="card-title">Lab Tasks</h3>
+            <p>
+              In this lab, we will be implementing a <a href="https://en.wikipedia.org/wiki/Double-ended_queue"
+                target="_blank">double-ended queue</a>, also known as a deque, using C++ classes and doubly linked
+              lists.
+              A deque is a data structure that allows for (efficient) insertion and removal of elements on both ends;
+              thus, it is more general than a LIFO stack or a FIFO queue.
+            </p>
+            <center><img src="images/1920px-Doubly-linked-list.svg.png" style="width:100%"></center>
+            <span style="font-size: 10px;">https://en.wikipedia.org/wiki/Doubly_linked_list</span>
+            <br><br>
+            <h4>Task 1 - Constructors and Destructor of <code>Node</code> and <code>Deque</code></h4>
+            <p>
+              Complete the following constructors and destructor of <code>Node</code> and <code>Deque</code>.
+              <code>Node</code> is a node in our doubly linked list and <code>Deque</code> is a simple wrapper around
+              our doubly linked list which allows us to treat it abstractly as a deque.
+              Note that <code>Node</code>-related constructors / destructor / member functions should be implemented in
+              <code>Node.cpp</code>, while those for <code>Deque</code> should be implemented in <code>Deque.cpp</code>.
+              <strong>It's possible that a function does nothing</strong>.
+            </p>
+            <ul>
+              <li><code>Node::Node(int data)</code>: A constructor that initializes the <code>data</code> data member
+                accordingly, and both pointers to <code>nullptr</code>.</li>
+              <li><code>Node::Node(int data, Node *prev, Node *next)</code>: A constructor that initializes each data
+                member of <code>Node</code> accordingly.</li>
+              <li><code>Node::~Node()</code>: Destructor for <code>Node</code>.</li>
+              <li><code>Deque::Deque()</code>: Default constructor of <code>Deque</code> that initializes both pointers
+                to <code>nullptr</code>, representing an empty deque.</li>
+              <li><code>Deque::~Deque()</code>: Destructor for <code>Deque</code>. Should free all memory within the
+                internally maintained linked list.</li>
+            </ul>
+            <p>Feel free to use member initialization lists (MILs) in your constructor implementations where
+              appropriate.</p>
+              <br><h4>Task 2 - Essential operations for <code>Deque</code></h4>
+            <p>Implement the following member functions for <code>Deque</code>, corresponding to the key operations on a
+              deque:</p>
+            <ul>
+              <li><code>void Deque::push_front(int data)</code>: Push <code>data</code> to the front of the deque</li>
+              <li><code>void Deque::push_back(int data)</code>: Push <code>data</code> to the back of the deque</li>
+              <li><code>void Deque::pop_front()</code>: Pop a node from the front of the deque. Do nothing if the deque
+                is empty</li>
+              <li><code>void Deque::pop_back()</code>: Pop a node from the back of the deque. Do nothing if the deque is
+                empty</li>
+              <li><code>const Node *Deque::peek_front() const</code>: Return the node at the front of the deque, or
+                <code>nullptr</code> if the deque is empty</li>
+              <li><code>const Node *Deque::peek_back() const</code>: Return the node at the back of the deque, or
+                <code>nullptr</code> if the deque is empty</li>
+              <li><code>bool Deque::is_empty() const</code>: Return whether the deque is empty</li>
+            </ul>
+            <p>All key operations should complete in constant time. To pass the lab, your submission for this task
+              should execute in a matter of seconds.</p>
+              <br><h4>Task 3 - Extended operations for <code>Deque</code></h4>
+            <p>
+              We now have a deque that supports efficient insertion/querying/deletion of elements on both ends, but
+              wouldn't it be even better if we could query the elements somewhere in between as well?
+              So let's do exactly that - extend our deque to support indexed access of elements.
+              Note that these operations will necessarily take time linear to the number of elements in the deque given
+              our current implementation using a doubly linked list.
+            </p>
+            <ul>
+              <li><code>const Node *Deque::get_node_at(int idx) const</code>: Return the node at index <code>idx</code>,
+                or <code>nullptr</code> if index is out of bounds</li>
+              <li>
+                <code>void Deque::insert_data_at(int idx, int data)</code>: Insert a node with data <code>data</code> at
+                index <code>idx</code>.
+                Do nothing if index is out of bounds.
+                Note, however, that it is valid to insert at index <code>n</code> for a deque of size <code>n</code> -
+                this should be equivalent to <code>push_back</code>
+              </li>
+              <li>
+                <code>void Deque::remove_at(int idx)</code>: Remove the node at index <code>idx</code>.
+                Do nothing if index is out of bounds
+              </li>
+            </ul>
+            <br><h4>General Tips on Linked List</h4>
+            <p>To implement a bug-free linked list, it's important to consider all the cases. Check whether your program
+              works well in the following conditions.</p>
+            <ol>
+              <li>There is no element.</li>
+              <li>There is 1 element.</li>
+              <li>There are >=2 elements.</li>
+            </ol>
+            <p>And if the function deals with a element in the list, also check the following conditions.</p>
+            <ol>
+              <li>The element is the first one.</li>
+              <li>The element is the last one.</li>
+              <li>The element is neither the first nor the last one.</li>
+            </ol>
+            <p>An elegant implementation can have less cases. But if you are not familiar with LL, try to enumerate all
+              the cases and implement them separately. </p>
+              <br><h4>Optional Extras</h4>
+            <p>In this lab, we introduced doubly linked list where each node also knows the previous node. One of the benefits is that you don't need to additionally supply the previous node as a function parameter during deletion (compared to a singly linked list with only next nodes).</p>
+            <p>Generally speaking, when we have more complicated linked lists, we will have more variables to maintain and more memory usage, but will have less special cases during insertion and deletion. Please read this Wikipedia entry for more examples of the commonly used linked list features. One of the most common/popular set of features for general usage is "circular doubly-linked list with sentinel node".</p>
+            <p>As an additional personal exercise (not in this lab because you will not be submitting the header files), see if you can eliminate all the special cases with the help of these features.</p>
+            <!-- <h4>Final Note</h4>
+              <p>
+                Note that any form of optimization (i.e. <code>-O1</code> and above) is <strong>not</strong> allowed in this lab.
+                The TA will check your Makefile upon submission to ensure that no optimization flags have been added.
+              </p>
+              <h4>Going Further</h4>
+              <p>
+                In the last lab, we learned how to implement an efficient LIFO stack using an array-based approach.
+                It turns out that we can adapt that approach and implement an efficient deque using a <em>circular</em> array.
+                In fact, by implementing our deque as a circular array, our <code>get_node_at</code> operation can be made to run in constant time as well, though <code>insert_data_at</code> and <code>remove_at</code> remain <code>O(n)</code> on average (where <code>n</code> is the size of the deque).
+                Students interested in this approach may wish to read up on <a href="https://www.geeksforgeeks.org/implementation-deque-using-circular-array/" target="_blank">a related article</a> and try to re-implement this lab using the new approach in his/her spare time.
+              </p> -->
+          </div>
+          <div class="card-footer text-muted">
+            End of Lab Tasks
+          </div>
+        </div>
+
+        <!-- Resources section -->
+        <!-- ### Complete resources section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="resources">
+            <h3 class="card-title">Resources &amp; Sample I/O</h3>
+            <ul>
+              <li>Skeleton code: <a href="code/lab5_skeleton.zip" target="_blank">lab5_skeleton.zip</a></li>
+              <li>
+                Makefile
+                <ul>
+                  <li>Windows: <a href="code/make/windows/Makefile" target="_blank">Makefile</a></li>
+                  <li>Mac/Linux: <a href="code/make/nix/Makefile" target="_blank">Makefile</a></li>
+                </ul>
+              </li>
+              <li>
+                Demo programs
+                <ul>
+                  <!-- <li>Windows (32-bit): <a href="code/windows/i386/lab5_main.exe" target="_blank">lab5_main.exe</a></li> -->
+                  <li>Windows: <a href="code/windows/x86_64/lab5_demo.exe" target="_blank">lab5_demo.exe</a>
+                  </li>
+                  <li>macOS: <a href="code/macos/lab5_demo" target="_blank">lab5_demo</a></li>
+                  <li>Linux: <a href="code/linux/lab5_demo" target="_blank">lab5_demo</a></li>
+                </ul>
+              </li>
+            </ul>
+            <br><h4>Run demo program on CS lab 2 machines</h4>
+            <p>In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+            <pre><code>
+ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab5/code/linux/lab5_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab5_demo
+./lab5_demo
+</code></pre>
+<br><h4>Sample I/O</h4>
+            <p>
+              Your program should produce the following output.
+              You may wish to compare your program output against the expected output using a <a
+                href="https://www.diffchecker.com/" target="_blank">diff checker</a>.
+            </p>
+            <p>
+            <pre><code>
+Task 1 tests
+37
+42 &lt;-&gt; 37
+42 &lt;-&gt; 37 &lt;-&gt; 47
+42 &lt;-&gt; 52 &lt;-&gt; 37 &lt;-&gt; 47
+task 1 tests complete
+Task 2 tests
+nil
+nil
+&lt;empty&gt;
+true
+13
+13
+13
+false
+13
+15
+13 15
+false
+27
+15
+27 13 15
+false
+27
+29
+27 13 15 29
+false
+13
+29
+13 15 29
+false
+15
+29
+15 29
+false
+15
+15
+15
+false
+nil
+nil
+&lt;empty&gt;
+true
+100
+100
+100
+false
+200
+100
+200 100
+false
+200
+300
+200 100 300
+false
+400
+300
+400 200 100 300
+false
+400
+500
+400 200 100 300 500
+false
+400
+600
+400 200 100 300 500 600
+false
+700
+600
+700 400 200 100 300 500 600
+false
+700
+800
+700 400 200 100 300 500 600 800
+false
+700
+900
+700 400 200 100 300 500 600 800 900
+false
+1000
+900
+1000 700 400 200 100 300 500 600 800 900
+false
+700
+900
+700 400 200 100 300 500 600 800 900
+false
+400
+900
+400 200 100 300 500 600 800 900
+false
+400
+800
+400 200 100 300 500 600 800
+false
+200
+800
+200 100 300 500 600 800
+false
+200
+600
+200 100 300 500 600
+false
+200
+500
+200 100 300 500
+false
+100
+500
+100 300 500
+false
+100
+300
+100 300
+false
+100
+100
+100
+false
+nil
+nil
+&lt;empty&gt;
+true
+nil
+nil
+&lt;empty&gt;
+true
+nil
+nil
+&lt;empty&gt;
+true
+true
+Task 2 tests complete
+Task 3 tests
+nil
+nil
+1000
+700
+400
+200
+100
+300
+500
+600
+800
+900
+nil
+nil
+1000 700 400 200 100 300 500 600 800 900
+1000 700 400 200 100 300 500 600 800 900
+1024 1000 700 400 200 100 300 500 600 800 900
+1024 1000 700 400 200 1024 100 300 500 600 800 900
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024
+1024 1000 700 400 200 1024 100 300 500 600 800 900 1024
+1000 700 400 200 1024 100 300 500 600 800 900 1024
+1000 700 400 200 1024 300 500 600 800 900 1024
+1000 700 400 200 1024 300 500 600 800 900
+1000 700 400 200 1024 300 500 600 800 900
+1000 700 400 200 1024 300 500 600 800 900
+Task 3 tests complete
+</code></pre>
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Resources and Sample I/O
+          </div>
+        </div>
+
+        <!-- Grading scheme section -->
+        <!-- ### Complete grading section for the lab ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="grading">
+            <h3 class="card-title">Submission & Grading</h3>
+            <p>
+              <strong>Deadline: <span 
+style="text-decoration: line-through">30 October 2020 
+Friday</span> 2 November 2020 Monday HKT 
+23:59.</strong><br>
+              You may earn 1 point for this lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC
+                Online Submission System</a>.
+            </p>
+            <p>Please compress <code>Node.cpp</code> and <code>Deque.cpp</code> as <code>lab5.zip</code>.</p>
+            <p>There are 3 visible test cases and 1 hidden test case. You will get the score for this lab if and only if you pass all the tests. </p>
+          </div>
+          <div class="card-footer text-muted">
+            End of Grading Scheme
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="#review">Review</a>
+                    </li>
+                    <li>
+                      <a href="#lab-tasks">Lab Tasks</a>
+                    </li>
+                    <li>
+                      <a href="#resources">Resources &amp; Sample I/O</a>
+                    </li>
+                    <li>
+                      <a href="#grading">Submission & Grading</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Jingyang Zhang
+                    </li>
+                    <li>
+                      Email: <a href="mailto:jzhangbs@connect.ust.hk">jzhangbs@connect.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">document.write(document.lastModified);</script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const code = document.querySelectorAll("pre code");
+    [...code].forEach(el => el.textContent = el.textContent.replace(/^\n/,''));
+  </script>
+</body>
+
+</html>

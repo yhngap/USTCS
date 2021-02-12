@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<!-- ### Change lab number ### -->
+    <title>COMP 2012H Lab 6: Inheritance</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+	<!-- Prism syntax highlighter -->
+	<link href="prism.css" rel="stylesheet" />	
+	
+	<style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+    </style>
+	
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+	
+    <!-- Page Content -->	
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4"><span style="color:darkblue">COMP 2012H</span>
+            <small>Honors Object-Oriented Programming and Data Structures</small>
+          </h2>
+		  
+		  <!-- ### Change lab number and title ### -->
+		  <h3 class="my-4">Lab 6
+            <span style="color:#660066">Inheritance</span>
+          </h3>
+
+          <div class="card mb-4">			
+            <div class="card-body" id="review">
+              <h3 class="card-title">Review</h3>
+                Inheritance is the ability to define a new class based on an existing class with a hierarchy. 
+The new class (<span style="font-weight:bold">derived class</span>) inherits data members and member 
+functions of the existing class (<span style="font-weight:bold">base class</span>).
+<br/><br/>
+New members and functions are added to the derived class. The new class only has to implement the behavior that 
+is extra to the base class, and the code of the base class can be re-used in the derived class. Inheritance 
+enables code re-use.
+			  <br/><br/>
+              <p class="card-text">                
+                Inheritance implements the is-a relationship. Suppose Student class inherits from 
+<code>UPerson</code> class,
+                <ul>
+                  <li>A <code>Student</code> object can be treated like a <code>UPerson</code> 
+object.</li>
+                  <li>All member functions of UPerson can be called by a <code>Student</code> object.</li>
+                </ul>
+                In other words, a <code>Student</code> object is a <code>UPerson</code> object.
+                In general, an object of the derived class can be treated like an object of the base class 
+under all circumstsances.
+			  </p>
+                 <br/>
+                 <span style="color:blue">Polymorphic or Liskov Substitution Principle</span>
+                 <br/><br/>
+                 <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 
+5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 
+5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-uys7{border-color:inherit;text-align:center}
+.tg .tg-l04w{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center}
+</style>
+<table class="tg" style="width:100%">
+  <tr>
+    <th class="tg-l04w">Function Expecting an Argument of Type</th>
+    <th class="tg-l04w">Will Also Accept</th>
+  </tr>
+  <tr>
+    <td class="tg-uys7">UPerson</td>
+    <td class="tg-uys7">Student</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">pointer to UPerson</td>
+    <td class="tg-c3ow">pointer to Student</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">UPerson reference</td>
+    <td class="tg-c3ow">Student reference</td>
+  </tr>
+</table> 
+              <br/>
+<br/>
+              <span style="color:blue">Initialization of Base Class objects</span><br/><br/>
+              <p>Suppose we have 3 classes, A, B and C. <br/>C inherits B and B inherits A.
+                <ul>
+                  <li>If class C is derived from class B which is in turn derived from class A, then C 
+will contain data members of both B and A.</li>
+                  <li>Class C's constructor can only call class B's constructor, and class B's constructor 
+can only call class A's constructor.</li>
+                  <li>It is the <span style="color:red">responsibility</span> of each derived class to 
+<span style="color:red">initialize its <span style="font-weight:bold">direct</span> base class</span> 
+correctly.</li>
+                </ul>
+              </p>
+              <br/>
+              <span style="font-weight:bold">Example:</span><br/><br/>
+              <pre class="prettyprint">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Base class
+class Shape {
+  // protected members are accessible in member functions of Shape and
+  // in all the derived classes, including Rectangle
+  protected:
+    int width;
+    int height;
+
+  public:
+    Shape() : width(0), height(0) {
+      cout << "Default contor of Shape" << endl;
+    }
+    Shape(int width, int height) : width(width), height(height) {
+      cout << "Other contor of Shape" << endl;
+    }
+    int getWidth() const  { return width; }
+    int getHeight() const { return height; }
+    void setWidth(int w)  { width = w; }
+    void setHeight(int h) { height = h; }
+};
+
+// Derived class
+class Rectangle : public Shape {
+  public:
+    // If a Shape class constructor is not exlicitly called using member initialization list
+    // of Rectangle class, C++ compiler will implicitly call the default constructor of Shape for us.
+    // That is the constructor, Rectangle() {}, will be implicitly changed to:
+    // Rectangle() : Shape() {}
+    Rectangle() {
+      cout << "Default contor of Rectangle" << endl;
+    }
+
+    // It's the responsibility of Rectangle class to initialize its direct base
+    // class, i.e. Shape, through member initialization list.
+    // In this case, we put : Shape(width, height)
+    Rectangle(int width, int height) : Shape(width, height) {
+      cout << "Other contor of Rectangle" << endl;
+    }
+
+    int getArea() {
+      // Can access inherited protected data members width and height
+      return width * height;
+    }
+};
+
+int main() {
+  Rectangle rect1;
+  cout << "Total area: " << rect1.getArea() << endl;
+  cout << endl;
+
+  Rectangle rect2(10, 20);
+  cout << "Total area: " << rect2.getArea() << endl;
+}</pre>
+            <span style="text-decoration: underline">Output of the program:</span><br/><br/>
+<pre>
+Default contor of Shape
+Default contor of Rectangle
+Total area: 0
+
+Other contor of Shape
+Other contor of Rectangle
+Total area: 200
+</pre>
+            </div>
+            <div class="card-footer text-muted">
+              End of Review
+            </div>
+          </div>
+
+          <!-- Introduction section -->
+		  <!-- ### Complete introduction section for the lab ### -->
+          <div class="card mb-4">
+		  
+		    <!-- ### Add an image representing the lab content here ### -->
+            <center><img class="card-img-top" style="width:80%" src="images/Difference between Stack and Queue in Java.png" alt="Card image cap"></center>
+			
+            <div class="card-body" id="introduction">
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+                In this Lab, we will again code two types of basic data structures that you should already be familiar with - <code>Stack</code> and <code>Queue</code> - with a dynamic array implementation. 
+				Although they add and remove elements in a slightly different ordering, almost all of the internal dynamic array code is the same. 
+				So, we will use OOP Inheritance to reuse the identical dynamic array code, while also implementing the slightly different LIFO vs FIFO ordering.
+			  </p>
+              <br/>
+			  
+              <h4>BaseArray</h4>
+              <p class="card-text">
+                <code>BaseArray</code> manages the internal dynamic array of our <code>Stack</code> and <code>Queue</code>. 
+				Both and <code>Stack</code> and <code>Queue</code> will inherit from <code>BaseArray</code> as the base class. 
+              </p>
+			  
+<pre class="prettyprint">
+class BaseArray {
+protected:
+	BaseArray(); // Default constructor.
+	BaseArray(const BaseArray& rhs); // Copy constructor.
+	~BaseArray(); // Destructor.
+
+	BaseArray& operator=(const BaseArray& rhs); // Copy-assignment operator.
+	const int& operator[](int index) const; // Array subscript operator.
+	int& operator[](int index); // Array subscript operator.
+
+	int get_capacity() const;
+	void reallocate_capacity(int new_capacity);
+	void print() const;
+
+	int size;
+	int head_index;
+
+private:
+	static const int INITIAL_CAPACITY = 8;
+	int capacity;
+	int* internal_array;
+};
+</pre>
+
+			  <p class="card-text">
+				The implementation of <code>BaseArray</code> should be mostly straightforward from your previous work in Lab3. 
+				Note that all the Constructors of <code>BaseArray</code> are non-<code>public</code>; it only exists as a base class to be inherited from. 
+				All of the functions as well as two data members <code>size</code> and <code>head_index</code> are <code>protected</code>, meaning that they can be directly accessed by derived classes. 
+				Both <code>capacity</code> and <code>internal_array</code> are <code>private</code>, so only <code>BaseArray</code> can manage the dynamic memory allocation. 
+				<code>INITIAL_CAPACITY</code> is <code>static const</code>, and is similar to a global constant variable that is only visible within <code>BaseArray</code>.
+			  </p>
+			  <br/>
+			  
+			  <h4>Circular Array</h4>
+			  <p class="card-text">
+				You may have wondered what is the purpose of <code>head_index</code>, as this is an array and not a linked list. 
+				We can code an otherwise linear array into a logically circular array, meaning that both ends of the array wraparound each other, just like a circular linked list. 
+				For our use cases, just keeping track of the <code>head_index</code> is sufficient, as <code>Queue</code> and <code>Stack</code> only add and remove elements from the front and back. <br/>
+				<center><img class="card-img-top" style="width:50%" src="images/queue08.gif" alt="Circular Array"></center>
+				Our circular array implementation is simple: Whenever we remove an element from the front of the array, instead of shifting all the remaining elements forward, we just increment <code>head_index</code> by 1. 
+				Then, we will use the modulo arithmetic operation <code>[(head_index + i) % capacity]</code> to wraparound our indices. 
+				In other words, whenever <code>head_index + i</code> overflow the array bounds, modulo with <code>capacity</code> will wraparound to the front of the array bounds. 
+				No space is wasted, and we have a significant speedup whenever we remove an element from the front of the array.
+			  </p>
+              <br/>
+			  
+              <h4>Stack &amp; Queue</h4>
+              <p class="card-text">
+				<code>Stack</code> and <code>Queue</code> manage the LIFT/FIFO ordering of element manipulation, and inherit from <code>BaseArray</code>.
+              </p>
+			  
+<pre class="prettyprint">
+class Stack : public BaseArray {
+public:
+	Stack(); // Default constructor.
+	Stack(const Stack& rhs); // Copy constructor.
+	~Stack(); // Destructor.
+
+	Stack& operator=(const Stack& rhs); // Copy-assignment operator.
+
+	int get_size() const;
+	bool is_empty() const;
+	const int& peek() const;
+	void push(int data);
+	void pop();
+	void print() const;
+};
+</pre>
+			  
+			  <p class="card-text">
+				The implementation of both <code>Stack</code> and <code>Queue</code> should also be mostly straightforward from your previous work in Lab3. 
+				Note that all the <code>protected</code> functions and data members of <code>BaseArray</code> are accessible from both <code>Stack</code> and <code>Queue</code>. 
+			  </p>
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+          <!-- Lab work section -->
+		  <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="labwork">
+              <h3 class="card-title">Lab Work</h3>
+			  <br/>
+			  <h4>Task 1 - BaseArray</h4>
+			  <p class="card-text">
+				The array subscript operators and the <code>print()</code> function are already provided to you in the skeleton code.
+			  </p>
+			  <ul>
+				<li><code>BaseArray()</code>: Initialize all data members to appropriate values. Allocate the dynamic <code>internal_array</code> according to <code>INITIAL_CAPACITY</code>.</li>
+				<li><code>BaseArray(const BaseArray& rhs)</code>: Initialize everything so that it is a copy of <code>rhs</code>. Remember to deep-copy each valid element of the <code>internal_array</code>.</li>
+				<li><code>~BaseArray()</code>: Deallocate dynamic memory accordingly.</li>
+				<li><code>BaseArray& operator=(const BaseArray& rhs)</code>: Convert into a copy of <code>rhs</code>. Be careful of memory leak.</li>
+				<li><code>int get_capacity() const</code>: Return the value of <code>capacity</code>.</li>
+				<li><code>void reallocate_capacity(int new_capacity)</code>: Reallocate <code>internal_array</code> according to the requested capacity. Do nothing if the request is already the current capacity. Also do nothing if the request is smaller than the actual number of elements or smaller than <code>INITIAL_CAPACITY</code>.</li>
+			  </ul>
+			  <br/>
+			  			  
+			  <h4>Task 2 - Stack</h4>
+			  <p class="card-text">
+				The <code>print()</code> function is already provided to you in the skeleton code. 
+				The rest of the required function implementations should be self-explanatory. 
+				Note that <code>Stack</code> is LIFO, Last-In-First-Out; <code>peek()</code>, <code>push</code>, and <code>pop()</code> are all performed on the last element. 
+				Also achieve <code>O(1)</code> amortization with judicious usage of <code>reallocate_capacity()</code>. Please refer to the Lab3 solution for a sample implementation with <code>O(1)</code> amortization.
+			  </p>
+			  <br/>
+			  
+			  <h4>Task 3 - Queue</h4>
+			  <p class="card-text">
+				This time, try writing both <code>Queue.h</code> and <code>Queue.cpp</code> without official skeleton code files. You may refer to <code>lab6_main.cpp</code> for guidance. 
+				You can duplicate <code>Stack.h</code> and <code>Stack.cpp</code> to use as skeleton code, since the code is almost the same. 
+				In fact, the only expected difference in <code>Queue.h</code> is <code>enqueue()</code> and <code>dequeue()</code> replacing <code>push()</code> and <code>pop()</code> respectively. 
+				<strong>Remember to also implement with a circular array</strong>, otherwise it is highly likely that your submission will timeout on ZINC.
+			  </p>
+			  <br/>
+			  
+			  <h4>Optional Task - Deque</h4>
+			  <p class="card-text">
+				Optionally (no test on ZINC), try implementing a <code>Deque</code> with similar behavior as a combination of our <code>Stack</code> and <code>Queue</code>, 
+				meaning that we can insert and remove elements from both the front and back.
+			  </p>
+            </div>
+			<div class="card-footer text-muted">
+              End of Lab Work
+            </div>
+          </div>
+
+          <!-- Resources section -->
+		  <!-- ### Complete resources section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources &amp; Sample I/O</h3>
+			  <ul>
+			    <li>Skeleton code: <a href="code/lab6_skeleton.zip">lab6_skeleton.zip</a></li>
+				<li>Makefile:
+				  <ul>
+					<li>Windows: <a href="code/windows/Makefile">Makefile</a></li>
+					<li>Mac/Linux: <a href="code/unix/Makefile">Makefile</a></li>
+				  </ul>
+				</li>
+				<li>Demo program: 
+				  <ul>
+				    <li>Windows: <a href="code/windows/lab6_demo.exe">lab6_demo.exe</a></li>
+					<li>Mac: <a href="code/mac/lab6_demo">lab6_demo</a></li>
+					<li>Linux: <a href="code/linux/lab6_demo">lab6_demo</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			  <br/>
+			  
+			  <h4>Run demo program on CS lab 2 machines</h4>
+				<p class="card-text">In case you cannot run demo program (on Mac), You can SSH to the CS lab2 machines and try the demo program for Linux. </p>
+<pre><code>ssh &lt;CSD_username&gt;@csl2wk01.cse.ust.hk    #'wk01' can be wk01-wk53
+wget https://course.cse.ust.hk/comp2012h/labs/lab6/code/linux/lab6_demo --http-user=&lt;CSD_username&gt; --http-password=&lt;CSD_password&gt;
+chmod +x lab6_demo
+./lab6_demo
+</code></pre>
+<br/>
+              
+			  <h4>Sample I/O</h4>
+<pre>
+One Stack object and one Queue object have been prepared for you to test.
+
+1. Stack
+2. Queue
+3. Copy Constructor and Copy-Assignment Operator test
+4. Reallocate Capacity test
+Q. Quit
+<span style="color:red">3</span>
+
+Copy-Constructor Test:
+stack1: 0 1 2 3 4 5 6 7 
+stack2: 0 1 2 3 4 5 6 7 
+queue1: 0 1 2 3 4 5 6 7 
+queue2: 0 1 2 3 4 5 6 7 
+
+Modification:
+stack2: 0 1 2 3 0 10 20 30 
+queue2: 4 5 6 7 0 10 20 30 
+
+Copy-Assignment Operator Test:
+stack1: 0 1 2 3 4 5 6 7 
+stack2: 0 1 2 3 4 5 6 7 
+queue1: 0 1 2 3 4 5 6 7 
+queue2: 0 1 2 3 4 5 6 7 
+
+1. Stack
+2. Queue
+3. Copy Constructor and Copy-Assignment Operator test
+4. Reallocate Capacity test
+Q. Quit
+<span style="color:red">4</span>
+
+Insertion Stress Test:
+stack_test: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 
+queue_test: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 
+
+Removal Stress Test:
+stack_test: 0 
+queue_test: 255 
+
+1. Stack
+2. Queue
+3. Copy Constructor and Copy-Assignment Operator test
+4. Reallocate Capacity test
+Q. Quit
+<span style="color:red">1</span>
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">1</span>
+Empty.
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">2</span>
+0
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">3</span>
+true
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">4</span>
+Empty peek.
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">1</span>
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">2</span>
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">3</span>
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">4</span>
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">1</span>
+1 2 3 4 
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">2</span>
+4
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">3</span>
+false
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">4</span>
+4
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">6</span>
+Stack pop executed.
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">6</span>
+Stack pop executed.
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">1</span>
+1 2 
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">2</span>
+2
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">3</span>
+false
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">4</span>
+2
+
+1. Stack print
+2. Stack size
+3. Stack empty
+4. Stack peek
+5. Stack push
+6. Stack pop
+B. Back
+<span style="color:red">B</span>
+
+1. Stack
+2. Queue
+3. Copy Constructor and Copy-Assignment Operator test
+4. Reallocate Capacity test
+Q. Quit
+<span style="color:red">2</span>
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">1</span>
+Empty.
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">2</span>
+0
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">3</span>
+true
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">4</span>
+Empty peek.
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">10</span>
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">20</span>
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">30</span>
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">5</span>
+Input data: <span style="color:red">40</span>
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">1</span>
+10 20 30 40 
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">2</span>
+4
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">3</span>
+false
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">4</span>
+10
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">6</span>
+Queue dequeue executed.
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">6</span>
+Queue dequeue executed.
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">1</span>
+30 40 
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">2</span>
+2
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">3</span>
+false
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">4</span>
+30
+
+1. Queue print
+2. Queue size
+3. Queue empty
+4. Queue peek
+5. Queue enqueue
+6. Queue dequeue
+B. Back
+<span style="color:red">B</span>
+
+1. Stack
+2. Queue
+3. Copy Constructor and Copy-Assignment Operator test
+4. Reallocate Capacity test
+Q. Quit
+<span style="color:red">Q</span>
+</pre>
+			  
+            </div>            
+			<div class="card-footer text-muted">
+              End of Resources and Sample I/O
+            </div>
+          </div>
+		  
+		  <!-- Grading scheme section -->
+		  <!-- ### Complete grading section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="grading">
+              <h3 class="card-title">Submission &amp; Grading</h3> 
+			  <p class="card-text">
+				<strong>Deadline: 6 November 2020 Friday 23:59 HKT.</strong> <br/>
+				You may earn 1% course grade for this lab via Automated Grading on the <a href='https://zinc.cse.ust.hk/'>ZINC Online Submission System</a>. <br/>
+				Please compress and submit <code>BaseArray.cpp</code>, <code>Queue.h</code>, <code>Queue.cpp</code>, and <code>Stack.cpp</code> as <code>lab6.zip</code> to ZINC.
+			  </p>
+            </div>
+			<div class="card-footer text-muted">
+              End of Submission &amp; Grading
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+                      <li><a href="#review">Review</a></li>
+                      <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#labwork">Lab Work</a>
+                      </li>
+                      <li>
+                        <a href="#resources">Resources &amp; Sample I/O</a>
+                      </li>
+			  		  <li>
+				  	    <a href="#grading">Submission &amp; Grading</a>
+					  </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+		    </div>
+          		  
+		    <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        CHANG Bing Yen
+                      </li>
+                      <li>
+                        Email: <a href="mailto:bychang@connect.ust.hk">bychang@connect.ust.hk</a>
+                      </li>
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+			</div>          
+		  		  
+		    <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="http://course.cse.ust.hk/comp2012h">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+	      </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012H Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>
