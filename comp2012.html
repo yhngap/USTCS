@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>COMP2012 Object-Oriented Programming and Data Structures</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="comp2012/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="comp2012/css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<link rel="icon" href="comp2012/img/cse_icon.png">
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="padding-top:100px">
+<img src="comp2012/img/title.png" style="width:100%; display:block;margin-top:-100px; float:none" alt="Title Image"/>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+    <!--<div>
+		<a href="https://www.facebook.com/groups/264783764111599/">
+		    <img src="img/facebook.png"/ style="min-width:30px; max-width:30px; margin: 10px 10px 10px 10px; float:left;">
+		</a>
+    </div>-->
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="comp2012.1.html#page-top">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav"  data-toggle="collapse" data-target=".in">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="comp2012.1.html#page-top"></a>
+                    </li>
+					<!--
+		    		<li>
+                        <a class="page-scroll" href="#announcements">Announcements</a>
+                    </li>
+					-->
+
+					<li class="dropdown"><a href="comp2012.1.html#" class="dropdown-toggle" data-toggle="dropdown">Course Info<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="comp2012.1.html#coursedetails" class="page-scroll">Course Details</a></li>
+                            <li><a href="comp2012.1.html#schedule" class="page-scroll">Schedule</a></li>
+                            <li><a href="comp2012.1.html#gradingscheme" class="page-scroll">Grading Scheme</a></li>
+			    <li><a href="comp2012.1.html#assessmentrubrics" class="page-scroll">Assessment Rubrics</a></li>
+			</ul>
+					</li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#people">People</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#lectures">Lectures</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#honorcode">Honor Code</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#labs">Labs</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#assignments">Assignments</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#exams">Exams</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#selflearning">Self-learning Center</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="comp2012.1.html#faqs">FAQs</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <section id="intro" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="padding-top:30px; padding-bottom:30px">
+					<div class="banner">
+						<h3>COMP2012 Object-Oriented Programming and Data Structures</h3>
+						<p style="padding-left:10px; padding-right:10px; padding-top:10px"><span style="font-weight:bold">Description:</span><br/><br/>To learn the fundamental concepts and techniques behind object-oriented programming. They include: abstract data types; creation, initialization, and destruction of objects; class hierarchies; polymorphism, inheritance and dynamic binding; generic programming using templates. To learn the object-oriented view of data structures: linked lists, queues, stacks, trees, and algorithms such as searching and hashing algorithms.</p>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Announcements Section-->
+	<section id="announcements" class="announcements-section">
+        <div class="container">
+            <div class="row">
+		<h3 class="titleheader">Announcements</h3>
+		<ul>
+		  <li><span style="color:blue">2020-12-09</span><br/>
+		  Grade of programming
+assignment 3 has been
+released. Please check your grade <a
+href="http://cgi.cs.ust.hk/~ypyau/cgi-bin/comp2012-pa3/">here</a>.
+You have around one week: from December 9 - December 17
+(both dates are inclusive) to appeal if you
+believe you deserve a different score for your
+PA2. For details, please check <a
+href="comp2012/assignments/assignment3/marking/index.html">here</a>.
+		  </li>
+		  <br/>
+		  <li><span style="color:blue">2020-11-26</span><br/>
+		  Grade of programming
+assignment 2 has been
+released. Please check your grade <a
+href="http://cgi.cs.ust.hk/~mhwongah/cgi-bin/comp2012-pa2/index_appeal.html">here</a>.
+You have around one week: from November 26 - December 2
+(both dates are inclusive) to appeal if you
+believe you deserve a different score for your
+PA2. For details, please check <a
+href="comp2012/assignments/assignment2/marking/index.html">here</a>.
+		  </li>
+		  <br/>
+		  <li><span style="color:blue">2020-11-19</span><br/>
+		  Programming assignment 3 has been released.
+Submission deadline is 23:59:00 on December 5, 2020 (Saturday).
+		  </li>
+		  <br/>
+		  <li><span style="color:blue">2020-10-27</span><br/>
+		  Programming assignment 2 has been released.
+Submission deadline is 23:59:00 on November 17, 2020 (Tuesday).
+		  </li>
+		  <br/>
+          <li><span style="color:blue">2020-10-21</span><br/>
+          There will be no lab next week (Oct 26 - Oct 28).
+          </li>
+          <br/>
+		  <li><span style="color:blue">2020-10-19</span><br/>
+		  Grade of programming
+assignment 1 has been
+released. Please check your grade <a
+href="http://cgi.cs.ust.hk/~wallacem/cgi-bin/comp2012-pa1/">here</a>.
+You have around one week: from October 19-25
+(both dates are inclusive) to appeal if you
+believe you deserve a different score for your
+PA1. For details, please check <a
+href="comp2012/assignments/assignment1/marking/index.html">here</a>.
+		  </li>
+		  <br/>
+		  <li><span style="color:blue">2020-9-29</span><br/>
+		  Programming assignment 1 has been released.
+Submission deadline is 23:59:00 on October 13, 2020 (Tuesday).
+		  </li>
+		  <br/>
+		  <li><span style="color:blue">2020-9-5</span><br/>
+		  Before the first lecture, you can find the Zoom meeting links and IDs on Canvas. If you are not familiar with Zoom, please read the
+		  FAQ prepared by the University: <a href="http://cei.ust.hk/files/public/good_practices_for_students_learning_in_zoom.pdf">http://cei.ust.hk/files/public/good_practices_for_students_learning_in_zoom.pdf</a>.<br/>
+		  Also, the first 3 sets of lecture notes have been posted.<br/><br/>
+		  </li>
+		  <li><span style="color:blue">2020-9-5</span><br/>
+		  Welcome to COMP 2012! For this course, we use our own course webpage (<a href="comp2012.1.html">https://course.cse.ust.hk/comp2012/</a>) and grades can be found on Canvas. Also, there will be no labs in the first two weeks
+		  (September 7 &amp; 14). The first lab starts in Week 3 (September 21).</li>
+		</ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Details Section -->
+    <section id="coursedetails" class="coursedetails-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Course Details</h3>
+                <div class="col-lg-6">
+					<!--h4>Course Description [3-0-2:4]</h4>
+					<ul>
+						<li>
+						The course vector means that the course consists of, per week,
+							<ul>
+								<li>3 hours of lectures</li>
+								<li>2 hours of lab exercises</li>
+							</ul>
+						an it gives you 4 credits for successful completion of the course.
+						</li>
+					</ul-->
+					<h4>Textbooks and Reference Book</h4>
+					<br/>
+					<ul>
+						<li>Recommended textbooks
+							<table class="table-hover">
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/howtoprogram.jpg" style="width:150px;" alt="C++ How to Program"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Paul Deitel, Deitel & Associates (2017). C++ How to Program.<br/><a href=" https://lbdiscover.ust.hk/bib/991001357849703412">Link to UST library for 2014 version</a>
+											<BR>
+											There are only few copies available in the
+											campus bookstore. On the other hand, you may
+											purchase an e-version of book from the campus
+											bookstore for HK$316. We were told that it
+											may take around 3 days to get the code for an
+											ebook.
+											</li>
+										</ul>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/weiss-algo.jpg" style="width:150px;" alt="Algorithm Textbook"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li><a href="https://lbdiscover.ust.hk/bib/991001362359703412">M.A. Weiss (2014). Data Structures and Algorithm Analysis in C++.</a>
+											<BR>
+											The book is out of print. You may be able to
+											find some free PDF copy on the Web.
+											</li>
+										</ul>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/shaffer-algo.jpg" style="width:150px;" alt="Algorithm Textbook"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li><a href="http://people.cs.vt.edu/~shaffer/Book/C++3elatest.pdf">Data
+											Structures and Algorithm Analysis Ed. 3.2 (C++ Version).</a>
+											<BR>
+											The above links to a free online version of
+											the book from the author, Clifford A. Shaffer of
+											Virginia Tech, USA.
+											</li>
+										</ul>
+									</td>
+								</tr>
+							</table>
+							<br/>
+						</li>
+						<li>Supplementary textbooks
+							<table class="table-hover">
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/thinkingcpp.jpg" style="width:150px;" alt="Thinking in C++"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li><a href=" https://lbdiscover.ust.hk/bib/991008703349703412">B. Eckel (2000). Thinking in C++.</a>
+<a href="http://www.cs.ust.hk/~dekai/library/ECKEL_Bruce/">Free Web zip.</a>
+</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/s2.jpg" style="width:150px;" alt="s2"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li><a href="https://lbdiscover.ust.hk/bib/991012239799703412">L. Nyhoff (2005). ADTs, Data Structures and Problem Solving with C++.</a></li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp2012/img/s3.jpg" style="width:150px;" alt="s3"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li><a href="https://lbdiscover.ust.hk/bib/991002209259703412">Stanley Lippman (2013). C++ Primer.</a></li>
+										</ul>
+									</td>
+								</tr>
+
+
+							</table>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-6">
+<h4>Topics Covered</h4>
+<ol>
+<li>Revision of dynamic data structures      </li>
+<li>C++ class basics                         </li>
+<li>Separate compilation and makefile        </li>
+<li>Constructors, destructor, initialization </li>
+<li>Inheritance, polymorphism, and dynamic binding </li>
+<li>Generic programming                      </li>
+<li>STL: containers, iterators, algorithms   </li>
+<li>Namespace                                </li>
+<li>Static member functions/data             </li>
+<li>Hashing                                  </li>
+<li>Binary search trees                      </li>
+<li>AVL tree                                 </li>
+<li>rvalue reference and move semantics      </li>
+
+</ol>
+<h4>Intended Learning Outcomes</h4>
+On successful completion of this course, students are expected to be able to:<br/><br/>
+<ol>
+	<li>Write object-oriented programs in C++ with object creation, destruction, member variables and functions, inheritance, polymorphism, and templates.</li>
+	<li>Analyze simple problems and provide solutions with OOP.</li>
+	<li>Understand the basic operations of data structures such as stacks,
+	queues, lists, binary search trees, and hashes, and their implementations.  </li>
+	<li>Demonstrate the ability to use the learned data structures to solve problems in C++.</li>
+	<li>Develop large programs using separate compilation, good OOP design, and code reuse through the use of inheritance, generic programming and the standard template library.</li>
+</ol>
+
+
+    <h4>Prerequisites &amp; Exclusions</h4>
+    <div class="table-responsive regulartable" style="border:0">
+    Pre-requisite: COMP 1003 (prior to 2011-12) OR COMP 1004 (prior to 2013-14) OR COMP 2011. Exclusion: COMP 2012H.
+    </div>
+</div>
+    <!--<h4>Questions</h4>
+    <p>
+    If you have any questions, please check the course FAQ page. If you do not find your answer, you may email the TAs or instructor.
+    </p-->
+</div>
+</div>
+</section>
+
+	<!-- Schedule Section -->
+    <section id="schedule" class="schedule-section">
+        <div class="container">
+            <div class="row">
+		<h3 class="titleheader">Schedule</h3>
+                <div class="col-lg-12">
+				<h4>Lecture Schedule</h4>
+				<div class="table-responsive regulartable"
+style="border:0">
+		<table class="table-hover">
+			<tr>
+				<th style="text-align:center">Section</th>
+				<th>Date and Time</th>
+				<th>Room / Zoom</th>
+				<th>Instructor</th>
+			</tr>
+
+			<tr>
+				<td style="text-align:center">L1</td>
+				<td>TuTh 12:00PM - 01:20PM</td>
+				<td style="text-align:center"><a
+href="https://hkust.zoom.us/j/93046834598?pwd=S3pEWFRvNk0reFc4RENqUEtvQWJ3UT09">Here</a></td>
+				<td>TSOI, Desmond Yau Chat</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">L2</td>
+				<td>WeFr 04:30PM - 05:50PM</td>
+				<td style="text-align:center"><a
+href="https://hkust.zoom.us/j/91531353274?pwd=N3h5VWFDd3E1MWpWcVkxbkV4QzJmQT09">Here</a></td>
+				<td>TSOI, Desmond Yau Chat</td>
+			</tr>
+			<!--<tr>
+				<td style="text-align:center">L3</td>
+				<td>Mo 01:30PM - 02:50PM, Fr 09:00AM - 10:20AM</td>
+				<td>Zoom or Rm 2306, Lift 17-18</td>
+				<td>TSOI, Desmond Yau Chat</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">L4</td>
+				<td>WeFr 03:00PM - 04:20PM</td>
+				<td>Zoom or Rm 2306, Lift 17-18</td>
+				<td>PAPADOPOULOS, Dimitris</td>
+			</tr>-->
+		</table>
+	</div>
+	<h4>Lab Schedule</h4>
+	<div class="table-responsive regulartable" style="border:0">
+		<table class="table-hover">
+			<tr>
+				<th style="text-align:center">Section</th>
+				<th>Date and Time</th>
+				<th>Room / Zoom</th>
+				<th>Primary TA</th>
+                <!-- <th>Group A Zoom Meeting Link</th> -->
+				<th>Secondary TA</th>
+                <!-- <th>Group B Zoom Meeting Link</th> -->
+				<th>Student Helper</th>
+			</tr>
+			<tr>
+                <td style="text-align:center">LA1</td>
+                <td>We 01:30PM - 03:20PM</td>
+                <td style="text-align:center"><a href="https://hkust.zoom.us/j/95816063413?pwd=TDcvVU8rT25lMGRHVHE5NzBWcFFSdz09">Here</a></td>
+                <td>WONG, Man Hing</td>
+                <td>QUAN, Yuqing</td>
+		<td>WONG, Tsz Chun</td>
+            </tr>
+            <tr>
+                <td style="text-align:center">LA2</td>
+                <td>Tu 03:00PM - 04:50PM</td>
+                <td style="text-align:center"><a href="https://hkust.zoom.us/j/91823379405?pwd=eHpuYlJxTENTWDIvYUgvdmh3UmpoQT09">Here</a></td>
+                <td>YAU, Yui Pan</td>
+                <td>QUAN, Yuqing</td>
+		<td>WONG, Tsz Chun</td>
+            </tr>
+            <tr>
+                <td style="text-align:center">LA3</td>
+                <td>Mo 01:30PM - 03:20PM</td>
+                <td style="text-align:center"><a href="https://hkust.zoom.us/j/92455910370?pwd=b0lZRmV0MmN0ekIyNHkwbTQ2Y2dUQT09">Here</a></td>
+                <td>MAK, Wai Ho Wallace</td>
+                <td>QUAN, Yuqing</td>
+		<td>HUANG, Jiaxin</td>
+            </tr>
+            <!--<tr>
+                <td style="text-align:center">LA4A</td>
+                <td>Tu 06:00PM - 07:50PM</td>
+                <td>Zoom or Rm 4210 (Lift 19)</td>
+                <td>TBD</td>-->
+                <!-- <td><a href="https://hkust.zoom.us/j/122694672">https://hkust.zoom.us/j/122694672</a></td> -->
+                <!--<td>TBD</td>-->
+                <!-- <td><a href="https://hkust.zoom.us/j/208869701">https://hkust.zoom.us/j/208869701</a></td> -->
+                <!-- <td>NIL</td> -->
+            <!--</tr>-->
+			<!--<tr>
+				<td style="text-align:center">LA5</td>
+				<td>Fr 09:00AM - 10:50AM</td>
+				<td>Rm 4210 (Lift 19)</td>
+				<td>Wang, Kevin</td>
+				<td>NIU, Zhe John</td>
+				<td>Tsang Siu Long (1hr)</td>
+			</tr>-->
+		</table>
+
+        <!--<b><font color="red">Please check the <a href="">lab group
+list</a> and attend the group which you have been assigned
+to.</font></b>-->
+	</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<Grading Scheme Section
+    <section id="gradingscheme" class="gradingscheme-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h4>Grading Scheme</h4>
+
+                    <!--<font color="Red">New: </font><a
+href="https://course.cse.ust.hk/comp2012/misc/comp2012-final-2020S-scheme.pdf">S2020
+Final Exam Marking Scheme</a>-->
+
+	<div class="table-responsive regulartable" style="border:0">
+		<table class="table-hover">
+			<tr>
+				<th>Item</th>
+				<th style="text-align:center">Percentage</th>
+			</tr>
+			<tr>
+				<td>Programming assignment - PA1 </td>
+				<td style="text-align:center">10%</td>
+			</tr>
+			<tr>
+				<td>Programming assignment - PA2 </td>
+				<td style="text-align:center">12%</td>
+			</tr>
+			<tr>
+				<td>Programming assignment - PA3 </td>
+				<td style="text-align:center">13%</td>
+			</tr>
+			<tr>
+				<td>Laboratory exercises</td>
+				<td style="text-align:center">10%</td>
+			</tr>
+			<!--<tr>
+				<td>Polling</td>
+				<td style="text-align:center">10%</td>
+			</tr>-->
+			<tr>
+				<td>Quiz</td>
+				<td style="text-align:center">10%</td>
+			</tr>
+			<tr>
+				<td>Final examination</td>
+				<td style="text-align:center">45%</td>
+			</tr>
+		</table>
+	</div>
+	<p>Please check your own marks from the <a href="https://canvas.ust.hk/courses/33224">CANVAS system</a>.</p>
+	<!--<p>
+		<span style="font-weight: bold;">Note:</span>
+		<ul>
+			<li>To pass this course, it is not sufficient to have your total score
+			greater than the pass mark.</li>
+			<li>You are also required to obtain a separate pass mark in your exams. That is, to pass, you are required to have:<br/><br/>
+			<span style="color:red">(Total Score >= X) AND ((normalized quiz score + normalized polling score + normalized final exam score) >= Y)</span><br/><br/>
+			where X and Y will be determined at the end of the semester. However, we promise
+			you that X will not be greater than 50, and Y will not be greater than 16.5 (30% of all the exam components).
+			</li>
+		</ul>
+	</p>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Assessment Rubrics Section -->
+    <section id="assessmentrubrics" class="assessment-rubrics-section">
+        <div class="container">
+            <div class="row">
+		<h3 class="titleheader">Assessment Rubrics</h3>
+		<div class="col-lg-12">
+		<div class="table-responsive regulartable"
+style="border:0">
+		<table class=".hover-table" style="border:1">
+  <thead>
+  <tr>
+  <th style="vertical-align:top">
+  <p style="">Course Learning Outcome</p>
+  </th>
+  <th>
+  <p>Exemplary</p>
+  </th>
+  <th>
+  <p>Competent</p>
+  </th>
+  <th>
+  <p>Needs Work</p>
+  </th>
+  <th>
+  <p>Unsatisfactory</p>
+  </th>
+  </tr>
+ </thead>
+<tbody>
+ <tr>
+  <td style="vertical-align:top">
+  <p>1. Write object-oriented programs in C++ with object creation,
+  destruction, member variables and functions, inheritance, polymorphism, and
+  templates.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a comprehensive grasp of object-oriented concepts and
+  fully demonstrates how to write object-oriented programs in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a thorough grasp of object-oriented concepts and mostly
+  demonstrates how to write object-oriented programs in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a basic grasp of object-oriented concepts and barely
+  able to demonstrate how to write object-oriented programs in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a lack of grasp of object-oriented concepts and fail to demonstrate
+  how to write object-oriented programs in C++.</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:2">
+  <td style="vertical-align:top">
+  <p>2. Analyze simple problems and provide solutions with OOP.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p></p>
+  <p>Demonstrate an exemplary ability to analyze problems and solve them using OOP.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a proficient ability to analyze problems and solve them using OOP.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a developing ability to analyze problems and solve them using OOP.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate deficiencies in their ability to analyze problems and solve them using OOP.</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:3">
+  <td style="vertical-align:top">
+    <p>3. Understand the basic operations of data structures such as stacks,
+	queues, lists, binary search trees, and hashes, and their implementations.
+    </p>
+    </td>
+  <td style="vertical-align:top">
+  <p></p>
+  <p>Demonstrate excellent understanding of the basic operations of the learned data structures and ability to implement them.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate sufficient understanding of the basic operations of the learned data structures and ability to implement them.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate limited understanding of the basic operations of the learned data structures and limited ability to implement them.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a lack of understanding of the basic operations of the
+    learned data structures and inability to implement them.</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:4">
+  <td style="vertical-align:top">
+
+  <p>4. Demonstrate the ability to use the learned data structures to solve problems in C++</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate an exemplary ability to use the learned data structures to solve problems in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a proficient ability to use the learned data structures to solve problems in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate a developing ability to use the learned data structures to solve problems in C++.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate deficiencies in the ability to use the learned data structures to solve problems
+  in C++.</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:5;mso-yfti-lastrow:yes">
+  <td style="vertical-align:top">
+    <p>5. Develop large programs using separate compilation, good OOP design, and code reuse through the use of inheritance, generic programming and the standard template library.</p>
+  </td>
+  <td style="vertical-align:top">
+  <p>Demonstrate complete comprehension of OOP concepts and techniques
+  for the development of large programs.</p>
+
+  </td>
+  <td style="vertical-align:top">
+
+  <p>Demonstrate basic comprehension of OOP concepts and techniques for
+  the development of large programs. </p>
+
+  </td>
+  <td style="vertical-align:top">
+
+  <p>Demonstrate minimal comprehension of OOP concepts and techniques for
+  the development of large programs.</p>
+  </td>
+  <td style="vertical-align:top">
+
+  <p>Demonstrate no comprehension of OOP concepts and techniques for the
+  development of large programs.</p>
+  </td>
+ </tr>
+</tbody></table>
+
+            </div>
+        </div>
+		</div>
+		</div>
+    </section>
+
+    <!-- People Section -->
+    <section id="people" class="people-section invisibletable">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">People</h3>
+                <div class="col-lg-12">
+	<h4>Instructor</h4>
+	<div class="">
+		<table class="table-hover">
+			<!--<tr>
+				<td style="width:33%"><img src="img/mak.jpg" class="peopleimg" alt="Brian Mak"/></td>
+				<td style="width:1%"></td>
+				<td style="width:66%;">
+					<span style="font-weight: bold">MAK, Brian Kan Wing</span><br/>
+					<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 3513</span><br/>
+					<span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:mak@cse.ust.hk">mak@cse.ust.hk</a></span><br/>
+					<span><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="http://www.cse.ust.hk/~mak">http://www.cse.ust.hk/~mak</a></span><br/>
+					<span>Office Hour: By appointment.</span><br/>
+					<span>Find me by PathAdvisor:</span>
+					<a href="http://pathadvisor.ust.hk/interface.php?roomno=3513">Click Here</a>
+				</td>
+			</tr>-->
+
+			<tr>
+				<td style="width:33%"><img src="comp2012/img/desmond.jpg" class="peopleimg" alt="Desmond"/></td>
+				<td style="width:1%"></td>
+				<td style="width:66%;">
+					<span style="font-weight: bold">TSOI, Desmond Yau Chat</span><br/>
+					<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 3553</span><br/>
+					<span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:desmond@cse.ust.hk">desmond@cse.ust.hk</a></span><br/>
+					<span><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="http://www.cse.ust.hk/~desmond">http://www.cse.ust.hk/~desmond</a></span><br/>
+					<span>Office Hour: Every Thursday 4:30pm - 5:30pm [Starting from 24 September] (online Zoom meeting only, via meeting link <a href="https://hkust.zoom.us/j/98175426055?pwd=T2p4VUhWSEZtU2N5R2xXTHR3SDFtdz09">here</a>)</span><br/>
+					<span>Find me by PathAdvisor:</span>
+					<a href="http://pathadvisor.ust.hk/interface.php?roomno=3553">Click Here</a>
+				</td>
+			</tr>
+
+
+
+            <!--<tr>
+                <td style="width:33%"><img src="img/dipapado.jpg" class="peopleimg" alt="PAPADOPOULOS, Dimitris"/></td>
+                <td style="width:1%"></td>
+                <td style="width:66%;">
+                    <span style="font-weight: bold">PAPADOPOULOS, Dimitris</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 2537</span><br/>
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:dipapado@cse.ust.hk">dipapado@cse.ust.hk</a></span><br/>
+                    <span><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="http://www.cse.ust.hk/~dipapado">http://www.cse.ust.hk/~dipapado</a></span><br/>
+                    <span>Office Hour: By appointment.</span><br/>
+                    <span>Find me by PathAdvisor:</span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=2537">Click Here</a>
+                </td>
+            </tr>-->
+
+		</table>
+	</div>
+    <p id="ta"></p>
+	<h4>Teaching Assistants</h4>
+	<div class="">
+		<table class="table-hover">
+		      <tr>
+                <td style="width:33%"><img src="comp2012/img/wallacem.jpg" class="peopleimg" alt="Wallace"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%">
+                    <span style="font-weight: bold">MAK, Wai Ho Wallace</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 2532</span><br/>
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a></span><br />
+                    <!-- <span><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="http://www.cse.ust.hk/~wallacem/">http://www.cse.ust.hk/~wallacem/</a></span><br/> -->
+                    <span>Office Hour: Every Friday 2:30pm - 3:30pm [Starting from 25 September] (online Zoom meeting only,via meeting link <a href="https://hkust.zoom.us/j/98085308892?pwd=dGo1c3hTOURKVzFZdnNTWDN5dzB4UT09">here</a>)</span><br/>
+                    <!-- <span>Office Hour: Fri 2pm-4pm @ Room 4221 (Programming commons)</span><br/> -->
+                    <span>Find me by PathAdvisor:</span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=2532">Click Here</a><br />
+                </td>
+              </tr>
+
+            <tr>
+                <td style="width:33%"><img src="comp2012/img/yuqing.jpg" class="peopleimg" alt="kylambd"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">QUAN, Yuqing</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 3661 </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:yquanaa@connect.ust.hk">yquanaa@connect.ust.hk</a></span><br />
+                    <span>Office Hour: Every Monday 7:30pm - 8:30pm [Starting from 21 September] (online Zoom meeting only,via meeting link <a href="https://hkust.zoom.us/j/96729512549?pwd=QThOTE1BUWlNcmxWTTlsSEIzaU5Qdz09">here</a>)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=3661">Click Here</a><br/>
+                </td>
+              </tr>
+
+            <tr>
+                <td style="width:33%"><img src="comp2012/img/hing.jpg" class="peopleimg" alt="kelvinchiu"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">WONG, Man Hing</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 4201 </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:mhwongah@connect.ust.hk">mhwongah@connect.ust.hk</a></span><br />
+                    <span>Office Hour: Every Wednesday 7:00pm - 8:00pm [Starting from 23 September] (online Zoom meeting only, via meeting link <a href="https://hkust.zoom.us/j/652091372?pwd=WVdudHlRNlcrR1ZsMjZpZm1lbzJwQT09">here</a>)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4201">Click Here</a><br/>
+                </td>
+              </tr>
+
+            <tr>
+                <td style="width:33%"><img src="comp2012/img/arthur.png" class="peopleimg" alt="pyun"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">YAU, Yui Pan</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 4205</span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:ypyau@connect.ust.hk">ypyau@connect.ust.hk</a></span><br />
+                    <span>Office Hour: Every Thursday 7:00pm - 8:00pm [Starting from 24 September] (online Zoom meeting only, via meeting link <a href="https://hkust.zoom.us/j/4107135959?pwd=bTJUaXFzdENuK2ZsZW5sS093Qldrdz09">here</a>)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4205">Click Here</a><br/>
+                </td>
+              </tr>
+
+            <!--<tr>
+                <td style="width:33%"><img src="img/cpwan.jpg" class="peopleimg" alt="cpwan"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">WAN, Ching Pui</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> nil </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:cpwan@cse.ust.hk">cpwan@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Fri 12pm-1pm (online Zoom meeting only, via meeting link on Canvas frontpage of your section)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=nil">Click Here</a><br/>
+                </td>
+              </tr>
+
+            <tr>
+                <td style="width:33%"><img src="img/zshiaj.jpg" class="peopleimg" alt="zshiaj"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">SHI, Zifan</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm CYT3007 </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:zshiaj@cse.ust.hk">zshiaj@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Tue 1pm-2pm (online Zoom meeting only, via meeting link on Canvas frontpage of your section)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=CYT3007">Click Here</a><br/>
+                </td>
+              </tr>
+
+            <tr>
+                <td style="width:33%"><img src="img/lganaa.jpg" class="peopleimg" alt="lganaa"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">GAN, Lu</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm CYT2013B </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:lganaa@cse.ust.hk">lganaa@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Thu 1pm-2pm (online Zoom meeting only, meeting link on Canvas frontpage of your section)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=CYT2013B">Click Here</a><br/>
+                </td>
+              </tr>
+
+
+            <tr>
+                <td style="width:33%"><img src="img/yliuhl.jpg" class="peopleimg" alt="yliuhl"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">LIU, Yuezhang</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> nil </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:yliuhl@cse.ust.hk">yliuhl@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Fri 11am-12pm (online Zoom meeting only, via meeting link on Canvas frontpage of your section)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=nil">Click Here</a><br/>
+                </td>
+              </tr>-->
+
+		      <!--
+
+
+            <tr>
+                <td style="width:33%"><img src="img/zniu.jpg" class="peopleimg" alt="zniu"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">NIU, Zhe John</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 4205 </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:zniu@cse.ust.hk">zniu@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Monday 5:30pm–6:30pm</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4205">Click Here</a><br/>
+                </td>
+              </tr>
+
+			<tr>
+		        <td style="width:33%"><img src="img/jzhangbs.jpg" class="peopleimg" alt="jzhangbs"/></td>
+		        <td style="width:1%">&nbsp;</td>
+		        <td style="width:66%"><span style="font-weight: bold">ZHANG, Jingyang Peter</span><br/>
+		        	<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 4204 </span><br />
+		    	    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:jzhangbs@cse.ust.hk">jzhangbs@cse.ust.hk</a></span><br />
+					<span>Office Hour: To be determined</span><br/>
+		    	    <span>Find me by PathAdvisor: </span>
+		    	    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4204">Click Here</a><br/>
+		        </td>
+		      </tr>
+
+            <tr>
+                <td style="width:33%"><img src="img/hhuangas.jpg" class="peopleimg" alt="hhuangas"/></td>
+                <td style="width:1%">&nbsp;</td>
+                <td style="width:66%"><span style="font-weight: bold">HUANG, Huaxun Warren</span><br/>
+                    <span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Rm 4212 </span><br />
+                    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:hhuangas@cse.ust.hk">hhuangas@cse.ust.hk</a></span><br />
+                    <span>Office Hour: Friday 5:00pm–6:00pm (will be held at room 4221)</span><br/>
+                    <span>Find me by PathAdvisor: </span>
+                    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4212">Click Here</a><br/>
+                </td>
+              </tr>-->
+
+
+
+		     <!--  <tr>
+		        <td style="width:33%"><img src="img/yingke.jpg" class="peopleimg" alt="ying ke"/></td>
+		        <td style="width:1%">&nbsp;</td>
+		        <td style="width:66%"><span style="font-weight: bold">ZHU, Yingke</span><br/>
+		        	<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 4208 </span><br />
+					Office Hour: Tue 2pm-3pm<br/>
+		    	    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:yzhuav@connect.ust.hk">yzhuav@connect.ust.hk</a></span><br />
+		    	    <span>Find me by PathAdvisor: </span>
+		    	    <a href="http://pathadvisor.ust.hk/interface.php?roomno=4208">Click Here</a><br/>
+		        </td>
+		      </tr>
+
+			  <tr>
+		        <td style="width:33%"><img src="img/samuel.jpg" class="peopleimg" alt="Place Holder"/></td>
+		        <td style="width:1%">&nbsp;</td>
+		        <td style="width:66%"><span style="font-weight: bold">CHOW, Ka Ho Samuel</span><br/>
+		        	<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 3142</span><br />
+					Office Hour: Thu 3pm-4pm<br/>
+		    	    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:khchowad@connect.ust.hk">khchowad@connect.ust.hk</a></span><br />
+		    	    <span>Find me by PathAdvisor: </span>
+		    	    <a href="http://pathadvisor.ust.hk/interface.php?roomno=3142">Click Here</a><br/><br/>
+		        </td>
+		      </tr>
+		      <tr>
+		        <td style="width:33%"><img src="img/jiajie.jpg" class="peopleimg" alt="Place Holder"/></td>
+		        <td style="width:1%">&nbsp;</td>
+		        <td style="width:66%"><span style="font-weight: bold">TAN, Jiajie</span><br/>
+		        	<span><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 3142</span><br />
+					Office Hour: Tue 10:30am-11:30am<br/>
+		    	    <span><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:jtanad@connect.ust.hk">jtanad@connect.ust.hk</a></span><br />
+		    	    <span>Find me by PathAdvisor: </span>
+		    	    <a href="http://pathadvisor.ust.hk/interface.php?roomno=3142">Click Here</a><br/><br/>
+		        </td>
+		      </tr> -->
+		</table>
+	</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Lectures Section -->
+    <section id="lectures" class="lectures-section">
+        <div class="container">
+            <div class="row">
+	      <h3 class="titleheader">Lectures</h3>
+                <div class="col-lg-12">
+			<div id="Lec1" class="">
+				<br/><br/>
+				<p>The schedule listed below is tentative. Instructors may have some adjustments subject to the progress.</p>
+				<!-- <br/>
+				<span style="font-size:120%; font-weight:bold;">Part I: Object-Oriented Programming</span> -->
+				<br/>
+				<div class="table-responsive regulartable"
+style="border:0">
+					<table class="table-hover">
+					<tr>
+						<th style="text-align: center; width:8%">Week#</th>
+						<th style="text-align: center; width:30%">Topics / Note</th>
+						<th style="text-align: center; width:15%">Download</th>
+						<th style="text-align: center; width:20%">Reading</th>
+						<th style="text-align: center; width:27%">Code / Additional Materials</th>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">1</td>
+						<td>Course Logistics</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/0-logistics-full.pdf">Full</a> /
+							<a href="comp2012/notes/0-logistics-4page.pdf">4-Page</a>
+						</td>
+						<td></td>
+						<td style="text-align: center">
+						Review: Pointers (<a href="comp2012/notes/review-pointers-full.pdf">Full</a> / <a href="comp2012/notes/review-pointers-4page.pdf">4-page</a>)<br/>
+						Review: References (<a href="comp2012/notes/review-references-full.pdf">Full</a> / <a href="comp2012/notes/review-references-4page.pdf">4-page</a>)
+						</td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">1-2</td>
+						<td>Review: pointer, reference and const-ness</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/1-review-and-const-full.pdf">Full</a> /
+							<a href="comp2012/notes/1-review-and-const-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: Chap 8</td>
+						<td style="text-align: center">
+						<a href="comp2012/notes/review-and-const-program.zip">Programs</a>
+						</td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">2-3</td>
+						<td>Object Initialization, Construction & Destruction </td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/2-constructor-destructor-full.pdf">Full</a> /
+							<a href="comp2012/notes/2-constructor-destructor-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: Chap 9</td>
+						<td style="text-align: center"><a href="comp2012/notes/constructor-destructor-program.zip">Programs</a></td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">3-6</td>
+						<td>Inheritance and Polymorphism</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/3-inheritance-full.pdf">Full</a> /
+							<a href="comp2012/notes/3-inheritance-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: Chap 11, 12</td>
+						<td style="text-align: center"><a href="comp2012/notes/inheritance-program.zip">Programs</a></td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">6-8</td>
+						<td>Generic Programming</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/4-generic-programming-full.pdf">Full</a> /
+							<a href="comp2012/notes/4-generic-programming-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: Chap 18, 19, 10</td>
+						<td style="text-align: center"><a href="comp2012/notes/generic-programming-program.zip">Programs</a></td>
+			                </tr>
+
+					<tr class="">
+						<td style="text-align: center">8-9</td>
+						<td>Standard Template Library (STL)</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/5-stl-full.pdf">Full</a> /
+							<a href="comp2012/notes/5-stl-4page.pdf">4-Page</a>
+						</td>
+						<td>Weiss: Chap 9.14</td>
+						<td style="text-align: center"><a href="comp2012/notes/stl-program.zip">Programs</a></td>
+			                </tr>
+
+					<tr class="">
+						<td style="text-align: center">9</td>
+						<td>rvalue Reference and Move Semantics</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/10-move-full.pdf">Full</a> /
+							<a href="comp2012/notes/10-move-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: (Web) Chap 24</td>
+						<td style="text-align: center"><a href="comp2012/notes/move-program.zip">Programs</a></td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">9-10</td>
+						<td>Static Function and Data Member</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/6-static-function-data-full.pdf">Full</a> /
+							<a href="comp2012/notes/6-static-function-data-4page.pdf">4-Page</a>
+						</td>
+						<td>Weiss: Chap 9.14</td>
+						<td style="text-align: center"><a href="comp2012/notes/static-function-data-program.zip">Programs</a></td>
+			                </tr>
+
+		                        <tr class="">
+                    				<td style="text-align: center">10-11</td>
+			                        <td>Binary Search Tree</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/7-bst-full.pdf">Full</a> /
+							<a href="comp2012/notes/7-bst-4page.pdf">4-Page</a>
+						</td>
+			                        <td>Weiss: Chap 4, Chap 3.6</td>
+                        			<td style="text-align: center"><a href="comp2012/notes/bst-program.zip">Programs</a></td>
+                  		        </tr>
+
+		                        <tr >
+                       				<td style="text-align: center">11-12</td>
+			                        <td>AVL Tree</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/8-avl-full.pdf">Full</a> /
+							<a href="comp2012/notes/8-avl-4page.pdf">4-Page</a>
+						</td>
+
+			                        <td>Weiss: Chap 4, Chap 4.4</td>
+                        			<td style="text-align: center"><a href="comp2012/notes/avl-program.zip">Programs</a></td>
+		                        </tr>
+
+		                        <tr>
+			                        <td style="text-align: center">12-13</td>
+                        			<td>Hashing</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/9-hashing-full.pdf">Full</a> /
+							<a href="comp2012/notes/9-hashing-4page.pdf">4-Page</a>
+						</td>
+			                        <td>Weiss: Chap 5</td>
+                        			<td style="text-align: center"></td>
+		                        </tr>
+
+					<tr class="" style="height:0">
+						<td colspan=5 style="background:darkgray; text-align:center; color:white;">Self-study Notes</td>
+                    			</tr>
+
+					<tr class="">
+						<td style="text-align: center">2</td>
+						<td>Makefile (self-study)</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/self-study-makefile-full.pdf">Full</a> /
+							<a href="comp2012/notes/self-study-makefile-4page.pdf">4-Page</a>
+						</td>
+						<td></td>
+						<td style="text-align: center"><a href="comp2012/notes/makefile-program.zip">Programs</a></td>
+					</tr>
+
+					<tr class="">
+						<td style="text-align: center">6</td>
+						<td>Namespace (Self-study)</td>
+						<td style="text-align: center;">
+							<a href="comp2012/notes/self-study-namespace-full.pdf">Full</a> /
+							<a href="comp2012/notes/self-study-namespace-4page.pdf">4-Page</a>
+						</td>
+						<td>Deitel: Chap 23.4</td>
+						<td style="text-align: center"><a href="comp2012/notes/namespace-program.zip">Programs</a></td>
+					</tr>
+					</table>
+				</div>
+				<br/>
+				<!-- <div class="table-responsive regulartable">
+					<span style="font-size:120%; font-weight:bold">Part II: Data Structures</span>
+					<table class="table-hover">
+						<tr>
+							<th style="text-align: center; width:8%">Week#</th>
+							<th style="text-align: center; width:30%">Topics / Notes</th>
+							<th style="text-align: center; width:15%">Download</th>
+							<th style="text-align: center; width:25%">Reading</th>
+							<th style="text-align: center">Code / Additional Materials</th>
+						</tr>
+
+
+
+
+					</table>
+				</div>
+				-->
+		</div>
+	</div>
+            </div>
+
+        <h4>Lecture Attendance via Zoom</h4>
+        <p>Lectures this semester will only be held via Zoom meetings
+(until we switch to mixed-mode of teaching later in the semester, if
+possible). The links for the meetings are available
+        at the Canvas page of the course, under the tab Zoom meetings. Before you join a meeting for the first time visit <a href="https://hkust.zoom.us/", target = _blank>this page</a> and sign in to Zoom using your HKUST e-mail, as our lecture meetings will require HKUST user authentication. When attending a lecture meeting, make sure to set up your screen username to:
+
+        <br/><br/>
+        <span style="color:red">LASTNAME Firstname studentusername</span> E.g., CHAN Wing Ho cwingho<br/><br/>
+
+        During a Zoom meeting, please remain muted in order to avoid background noise. If you have questions, you can push the Raise Hand button which will signal this to the instructor who will unmute you. You can also use the Chat function to post questions or comments, if it is enabled by the instructor. We strongly recommend that you join with your camera turned on as this helps create a more interactive online classroom experience. In the first lecture of the semester we will go over the Zoom meeting controls with you but if your have not used Zoom previously we suggest that you play around with it a bit in order to become familiar. You can find a good general set of guidelines <a href="http://cei.ust.hk/zoom-teaching-good-practices-and-faqs", target =_blank>here</a>.</p>
+
+	    <div class="row col-lg-12">
+	    <h4>Lecture Videos</h4>
+        <!--<ul>
+            <li><a href="https://canvas.ust.hk/courses/23946/pages/l1-lecture-videos">L1 lecture videos</a></li>
+            <li><a href="https://canvas.ust.hk/courses/23946/pages/l4-lecture-videos">L4 lecture videos</a> (from the 2nd lecture onwards)</li>
+        </ul>-->
+        <!--<p>Zoom lecture videos will be published on Canvas at the end
+of
+each week or the beginning of the next week depending on when they become
+available.</p>-->
+	<p>Zoom lecture videos will be published on the supplementary
+website<br/>(<a href="https://www.cse.ust.hk/~desmond/comp2012/Password_Only/">https://www.cse.ust.hk/~desmond/comp2012/Password_Only/</a>)
+after each lecture
+class depending on when they become available.</p>
+	      <!-- <div class="table-responsive regulartable">
+                 <table class="table-hover">
+		    <thead>
+		    <tr>
+			<th>Week</th><th>L1 (Brian Mak)</th><th>L2 (Gary Chan)</th>
+		    </tr>
+		    </thead>
+		    <tr>
+			<td>1</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180201_52714">
+1/2/2018</a>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180202_20495">
+2/2/2018</a>
+			</td>
+		    </tr>
+		    <tr>
+			<td>2</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180208_20799">
+8/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180206_43743">
+6/2/2018</a>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180209_29988">
+9/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180207_69983">
+7/2/2018</a>
+			</td>
+		    </tr>
+		    <tr>
+			<td>3</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180213_89941">
+13/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180215_90688">
+15/2/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180214_31560">
+14/2/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>4</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180220_28944">
+20/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180222_33503">
+22/2/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180221_46808">
+21/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180223_73346">
+23/2/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>5</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180227_77680">
+27/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180301_83137">
+1/3/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180228_84332">
+28/2/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180302_50620">
+2/3/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>6</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180306_32082">
+6/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180308_60338">
+8/3/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180307_76933">
+7/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180309_97340">
+9/3/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>7</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180313_91883">
+13/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180315_42250">
+15/3/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180314_98014">
+14/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180316_70589">
+16/3/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>8</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180320_62584">
+20/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180322_30814">
+22/3/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180321_74245">
+21/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180323_16313">
+23/3/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>9</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180327_79999">
+27/3/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180329_69309">
+29/3/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180328_54656">
+28/3/2018</a><br/>
+
+			</td>
+		    </tr>
+		    <tr>
+			<td>10</td>
+			<td>
+No class
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180403_30814">
+3/4/2018 (Make up class - 3hr)</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180406_80897">
+6/4/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>10</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180410_11675">
+10/4/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180412_86274">
+12/4/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180411_18551">
+11/4/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180413_99283">
+13/4/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>11</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180414_39938">
+14/4/2018 (Make up class)</a><br/>
+			</td>
+			<td>
+
+			</td>
+		    </tr>
+		    <tr>
+			<td>11</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180424_50250">
+24/4/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180426_13921">
+26/4/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180425_21168">
+25/4/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180427_65947">
+27/4/2018</a><br/>
+			</td>
+		    </tr>
+		    <tr>
+			<td>12</td>
+			<td>
+1/5/2018 (Holiday)<br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180503_27299">
+3/5/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180502_19002">
+2/5/2018</a><br/>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180504_51518">
+4/5/2018</a><br/>
+
+			</td>
+		    </tr>
+		    <tr>
+			<td>13</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L1_180508_35124">
+8/5/2018</a><br/>
+			</td>
+			<td>
+<a href="https://rvc.ust.hk/mgmt/media.aspx?path=18SP_COMP2012-L2_180509_10255">
+9/5/2018</a><br/>
+
+			</td>
+		    </tr>
+		    <tr>
+			<td>Additional Video on AVL</td>
+			<td>
+
+Please login to Canvas <br/>
+<a href="https://canvas.ust.hk/courses/17141/modules/items/216923">from 00:24:50 - the end</a>
+<br/>
+<a href="https://canvas.ust.hk/courses/17141/modules/items/216924">from 00:12:15 - 00:45:20</a>
+
+			</td>
+			<td>
+			</td>
+		    </tr>
+		 </table>
+	       </div>-->
+	    </div>
+        <br/><br/>
+        <!--<h4>Polling</h4>
+
+        <p>During the lecture, the instructor may ask "understanding"
+questions related to the currently taught material. This will be done via a
+Zoom poll that appears as a pop-up during the zoom meeting. It will consist
+one or more multiple-choice questions and your answers will be recorded automatically; multiple polls may be given at each lecture. Each lecture's polls are worth 1 point in total. We will only count your top-20 points from lecture polling.  These points will contribute to 10% of your final course grade, as explained in the Grading Scheme section above.</p>-->
+
+        </div>
+      </div>
+    </section>
+
+	<!-- Honor Code Section -->
+    <section id="honorcode" class="honorcode-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Honor Code</h3>
+                <div class="col-lg-12">
+                <!-- adopted from comp2011 2020F-->
+Honesty and integrity are
+central to academic work. You must observe and uphold the highest standards
+of academic integrity and honesty in all the work (lab exercises,
+programming assignments, quiz, exams, etc.) you do in this course. We deal
+with cheating cases seriously and the maximum penalty is a FAIL in the
+course plus additional disciplinary actions from the CSE Department as well
+as from the University. Both the copier(s) and the copiee will be punished,
+and the penalty will be more than just a zero mark in your
+assignments/exams.
+<br/><br/>
+<!--Anyone &mdash; both the copier and the copiee &mdash; caught cheating
+on their assignments will get zero marks for the assignment. In
+							addition, they BOTH will get an additional 5% deduction from the <strong>final grade</strong> for the first time of cheating.<br />
+Anyone get caught for cheating in an assignment for the second time will get an additional 10% deduction. (hence 15% deduction in total)<br />
+Anyone get caught for cheating in an assignment for the third time will get
+an immediate FAIL grade.<br />-->
+					  <!--<li>On the other hand, anyone
+caught cheating in the exams (quiz/final) will get a FAIL grade <strong>immediately</strong>.</li>
+					  <li>There can be additional
+disciplinary actions as well from the department and university.</li>-->
+
+					<p>Here are links to the <a href="http://ugadmin.ust.hk/integrity/student-1.html" class="contentlink">University's Honor code</a>, and the <a href="http://ugadmin.ust.hk/integrity/student-5.html" class="contentlink">University's Penalties for Cheating</a>.</p>
+
+					If you are not sure what is considered plagiarism,
+					<ul>
+					  <li> <span style="color:red">Do NOT copy program codes from another student/person.</span></li>
+					  <li> <span style="color:red">Do NOT look at the actual program codes of another student.</span></li>
+					  <li> <span style="color:red">Do NOT share actual program codes with other students/people (by paper, emails, blogs, FB, Google Doc, etc.).</span></li>
+					  <li> <span style="color:red">Do NOT give your program codes to other students who ask for it, and do not ask for a copy of their code either.</span></li>
+					  <li> <span style="color:red">Do NOT post your program codes anywhere online.</span></li>
+					  <li> <span style="color:red">Do NOT leave your finished/unfinished program codes unattended.</span></li>
+					  <li> <span style="color:red">While we encourage discussion among students, you have to write codes on your own.</span> </li>
+					  <li> <span style="color:red">During discussion, you should NOT go to the details such that everyone will end up in the same code.</span></li>
+				</ul>
+		The list is by no means exhaustive, and you will need to
+use your own discretion.
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Labs Section -->
+    <section id="labs" class="labs-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Labs</h3>
+                <div class="col-lg-12">
+<!--             <p>However, if you have been using Eclipse from COMP2011, you can continue using that. The compiler is basically the same.</p> -->
+<p>The lab exercises are designed to help you learn a programming
+language with on-the-spot advices of a teaching assistant. All the TAs
+assigned to the course are supposed to be very experienced in C++
+programming. It is more a service to you than an exercise for the
+marks. The 10% mark is only set to encourage you to make good use of
+the lab time.</p>
+<br/>
+			<p>We will use VS Code as the development platform for C++ programming. Please read the following
+tutorial which will help you get started:</p>
+			<ul>
+				<li><a href="comp2011/labs/vscode/index.html">VS Code Installation and Usage</a></li>
+			</ul>
+<br/>
+<p>Labs this semester will be
+conducted online via Zoom meetings (until we switch to mixed-mode teaching
+later in the semester, if possible).</p>
+<p>But similar to the past, a successful completion of the
+lab is subject to the following
+conditions:</p>
+<ol>
+  <li>Attend the lab</li>
+  <li>Finish the requirement / program and submit it to ZINC (automatic grading system).</li>
+  <li>Answer a question related to the lab to show that you really work out
+the solution yourself.</li>
+</ol>
+<p>Each lab is worth 3 points, 1 point for each of the items above.
+Students will be randomly selected to answer a question about the lab.
+If you are selected,
+the answering point will be given only if you answer the question
+correctly.
+If you are not
+selected, you get the 2nd answering point automatically if you finish the
+lab and successfully demonstrate it to your TA.
+</p>
+<br/>
+<p>Note to all students:</p>
+<ul>
+  <!--<li>Before you join the lab meeting for the first time, visit
+<a href="#schedule">here</a> to check which TA you have been assigned to. Also,
+check the link for the lab meeting to be conducted by your TA at the Canvas page of each course section, under
+"Zoom meetings".</li><br/>-->
+<li>When attending the lab meeting, make sure to set up your screen
+username to:
+<br/>
+<span style="color:red">LASTNAME Firstname studentusername</span> E.g., CHAN Wing Ho cwingho
+</li><br/>
+<li>During the lab meeting, "raise hand" if you want to ask
+questions. TA will follow chronological order when handling raise hand
+request. If your questions require sharing a screen, your TA will put you
+in a breakout room.
+</li><br/>
+<!--  <li>In the breakout room, share your screen to show your code and
+explain
+it to the TA.</li><br/>-->
+</ul>
+
+<b>[Public holiday exception]</b>
+<p>
+If a day is a public holiday, students are not required to attend the labs
+held on that day. There will be no points for these labs for only those
+students who originally are supposed to attend these labs; other students
+are not affected. As different students may be affected by different public
+holidays, the final total lab points will be normalized according to the
+number of labs a student has to take. However, although a student may not
+need to attend a lab on a day that happens to be a public holiday, we
+strongly encourage the student to still go over the materials of that lab
+and try to finish it. Labs help students review what they are taught in
+lectures and get ready for the next lab. <br/></br/>
+This policy will also apply to situations when classes/labs are cancelled
+due to, e.g., adverse weather conditions, etc.
+</p>
+<br>
+
+<div style="border:3px ridge #f00; padding: 1rem; font-weight:bold">
+Important notes:<br/><br/>
+  <ul style="margin-left:-15px">
+  <li>You must attend the lab meeting for your assigned lab session.
+If you need to go to a different lab meeting, seek prior approval from your
+course
+instructor.</li><br/>
+  <li style="color:red">Although you are not required to finish the
+lab exercises before attending the lab meeting, you are strongly suggested
+to read through the requirements beforehand and try to finish part of the
+tasks. If you
+came across any problems, please approach your instructor / TAs during
+their office hours / by emails. </li><br/>
+  <li>No late lab assignment will be
+accepted.</li>
+  </ul>
+</div>
+<br/><br/>
+					<div class="table-responsive
+regulartable" style="border:0">
+						<table class="table-hover">
+				<tr>
+					<th>Dates</th>
+					<th>Tentative Topic</th>
+					<th>Solution</th>
+				</tr>
+				<tr>
+					<td>September 7, 8, 9, 14, 15,
+16</td>
+					<td colspan="2"><span style="color:red">No labs in the
+first two weeks. The first lab starts in Week 3.</span></td>
+				</tr>
+				<tr>
+					<td>Lab 1: September 21-23</td>
+					<td><a href="comp2012/labs/lab1/index.html">Makefile and Separate Compilation</a>
+                        <br>
+                        <br>
+                        <a href="comp2012/misc/lab.pdf">Lab grading scheme and instructions</a>
+                    </td>
+					<td><a href="comp2012/labs/lab1/solution.zip">solution</a></td>
+				</tr>
+                <tr>
+                    <td>Lab 2: September 28-30</td>
+                    <td><a href="comp2012/labs/lab2/index.html">Class Construction and Destruction</a>
+                    </td>
+                    <td><a href="comp2012/labs/lab2/solution.zip">solution</a></td>
+                </tr>
+                <tr>
+                    <td>Lab 3: October 5-7</td>
+                    <td><a href="comp2012/labs/lab3/index.html">More Class Construction and Destruction</a>
+                    </td>
+                    <td><a href="comp2012/labs/lab3/solution.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>Lab 4: October 12-14</td>
+                        <td><a href="comp2012/labs/lab4/index.html">Inheritance: basics</a></td>
+                        <td><a href="comp2012/labs/lab4/solution.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>Lab 5: October 19-21</td>
+                        <td><a href="comp2012/labs/lab5/index.html">More on Inhertiance</a></td>
+                        <td><a href="comp2012/labs/lab5/solution.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>October 26-28</td>
+                    <td colspan="2"><span style="color:red">No lab for 1 week (Oct 26-28).</span></td>
+                </tr>
+                <tr>
+                        <td>Lab 6: November 2-6</td>
+                        <td><a href="comp2012/labs/lab6/index.html">Polymorphism: Virtual Functions</a></td>
+                        <td><a href="comp2012/labs/lab6/lab6-sol.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>Lab 7: November 9-13</td>
+                        <td><a href="comp2012/labs/lab7/index.html">More on Inheritance</a></td>
+                        <td><a href="comp2012/labs/lab7/sol.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>Lab 8: November 16-20</td>
+                        <td><a href="comp2012/labs/lab8/index.html">Template, Operator Overloading and Friends</a></td>
+                        <td><a href="comp2012/labs/lab8/sol.zip">solution</a></td>
+                </tr>
+
+                <tr>
+                        <td>Lab 9: November 23-27</td>
+                        <td><a href="comp2012/labs/lab9/index.html">A Calculator for Polish Notation and Reverse Polish Notation</a></td>
+                        <td><a href="comp2012/labs/lab9/sol.zip">solution</a></td>
+                </tr>
+                <tr>
+                        <td>Lab 10: November 30 - December 4</td>
+                        <td><a href="comp2012/labs/lab10/index.html">Binary Trees and Binary Search Trees</a></td>
+                        <td><a href="comp2012/labs/lab10/sol.zip">solution</a></td>
+                </tr>
+
+                <!--
+				<tr>
+					<td>Lab 2: March 19, 23, 24</td>
+					<td><a href="labs/lab2/index.html">class construction and destruction</a></td>
+					<td><a href="labs/lab2/solution.zip">solution</a></td>
+				</tr>
+                                <tr>
+                                        <td>Lab 3: March 26, 30, 31</td>
+                                        <td><a href="labs/lab3/index.html">Inheritance: basics</a></td>
+                                        <td><a href="labs/lab3/solution.zip">solution</a></td>
+                                </tr>
+
+
+                                <tr>
+                                        <td>Lab 4: April 2, 6, 7</td>
+                                        <td><a href="labs/lab4/index.html">Inheritance: Effect of Substitution and Slicing</a></td>
+                                        <td><a href="labs/lab3/solution.zip">solution</a></td>
+                                </tr>
+
+                                <tr>
+                                        <td>-</td>
+                                        <td><b>No lab on April 9, 13, 14</b></td>
+                                        <td></td>
+                                </tr>
+
+                                <tr>
+                                        <td>Lab 5: April 16, 20, 21</td>
+                                        <td><a href="labs/lab5/index.html">Polymorphism: Virtual Functions</a></td>
+                                        <td><a href="labs/lab5/sol.zip">solution</a></td>
+								</tr>
+
+                                <tr>
+									<td>Lab 6: April 23, 27, 28</td>
+									<td><a href="labs/lab6/index.html">More on inheritance</a></td>
+                                        <td><a href="labs/lab6/sol.zip">solution</a></td>
+							</tr>
+							   <tr>
+									<td>Lab 7: May 4, 5<br>(April 30 is a public holiday)<br>(LA1A: no lab, see [Public holiday exception] above.)<br></td>
+									<td><a href="labs/lab7/index.html">template + operator overloading; friends</a></td>
+
+                                        <td><a href="labs/lab7/sol.zip">solution</a><br><a href="misc/tfriend.pptx">extra notes</a></td>
+							</tr>
+                                                          <tr>
+                                                                        <td>Lab 8 (last lab): May 7, 11, 12</td>
+                                                                        <td><a href="labs/lab8/index.html">STL</a></td>
+                                                                        <td><a href="labs/lab8/sol.zip">solution</a></td>
+                                                          </tr>-->
+
+<!--
+					<p>Lab Policy:</p>
+					The lab exercises are designed to help you learn a (new) programming language with on-the-spot advices of a teaching assistant. All the TAs assigned to the course are very experienced in C++ programming. It is more a service to you than an exercise for the marks. The 10% mark is only set to encourage you to make good use of the lab time.
+					<br/>
+					A successful completion of the lab is subject to the following conditions:
+					<ol>
+					<li>Attend the lab.</li>
+					<li>Finish the requirement/ program and demonstrate it to a TA.</li>
+					<li>Answer a question about the lab exercise.</li>
+					</ol>
+					<p>
+					Each lab is worth 3 points, 1 point for each of the above
+					conditions. Students are randomly selected to answer a question
+					about the lab. If you are not selected, you get the 3rd answering point
+					automatically if you finish the lab and successfully demonstrate it
+					to a TA. If you are selected, the answering point will be given
+					only if you answer the question correctly.
+					</p>
+
+					<p>Note to all students:</p>
+					<ul>
+						<li>Although we don't expect you to finish the lab exercise before you go to the lab, we expect you to have read the lab's materials and understand what you are required to do.</li>
+						<li>At the end of each lab, you are required to show and demonstrate your solution of the lab exercise to one of your TAs. You may be also asked a question related to the lab to show that you really work out the solution yourself. No late lab assignment will be accepted. You must attend your enrolled lab to earn your credits. You must seek prior instructor's approval if you need to go to different lab.</li>
+					</ul>
+				  <p id="publicholiday" style="padding-top:50px;"><strong>[Public holiday exception]</strong> <br/>
+					   If a day is a public holiday, students are not required to attend the labs held on that day. There will be no points for these labs for only those
+	   				   students who originally are supposed to attend these labs; other students are not affected. As different students may be affected by different public holidays,
+					   the final total lab points will be normalized according to the number of labs a student has to take. However, although a student may not need to attend a lab on a day that happens to be a public holiday, we strongly encourage the student to still go over the materials of that lab
+					   and try to finish it. Labs help students review what they are taught in lectures and get ready for the next lab.
+				  </p>
+
+				   <br />
+
+				   <p><strong>Lab Safety</strong></p> <br/> Please read the lab safety
+				   <a href="http://www.ab.ust.hk/hseo/sm06/ch7.htm"> here</a>.<br/><br/>
+
+					<br/>
+					<span style="color:red">No labs for the first two academic weeks. (See announcements)</span>
+					<div class="table-responsive regulartable">
+						<table class="table-hover">
+				<tr>
+					<th>Dates</th>
+					<th>Tentative Topic</th>
+					<th>Solution</th>
+				</tr>
+				-->
+				<!--<tr>
+					<td>Jan 30 1 - 15</td>
+					<td>No lab in the first two weeks</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Feb 19, 21, 22<br/></td>
+					<td><a href="labs/lab1">Lab 1 - Separate compilation with Makefiles</a></td>
+					<td><a href="labs/lab1/sol.zip">solution</a></td>
+				</tr>
+                <tr>
+                    <td>Feb 26, 28  Mar 1</td>
+                    <td><a href="labs/lab2">Lab 2 - Class Construction and Destruction</a></td>
+                    <td><a href="labs/lab2/solution.zip">solution</a></td>
+                </tr>
+
+                            <tr>
+                                <td>Mar 5, 8, 9</td>
+                                <td><a href="labs/lab3/index.html">Lab 3 - Inheritance: Basics</a></td>
+                                <td><a href="labs/lab3/sol.zip">solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>Mar 12, 15, 16</td>
+                                <td><a
+href="labs/lab4/index.html">Lab 4 - Inheritance: Effect of substitution and slicing</a></td>
+                                <td><a href="labs/lab4/solution.zip">solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>Mar 19, 22, 23</td>
+                                <td><a
+href="labs/lab5/index.html">Lab 5 - Polymorphism</a></td>
+                                <td><a href="labs/lab5/sol.zip">solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>Mar 26, 28, 29</td>
+                                <td><a
+href="labs/lab6/index.html">Lab 6 - Inheritance Access Specifiers and Friend Classes</a></td>
+                                <td><a href="labs/lab6/solution.zip">solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>Apr 2, 4<br><font color="red">Public holiday policy applies for Friday students</font></td>
+                                <td><a
+href="labs/lab7/index.html">Lab 7 - Template, Operator Overloading and Friends</a></td>
+                                <td><a href="labs/lab7/sol.zip">solution (accessible after 8pm on April 4th)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Apr 8 - 12<br></td>
+                                <td>No lab for this week</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Apr 16, <font color="red">25</font>, <font color="red">26</font>
+                                    <br>
+                                    (due to midterm break and holiday)
+                                </td>
+                                <td><a
+href="labs/lab8/index.html">Lab 8 - STL</a></td>
+                                <td><a href="labs/lab8/solution.zip">solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>Apr 30, May 2, 3</td>
+                                <td><a href="labs/lab9/index.html">Lab 9 - Binary Trees</a></td>
+                                <td><a href="labs/lab9/lab9-sol.zip">solution</a></td>
+                            </tr>-->
+
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Assignments Section -->
+    <section id="assignments" class="assignments-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Assignments</h3>
+                <div class="table-responsive regulartable"
+style="border:0">
+                    <table class="table-hover">
+                        <tr>
+                            <th>Assignment</th>
+                            <th style="text-align:center">TA-in-charge</th>
+                            <th>Solution</th>
+                        </tr>
+                        <tr>
+                            <td><a href="comp2012/assignments/assignment1/index.html">Assignment 1: Inventory</a></td>
+                            <td style="text-align:center">Wallace Mak (wallacem@cse.ust.hk)</td>
+                            <td><a href="comp2012/assignments/assignment1/marking/index.html">Grades and Marking scheme</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="comp2012/assignments/assignment2/index.html">Assignment 2: Financial Planner</a></td>
+                            <td style="text-align:center">Wong, Man Hing (mhwongah@connect.ust.hk)</td>
+			    <td><a href="comp2012/assignments/assignment2/marking/index.html">Grades and Marking Scheme</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="comp2012/assignments/assignment3/index.html">Assignment 3: Library Search System</a></td>
+                            <td style="text-align:center">Arthur YAU (taappealemail@gmail.com)</td>
+			    <td><a href="comp2012/assignments/assignment3/marking/index.html">Grades and Marking Scheme</a></td>
+                        </tr>
+
+                        <!--<tr>
+                            <td><a href="assignments/assignment3/">Assignment 3: Infection Analyzer</a></td>
+                            <td style="text-align:center">Wallace Mak (wallacem@cse.ust.hk)</td>
+                            <td><a href="assignments/assignment3/marking/">Grades and Marking scheme</a></td>
+                        </tr>-->
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Exam Section -->
+    <section id="exams" class="exam-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Exams</h3>
+
+                <!--<div class="col-lg-6">
+                <h4>Polling questions in each class</h4>
+                </div>-->
+
+                <div class="col-lg-12">
+                <h4>Quiz</h4> 
+		<ul>
+                    <li>Date: 31st October 2020 (Saturday)</li>
+                    <li>Time: 7pm - 9pm</li>
+                    <li>Venue: Canvas + Zoom (<a href="comp2012/quiz/index.html">Instructions</a>)</li>
+                    <li>Scope:
+                      <ul>
+                        <li>Topic 1: Review Example, Pointer, Reference &amp; Const-ness</li>
+                        <li>Topic 2: Object Initialization, Construction and Destruction</li>
+                        <li>Topic 3: Inheritance and Polymorphism (Up to Page 82, i.e. not including Abstract Base Class)</li>
+                      </ul>
+                    </li>
+
+                    <li>Statistics:
+                        <ul>
+                    <li><img style="width:700px" src="comp2012/img/quiz.png"/>
+                    </li></ul>
+                    </li>
+                    <!--
+                            <li>Mean: 10.19</li>
+                            <li>Stdev: 2.24</li>
+                            <li>Mark distribution:<br/>
+                                <img style="width:400px" src="img/quiz.png"/>
+                            </li>
+                        </ul>-->
+
+
+                    </ul>
+                </div>
+
+					<!--
+                <div class="col-lg-6">
+                <br/>
+					<h4>Midterm Exam</h4>
+					<ul>
+					<li>Date: 6th April (Sat)</li>
+					<li>Time: 2:00pm - 4:00pm</li>
+                    <li>Venue: LTB and LTJ</li>
+                    <li>Statistics:
+                        <ul>
+                            <li>Mean: 56.4</li>
+                            <li>Stdev: 18.36</li>
+                            <li>Mark distribution:<br/>
+                                <img style="width:100%" src="misc/2012midterm.png"/>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="exams/comp2012-midterm-2019S-POST.pdf">Solution and Marking Scheme</a></li>
+
+ 					<li>Scope: TBC
+					  <ul>
+						<li>Data Abstraction and Classes</li>
+						<li>Preprocessor Directives and Const-ness</li>
+						<li>Object Initialization, Constructor and Destruction (including Member Initialization List)</li>
+						<li>Generic Programming (Function and Class Templates, Operator Overloading, Friend Functions / Classes)</li>
+						<li>STL (Containers, Iterators and Algorithms)</li>
+					  </ul>
+					</li>
+
+					<li>Statistics:
+						<ul>
+							<li>Mean: 58.9</li>
+							<li>Stdev: 14.9</li>
+							<li>Mark distribution:<br/>
+								<img style="width:100%" src="misc/midterm-histogram.png"/>
+							</li>
+						</ul>
+					</li>
+					<li><a href="exams/comp2012-midterm-2018S-soln.pdf">Solution</a></li>
+					</ul>
+				</div>
+					-->
+				<br/>
+				<div class="col-lg-12">
+					<h4>Final Exam</h4>
+
+				<ul>
+			 		<li>Date: 18th December 2020 (Friday)</li>
+					<li>Time: 4:30pm - 7:30pm</li>
+					<li>Venue: Canvas + Zoom</li>
+					<li>Scope: 
+					  <ul>
+						<li>All topics listed under Lectures of the course website are covered (excluding the self-study topics of Makefile, Namespace, and 
+rvalue Reference and Move Semantics). </li>
+						<li>All materials including lecture notes, lab exercises, PAs, textbook, and any additional learning materials we posted on the course 
+						website may be tested.</li>
+						<li>Your programming knowledge in the pre-requisite COMP2011 is also assumed.</li>
+					  </ul>
+					</li>
+                    <li>Statistics:
+                        <ul>
+                            <li>Mean: 47.73</li>
+                            <li>Stdev: 15.04</li>
+			    <li>Max: 87.50</li>
+                            <li>Score distribution:<br/>
+                                <img style="width:70%" src="comp2012/misc/comp2012-fall-2020-final-distribution.png"/>
+                            </li>
+			</ul>
+                    </li>
+                    <li><a href="comp2012/misc/comp2012-final-2020F-scheme.pdf">Marking scheme</a></li>
+				</div>
+			</ul>
+				<br/>
+				<div class="col-lg-12">
+					<h4>Past Exam Papers</h4>
+					<div class="table-responsiveregulartable" style="border:0">
+						<table class="table-hover">
+							<thead>
+								<tr>
+								<th></th>
+								<th>Mid-Term Exams</th>
+								<th>Final Exams</th>
+								</tr>
+							</thead>
+
+                            <tr>
+                                <td>2018F</td>
+                                <td><a href="comp2012/past-paper/mid-term/comp2012-midterm2018F1.pdf">Question I</a> | <a href="comp2012/past-paper/mid-term/comp2012-midterm2018F2.pdf">Question II</a> | <a href="comp2012/past-paper/mid-term/comp2012-midterm2018F-soln.pdf">Solution</></td>
+                                <td><a href="comp2012/past-paper/final/comp2012-final2018F1.pdf">Question I</a> | <a href="comp2012/past-paper/final/comp2012-final2018F2.pdf">Question II</a> | <a  href="comp2012/past-paper/final/comp2012-final2018F-soln.pdf">Solution</a></td>
+                            </tr>
+                            <tr>
+                                <td>2018S</td>
+                                <td><a href="comp2012/past-paper/mid-term/comp2012-midterm2018S.pdf">Question</a> | <a href="comp2012/past-paper/mid-term/comp2012-midterm2018S-soln.pdf">Solution</></td>
+                                <td><a href="comp2012/past-paper/final/comp2012-final2018S.pdf">Question</a> | <a  href="comp2012/past-paper/final/comp2012-final2018S-soln.pdf">Solution</a></td>
+                            </tr>
+
+							<tr>
+								<td>2017F</td>
+								<td><a href="comp2012/past-paper/mid-term/comp2012-midterm2017F.pdf">Question</a> | <a href="comp2012/past-paper/mid-term/comp2012-midterm2017F-soln.pdf">Solution</></td>
+								<td><a href="comp2012/past-paper/final/comp2012-final2017F.pdf">Question</a> | <a  href="comp2012/past-paper/final/comp2012-final2017F-soln.pdf">Solution</a></td>
+							</tr>
+							<tr>
+								<td>2017S</td>
+								<td><a href="comp2012/past-paper/mid-term/comp2012-midterm2017S.pdf">Question</a> | <a href="comp2012/past-paper/mid-term/comp2012-midterm2017S-soln.pdf">Solution</></td>
+								<td><a href="comp2012/past-paper/final/comp2012-final2017S.pdf">Question</a> | <a  href="comp2012/past-paper/final/comp2012-final2017S-soln.pdf">Solution</a></td>
+							</tr>
+
+<!-- 							<tr>
+								<td>2016F</td>
+								<td><a href="past-paper/mid-term/comp2012-midterm2016F.pdf">Question</a> | <a href="past-paper/mid-term/comp2012-midterm2016F-soln.pdf">Solution</a></td>
+								<td><a href="past-paper/final/comp2012-final2016F.pdf">Question</a> | <a href="past-paper/final/comp2012-final2016F-soln.pdf">Solution</a></td>
+							</tr>
+
+							<tr>
+								<td>2016S</td>
+								<td><a href="past-paper/mid-term/comp2012-midterm2016S.pdf">Question</a> | <a href="past-paper/mid-term/comp2012-midterm2016S-soln.pdf">Solution</a></td>
+								<td><a href="past-paper/final/comp2012-final2016S.pdf">Question</a> | <a href="past-paper/final/comp2012-final2016S-soln.pdf">Solution</a></td>
+							</tr> -->
+
+							<!--tr>
+								<td>2015S</td>
+								<td><a href="past-paper/mid-term/comp2012-midterm2015S.pdf">Question</a> | <a href="past-paper/mid-term/comp2012-midterm2015S-soln.pdf">Solution</a></td>
+								<td><a href="past-paper/final/comp2012-final2015S.pdf">Question</a> | <a href="past-paper/final/comp2012-final2015S-soln.pdf">Solution</a></td>
+							</tr>
+
+							<tr>
+								<td>2014S</td>
+								<td><a href="past-paper/mid-term/comp2012-midterm2014S.pdf">Question</a> | <a href="past-paper/mid-term/comp2012-midterm2014S-soln.pdf">Solution</a></td>
+								<td><a href="past-paper/final/comp2012-final2014S.pdf">Question</a> | <a href="past-paper/final/comp2012-final2014S-soln.pdf">Solution</a></td>
+							</tr-->
+
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Self-learning Section -->
+    <section id="selflearning" class="self-learning-section">
+	<div class="container">
+            <div class="row">
+				<h3 class="titleheader">Self-learning Center</h3>
+                <!--div class="col-lg-6">
+		<h4>Self-Tests</h4>
+                <ul>
+                    <li id="menu1"><a href="self-test/1_Basic.html" target="target_a"> Self-test 1: C++ Basic</a></li>
+                    <li id="menu2"><a href="self-test/2_Const-ness.html"  target="target_a"> Self-test 2: Const-ness</a></li>
+                    <li id="menu3"><a href="self-test/3_Constructor-Destructor.html" target="target_a"> Self-test 3: Constructors and Destructors</a></li>
+                    <li id="menu4"><a href="self-test/4_Inheritance.html" target="target_a"> Self-test 4: Inheritance</a></li>
+                    <li id="menu5"><a href="self-test/5_Template.html" target="target_a"> Self-test 5: Templates</a></li>
+                    <li id="menu6"><a href="self-test/6_STL_Library.html" target="target_a"> Self-test 6: STL Library</a></li>
+                    <li id="menu7"><a href="self-test/7_Hashing.html" target="target_a"> Self-test 7: Hashing</a></li>
+                    <li id="menu8"><a href="self-test/8_Binary_Tree.html" target="target_a"> Self-test 8: Binary Tree</a></li>
+                </ul>
+                </div-->
+                <div class="col-lg-6">
+		<h4>Supplementary Materials</h4>
+                        <ul>
+
+                          <!--<li><a href="labs/eclipse_intro/index.html" target="_blank">Introduction to Eclipse in C++</a>
+                            <p>We use Eclipse (version 4.6.2) Neon.2 to write C++ codes in this course. Eclipse provides an Integrated Development Environment (IDE) that allows developers to write, build, and debug C++ programs.</p>
+                          </li>-->
+                          <li><a href="https://developers.google.com/edu/c++/">Google's C++ Class</a><br />
+                          </li>
+                          <li>Online C++ References:<br />
+                            <a href="http://www.cplusplus.com/reference/">http://www.cplusplus.com/reference/</a><br />
+                            <a href="http://www.cplusplus.com/doc/tutorial/">http://www.cplusplus.com/doc/tutorial/</a><br />
+                            <br />
+                          </li>
+                          <li><a href="comp2012/misc/C++Standard-ANSI-ISO-IEC-14882-2003.pdf">ANSI C++ Standard 2003</a><br /></li>
+                          <li><a href="comp2012/misc/C++11-Standard-ANSI-ISO-IEC-n3337-20120116.pdf">ANSI C++ Standard 2012</a><br/></li>
+                          <li><a href="http://en.wikipedia.org/wiki/C%2B%2B14">Information about the new ANSI C++ Standard 2014</a><br/></li>
+                        </ul>
+	    </div>
+		<div class="col-lg-6">
+		<h4>COMP2011 Materials</h4>
+		<a href="comp2011_2020S.html">2020S COMP2011 Course Webpage</a>
+		</div>
+
+        <div class="col-lg-6">
+        <h4>COMP2012 Self-tests</h4>
+        <a href="comp2012/self-test/self-tests.html">Self-tests</a>
+        </div>
+        <div class="col-lg-6">
+        <h4>Memory Leak Check</h4> 
+	<ul>
+	  <li><a href="comp2012/misc/drmemory_tutorial.html">Dr. Memory</a></li>
+	  <li><a href="comp2012/misc/valgrind_tutorial.html">Valgrind</a></li>
+	</ul>
+        </div>
+        </div>
+		</div>
+    </section>
+
+	<!-- FAQs Section -->
+    <section id="faqs" class="faqs-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">FAQs</h3>
+                <div class="col-lg-12">
+			<h4 style="padding-top:5px">How hard should I work?</h4><br />
+                        <br />
+                          Some people say that a 3-unit course takes 8 hours/week. It all depends. You should cultivate an independent learning habit.<br />
+                          <br />
+                          Here is a guideline:<br />
+                        <ul>
+                          <li>pre-study (15 - 30 minutes): what topic/materials will the coming lecture be covering? </li>
+                          <li>attend class: The A+ students tell you that they pay FULL attention in class and try to understand everything in the class so that it is easy to review the class materials.
+                            <ul>
+                              <li>our notes provide a guideline; also take your own notes </li>
+                              <li>ask questions whenever you don't understand<br />
+                              </li>
+                            </ul>
+                          </li>
+                          <li>post-study (3 hours): re-reading the notes, book reading<br />
+                          </li>
+                        </ul>
+                        <br />
+                        <br />
+                        <h4 style="padding-top:5px">How do I learn a new programming language?</h4><br />
+                        <br />
+                        Learning a programming language is similar to learning a human language (like Chinese, English, French, etc.) but only easier. However, the basic technique is similar to the 3Rs:<br />
+                        <ul>
+                          <li>read more: we are not going to follow the recommended textbook vigorously, and we can't give all the details in our lectures. Read the book! <br />
+                          </li>
+                          <li>write more: there are only 3 programming assignments in this class. That is NOT enough! Think of problems around you and try to solve them by writing a computer   program.<br />
+                          </li>
+                        </ul>
+                        <p>&nbsp;</p>
+                        <h4 style="padding-top:5px">How can I write a program effectively?</h4><br />
+                        <br />
+                        You should spend a lot of time in THINKING (stay away from the computer) before you start WRITING. No matter how beautiful your codes are, if the method you use is wrong, they are still wrong codes.<br />
+                        <br />
+                        Here is a guideline:<br />
+                        <ul>
+                          <li>planning (30 - 40%) : algorithm design, code design, documentation </li>
+                          <li>coding (60 - 70%) :  writing code, debugging, testing </li>
+                        </ul>
+                        <br />
+                        <!--<h4 style="padding-top:5px">What operating system do I use to program for this class?</h4><br />
+                        <br />
+                        The labs will be conducted using the Windows operating system. However, we will be using the Eclipse programming environment with the GCC
+						compiler. This is a multi-platform solution that you can set up on your PC, Mac, and Linux. For information on setting up Eclipse, please refer to <a href="labs/eclipse_intro/">this page</a>.
+                        <p>&nbsp;</p>-->
+                        <h4 style="padding-top:5px">Where may I get help on programming problems?</h4><br/>
+                          <br/>
+                          God help those who help themselves! But if you can't find your God, try the following, in that order:<br />
+                        <ul>
+                         <li>Post your question to the COMP2012 discussion forum on Canvas. Your question &mdash; even you   think it may be a dumb question &mdash; usually is also the question of your fellow   classmates. Your TAs will read messages in the newsgroup too and answer your   question. Furthermore, other classmates will read your question and may also   answer it. <br />
+                          </li>
+                          <li>Email your question to your TAs. (We do most business using emails here in the university.) Please do not expect an answer right away. </li>
+                          <li>Email your question to the instructor. </li>
+                          <li>Don't expect the instructor and your TAs to be your debugger! Except for obvious bugs, we won't debug for you. </li>
+                          <li>Find it on the Web.<br />
+                          </li>
+                        </ul>
+                        <br />
+
+                        <p><h4 style="padding-top:5px">
+                        Where may I get more information about the computing facilities in CSE department?<br />
+						</h4><br />
+                        You can't afford to miss the following URL from our cssystem:<br />
+                        <a href="http://cssystem.cse.ust.hk/home.php?docbase=UGuides&amp;req_url=UGuides/index.html#ug">http://cssystem.cse.ust.hk/home.php?docbase=UGuides&amp;req_url=UGuides/index.html#ug</a>
+                </div>
+            </div>
+        </div>
+    </section>
+	<footer class="page-footer">
+		<div class="container">
+            <div class="row">
+<!-- 				<div class="col-lg-3">
+				    <a href="https://www.facebook.com/groups/481228118923366">
+				    <img src="img/facebook.png"/ style="min-width:30px; max-width:100px; float:left;"></a>
+				</div> -->
+				<div class="col-lg-12">
+					Last modified on <script type="text/javascript">document.write(document.lastModified);</script>
+					<br/>
+					Maintained by COMP2012 Teaching Team &copy; 2020 HKUST Computer Science and Engineering
+				</div>
+			</div>
+		</div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="comp2012/js/jquery.js"></script>
+
+	<!--<script>
+		$('#myTab a').click(function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+
+		// store the currently selected tab in the hash value
+		$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+			var id = $(e.target).attr("href").substr(1);
+			window.location.hash = id;
+		});
+
+		// on load of the page: switch to the currently selected tab
+		var hash = window.location.hash;
+		$('#myTab a[href="' + hash + '"]').tab('show');
+	</script>-->
+
+<!--	<script>
+	$.ajaxPrefilter( function (options) {
+  if (options.crossDomain && jQuery.support.cors) {
+    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+    //options.url = "http://cors.corsproxy.io/url=" + options.url;
+  }
+});
+
+$.get(
+    'http://www.cse.ust.hk/~quan/comp2012/index.html',
+    function (response) {
+        $("#Lec2").html(response);
+});
+	</script>-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="comp2012/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="comp2012/js/jquery.easing.min.js"></script>
+    <script src="comp2012/js/scrolling-nav.js"></script>
+</body>
+
+</html>
