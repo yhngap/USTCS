@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012 Lab 10: Binary Trees and Binary Search Trees</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+    <style>
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f36d33;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+            <h4 class="my-4">
+                <span style="color:darkblue">COMP 2012</span>
+                <small>Object-Oriented Programming and Data Structures</small>
+            </h4>
+
+            <!-- ### Change assignment number and title ### -->
+            <h3 class="my-4">Lab 10
+                <span style="color:#660066">Binary Trees and Binary Search Trees</span>
+            </h3>
+
+            <!-- Introduction section -->
+            <!-- ### Complete introduction section for the assignment ### -->
+            <!-- <div class="card mb-4">
+              <div class="card-body" id="introduction">
+
+              </div>
+            </div> -->
+
+            <div class="card mb-4">
+                <div class="card-body" id="labtask">
+                    <h3 class="card-title">Binary Trees</h3>
+                    <p class="card-text">
+                    <h4 id="objective">Objective</h4>
+                    <p>
+                        In this lab, you will implement several functions of Binary Tree and a class of Binary Search Tree.
+                    </p>
+                    <h4 id="description">Description</h4>
+                    <p>
+                      A binary tree is a tree data structure in which each node has at most two children nodes, which are referred to as the left child and the right child. A basic binary tree node implementation is given in (<a href="img/BtreeNode.h">BtreeNode.h</a>)
+                    </p>
+                    <p>
+                        DO NOT modify this file. There are three helper functions provided, which are useful in completing this lab.
+                        <ul>
+                            <li><code>bool BtreeNode::is_ancestor_of(const T& data)</code> returns true if the current node is an ancestor of any node that has <code>data</code>.</li>
+                            <li><code>const T BtreeNode::find_max()</code> and <code>const T BtreeNode::find_min()</code> recursively search the children to find the min and max element.</li>
+                        </ul>
+                    </p>
+
+                    <h4>Binary Tree Operations</h4>
+                    <p>
+                        <ul>
+                            <li><code>tree_height</code> : Calculate the height of a binary tree. The height of a tree is the number of edges on the longest downward path between the root and a leaf.</li>
+                            <li><code>count_nodes</code> : Calculate the number of nodes of a binary tree.</li>
+                            <li><code>mirror</code> : Create a "new" mirror tree. For example: </li>
+                            <p>Before mirroring:
+<pre>
+                ______________50______________
+               /                              \
+        ______17______                  ______76      
+       /              \                /               
+       9__          __23              54__                
+          \        /                      \                
+          14      19                      72                
+         /                               /                   
+        12                              67
+</pre></p>
+                            <p>After mirroring:
+<pre>
+                ______________50______________
+               /                              \
+              76______                  ______17______
+                      \                /              \
+                    __54              23__          ___9  
+                   /                      \        /       
+                  72                      19      14        
+                    \                               \        
+                    67                              12
+</pre></p>  
+                        <li><code>is_complete</code> : Check whether a binary tree is complete. In a complete binary tree, every level, except possibly the last, is completely filled, and all nodes are as far left as possible. For example: </li>
+                        <p><center><img src="img/img1.png" width="100%" ></center></p>
+
+                        <li><code>BtreeNode&lt;T&gt;* lowest_common_ancestor(BtreeNode&lt;T&gt;* root, const T& a, const T& b)</code> : This function returns the binary tree node which is the lowest common ancestor of the two binary tree nodes with value <code>a</code> and <code>b</code>. If no such node in the binary tree has value <code>a</code> or <code>b</code>, return <code>nullptr</code>. You can assume each node contains a distinct value. In the figure below, nodes A, B and D are the common ancestors of nodes H and I, and node D is the <strong>lowest</strong> common ancestor, because it has the largest depth out of A, B and D. Nodes A and B are the common ancestors of nodes D and K, and node B is the <strong>lowest</strong> common ancestor. The functions <code>is_ancestor_of()</code> may be helpful here. </li>
+                        <p><center><img class="card-img-top" src="img/lca.png" width="30%" height="30%"></center></p>
+                        </li>
+
+                        <li><code>bool is_bst(BtreeNode&lt;T&gt;* root)</code> : This function checks whether a binary tree is also a binary search tree. You can assume each node contains distinct value. For the definition of BST, please refer to the lecture notes on BST. The functions <code>find_min()</code> and <code>find_max()</code> may be helpful here.</li>
+                        </ul>
+                    </p>
+                    <h4>Binary Search Tree</h4>
+                    <p>A binary search tree is a rooted binary tree, whose key value in each node
+                    must be greater than or equal to any key value stored in the left sub-tree, and less than or equal to any
+                    key value stored in the right sub-tree.
+                </p>
+
+                <p>
+                    In this lab, we index the binary tree by two keys(values);  each <b>BinaryNode</b> object in
+                    <b>BinarySearchTree</b> class contains two comparable data members <b>T1: x, T2: y</b>, which satisfy the following:
+                </p>
+                <ul>
+                    <li> The <b>x</b> value of any of the left sub-tree node is less than or equal to its parent node's <b>x</b> value.
+                        If they are the same, then the <b>y</b> value of the left sub-tree node is less than or equal to its parent's <b>y</b> value.
+                    </li>
+                    <li> The <b>x</b> value of any of the right sub-tree  node is greater than or equal to its parent node's <b>x</b> value.
+                        If they are the same, then the <b>y</b> value of the right sub-tree node is grater than its parent's <b>y</b> value.
+                    </li>
+                </ul>
+
+                <p>The <b>BinarySearchTree</b> has the following member functions </p>
+
+                <ul>
+                    <li><code>insert(const T1 &x, const T2 &y)</code>: Insert a pair of key to the BST. If the entry already exists,
+                    you don't need to insert it again, i.e., there are no duplicate nodes.</li>
+                    <li><code>contains(const T1 &x, const T2 &y)</code>: Check if the BST contains the value (x,y).</li>
+                    <li><code>print_max()</code>: print out the maximum value pair stored in the BST.
+                        If two nodes have the same maximum x value, find the maximum y among them.
+                    </li>
+                    <li><code>make_empty()</code>: Delete all nodes in the BST object.</li>
+                    <li><code>print_tree()</code>: Print the BST, the output is rotated -90 degrees. This function is provided to you.</li>
+                </ul>
+                    <h4 id="task">Task</h4>
+                    <ol>
+                        <li>Implement <code>BTreeExercises.h</code>.</li>
+                        <li>Implement member functions of <code>BinarySearchTree</code> class.</li>
+                        <li>Compile the project.</li>
+                        <li>Use the command <code>g++ -std=c++11 -o tree *.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute <code>./tree</code> in terminal.</li>
+                        <li>Run the executable to check with the expected output below: </li>
+<pre>
+---Part1: Binary Tree---
+# Tree 1
+
+  _2
+ /   
+ 1    
+
+Nodes: 2
+Height: 1
+Mirroring: 
+   2
+    \
+     1
+
+# Tree 2
+
+  _2
+ /  \
+ 1   3
+
+Nodes: 3
+Height: 1
+Mirroring: 
+  _2
+ /  \
+ 3   1
+
+# Tree 3
+
+    ___0__
+   /      \
+   1       3
+    \        
+     2        
+
+Nodes: 4
+Height: 2
+Mirroring: 
+    ___0__
+   /      \
+   3      _1
+         /   
+         2    
+
+---Part2: isComplete---
+# Tree 1
+Is Complete: Yes
+# Tree 2
+Is Complete: Yes
+# Tree 3
+Is Complete: No
+
+---Part3: Binary Search Tree---
+The maximum key is undefined.
+           (6,4)
+                 (5,4)
+     (5,3.5)
+(4,2)
+     (3,4)
+           (3,2)
+
+Contains (3,4.0): true
+Contains (5,3.5): true
+Contains (5,2.0): false
+
+The maximum key is (6,4)
+
+---Part4: Lowest Common Ancestor---
+
+        _______A______
+       /              \
+    ___B__          ___C__
+   /      \        /      \
+  _D      _E      _F      _G
+ /  \    /  \    /  \    /  \
+ H   I   J   K   L   M   N   O
+Lowest common ancestor of I and H is D
+Lowest common ancestor of B and F is A
+Lowest common ancestor of A and O is A
+A and Z have no common ancestor
+
+---Part5: Is BST---
+
+    ___4__
+   /      \
+  _2      _6
+ /  \    /  \
+ 1   3   5   7
+Is bst? true
+
+    ___3__
+   /      \
+  _2      _6
+ /  \    /  \
+ 1   4   5   7
+Is bst? false
+
+    ___4__
+   /      \
+  _2      _6
+ /  \    /  \
+ 3   1   5   7
+Is bst? false
+
+               1______
+                      \
+                       2__
+                          \
+                           3
+                            \
+                             4
+Is bst? true
+</pre>
+                    </ol>
+
+
+                    </p>
+                </div>
+ </div>
+            <div class="card mb-4">
+                <div class="card-body" id="submission">
+                    <h3 class="card-title">Submission</h3>
+                    <p class="card-text">
+                        
+                    </p><p>For this lab, please zip and submit the following:
+                    </p><ul>
+                    <li>BTreeExercises.h</li>
+                    <li>BinarySearchTree.h</li>
+                </ul><p></p>
+                <p>The ZINC system has been 
+revamped, you may follow the new instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 10" on Zinc.</p>
+                <p></p>
+                </div>
+             </div>
+            
+
+            <div class="card mb-4">
+                <div class="card-body" id="download">
+                    <h3 class="card-title">Download</h3>
+                    <p class="card-text">
+Download the <a href="skeleton.zip">HERE</a>.
+            </p>
+                </div>
+            </div>
+
+            <!-- Description section -->
+            <!-- ### Complete description section for the assignment ### -->
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3" style="">
+            <div class="sticky-top">
+
+                <!-- Menu Widget -->
+                <div class="card my-12">
+                    <h5 class="card-header">Menu</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="mb-0" type="circle" style="padding-left:20px">
+                                    <li>
+                                        <a href="index.html#labtask">Binary Trees and Binary Search Trees</a>
+                                        <ul>
+                                            <li><a href="index.html#objective">Objective</a></li>
+                                            <li><a href="index.html#description">Description</a></li>
+                                            <li><a href="index.html#task">Task</a></li>
+                                            <li><a href="index.html#submission">Submission</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#download">Download</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintainance widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Page maintained by</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        QUAN, Yuqing
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <a href="mailto:yquanaa@connect.ust.hk">yquanaa@connect.ust.hk</a>
+                                    </li>
+                                    <li>Last Modified:
+                                        <script type="text/javascript">
+                                            document.write(document.lastModified);
+                                        </script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Homepage widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Homepage</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="../../../comp2012.1.html">Course Homepage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+            and Engineering</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function promptWarning() {
+        var s = confirm(
+            "I know that I should not change main.cpp. \nClick \"Cancel\" to proceed. "
+        );
+        if (s == true) {
+            alert("Please read the prompt again.");
+        } else {
+            window.open('lab5-ske.zip');
+        }
+    };
+</script>
+</body>
+
+</html>

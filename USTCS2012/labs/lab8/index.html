@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012 Lab 8: Template, Operator Overloading and Friends</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+ <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+    #download input[type=checkbox ]{
+    display: none;
+    }
+    #download input[type=checkbox]:checked ~ .remove-check{
+        display: none;
+    }
+    #download input[type=checkbox]:checked ~ #message{
+        display: block;
+    }
+    #message{
+        display: none;
+    }
+    <style scoped>
+    .conflicting-class { ... }
+    </style>
+  </style>
+</head>
+
+<body>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+            <h4 class="my-4">
+                <span style="color:darkblue">COMP 2012</span>
+                <small>Object-Oriented Programming and Data Structures</small>
+            </h4>
+
+            <!-- ### Change assignment number and title ### -->
+            <h3 class="my-4">Lab 8
+                <span style="color:#660066">Template, Operator Overloading and Friends</span>
+            </h3>
+
+            <!-- Introduction section -->
+            <!-- ### Complete introduction section for the assignment ### -->
+            <!-- <div class="card mb-4">
+              <div class="card-body" id="introduction">
+
+              </div>
+            </div> -->
+
+            <div class="card mb-4">
+                <div class="card-body" id="labtask">
+                    <h3 class="card-title">Movie List</h3>
+                    <p class="card-text">
+                        <!--<center><img src="img/2.png" height=200px/></center>-->
+    
+                    <h4 id="objective">Objective</h4>
+                    <p>
+                        In this lab:
+                        <li>
+                            Part A: 
+                            You are going to implement a simple data structure <code>set</code>. You need to use template so that the <code>set</code> supports different data types. Also, you need operator overloading to implement functionalities such as set operations, assignment, etc.
+                        </li>
+                        <li>
+                            Part B: 
+                            You are going to use &lt;set&gt; &lt;list&gt; and &lt;map&gt; in Standard Template Library (STL) and &lt;algorithm&gt;.
+                        </li>
+                    </p>
+
+                    <h4 id="description">Description</h4>
+                    <p> Part A </p>
+                    <img src="img/lab8.png" style="display: block; margin: 20px auto; zoom: 100%;"/>
+
+                    <p>
+                        Alice, Bob, Carol, Dan, and Eve (abbreviated as A,B,C,D,E ) are students of the movie club at HKUST. They are now in different parts of the world. They want to share useful information of their favourite movies with each other. They are building:
+                        <li> a movie list (as <code>set&ltstring&gt</code>), and </li>
+                        <li> a movie information includes name and year of release (as <code>set&lt pair&ltstring,int&gt &gt</code>).</li>
+                    </p>
+
+
+                    <p>
+                        Can you implement a data structure <code>set</code> for the purpose? 
+                    </p>
+
+                    <p>
+                        Set is a collection of unique elements. In C++ Standrad Template Library (STL), <code>std::set</code> is implemented with a binary search tree as the underlying data structure. In this lab, we will implement <code>set</code> with an array. Our version should support some set operations, such as set intersection and set union, in addition to the list operations that are implemented in <code>std:set</code>. The expected behaviors of the set operations are described in the following:
+                        <li>
+                            Set intersection: the intersection of two sets is a set containing all elements that are in both sets. The set intersection operation should return the intersection of two sets.
+
+                        </li>
+                        <li>
+                            Set union: the union of two sets is a set containing all elements that are in one of the sets (possibly both). The set union operation should return the union of two sets.
+
+                        </li>
+
+                    </p>
+                    <p>
+                        The program should be able to instantiate 2 template classes: <code>set&ltstring&gt</code> and <code>set&lt pair&ltstring,int&gt &gt</code>. The first template class <code>set&ltstring&gt</code> contains string elements. The movie lists of the student A,B,C,D,E are represented by a <code>set </code> of movie titles (stored as <code>string</code>). 
+                    </p>
+                    <p>
+
+                        The second template class <code>set&lt pair&ltstring,int&gt &gt</code> contains <code>pair&ltstring,int&gt</code> elements. The class <code>pair</code> refers to <code>std:pair</code>, a container implemented in the STL. The template class <code> pair&ltS,U></code> contains 2 elements: <code>first</code> and <code>second</code>, where <code>S</code> is the type of <code>first</code>, and <code>U</code> is the type of <code>second</code>. The movie info is represented by a <code>set</code> of pair in the form of (movie name: <code>string</code>, movie release year: <code>int</code>). For example,
+<pre>
+pair&ltstring, int> info { "Star Wars", 1977 };
+// info.first has value "Star Wars" of type string
+// info.second has value 1977 of type int
+</pre>
+
+                        
+
+                    </p>
+
+                    <p> Part B </p>
+                    <p>In this part exercise, &lt;set&gt; &lt;list&gt; and &lt;map&gt; in Standard Template Library (STL) and &lt;algorithm&gt; will be used. </p>
+                    <li>set</li>
+                    <p>This part starts with 2 STL string sets: Fictions and Movies. Set intersection is implemented on Fictions and Movies. 
+                    <p>The online reference of STL &lt;set&gt; can be found here: <a href="http://www.cplusplus.com/reference/set/set/">http://www.cplusplus.com/reference/set/set/</a> </p>
+                    <p>The online reference of STL &lt;algorithm&gt; can be found here: <a href="http://www.cplusplus.com/reference/algorithm/">http://www.cplusplus.com/reference/algorithm/</a></p>
+                    <p>The online reference of STL &lt;iterator&gt; can be found here: <a href="http://www.cplusplus.com/reference/iterator/">http://www.cplusplus.com/reference/iterator/</a></p>
+
+                    <p><b>Hint:</b> there are some STL functions that you might use to solve these problems quickly. <code>(e.g. "set_intersection" in &lt;algorithm&gt; , "inserter" in &lt;iterator&gt; , "begin()" and "end()" in &lt;set&gt; )</code> However, with this approach you will need to self-study how to use them yourself. A more straight-forward approach would be to simply use if-statements and for-loops to create the algorithms yourself.</p>
+                    <li>list</li>
+                    <p>After these set operations, a list container listR is used by merging the content of Fictions and Movies. listR will be sorted.</p> 
+                    <p><b>Note:</b> STL list iterator does not support random access which is needed for the &lt;alogrithm&gt;'s sort function to work, so use the sort member function of stl list instead, see <a href="http://www.cplusplus.com/reference/list/list/sort/">http://www.cplusplus.com/reference/list/list/sort/</a>.</p>
+                    <p><code>(e.g. "merge" in &lt;algorithm&gt; , "back_inserter" in &lt;iterator&gt; , "begin()" and "end()" in &lt;set&gt; , "push_back", "push_front" and "sort" in &lt;list&gt; )</code></p>
+                    <li>map</li>
+                    <p>Then a map container mapMovie is created. You need to do element search and deletion in mapMovie.</p>
+                    <p>The online reference of &lt;map&gt; can be found here <a href="http://www.cplusplus.com/reference/map/map/">http://www.cplusplus.com/reference/map/map/</a><code>(e.g. "find", "erase" and "end()" in &lt;map&gt;)</code></p>
+                    <p>You should use iterators to print out the content of set, list and map.</p>
+
+                    <h4 id="class-declaration">Class Declaration</h4>
+
+                    <p>
+
+                        The class <code>set</code> stores the data as an array.
+                        This template class takes a typename <code>T</code> which is the type of the elements in the
+                        array. 
+                    </p>
+
+                    <ul>
+                        <li><code>elements: T*</code></li>
+                        <p>
+                            The dynamic array storing the elements. The value is <code>nullptr</code> initially.
+                        </p>
+                        <li><code>size: int</code></li>
+                        <p>
+                            The actual number of elements in the array.
+                        </p>
+   
+                        <li><code>str(): string</code></li>
+                        <p>
+                            Return the content of the set as a string. You need this function for the
+                            stream insertion operator <code>operator<<</code>. This function has already been implemented for you.
+                        </p>
+                        <li>Default constructor</li>
+                        <p>
+                            The default constructor initialize <code>elements</code> to <code>nullptr</code> and <code>size</code> to <code>0</code>.
+                        </p>
+                        <li> Conversion constructor</li>
+                        <p>
+                            The conversion constructor converts an array with unique elements to <code>set</code>.
+                        </p>
+                        <li>Copy constructor (TODO)</li>
+                        <p>
+                            The copy constructor should perform deep copy by calling assignment operator function <code>operator=</code>.
+                        </p>
+
+                        <li>Destructor</li>
+                        <p>
+                            Delete the dynamic array.
+                        </p>
+                        <li><code>cardinality(): int</code></li>
+                        <p>
+                            Accessor of <code>size</code>.
+                        </p>
+                        <li><code>findElement(value: const T&): int</code> </li>
+                        <p>
+                            Return the index of the element if it exists. Otherwise, return -1.
+                        </p>
+                       <li><code>isExist(value: const T&): bool</code> </li>
+                        <p>
+                            Return true if the element exists. Otherwise, return false.
+                        </p>
+                       <li><code>addElement(value: const T&): void</code> </li>
+                        <p>
+                            Allocate a new array of size <code>size+1</code>, copy the existing elements to the new array and add the new element to the last position of the new array. Do nothing if the element already exists,
+                        </p>
+
+                       <li><code>removeElement(value: const T&): bool</code> </li>
+                        <p>
+                            Allocate a new array and copy existing elements to the new array except the element to be deleted. Return true if the element is found and deleted. Otherwise, return false.
+                        </p>
+                        <li>Addition operator <code>operator+</code> (TODO)</li>
+                        <p>
+                            Perform the set union operation. Return the result.
+                        </p>
+                        <li>Multiplication operator <code>operator*</code> (TODO)</li>
+                        <p>
+                            Perform the set intersection operation. Return the result.
+                        </p>
+                        <li>Assignment operator <code>operator=</code> (TODO)</li>
+                        <p>
+                            Copy the content of the input set to this one. You need to do DEEP COPY.
+                        </p>
+                        <li>Equality operator <code>operator==</code> (TODO)</li>
+                        <p>
+                            Return true if and only if the size and the elements in two sets are identical. Otherwise,
+                            return false.
+                        </p>
+                        <li>Stream insertion operator <code>operator<<</code> (TODO)</li>
+                        <p>
+                            Print the information of the <code>set</code> to the stream. You need to use <code>str()</code>. You
+                            CANNOT directly print to <code>cout</code>.
+                        </p>
+                    </ul>
+
+                    <p>
+                        Note that we also overload the <code>operator<<</code> for <code>pair&ltstring,int></code> in the <code>main.cpp</code> since it is not a primitive type and does not support stream insertion operator by default.
+                    </p> 
+
+                    <h4 id="hint">Hints</h4>
+                    <ul>
+                        <li>You may re-use some of the implemented functions such as <code>findElement</code>, <code>isExist</code> for the set operations.
+                        </li>
+                        <li> The copy constructor can be implemented in one line of code using a properly implemented <code>operator=</code>.
+                        </li>
+                        <li> For the assignment operator, be reminded to avoid self-assignment and properly delete the old data when necessary.
+                        </li>
+                        <li>  Be reminded to <code>friend</code> your stream insertion operator <code>operator<<</code>.
+                        </li>    
+                        <li>The prototypes of the operators are not given. Pay particular attention to what the
+						return type should be. This lab should be easy if you review the lecture note.
+                        </li>
+                    </ul>
+
+                    <h4 id="task">Task</h4>
+                    <ol>
+                        <li> Finish the TODOs in <code>set.h</code>.
+
+            <ul>
+                 <li> Copy constructor</li>
+                  <li> <code>operator+</code></li>
+                  <li> <code>operator*</code></li>
+                  <li> <code>operator=</code></li>
+                  <li> <code>operator==</code></li>
+                  <li> <code>operator<<</code></li>
+             </ul>
+                        </li>
+
+                        <li>Compile the project.</li>
+                        <li>Use the command <code>g++ -std=c++11 -o partA mainA.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute ./partA in terminal
+                        <li>Check with the expected output below:</li>
+
+<pre>
+==========================================
+||             Movie List              ||
+==========================================
+
+1. Alice, Bob, and Dan are sharing their Movie Lists.
+Alice's Movie List (A) : {The Time Machine,Harry Potter,The Lord of the Rings}
+|A| = 3
+
+Bob's Movie List (B) : {The Shawshank Redemption,City of God,The Lord of the Rings,Harry Potter}
+|B| = 4
+
+Dan's Movie List (D) : {Harry Potter,The Lord of the Rings,The Time Machine}
+|D| = 3
+
+2. Carol collects the Movie List from Alice and Bob. (A union B)
+Carol's Movie List (C) : {The Time Machine,Harry Potter,The Lord of the Rings,The Shawshank Redemption,City of God}
+|C| = 5
+
+3. Eve wants to find the movie(s) that would work for both Alice and Bob. (A intersect B)
+Eve's Movie List (E) : {The Lord of the Rings,Harry Potter}
+|E| = 2
+
+4. Alice, Bob, and Dan want to find out if their Movie Lists share the same movie(s).
+A = {The Time Machine,Harry Potter,The Lord of the Rings}
+B = {The Shawshank Redemption,City of God,The Lord of the Rings,Harry Potter}
+D = {Harry Potter,The Lord of the Rings,The Time Machine}
+A == B? false
+A == D? true
+
+==========================================
+||           Movie  Info           ||
+==========================================
+
+5. The initial state of directory : 
+{}
+
+6. Adding some movie info : 
+{
+(The Lord of the Rings : 2002),
+(City of God : 2002)}
+
+7. Several students have suggested adding some old films : 
+{
+(The Lord of the Rings : 2002),
+(City of God : 2002),
+(The Shawshank Redemption : 1994),
+(Star Wars : 1977),
+(Forest Gump : 1994)}
+
+8. Oops, a student miswrote the release year of the film, let's remove that : 
+{
+(The Lord of the Rings : 2002),
+(City of God : 2002),
+(Star Wars : 1977),
+(Forest Gump : 1994)}
+</pre>
+                <li> Finish the TODOs in <code>mainB.cpp</code>.</li>
+                <li>Compile the project.</li>
+                <li>Use the command <code>g++ -std=c++11 -o partB mainB.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute ./partB in terminal
+                <li>Check with the expected output below:</li>
+                <pre>
+************************** Part1: set **************************
+Set Fictions Content = {Harry Potter,The Lord of the Rings,The Time Machine}
+Set Movies Content = {City of God,Harry Potter,The Lord of the Rings,The Shawshank Redemption}
+Fictions intersect Movies Content = {Harry Potter,The Lord of the Rings}
+
+************************** Part2: list **************************
+List R Content = {City of God,Harry Potter,Harry Potter,The Lord of the Rings,The Lord of the Rings,The Shawshank Redemption,The Time Machine}
+New R Content = {Avenger,City of God,Harry Potter,Harry Potter,The Lord of the Rings,The Lord of the Rings,The Shawshank Redemption,The Time Machine,Saw}
+Sorted R Content = {Saw,Avenger,City of God,Harry Potter,Harry Potter,The Time Machine,The Lord of the Rings,The Lord of the Rings,The Shawshank Redemption}
+
+************************** Part3: map **************************
+mapMovie Content: 
+key: City of God        Value: 2002
+key: Forest Gump        Value: 1994
+key: Star Wars  Value: 1977
+key: The Lord of the Rings      Value: 2002
+key: The Shawshank Redemption   Value: 1994
+Key found, the value is 1977
+mapMovie Content after deletion: 
+key: Forest Gump        Value: 1994
+key: Star Wars  Value: 1977
+key: The Lord of the Rings      Value: 2002
+key: The Shawshank Redemption   Value: 1994
+</pre>
+
+                    </ol>
+
+
+                    </p>
+                </div>
+            </div>
+                 <div class="card mb-4">
+                <div class="card-body" id="submission">
+                    <h3 class="card-title">Submission</h3>
+                    <p class="card-text">
+                        
+                    </p><p>For this lab, please zip and submit the following:
+                    </p><ul>
+                    <li>set.h</li>
+                    <li>mainA.cpp</li>
+                    <li>mainB.cpp</li>
+                </ul><p></p>
+                <p>The Zinc system has been revamped, you may follow the new instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 8" on Zinc.</p>
+                <p></p>
+                </div>
+             </div>
+            
+
+            <div class="card mb-4">
+                <div class="card-body" id="download">
+                    <h3 class="card-title">Download</h3>
+                    <p class="card-text">
+Download the <a href="skeleton.zip">HERE</a>. 
+            </p>
+            <p>Part of set.h file has a minor typo, now it has been updated, please check. Line 93 of set.h : </p>
+            <p>delete [] elements;</p>
+                </div>
+            </div>
+
+            <!-- Description section -->
+            <!-- ### Complete description section for the assignment ### -->
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3" style="">
+            <div class="sticky-top">
+
+                <!-- Menu Widget -->
+                <div class="card my-12">
+                    <h5 class="card-header">Menu</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="mb-0" type="circle" style="padding-left:20px">
+                                    <li>
+                                        <a href="index.html#labtask">Movie List</a>
+                                        <ul>
+                                            <li><a href="index.html#objective">Objective</a></li>
+                                            <li><a href="index.html#description">Description</a></li>
+                                            <li><a href="index.html#class-declaration">Class Declaration</a></li>
+                                            <li><a href="index.html#task">Task</a></li>
+                                            <li><a href="index.html#submission">Submission</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#download">Download</a>
+                                        <ul>
+                                            <li><a href="index.html#download-source">Source</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintainance widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Page maintained by</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        QUAN, Yuqing
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <a href="mailto:yquanaa@connect.ust.hk">yquanaa@connect.ust.hk</a>
+                                    </li>
+                                    <li>Last Modified:
+                                        <script type="text/javascript">
+                                            document.write(document.lastModified);
+                                        </script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Homepage widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Homepage</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="../../../comp2012.1.html">Course Homepage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+            and Engineering</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function promptWarning() {
+        var s = confirm(
+            "I know that I should not change main.cpp. \nClick \"Cancel\" to proceed. "
+        );
+        if (s == true) {
+            alert("Please read the prompt again.");
+        } else {
+            window.open('lab5-ske.zip');
+        }
+    };
+</script>
+</body>
+
+</html>

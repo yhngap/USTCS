@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<!-- ### Change lab number ### -->
+    <title>COMP 2012 ZINC - Automatic Grading System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+	
+	<!-- Prism syntax highlighter -->
+	<link href="prism.css" rel="stylesheet" />	
+  </head>
+
+  <body>
+    <script src="prism.js"></script>
+	
+    <!-- Page Content -->	
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4"><span style="color:darkblue">COMP 2012</span>
+            <small>Object-Oriented Programming and Data Structures</small>
+          </h2>
+		  
+		  <!-- ### Change lab number and title ### -->
+		  <h3 class="my-4">
+            <span style="color:#660066">ZINC</span> Automatic Grading System
+          </h3>
+		  <img class="card-img-top" src="images/zinc.png" style="width:30%;" alt="Card image cap">
+		  <br/><br/>
+
+          <!-- Introduction section -->
+		  <!-- ### Complete introduction section for the lab ### -->
+          <div class="card mb-4">
+			
+            <div class="card-body" id="introduction">
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+			    ZINC stands for "ZINC is not CASS". It is an online assessment platform that allows you to submit your programming work for automated grading. Upon completion of grading, you will get back a report showing the results of the automated assessments.
+			  </p>
+			</div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+		  
+		  <div class="card mb-4">
+			
+            <div class="card-body" id="zip-file-preparation">
+              <h3 class="card-title">Prepare a Zip File with your Source Code</h3>
+			  <br/>
+              <p class="card-text">
+			    As ZINC only accepts zip file, you will need to prepare a zip file with your source code as described below. Note that you must <b>compress the required files only</b>, NOT a folder containing the files. Also, <b>do not include any file that is not required</b>. Check the lab/assignment page for the exact list of required files.
+
+                <br><br>The following is for the Windows user, although the steps are very similar on MacOS as well. MacOS users may refer to this <a href="https://www.youtube.com/watch?v=euP3GCZn0sk">short youtube video on compressing multiple files on MacOS</a>. <b>Note for MacOS users:</b> MacOS may add some "extra" stuff like "__MACOSX" to your zip file. Zinc may report that those are "extra files". You may just ignore those "errors" and check the test case results. If you really need to remove those extra files because it affects the test cases somehow, you may follow <a href="https://wpguru.co.uk/2013/10/how-to-remove-__macosx-from-zip-archives/">this guide</a>.
+				<br/><br/>
+				<ol>
+					<li>Go to the folder where your source code is located.
+					</li>
+					<br/>
+					<li>Suppose you want to submit your work for Lab 1 and let's say you only need to submit one .cpp file. Right-click the source file that you need to submit, click "Send to" and "Compressed (zipped) folder".<br><br>If you need to submit multiple files, select/highlight all those files first (hold down ctrl key on Windows, and click on them one by one; or, just hold down your mouse to select a group of files), before you right-click one of them for compressing all selected files.
+                    <br/><br/>
+
+					<img src="images/zip-file.png" style="width:80%"/>
+					<br/><br/>
+					Now, you should see a zip file with your source code.
+					<br/><br/>
+					<img src="images/zip-finished.png" style="width:80%"/>
+					</li>
+				</ol>
+			  </p>
+			</div>
+            <div class="card-footer text-muted">
+              End of Zip File Preparation
+            </div>
+          </div>
+
+          <!-- Lab work section -->
+		  <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="submit-work">
+              <h3 class="card-title">How to Submit Your Work</h3>
+			  <br/>
+			  <ol>
+			    <li>Go to <a href="https://zinc.cse.ust.hk">https://zinc.cse.ust.hk</a></li>
+				<br/>
+				<li>Login to ZINC using your ITSC credentials.<br/><br/>
+					<img src="images/cas-login.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>If you have successfully login, you should see the following main page.
+				<br/><br/>
+				<img src="images/zinc-main.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>Click COMP 2012 and this brings you to the assignment submission page. Note: the following screenshots show COMP2012H as an example just for illustration purposes, but all steps apply to COMP2012 as well.
+				<br/><br/>
+				<img src="images/assignment-page.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>Click on the lab/assignment that you want to submit your work to. Suppose you want to submit Lab 1, click "Lab 1: Makefile and Separate Compilation". Now, you should a page like this. Don't mind the description there (if any), they are just copied and pasted from the lab/assignment page. Our lab/assignment page is always the most up-to-date one.
+				<br/><br/>
+				<img src="images/lab1-page.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>To submit your work, click the blue button on the top-right hand corner of the page and a file selection dialog is opened.<br/><br/>
+				<img src="images/select-zip.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>Go to the folder where you put your zip file, select the zip file (the one with your source code), and click "Open".
+				<br/><br/>
+				<img src="images/zip-upload.png" style="width:80%"/>
+				<br/><br/>
+				You will be prompted and asked whether you want to upload the selected file. To confirm, click "Upload".
+				</li>
+				<br/>
+				<li>After the zip file has been uploaded, you will see the following page.
+				<br/><br/>
+				<img src="images/waiting-for-report.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>ZINC should start grading your submitted lab/assignment. Please note that it normally takes a few seconds to complete the grading. Press "F5" to refresh the page and see whether the grading is done. When the grading is done, you should see the following.
+				<br/><br/>
+				<img src="images/report-ready.png" style="width:80%"/>
+				<br/><br/>
+				Note: Your score is shown under "Reports - Score".
+				</li>
+				<br/>
+				<li>If you would like to check the grade details, click on the score and you will see the report.
+				<br/><br/>
+				<img src="images/grade-details.png" style="width:80%"/>
+				</li>
+				<br/>
+				<li>Expand the menu item for more details. E.g., more details about compilation.
+				<br/><br/>
+				<img src="images/compilation-details.png" style="width:80%"/>
+				</li>
+			  </ol>			  
+            </div>
+			<div class="card-footer text-muted">
+              End of How to Submit Your Work
+            </div>
+          </div>
+		</div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+                      <li>
+                        <a href="index.html#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="index.html#zip-file-preparation">Zip File Preparation</a>
+                      </li>
+                      <li>
+                        <a href="index.html#submit-work">How to Submit Your Work</a>
+                      </li>
+			  		  <!--<li>
+				  	    <a href="#grading">Grading</a>
+					  </li>-->
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+		    </div>
+          		  
+		    <!-- Maintainance widget -->
+            <!--<div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        Prof. Desmond TSOI
+                      </li>
+                      <li>
+                        Email: <a href="mailto:desmond@ust.hk">desmond@ust.hk</a>
+                      </li>
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+			</div>          -->
+		  		  
+		    <!-- Homepage widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Homepage</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="../../comp2012.1.html">Course Homepage</a>
+                      </li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+            </div>
+	      </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>

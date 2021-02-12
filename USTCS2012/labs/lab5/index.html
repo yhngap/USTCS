@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 5: More on Inheritance</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 5
+          <span style="color:#660066">More on Inhertiance</span>
+        </h3>
+
+ 
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <!-- <div class="card mb-4">
+          <div class="card-body" id="introduction">
+
+          </div>
+        </div> -->
+
+        <div class="card mb-4">
+          <div class="card-body" id="labtask">
+            <!-- <h3 class="card-title">Inheritance Basics</h3> -->
+            <p class="card-text">
+              <center><img src="img/cat.jpg" width="100%" /></center>
+              <br>
+              <h4 id="objective">Introduction</h4>
+              <p>
+                Let's play with cats this time. Meow~
+                <br><br>
+<!--                 <pre> /\_/\
+( o.o )
+ > ^ <</pre> -->
+                You will be given a class diagram, description of the classes, a main.cpp that uses those classes, and some of the class header files. You will create the missing class header and source files yourself, to practice creating classes with inheritance from scratch.
+              </p>
+
+              <h4 id="description">Description</h4>
+              <p>There are 4 classes in total:</p>
+              <center><img src="img/classes.png" width="100%" ></center>
+              <p>The top-level base class is Cat. FatCat inherits from Cat while UltraFatCat inherits from FatCat. Toy is a separate class. A Cat owns a Toy.</p>
+
+              <p>You should already have some idea on how to create and design simple classes after lab 4, so we are not going to repeat the obvious here.</p>
+
+              <h3>Cat</h3>
+              <p>The cat.h is already given in the starting code. You should not modify or submit that. Please follow the instructions in the header file and check the sample output to implement the Cat class in cat.cpp.</p>
+
+              <h3>FatCat</h3>
+              <p>You should declare the class in <b>fatcat.h</b> and define the member functions in <b>fatcat.cpp</b>. You can see that fatcat.h is included in main.cpp.</p>
+              <p>It should NOT have any data member defined in FatCat itself.</p>
+              <p>Compared to its parent class, it has a new function <b>eatBigFish</b> which increases the fullness by 20. It also redefines <b>play</b> which decreases fullness by 8 only.</p>
+              
+              <h3>UltraFatCat</h3>
+              <p>You should declare the class in <b>ultrafatcat.h</b> and define the member functions in <b>ultrafatcat.cpp</b>. You can see that ultrafatcat.h is included in main.cpp.</p>
+              <p>It should NOT have any data member defined in UltraFatCat itself.</p>
+              <p>Compared to its parent class, it has a new function <b>eatFishBuffet</b> which increases the fullness by 30. It also redefines <b>play</b> which decreases fullness by 5 only.</p>
+              
+
+              <h3>Toy</h3>
+              <p>A cat owns a toy. The toy.h is already given in the starting code. You should not modify or submit that. Please follow the instructions in the header file and check the sample output to implement the Toy class in toy.cpp.</p>
+              
+              
+              <h4 id="output">Sample output</h4>
+                (updated on Oct 15th, after changing one line in main.cpp, see the Download section)
+                <pre>
+Maru's toy is created.
+Cat constructor is called.
+Maru eats a fish!
+Maru's fullness is 10.
+Maru plays with you energetically!
+Maru's fullness is 0.
+Cat destructor is called.
+Maru's toy is destroyed.
+===============================================
+Fat Fat's toy is created.
+Cat constructor is called.
+FatCat constructor is called.
+Fat Fat eats a big fish!
+Fat Fat's fullness is 20.
+Fat Fat plays with you!
+Fat Fat's fullness is 10.
+FatCat destructor is called.
+Cat destructor is called.
+Fat Fat's toy is destroyed.
+===============================================
+Big Fat's toy is created.
+Cat constructor is called.
+FatCat constructor is called.
+UltraFatCat constructor is called.
+Big Fat eats a fish!
+Big Fat's fullness is 10.
+Big Fat eats a big fish too!
+Big Fat's fullness is 30.
+Big Fat eats a delicious fish buffet!!!
+Big Fat's fullness is 60.
+Big Fat plays with you lazily...
+Big Fat's fullness is 50.
+UltraFatCat destructor is called.
+FatCat destructor is called.
+Cat destructor is called.
+Big Fat's toy is destroyed.
+===============================================
+</pre>
+(Note: yes, after every play, the fullness has been decreased by 10 for all kinds of cats; it is correct according to what we have in main.cpp, but why? something to think about :))
+              </ol>
+
+
+          </div>
+
+      
+    </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission</h3>
+            <p class="card-text">
+
+              
+                  <p>For this lab, please zip and submit the following:
+                  <ul>
+                    <li>toy.cpp</li>
+                    <li>cat.cpp</li>
+                    <li>fatcat.h</li>
+                    <li>fatcat.cpp</li>
+                    <li>ultrafatcat.h</li>
+                    <li>ultrafatcat.cpp</li>
+                  </ul></p>
+                  <p>You may follow the Zinc instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 5" on Zinc. It will be open before the first lab session. Please use the sample output to check your work before then.</p>
+
+
+            </p>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+              
+                  Download the <a href="skeleton1015.zip">skeleton1015.zip</a>.
+                  <br>(Minor update on Oct15th: changed <code>u.eatFishBuffet();</code> to <code>u.eatBigFish();</code> in Line 50 of main.cpp; it doesn't affect the requirements)
+
+
+            </p>
+          </div>
+        </div>
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+
+
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3" style="">
+        <div class="sticky-top">
+
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li><a href="index.html#labtask">Description</a></li>
+                    <li><a href="index.html#submission">Submission</a></li>
+                      
+                      <li><a href="index.html#download">Download (starting code)</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Wallace Mak
+                    </li>
+                    <li>
+                      Email:
+                      <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">
+                        document.write(document.lastModified);
+                      </script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="../../../comp2012.1.html">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    function promptWarning() {
+      var s = confirm(
+        "I know that I should only change the store.cpp file. \nClick \"Cancel\" to proceed. "
+      );
+      if (s == true) {
+        alert("Please read the prompt again.");
+      } else {
+        window.open('source.zip');
+      }
+    };
+  </script>
+</body>
+
+</html>

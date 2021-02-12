@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Assignment 2: Financial Planner</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- Prism syntax highlighter
+  <link href="prism.css" rel="stylesheet" /> -->
+
+  <!-- For code highlighting -->
+  <script src="vendor/prism/prism.js" type="text/javascript"></script>
+  <link href="vendor/prism/prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://course.cse.ust.hk/comp2012/assignments/assignment2/prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Assignment 2
+          <span style="color:#660066">Financial Planner</span>
+        </h3>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the assignment content here ### -->
+          <img class="card-img-top" src="images/financial.jpg" alt="Card image cap">
+
+          <div class="card-body" id="introduction">
+            <h3 class="card-title">Introduction</h3>
+            <p class="card-text">
+              <p>In this assignment, through the implementation of a financial planer, you will have practices on the following concepts:</p>
+                <ul>
+                  <li>Inheritance</li>
+                  <li>Polymorphism</li>
+                  <li>Run-time type information (RTTI)</li>
+                  <li>Pointers</li>
+                  <li>Abstract Base Class</li>
+                </ul>  
+
+            </p>
+
+            <!-- 			  <br/>
+			  <h4>Sub-section heading</h4>
+			  <p>
+			    ...
+			  </p>
+			  <br/>
+
+			  <h4>Sub-section heading</h4>
+			  <p>
+			    ...
+			  </p>	 -->
+          </div>
+          <div class="card-footer text-muted">
+            <p>We value academic integrity very highly. Please read the <a href="../../../comp2012.1.html#honorcode">Honor
+                Code</a> section on our course webpage to
+              make sure you understand what is considered as plagiarism and what the penalties are. The following are
+              some of the highlights:</p>
+            <ul>
+              <li>Do NOT try your "luck" - we use sophisticated plagiarism detection software to find cheaters. We also review codes for potential cases manually.</li>
+              <li>The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your assignment. Please read the <a href="../../../comp2012.1.html#honorcode">Honor Code</a> thoroughly.</li>
+              <li>Serious offenders will fail the course immediately, and there may be additional disciplinary actions from the department and university, upto and including expulsion.</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="ow">
+            <h3 class="card-title">Overview</h3>
+            <p class="card-text">
+              <p></p>
+              <p>There are 5 classes.</p>
+              <ul>
+                <li><b>Transaction</b>: is an abstract base class. This is the basic unit of record in ledger.</li>
+                <li><b>Income</b>: is a type of transaction which is implemented slightly differently on top of transaction. </li>
+                <li><b>Expenses</b>: is a type of transaction which is implemented slightly differently on top of transaction.</li>
+                <li><b>Ledger</b>: keeps all the transactions</li>
+                <li><b>Account</b>: keeps track of different ledgers and different kinds of balances.</li>
+                <p></p>
+               <p>The relations of the classes are illustrated with the following UML diagram. You may refer to this <a href="https://en.wikipedia.org/wiki/Class_diagram">wiki page</a> to understand more about the notations used in the UML diagram.</p>
+               <p><img src="images/class_diagram_updated3.jpg" width=100% height="600"></p>
+
+
+              </ul>
+              <p>Your solution to this assignment must be based on the given skeleton code provided in the Download section.</p>
+              <p>Your task is to complete the following:</p>
+                <ul>
+                  <li>Account implementation in account.cpp</li>
+                  <li>Expenses implementation in expenses.cpp</li>
+                  <li>Income implementation in income.cpp</li>
+                  <li>Ledger implementation in ledger.cpp</li>
+                  <li>Transaction implementation in transactions.cpp</li>
+                </ul>
+              </p>
+              <p><b>These are the only 5 files you are supposed to modify/create, zip, and then submit to ZINC.</b></p>
+
+              <p>Comments in the corresponding header files list out the detailed requirements. The description below supplements only the missing information. You need to read both the source/header files and the webpage description carefully to get the whole picture.</p>
+
+              <p>Read the FAQ page for some common clarifications. You should check that a day before the deadline to make sure you don't miss any clarification, even if you have already submitted your work then.</p>
+
+
+              <p>If you need clarification of the requirements, please feel free to post your question on Piazza with the <u>pa2</u> tag.
+			  However, to avoid cluttering the forum with repeated/trivial questions, please do <b>read all the source code comments, webpage
+			  description, sample output, and the latest FAQ (refresh this page regularly) carefully before you post your questions</b>. You should also check if your question has been asked before posting one. Non-trivial/non-repeated questions would be prioritized. Please note that we won't debug for any student's assignment for fairness.
+      </p>
+
+              <p>Submission details are in the Submission and Deadline section.</p>
+              </p>
+
+          </div>
+        </div>
+
+
+        <!-- Download section -->
+        <!-- ### Complete download section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <ul>
+              <li>Skeleton code:
+                <a href="skeleton.zip">skeleton.zip</a>
+              </li>
+            </ul>
+
+             <p>This is a Makefile project. Just do what you did in <a href="../../labs/lab1/index.html">lab 1</a> to put that in your VS Code / Eclipse / other IDEs. In VS Code terminal, running <code>make</code> will create 3 excuteables: test1.exe, test2.exe and test3.exe for the 3 given test cases which are compiled from their corresponding mainN.cpp file, where N is the test case number. Run <code>./testN.exe</code> to run the program.</p> See the <a href="index.html#sample-output">Sample Output and Grading Scheme</a> section for more information about the test cases.
+
+
+           <!--  <p>
+            For VS Code, basically just follow <a href="https://course.cse.ust.hk/comp2011/labs/vscode/#terminal">creating a project and using the terminal for custom compilation command</a> section on our VS Code usage tutorial. That is, create a folder to hold all the extracted files in your file explorer, then open this folder in VS Code. You can then use the terminal command <code>g++ -std=c++11 *.cpp -o programName.exe</code> to compile all sources in the folder to the program, and <code>./programName</code> to run it afterward.
+            </p>
+            <p>
+              For Eclipse: create a standard Eclipse C++ project (MinGW gcc compiler on Windows, or MacOS gcc on Mac) and add all files from the zip package to it.
+            </p>
+ -->
+
+        </div>
+      </div>
+
+       
+
+<!--         
+        <div class="card mb-4">
+          <div class="card-body" id="format">
+            <h3 class="card-title">Output format</h3>
+            
+            <p>In <code>Inventory::print()</code>, you need to follow this format exactly for printing the inventory and the items in it. You should not have any other console output in any other functions that you implement. If you are not sure about the format, check the sample output, or simply try your implementation on the online autograder (feel free to try as the number of submissions is not limited; we only use your last submission for grading at the end).</p>
+            <p>The format is as follows:</p>
+            <pre>{"[FIRST ITEM NAME]":[FIRST ITEM QUANTITY],"[SECOND ITEM NAME]":[SECOND ITEM QUANTITY],"[THIRD ITEM NAME]":[THIRD ITEM QUANTITY],"[FORTH ITEM NAME]":[FORTH ITEM QUANTITY]<font color="green"> AND SO ON...</font>}</pre>
+            <p>Basically, use { and } to contain all items which are separated by a single comma. Each item is represented by a quoted name, followed by a colon, followed by its quantity.</p>
+            <p>At the very end after }, there is a single endl.</p>
+            <p>For example, if we have 10 apples, 20 bananas, and 15 oranges, the print function should print the following line:</p>
+              <pre>{"Apple":10,"Banana":20,"Orange":15}</pre>
+            <p>Tips: the double quote character in C++ has to be escaped, i.e., <code>"\""</code> represents a double quote string while <code>"""</code> is incorrect.</p>
+            
+
+
+        </div>
+      </div>
+ -->
+
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="sample-output">
+            <p>
+              <h3 class="card-title">Sample Output and Grading Scheme</h3>
+            </p>
+<p>
+  Your finished program should produce the exact same output as our <a href="sample.zip">sample output</a>. Please note that sample output, naturally, does not show all possible cases. It is part of the assessment for you to design your own test cases to test your program. <b>Be reminded to remove any debugging message</b> that you might have added before submitting your code.
+</p>
+
+<p>Your program should terminate without any memory leak. Your program will need to have 0 memory leak as well as correct output. Please note the sample outputs are only for you to test your program on. The actual test cases are hidden and would only be used by us for the grading. Therefore, simply printing out all the outputs using <code>cout</code> does NOT work. We would grade your work by comparing the outputs of your program when run on our HIDDEN test cases. </p>
+
+<p> 
+    <strong style="color: red;">[New!]</strong>Below includes updates on program's print outs: (more cases may be added for clarity)<br>
+    Please make sure your program satisfy BOTH the print outs from sample.zip as well as those listed below. <br><br>
+    
+    <!--<strong>case 1</strong>: when you add transactions to the ledger beyond the maxNumTrans limit<br>
+    print: <code>Memory is full. Failed to add transaction!</code><br><br>
+    
+    <strong>case 2</strong>: How to print out sumToWhere?<br>
+    print: print out <code>Bank</code> if sumToWhere==BANK, <code>Credit Card</code> if 'CREDIT_CARD' and <code>Cash</code> if 'CASH'. <br><br>    -->
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>	
+
+<p>account.cpp</p>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Function Names</th>
+    <th class="tg-0lax">Sample Print Outs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Account::Account(double bank, double creditCard, double cash)</td>
+    <td class="tg-0lax">Initialization of account succeed! There are two ledger: Income and Expenses.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">==========Account Summary==========</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Maximum #. transactions allowed for each ledger: 100</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Current #. transactions allowed for each ledger: 100</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Current bank balance: 1000</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Current credit card balance: 1000</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Current cash balance: 1000</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Account::addBalance(int option, double amount)</td>
+    <td class="tg-0lax">Wrong balance option number!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Account::updateLedger(Transaction* oldTrans, Transaction* newTrans)</td>
+    <td class="tg-0lax">New and Old transaction types not matching!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Fail to insert records!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Successfully updated.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Account::addTransactionToLedger(Transaction* newTransact)</td>
+    <td class="tg-0lax">5000 added into Bank.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">5000 added into Cash.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">5000 added into Credit Card.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Oh no! Not enough money to spend! :(</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Fail to add the transaction! &gt;.&lt;</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Transaction amount 5000 added</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Account::removeTransactionFromLedger(Ledger* led, int numTransact)</td>
+    <td class="tg-0lax">Error! No transactions in this ledger!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">An transaction has been removed successfully.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Account::printBalance() const</td>
+    <td class="tg-0lax">Printing Balances</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Bank: 10850</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Credit Card: 1000</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Cash: 800</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Account::~Account()</td>
+    <td class="tg-0lax">All account records deleted.</td>
+  </tr>
+</tbody>
+</table>	
+
+</p>
+<br><br>
+<p>transactions.cpp</p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Function Names</th>
+    <th class="tg-0lax">Sample Print Outs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Transaction::~Transaction()</td>
+    <td class="tg-0lax">Transaction with 1200 dollars on 11/10/2020 deleted.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Transaction::setAmount(double amount)</td>
+    <td class="tg-0lax">Transaction with 1200 dollars on 11/10/2020 added.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Transaction::setHasRealized()</td>
+    <td class="tg-0lax">The transaction has realized already!</td>
+  </tr>
+</tbody>
+</table>
+
+<br><br>
+<p>ledger.cpp</p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Function Names</th>
+    <th class="tg-0lax">Sample Print Outs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">void Ledger::updateTransactionInLedger(Transaction* oldTrans, Transaction* newTrans)</td>
+    <td class="tg-0lax">No matching old transaction found!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Ledger::addTransaction(Transaction* newTransaction)</td>
+    <td class="tg-0lax">Memory is full. Failed to add transaction!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Ledger::printAllTransactions() const</td>
+    <td class="tg-0lax">Sorry, no transaction to print!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Ledger::printRecentNTrans(int nTrans) const</td>
+    <td class="tg-0lax">Sorry, no transaction to print!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Ledger::removeSingleTransaction(int numTransact)</td>
+    <td class="tg-0lax">Invalid transaction number!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Sorry, no transaction to remove!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Ledger::printRealizedTransactions(bool realized) const</td>
+    <td class="tg-0lax">Sorry, no transaction to print!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">There is no unrealized transaction.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">There is no realized transaction.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Transaction* Ledger::getTransactionByNum(int numTransact)</td>
+    <td class="tg-0lax">Sorry, no transaction to retrieve!</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Wrong transaction number! Cannot retrieve transactions!</td>
+  </tr>
+</tbody>
+</table>
+
+<br><br>
+<p>income.cpp</p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Function Names</th>
+    <th class="tg-0lax">Sample Print Outs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Income::Income(double amount, bool hasRealized, string date, TransactionCategory ic, GoesTo gt, string description)</td>
+    <td class="tg-0lax">Income with amount 5000 dated 11/10/2020 initialized.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Income::~Income()</td>
+    <td class="tg-0lax">Income with 10000 dollars on 11/10/2020 deleted.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Income* Income::operator*(int salaryMultiplier)</td>
+    <td class="tg-0lax">The transaction amount has been multiplied 2 times.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Income::setGoesTo(GoesTo gt)</td>
+    <td class="tg-0lax">Income has sent to 1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">ostream&amp; Income::printTransaction(ostream&amp; out) const</td>
+    <td class="tg-0lax">=====================================</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Income: Part time salary</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Income Date: 11/10/2020</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Amount: 10000</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Has been realized?: 1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Amount added into: Bank</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">=====================================</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">TransactionCategory Income::getCategory() const</td>
+    <td class="tg-0lax">"Identifying which type of income is this..."</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">GoesTo Income::getGoesTo() const</td>
+    <td class="tg-0lax">Identify where this income goes to...</td>
+  </tr>
+</tbody>
+</table>
+
+<br><br>
+<p>expenses.cpp</p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Function Names</th>
+    <th class="tg-0lax">Sample Print Outs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Expenses::Expenses(double amount, bool hasRealized, string date, TransactionCategory ic, GoesTo gt, string description)</td>
+    <td class="tg-0lax">Expense with amount -200 dated 20/10/2020 initialized.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Expenses::~Expenses()</td>
+    <td class="tg-0lax">Expenses with -200 dollars on 20/10/2020 deleted.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Expenses::setGoesTo(GoesTo gt)</td>
+    <td class="tg-0lax">Expenses has sent to 1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">ostream&amp; Expenses::printTransaction(ostream&amp; out) const</td>
+    <td class="tg-0lax">=====================================</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Expenses: Friend's birthday presents</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Expenses Date: 11/10/2020</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Amount: -150</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Has been realized?: 0</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Amount added into: Bank</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">=====================================</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">TransactionCategory Expenses::getCategory() const</td>
+    <td class="tg-0lax">Identifying which type of expenses is this...</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">GoesTo Expenses::getGoesTo() const</td>
+    <td class="tg-0lax">Identify where this expense goes to...</td>
+  </tr>
+</tbody>
+</table>
+<br><br>
+
+
+<!--<p>Each of the test cases is worth 4 marks, and there is no partial credit for each case. We will have other additional 15 test cases which are not released to you before the deadline. In total, all 25 test cases (10 given + 15 hidden) will contribute to the 100 total marks of the assignment.</p>-->
+          </div>
+        </div>
+
+
+
+
+        <!-- Submission and deadline section -->
+        <!-- ### Complete submission and deadline section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission and Deadline</h3>
+            <p>
+              <u>Deadline: 23:59:00 on Nov 19, 2020 (Thursday)</u> 
+            </p>
+            <br />
+            <p><b>Notice:</b> ZINC submission for assignment 2 will be open at a later time. Please refer to the <a href="../assignment1/submission-guide/index.html">ZINC Submission Guide</a> for how to make a submission to ZINC properly.</p>
+            <br>
+            <p>Please zip five cpp files only: <code>account.cpp</code>, <code>expenses.cpp</code>, <code>income.cpp</code>, <code>ledger.cpp</code> and <code>transactions.cpp</code>. Zip only these 5 files, NOT a folder containing them. Submit the zip file to <a href="http://zinc.cse.ust.hk">ZINC</a>. ZINC usage instructions can be found <a href="../../zinc-submission/index.html">here</a>.</p>
+
+            <p>Notes:</p>
+            <ul>
+                  <li>You may submit your file multiple times, but only the latest version will be graded.</li>
+                  <li>Submit early to avoid any last-minute problem. Only ZINC submissions will be accepted.</li>
+           </ul>
+           <p> Late penalty applies. For instance, since the deadline of the assignment is 23:59:00 on Nov 19th, if you submit your solution at 1:00:00 on Nov 18th, there will be a penalty of -61 points for your assignment.
+           </p>
+
+            <!-- 
+            <p>Note: If you have no idea how to create a zip file, you may see <a href="https://www.laptopmag.com/articles/how-to-zip-files-windows-10">How
+                to create a zip file in Windows 10</a> or <a href="http://osxdaily.com/2012/01/10/how-to-zip-files-in-mac-os-x/">How
+                to create a zip file in Mac OS X</a> . <u>Zip just the 2 files, not a folder containing the 2 files.</u></p> -->
+
+		 <br/>
+                 <h4 id="virtual_barn">Compilation Requirement</h4>
+
+      <p>
+        It is <strong>required</strong> that your submissions can be compiled and run successfully in our online autograder ZINC. If we cannot even compile your work, it won't be graded. Therefore, for parts that you cannot finish, just put in dummy implementation so that your whole program can be compiled for ZINC to grade the other parts that you have done. Empty implementations can be like:
+      </p>
+      <pre><code class="language-cpp">int SomeClass::SomeFunctionThatIsTooDifficultToImplementForMe()
+{
+    return 0;
+}
+
+void SomeClass::AnotherFunctionThatIsTooDifficultToImplementForMeOhNo()
+{
+}</code></pre>
+	    <br/>
+            <p>
+              <h4>Late submission policy</h4>
+            </p>
+
+            <p>There will be a penalty of -1 point (out of a maximum 100 points) for
+              every minute you are late. For instance, since the deadline of the assignment is 23:59:00 on Oct 9th,
+              if you submit your solution at 1:00:00 on Oct 10th, there will be a penalty of -61 points for your
+              assignment. However, the lowest grade you may get from
+              an assignment is zero: any negative score after the deduction due to late penalty (and any other
+              penalties) will be reset to zero.</p>
+
+          </div>
+        </div>
+
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+<!--         <div class="card mb-4">
+          <div class="card-body" id="leak">
+            <h3 class="card-title">Checking for memory leak</h3>
+            <p class="card-text">
+      <p>One of our test cases (test case 10) check for memory leak. You can try it on ZINC.</p>
+    
+    </p>
+</div>
+</div> -->
+
+
+        <!-- FAQ section -->
+        <!-- ### Complete FAQ section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="faq">
+            <h3 class="card-title">FAQ</h3>
+            <p>
+              <h4>Frequently Asked Questions</h4>
+            </p>
+	    <br/>
+            <p>Q: My code doesn't work / there is an error, here is the code, can you help me fix it?</p>
+            <p>A: As the assignment is a major course assessment, to be fair, you are supposed to work on it on your own and we should not finish the tasks for you. We might provide some very general hints to you, but we shall not fix the problem or debug for you.</p>
+<br>
+            <p>Q: Can I add extra helper functions?</p>
+            <p>A: You may do so in the files that you are allowed to modify and submit.</p>
+<br>
+<br>
+            <p>Q: Can I use global variable or static variable such as "static int x"?</p>
+            <p>A: No.</p>
+<br>
+            <p>Q: Can I use "auto"?</p>
+            <p>A: No.</p>
+<br>
+<br>
+            <p>Q: Regarding the description, it asks us to "modify" the 5 cpp files but indeed I could only find 2. Are we supposed to create the remaining 3 by our own?</p>
+            <p>A: Yes. Please ensure you have created/modified all the cpp required. </p>
+<br>
+<br>
+            <p>Q: For some functions we are not asked to reference to sample outputs. Does that mean there is no outputs/print outs?</p>
+            <p>A: No. Always refer to the webpage and the sample outputs in sample.zip for the standard outputs required.</p>
+<br>
+<br>
+            <p>Q: What does it mean by two transaction being the same?</p>
+            <p>A: By 3 criteria: i) if they have same amount? ii) if they are both (un)realized? iii) if they are on same date?</p>
+<br>
+<br>
+            <p>Q: What is the use of 'const int MAX_NUM_TRANS = 100;' in ledger?</p>
+            <p>A: It has been removed to avoid confusion with maxNumTrans. As a consequence, in Account::Account(), "Maximum #. transactions allowed for each ledger: " and  "Current #. transactions allowed for each ledger: " will use the same variable for print outs.</p>
+<br>
+<br>
+            <p>Q: Why does ZINC shows red highlights when doing output compares even the lines are the same?</p>
+            <p>A: If you see a green tick it means you pass the test case; if you see a red cross it means you fail the test case. In the former case, the red highlights just indicate spacing and newline differences, which would be ignored during grading. However, if that is latter case, somewhere in your output does not match that of the standard one. </p>
+<br>
+<br>
+            <p>Q: Why I get 0/0 in ZINC?</p>
+            <p>A: If you see a green tick it means you pass the test case; Since the testing are not graded, they are of zero mark.  </p>
+<br>
+<br>
+            <p>Q: Can I use other libraries?</p>
+            <p>A: Please refer to the list of allowed libraries <a href="https://piazza.com/class/kewe9e5xv2j65f?cid=80">here</a>.</p>
+<br>
+<br>
+            <p>Q: Do you provide mapping between print outs to function?</p>
+            <p>A: Yes. It can be found in toPrint.zip in skeleton.zip.</p>
+<br>
+<br>
+            <p>Q: when should I print "Fail to add the transaction! >.<" in void Account::addTransactionToLedger(Transaction* newTransact) ?</p>
+            <p>A: It is used to give you to check if your casting has errors. Thus, you cannot see this output if your implementation is correct. It helps you with code checking. Thus, we are not having tests on this error message requiring you to print this.</p>
+<br>
+<br>
+            <p>Q: when should I print "Invalid transaction number!"?</p>
+            <p>A: When using wrong numTransact in non-empty ledger.</p>
+<br>
+<br>
+            <p>Q: What are the differences between the following print outs?</p>
+            <p>A: "Sorry, no transaction to print!": when ledger is empty;  <br>
+"Invalid transaction number!": when ledger non-empty but get wrong transaction number<br>
+""Wrong transaction number! Cannot retrieve transactions!": when ledger non-empty but get wrong transaction number<br>
+</p>
+<br>
+<br>
+            <p>Q: If nTrans > currNumTrans in Ledger::printRecentNTrans(int nTrans) const, do we need to print all the transactions? (suppose currNumTrans > 0)</p>
+            <p>A: No. Print nothing. And you need to ensure the program should not crash as well.</p>
+<br>
+<br>
+            <p>Q: What to return when the numTransact is <0 in Account::removeTransactionFromLedger(Ledger* led, int numTransact)?</p>
+            <p>A: It will never happen. </p>
+<br>
+<br>
+            <p>Q: Will ledger constructed with currNumTrans greater than 0?</p>
+            <p>A: No. Ledger initialization will only has 0 currNumTrans.</p>
+<br>
+<br>
+            <p>Q: Use 'Expenses' or 'Expense' or 'expenses' or 'expense'?</p>
+            <p>A: Please stick to ZINC.</p>
+<br>
+<br>
+            <p>Q: How to decide if I need to deallocate the memory for an object in a function or not?</p>
+            <p>A: Referring to the main cpp files, if an object is not deleted in main cpp files, you need to handle the deallocation in your program. There are either two places: either deallocate in function or in destructors. You may refer to sample outputs/ZINC for hints as of where to deallocate them. </p>
+<br>
+<br>
+            <p>Q: So we will still update the balance when the ledger is full in addTransactionToLedger()?</p>
+            <p>A: Yes.</p>
+<br>
+<br>
+            <p>Q: In Account::updateLedger, if old trans has the same type as new trans and old trans is not found in ledger right, should we update the balance?</p>
+            <p>A: Yes. There can EXIST such case. </p>
+<br>
+<br>
+            <p>Q: Is it good enough if our program can cover all the sample output, will there be any hidden cases that the sample output does not cover when it comes to grading? </p>
+            <p>A: Good enough. Similar to pa1, test cases are a bunch of mains cpp which try to test each of your functions separately. So if you pass pre-deadline test cases, you are pretty much ready for hidden tests. But we cannot guarantee you will get full marks just based on that. It is impossible to include all possible cases in pre-deadline tests/sample outputs/ZINC. We assume if you pass pre-deadlines, your program's logic should be correct.  </p>
+<br>
+
+
+
+            <br>
+            <p>
+              <h4>Recent Updates</h4>
+
+   
+
+<p>Amendment 1# capitalization issues<br>
+in account.cpp, BankBalance, CashBalance, CreditCardBalance' are changed to bankBalance, cashBalance, creditCardBalance.<br>
+In account.h: "RemoveTransactionFromLedger" changed to "removeTransactionFromLedger", deleted varable "currNumTrans" as it's not used.<br>
+In ledger.h: "Income.h" to "income.h", "Expenses.h" to "expenses.h". Thus, in the Makefile: all "Expenses" to "expenses", "Income" to "income".<br>
+</p> 
+<p>
+Amendment 2#<br>
+in account.h, there are duplicated declaration of 'void printBalance() const;'. Please delete one of them.<br>
+</p>
+<p>
+Amendment 3#<br>
+In main1.cpp: "new Income(1000, true, "11/10/2020", POCKET_MONEY, CASH, "Pocket Money");" to "new Income(1000, false, "11/10/2020", POCKET_MONEY, CASH, "Pocket Money");"<br>
+</p>
+<p>
+Amendment 4#<br>
+In main1.cpp, main2.cpp: all delete statements updated. For example, "delete income1, income2;" becomes "delete income1; delete income2;". There is NO delete statements in main3.cpp except 'delete expense4;'<br>
+</p>
+<p>
+Amendment 5#<br>
+ledger.cpp: 'const int MAX_NUM_TRANS = 100;'  has been removed to avoid confusion with maxNumTrans. As a consequence, in Account::Account(), "Maximum #. transactions allowed for each ledger: " and "Current #. transactions allowed for each ledger: " will use the same variable for print outs.<br>
+</p>
+
+<p>
+Amendment 6#<br>
+"// Transaction amount 5000 added" add back to toPrint.zip's account.cpp. In Ledger::printRealizedTransactions(bool realized) const, "Sorry, no transaction to remove!" should be "Sorry, no transaction to print!"<br>
+</p>
+
+<p>
+<strong style="color: red;">The skeleton.zip and sample.zip on the webpage have been updated.</strong>
+</p>
+
+<p>
+Kind reminder 1#<br>
+There is an additional section added to the webpage under the section "Sample Output and Grading Scheme", which gives hints on expected outputs IN ADDITION to sample.zip. Your program is expected to cover those cases specified there as well, IN ADDITION to satisfying outputs in sample.zip.
+</p>
+
+<p>
+Kind reminder 2#<br>
+Both the "FAQ" and "Sample Output and Grading Scheme" sections would be updated whenever necessary. Please come to check from time to time before making your submission. You can also follow threads in Piazza to get the earliest updates. You are encouraged to post questions in Piazza so we can share with all the students at the same time.      
+</p>
+ 
+        
+            </p>            
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+        <!-- Menu Widget -->
+        <div class="card my-12">
+          <h5 class="card-header">Menu</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="mb-0" type="circle" style="padding-left:20px">
+                  <li>
+                    <a href="index.html#introduction">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="index.html#ow">Overview</a>
+                  </li>
+                  <li>
+                    <a href="index.html#download">Download</a>
+                  </li>
+                  <!--<li>
+                    <a href="#format">Output Format</a>
+                  </li>-->
+                  
+                  <li>
+                    <a href="index.html#sample-output">Sample Output and Grading Scheme</a>
+                  </li>                  
+                  <li>
+                    <a href="https://piazza.com/class/kewe9e5xv2j65f?cid=86"><strong style="color: red;">Important!</strong> PA2 Updates</a>
+                  </li>
+                  
+                  <li>
+                    <a href="index.html#submission">Submission &amp; Deadline</a>
+                  </li>
+           <!--        <li>
+                    <a href="#leak">Checking for memory leak</a>
+                  </li> -->
+              <!--     <li>
+                    <a href="#amend">Amendment History</a>
+                  </li>  -->                
+                  <li>
+                    <a href="index.html#faq">FAQ</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maintainance widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Page maintained by</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    WONG, Man Hing
+                  </li>
+                  <li>
+                    Email:
+                    <a href="mailto:wallacem@cse.ust.hk">mhwongah@connect.ust.hk</a>
+                  </li>
+                  <li>Last Modified:
+                    <script type="text/javascript">document.write(document.lastModified);</script>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Homepage widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Homepage</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="../../../comp2012.1.html">Course Homepage</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    SyntaxHighlighter.highlight();
+  </script>
+</body>
+
+</html>

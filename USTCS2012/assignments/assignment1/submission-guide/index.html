@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Submission Guide</title>
+<!-- Bootstrap core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="https://course.cse.ust.hk/comp2012/assignments/assignment1/css/simple-sidebar.css" rel="stylesheet">
+<!-- For code highlighting -->
+<script src="js/prism.js" type="text/javascript"></script>
+<link href="css/prism.css" rel="stylesheet" />
+<style>
+table {
+  width: 100%;
+  display: inline-block;
+  overflow-x: auto;
+}
+
+table caption {
+  font-size: medium;
+}
+
+table thead th {
+  background-color: #ddd;
+}
+
+table th,
+table td {
+  text-align: left;
+  padding: 3px 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #aaa #aaa;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+blockquote {
+  border: 1px solid #b3b3b3;
+  border-left: 10px solid #b3b3b3;
+  border-radius: 0px;
+  background: #fafafa;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  margin: 10px;
+  padding: 10px 20px;
+}
+ 
+blockquote p {
+  margin: 0;
+  line-height: 30px;
+  padding-bottom: 20px;
+}
+ 
+blockquote .small {
+  display: block;
+  font-size: 80%;
+  color: brown;
+  text-align: right;
+}
+
+img.limit {
+  max-width: 100%
+}
+
+</style>
+</head>
+
+<!--
+# How to auto indent HTML in vim
+:filetype indent on
+:set filetype=html           # abbrev -  :set ft=html
+:set smartindent             # abbrev -  :set si
+gg=G
+  -->
+<body class="language-none">
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+<!--   <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sticky-top">
+      <div class="list-group list-group-flush">
+        <a href="#Submission" class="list-group-item list-group-item-action bg-light">Submission</a>
+        <a href="#Compile" class="list-group-item list-group-item-action bg-light">Compiling and Testing</a>
+
+      </div>
+    </div>
+  </div> -->
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+<!--     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="col-sm-9">
+      <span class="navbar-toggler-icon" id="menu-toggle"></span>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+  
+      </ul>
+      </div>
+    </nav> -->
+
+
+    <div class="container-fluid border-bottom my-5">
+      <div class="col-sm-12 col-lg-12 container">
+      <h1>Zinc Submission Guide</h1>
+      </div>
+    </div>
+
+    <div class="container-fluid border-bottom my-5" id="Submission">
+      <h2 class="mt-4">Submission</h2>
+
+      <p>
+        Login to <a href="https://zinc.cse.ust.hk">https://zinc.cse.ust.hk</a> using your ITSC account. After you logged in, you should find “COMP2012 Assignment 1 Inventory” on the left. Click on it.
+      </p>
+
+      <p>
+        Afterward, on the right, you should see “Upload a file or drag and drop”. You can
+      </p>
+
+      <ul>
+        <li>Click on it and then upload a ZIP file. Or</li>
+        <li>Drag and drop a ZIP file to upload it.</li>
+      </ul>
+
+      <img src="imgs/upload.png" width="600px">
+
+      <p>
+        <strong>You need to zip the required files (i.e. Item.cpp and Inventory.cpp) ONLY. Do NOT zip a folder that contains the two files. It does not work. Also, the submission system only officially supports ZIP files.</strong> Other compression formats such as RAR, 7Z, etc. may NOT be accepted. To make a ZIP file,
+      </p>
+
+      <ul>
+        <li>In Windows, first select all the required files (hold down CTRL key, and click on the files one by one; or, just hold down your mouse to select a group of files). Right-click on the highlighted files, choose "Send to" > "Compressed (zipped) folder". You should submit that ZIP file.</li>
+        <li>In MacOS, first select all the required files (hold down Command key, and click on the files one by one; or, just hold down your mouse to select a group of files). Right-click on the highlighted files, choose "Compress N items". You should submit that ZIP file.</li>
+      </ul>
+
+      <p>
+        After you have submitted your zip file, you should see the message: “You submitted on [date] at [time]”. We
+		notice that some browser may have problem in showing the right date and time. Chrome works and Firefox doesn't.
+		So we recommend you to use Chrome for submitting your PA.
+      </p>
+
+      <img src="imgs/details.png" >
+    </div>
+
+    <div class="container-fluid border-bottom my-5" id="Compile">
+      <h2 class="mt-4">Verifying and Compiling</h2>
+
+      <p>
+        After your submission, the system will compile your program and perform some simple checks. 
+        That is, after a few seconds to minutes, you should see the message “Auto Grader graded your submission on
+		[date] at [time]”.  Click “View Details” to check the report.
+		(If it doesn't, please refresh the page to see the new message.) 
+      </p>
+
+      <p>
+        You should see the Submission Details on the right.
+      </p>
+
+      <img src="imgs/report.png" >
+
+      <p>Before the "Standard I/O Test", you will see some file structure validation and possibly warnings saying you have submitted the skeleton code by accident. If you got errors there, double-check/recreate your submission and try again.</p>
+
+      <p>For makefile projects, you will also see the make compilation result:</p>
+
+      <img src="imgs/compilation-error.png" >
+
+<br>
+<br>
+    <p>If it fails (i.e. you see a red cross beside Make), check the STDERR for the error logs as shown above. Fix the errors, save your updates, zip your updated files, and submit the zip file again.</p>
+
+</div>
+
+    <div class="container-fluid border-bottom my-5" id="Testing">
+      <h2 class="mt-4">Testing</h2>
+
+
+      <p>If there is no compilation error reported, clicking the "Details" button next to each test case reveals the details for that test case:</p>
+
+      <img src="imgs/output.png">
+
+      <p>The first tab is "Your output". You can also check the "Split-View Diff" and "Unified Diff" to see the difference of your output from the expected one. Try both to see which one is more informative to you.</p>
+
+      <b>About memory leak and other potential errors</b>
+
+      <p>Some test cases will also check for errors like memory leak using the <code>-fsanitize=address,leak,undefined</code> flags (<a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">related documentation here</a>) of the latest g++ compiler on Linux (it won't work on Windows for the versions we have tested). Check the "Errors" tab for errors such as memory leak. Other errors/bugs such as out-of-bounds, use-after-free bugs, and some undefined-behavior-related bugs may also be detected. You will get 0 mark for the test case if there is any error there. Note that if your program has no errors detected by the sanitizers, then the "Errors" tab may not appear.</p>
+
+
+      <img src="imgs/error.png">
+
+    </div>
+
+   <!--  <div class="container-fluid border-bottom my-5" id="Error">
+      <h2 class="mt-4">Possible Causes of Compilation Error</h2>
+
+      <p>
+        <strong>If you do not see “Standard IO Test”, then your program cannot be compiled with the test cases.</strong> Make sure first you can compile your pa1.cpp individually on your PC. Here is a list of possible causes of having compilation error on the submission system but not on your PC.
+      </p>
+
+      <img src="./imgs/compilation_error.png" width="300px">
+
+      <ul>
+        <li>
+          You have changed the function header of some functions provided by the skeleton. Note that you cannot change the return value, add extra parameters, or change the type of a parameter. Please restore the function headers to those in the skeleton. You can write helper functions to achieve the same effect.
+        </li>
+
+        <li>
+          One or more functions in Tasks 1-5 are missing (or their names have been changed). The main function is replaced in compilation and it calls each functions in Tasks 1-5. Please put in dummy implementations of these functions, similar to the provided skeleton.
+        </li>
+      </ul>
+
+    </div> -->
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+<!-- /#wrapper -->
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    });
+
+  SyntaxHighlighter.highlight();
+</script>
+</body>
+</html>

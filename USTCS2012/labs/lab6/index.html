@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012 Lab 6: Polymorphism: Virtual Functions</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+    <style>
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f36d33;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+            <h4 class="my-4">
+                <span style="color:darkblue">COMP 2012</span>
+                <small>Object-Oriented Programming and Data Structures</small>
+            </h4>
+
+            <!-- ### Change assignment number and title ### -->
+            <h3 class="my-4">Lab 6
+                <span style="color:#660066">Polymorphism: Virtual Functions</span>
+            </h3>
+
+            <!-- Introduction section -->
+            <!-- ### Complete introduction section for the assignment ### -->
+            <!-- <div class="card mb-4">
+              <div class="card-body" id="introduction">
+
+              </div>
+            </div> -->
+
+            <div class="card mb-4">
+                <div class="card-body" id="labtask">
+                    <h3 class="card-title">Take-out Restaurant</h3>
+                    <p class="card-text">
+                    <h4 id="objective">Objective</h4>
+                    <p>
+                        In this lab, you will get familiar with the dynamic binding feature in C++.
+                    </p>
+                    <h4 id="description">Description</h4>
+
+                    <p>
+                    <center><img style="width:100%" src="img/classes.png"></center>
+                    </p>
+
+                    <p>
+Recently, the outbreak of COVID-19 has raised global concerns. The take away service of the Junk Food Store is available and gaining traction. John, the owner of the store, is getting overwhelmed by the ever increasing workload to manage his store. Therefore, he decided to hire a store manager to assist him. On top of this, John is intend to hire cooks and delivery men.
+                    <ul>
+                    <li>Cooks are paid by the hour and delivery men are paid by the order.</li>
+                    <li>A Manager is paid by base salary and additional salary depending on the types of employees he manages.</li>
+                    </ul>
+                    </p>        
+
+                    <p>
+Your task is to help John to develop the payroll system which calculates the salary payable to each of the employees in the Junk Food Store based on the duty of the employee.
+                    </p>
+
+                    <h4 id="class-description">Class Description</h4>
+
+                    <p>
+                        There are 4 classes, <code>Employee</code>, <code>Cook</code>, <code>DeliveryMen</code>, and <code>Manager</code>.
+                    </p>
+
+                    <h5 class="text-monospace">Employee</h5>
+                    <p>
+This class is the <strong>abstract base class</strong> of <code>Cook</code>, <code>DeliveryMen</code>, and <code>Manager</code>. It has a private member <code>name</code>, which stores the name of the Employee.
+                    </p>
+                    <h6 class="text-monospace">Employee::Employee(const char* name)</h6>
+                    <p>
+                        The constructor should set the name of the employee. 
+                    </p>
+                    <h6 class="text-monospace">Employee::~Employee()</h6>
+                    <p>
+                        The destructor should print:<pre>Employee Dtor: name</pre>where <code>name</code> is the name of the employee.
+                    </p>
+                    <h6 class="text-monospace">void Employee::print_description() const</h6>
+                    <p>
+                        This function should print:<pre>Employee: name</pre>where <em>name</em> is the name of the employee.
+                    </p>
+
+                    <h6 class="text-monospace">void Employee::print_salary() const</h6>
+                    <p>
+                        This function should print:<pre>Salary: salary</pre>where <em>salary</em> is the salary of the employee, calculated based on his duty.
+                    </p>
+
+                    <h5 class="text-monospace">Cook</h5>
+                    <p>
+                        This class is derived from <code>Employee</code> class. It has two private members. <code>hourly_wage</code> is the hourly wage of the cook, <code>hours_worked</code> is the number of hours worked by the cook.
+                    </p>
+                    <h6 class="text-monospace">Cook::Cook(const char* name, int hourly_wage, int hours_worked)</h6>
+                    <p>
+                        The constructor should create a cook and initializes it.
+                    </p>
+
+                    <h6 class="text-monospace">Cook::~Cook()</h6>
+                    <p>
+                        The destructor should print:<pre>Cook Dtor</pre>
+                    </p>
+
+                    <h6 class="text-monospace">void Cook::print_description() const</h6>
+                    <p>
+                        This function should print:<pre>Employee: name Duty: Cook</pre>where <em>name</em> is the name of the cook.
+                    </p>
+
+                    <h6 class="text-monospace">void Cook::print_salary() const</h6>
+                    <p>
+                        This function should print:<pre>Salary: salary</pre>where <em>salary</em> is the salary of the cook. The salary of the cook is the hourly wage multiplied by number of hours worked.
+                    </p>
+
+                    <h5 class="text-monospace">DeliveryMen</h5>
+                    <p>
+                        This class is derived from <code>Employee</code> class. It has two private members. <code>order_wage</code> is the wage of each order, <code>orders_worked</code> is the number of orders worked by the delivery man.
+                    </p>
+                    <h6 class="text-monospace">DeliveryMen::DeliveryMen(const char* name, int order_wage, int orders_worked)</h6>
+                    <p>
+                        The constructor should create a delivery man and initializes it.
+                    </p>
+
+                    <h6 class="text-monospace">DeliveryMen::~DeliveryMen()</h6>
+                    <p>
+                        The destructor should print:<pre>DeliveryMen Dtor</pre>
+                    </p>
+
+                    <h6 class="text-monospace">void DeliveryMen::print_description() const</h6>
+                    <p>
+                        This function should print:<pre>Employee: name Duty: DeliveryMen</pre>where <em>name</em> is the name of the delivery man.
+                    </p>
+
+                    <h6 class="text-monospace">void DeliveryMen::print_salary() const</h6>
+                    <p>
+                        This function should print:<pre>Salary: salary</pre>where <em>salary</em> is the salary of the delivery man. The salary of the delivery man is the each order wage multiplied by number of orders worked.
+                    </p>
+
+
+                    <h5 class="text-monospace">Manager</h5>
+                    <p>
+                        This class is derived from <code>Employee</code> class. It has four private members. <code>staff</code> is the array of employees supervised by this manager. <code>num_staff</code> is the number of employees in the <code>staff</code> array. <code>base_salary</code> is the base salary of the manager, <code>commission</code> is the commission received by the manager.<pre>
+const int MAX_NUM_STAFF = 5;
+
+private:
+    Employee *staff[MAX_NUM_STAFF];
+    int num_staff;
+
+    int base_salary;
+    int num_cook;
+    int num_deliverymen;</pre>
+                    </p>
+                    <h6 class="text-monospace">Manager::Manager(const char* name, int base_salary)</h6>
+                    <p>
+                        The constructor should create a manager and initializes it.
+                    </p>
+
+                    <h6 class="text-monospace">Manger::~Manager()</h6>
+                    <p>
+                        The destructor should first <code>delete</code> each of the employees in the <code>staff</code> array. Then print:<pre>Manager Dtor</pre>
+                    </p>
+
+                    <h6 class="text-monospace">void Manager::print_description() const</h6>
+                    <p>
+                        This function should print:<pre>Employee: name Duty: Manager</pre>where <em>name</em> is the name of the manager.
+                    </p>
+
+                    <h6 class="text-monospace">void Manager::print_salary() const</h6>
+                    <p>
+                        This function should print:<pre>Salary: salary</pre>where <em>salary</em> is the salary of the manager. The salary of a manager is the sum of base salary and <code> "100 * num of cooks + 50 * num of delivery men"</code>.
+                    </p>
+                    <h6 class="text-monospace">void Manager::hire(Employee *new_staff, int type)</h6>
+                    <p>
+                        This function should append the employee <code>new_staff</code> to the <code>staff</code> array. Note that <code>num_staff</code> should be increased by one. 
+                        Use <code>int type</code> to distinguish between cooks and delivery men. <code>type = 1</code> represents <code>Cook</code> and <code>type = 2</code> represents <code>DeliveryMen</code>.
+                    </p>
+                    <h6 class="text-monospace">void Manager::pay_salary() const</h6>
+                    <p>
+                        This function should first call <code>print_description()</code> and then <code>print_salary()</code> for each employee in the <code>staff</code> array. Then call <code>print_description()</code> and then <code>print_salary()</code> of the manager.
+                    </p>
+
+                    <h4 id="task">Tasks</h4>
+                    <h5>Task 1</h5>
+                    <p>
+                        <code>employee.cpp</code> is given and <code>employee.h</code> is partially completed. Read <code>main.cpp</code> to see how dynamic binding is used and declare some of the functions of <code>Employee</code> class as <code>virtual</code>. Since employee is an abstract base class, there is one pure virtual function. Which function should you declare as pure virtual?
+                    </p>
+
+                    <h5>Task 2</h5>
+                    <p>
+                        Complete the rest of constructor and destructor of <code>Employee</code>, and the implementation of classes <code>Cook</code>, <code>DeliveryMen</code> and <code>Manager</code>. When implementing the <code>print_description()</code> method of the subclasses, you may need to call the method of <code>Employee</code> class.
+                    </p>
+                    <p>
+                        You have to allocate dynamic memory for the <code>name</code> of <code>Employee</code>. <code>strlen()</code> and <code>strcpy()</code> functions are useful here.
+                    </p>
+                    
+                    <h4 id="output">Sample output</h4>
+                    <pre>
+                        
+Employee: Alice Duty: Cook
+Salary: 8000
+Employee: Chris Duty: DeliveryMen
+Salary: 13500
+Employee: Bob Duty: Cook
+Salary: 9000
+Employee: Amy Duty: DeliveryMen
+Salary: 5000
+Employee: Bob Duty: Manager
+Salary: 20300
+Cook Dtor
+Employee Dtor: Alice
+DeliveryMen Dtor
+Employee Dtor: Chris
+Cook Dtor
+Employee Dtor: Bob
+DeliveryMen Dtor
+Employee Dtor: Amy
+Manager Dtor
+Employee Dtor: Bob
+                    </pre>
+                
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body" id="submission">
+                    <h3 class="card-title">Submission</h3>
+                    <p class="card-text">
+                        
+                    </p><p>For this lab, please zip and submit the following:
+                    </p><ul>
+                    <li>employee.h</li>
+                    <li>employee.cpp</li>
+                    <li>cook.h</li>
+                    <li>cook.cpp</li>
+                    <li>DeliveryMen.h</li>
+                    <li>DeliveryMen.cpp</li>
+                    <li>manager.h</li>
+                    <li>manager.cpp</li>
+                </ul><p></p>
+                <p>The Zinc system has been revamped, you may follow the new instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 6" on Zinc.</p>
+                <p></p>
+                </div>
+             </div>
+            
+
+            <div class="card mb-4">
+                <div class="card-body" id="download">
+                    <h3 class="card-title">Download</h3>
+                    <p class="card-text">
+Download the <a href="skeleton.zip">HERE</a>. Note that your project contains several cpp files, so you need to use the command <code>g++ -std=c++11 -o programName *.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute <code>./programName</code> in terminal.
+            </p>
+                </div>
+            </div>
+
+            <!-- Description section -->
+            <!-- ### Complete description section for the assignment ### -->
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3" style="">
+            <div class="sticky-top">
+
+                <!-- Menu Widget -->
+                <div class="card my-12">
+                    <h5 class="card-header">Menu</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="mb-0" type="circle" style="padding-left:20px">
+                                    <li>
+                                        <a href="index.html#labtask">Take-out Restaurant</a>
+                                        <ul>
+                                            <li><a href="index.html#objective">Objective</a></li>
+                                            <li><a href="index.html#description">Description</a></li>
+                                            <li><a href="index.html#class-description">Class Declaration</a></li>
+                                            <li><a href="index.html#task">Task</a></li>
+                                            <li><a href="index.html#submission">Submission</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#download">Download</a>
+                                        <ul>
+                                            <li><a href="index.html#download-source">Source</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintainance widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Page maintained by</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        QUAN, Yuqing
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <a href="mailto:yquanaa@connect.ust.hk">yquanaa@connect.ust.hk</a>
+                                    </li>
+                                    <li>Last Modified:
+                                        <script type="text/javascript">
+                                            document.write(document.lastModified);
+                                        </script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Homepage widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Homepage</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="../../../comp2012.1.html">Course Homepage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+            and Engineering</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function promptWarning() {
+        var s = confirm(
+            "I know that I should not change main.cpp. \nClick \"Cancel\" to proceed. "
+        );
+        if (s == true) {
+            alert("Please read the prompt again.");
+        } else {
+            window.open('lab5-ske.zip');
+        }
+    };
+</script>
+</body>
+
+</html>

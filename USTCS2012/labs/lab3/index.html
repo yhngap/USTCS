@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 3: More Class Construction and Destruction </title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 3
+          <span style="color:#660066">More Class Construction and Destruction</span>
+        </h3>
+
+ 
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <!-- <div class="card mb-4">
+          <div class="card-body" id="introduction">
+
+          </div>
+        </div> -->
+
+        <div class="card mb-4">
+          <div class="card-body" id="labtask">
+            <h3 class="card-title">Pointset</h3>
+            <p class="card-text">
+              <center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Coord_system_CA_0.svg/240px-Coord_system_CA_0.svg.png" height=200px /></center>
+              <h4 id="objective">Objective</h4>
+              <p>
+                In this lab, you are going to practice using class constructors and destructors by implementing a class called Pointset. You will also practice on a technique that is useful for the first assignment - to maintain a dynamic array just big enough to contain all the items (e.g. points, for this lab). 
+              </p>
+
+              <h4 id="description">Description</h4>
+              <p>A PointSet is a set of 3D points, it is backed by a dynamic array of 3D point objects and each 3D point object has three double member variables: x, y, and z, which represents the x-coordinate, y-coordinate and z-coordinate of a 3D point.
+                <br><br>
+                Download the <a href="index.html#download">starting code</a>, and complete the TODOs in PointSet.cpp. You should read all the given source code especially the PointSet.h as well as the sample output to understand the requirements.</p>
+
+                  <p>Note: if you use VS Code, please put all the starting code files to its own project folder, then open that folder in VS Code. To compile, <a href="../../../comp2011/labs/vscode/index.html#terminal">open a terminal</a> and use the command <code>g++ -std=c++11 *.cpp -o programName.exe</code> to compile all cpp source files in the current folder into a program named programName. You may use the command <code>./programName.exe</code> in terminal to run the program then. Alternatively, you can also create a Makefile and make use of it. Tips: press up arrow (multiple times for earlier commands) to repeat the last command(s) in terminal.</p>
+
+              
+              <h4 id="output">Sample output</h4>
+
+                <pre>
+PointSet1:
+Initialized by PointSet's default constructor
+Empty!
+removeFirstPoint:
+No points!
+
+PointSet2:
+Initialized by PointSet's other constructor
+(0,0,0)
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+
+PointSet3:
+Initialized by PointSet's copy constructor
+(0,0,0)
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+addPoint:
+(0,0,0)
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+(7,9.4,6.3)
+addPoint:
+(0,0,0)
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+(7,9.4,6.3)
+(3,1.7,0)
+removeFirstPoint:
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+(7,9.4,6.3)
+(3,1.7,0)
+removeLastPoint:
+(1.5,2,0)
+(0.5,4,0)
+(1.5,2.5,3)
+(7,9.4,6.3)
+Does PointSet3 have the point (1, 2, 3)? false
+Does PointSet3 have the point (1.5, 2.5, 3)? true
+
+PointSet's destructor is called!
+PointSet's destructor is called!
+PointSet's destructor is called!
+</pre>
+              </ol>
+          </div>
+
+      
+    </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission</h3>
+            <p class="card-text">
+
+              
+                  We use our online grader <a href="http://zinc.cse.ust.hk">Zinc</a> again this lab. Instructions can be found <a href="../../zinc-submission/index.html">here</a>. Lab 3 submission will be open later as the Zinc team is working on a major update (hopefully before the first lab session). Before that, you may simply compare your output with the given sample output above manually. We will use the same test case on Zinc (and we may also check for memory leak there). For this lab, please zip and submit one cpp file <code>PointSet.cpp</code> (yes, please still zip the single cpp file, as required by the Zinc system). 
+
+                  <br>
+                  <br>
+                  <b>Note for MacOS users</b>: MacOS may add some "extra" stuff like "__MACOSX" to your zip file. Zinc may report that those are "extra files". You may just ignore those "errors" and check the test case results. If you really need to remove those extra files because it affects the test cases somehow, you may follow <a href="https://wpguru.co.uk/2013/10/how-to-remove-__macosx-from-zip-archives/">this guide</a>. 
+
+
+            </p>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+              
+                  Download the starting code <a href="skeleton.zip">HERE</a>.
+
+
+            </p>
+          </div>
+        </div>
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+
+
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3" style="">
+        <div class="sticky-top">
+
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="index.html#labtask">Pointset</a>
+                      <ul>
+                        <li> <a href="index.html#objective">Objective</a></li>
+                        <li><a href="index.html#description">Description</a></li>
+                        <li> <a href="index.html#submission">Submission</a> </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="index.html#download">Download (starting code)</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Wallace Mak
+                    </li>
+                    <li>
+                      Email:
+                      <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">
+                        document.write(document.lastModified);
+                      </script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="../../../comp2012.1.html">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    function promptWarning() {
+      var s = confirm(
+        "I know that I should only change the store.cpp file. \nClick \"Cancel\" to proceed. "
+      );
+      if (s == true) {
+        alert("Please read the prompt again.");
+      } else {
+        window.open('source.zip');
+      }
+    };
+  </script>
+</body>
+
+</html>

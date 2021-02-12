@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 4: Inheritance Basics</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 4
+          <span style="color:#660066">Inheritance Basics</span>
+        </h3>
+
+ 
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <!-- <div class="card mb-4">
+          <div class="card-body" id="introduction">
+
+          </div>
+        </div> -->
+
+        <div class="card mb-4">
+          <div class="card-body" id="labtask">
+            <!-- <h3 class="card-title">Inheritance Basics</h3> -->
+            <p class="card-text">
+              <center><img src="img/dog.jpg" height=200px /></center>
+              <h4 id="objective">Introduction</h4>
+              <p>
+                Let's try something different in this lab.
+                <br><br>
+                You will be given a class diagram, description of the classes, and a main.cpp that uses those classes. You will create the corresponding class header and source files yourself, to practice creating classes with basic inheritance from scratch.
+              </p>
+
+              <h4 id="description">Description</h4>
+              <p>There are 4 classes in total:</p>
+              <center><img src="img/classes.png"></center>
+              <p>The top-level base class is Animal. Dog inherits from Animal while Corgi and GreatDane inherit from Dog.</p>
+
+              <h3>Animal</h3>
+              <p>You should declare the class in <b>animal.h</b> and define the member functions in <b>animal.cpp</b>. You can see that animal.h is included in main.cpp.</p>
+              <p>It should have only one <u>private</u> data member <b>name</b> of the <b>string</b> type. It has no other data member.</p>
+              <p>It has only one constructor <code>Animal(string name)</code> as you can see that is invoked in the main function. It simply sets the name of the animal upon construction of an animal object.</p>
+              <p>It can <b>talk</b> and <b>eat</b>. (they are also invoked in the main function) We also are able to retrieve its name via the <b>getName</b> function. You need to determine their function headers yourself. Check the main.cpp to see how they are used, and derive what they need to output.</p>
+              
+
+              <h3>Dog</h3>
+              <p>You should declare the class in <b>dog.h</b> and define the member functions in <b>dog.cpp</b>. You can see that dog.h is included in main.cpp.</p>
+              <p>It should NOT have any data member defined in Dog itself. Of course, it should inherit <b>name</b> from the parent class.</p>
+              <p>It has only one constructor <code>Dog(string name)</code> as you can see that is invoked in the main function. It simply sets the name of the dog upon construction of a dog object. You need to use the member initialization list (MIL) here.</p>
+              <p>It can <b>talk</b>, <b>eat</b>, and <b>bark</b>. (they are also invoked in the main function) You need to determine their function headers yourself. Check the main.cpp to see how they are used, and derive what they need to output. <b>talk</b> and <b>eat</b> are already defined in the parent class, therefore, you need to define them again (i.e. override) in the Dog class to give them new implementations.</p>
+              <p>Note: <b>getName</b> should not be defined in the Dog class itself - it should be inherited from the parent class.</p>
+
+              <h3>Corgi</h3>
+              <p>You should declare the class in <b>corgi.h</b> and define the member functions in <b>corgi.cpp</b>. You can see that corgi.h is included in main.cpp.</p>
+              <p>It should NOT have any data member defined in Corgi itself. Of course, it should inherit <b>name</b> from the parent class.</p>
+              <p>It has only one constructor <code>Corgi(string name)</code> as you can see that is invoked in the main function. It simply sets the name of the corgi upon construction of a Corgi object. You need to use the member initialization list (MIL) here.</p>
+              <p>It can <b>talk</b>, <b>eat</b>, and <b>bark</b>. (they are also invoked in the main function) You need to determine their function headers yourself. Check the main.cpp to see how they are used, and derive what they need to output. <b>bark</b> is already defined in the parent class, therefore, you need to define it again (i.e. override) in the Corgi class to give it a new implementation.</p>
+              <p>Note: <b>talk</b>, <b>eat</b>, and <b>getName</b> should not be defined in the Corgi class itself - it should be inherited from the parent class.</p>
+
+              <h3>GreatDane</h3>
+              <p>You should declare the class in <b>greatdane.h</b> and define the member functions in <b>greatdane.cpp</b>. You can see that greatdane.h is included in main.cpp.</p>
+              <p>It should NOT have any data member defined in GreatDane itself. Of course, it should inherit <b>name</b> from the parent class.</p>
+              <p>It has only one constructor <code>GreatDane(string name)</code> as you can see that is invoked in the main function. It simply sets the name of the greatdane upon construction of a GreatDane object. You need to use the member initialization list (MIL) here.</p>
+              <p>It can <b>talk</b>, <b>eat</b>, and <b>bark</b>. (they are also invoked in the main function) You need to determine their function headers yourself. Check the main.cpp to see how they are used, and derive what they need to output. <b>bark</b> is already defined in the parent class, therefore, you need to define it again (i.e. override) in the GreatDane class to give it a new implementation.</p>
+              <p>Note: <b>talk</b>, <b>eat</b>, and <b>getName</b> should not be defined in the GreatDane class itself - it should be inherited from the parent class.</p>
+
+              
+              
+              <h4 id="output">Sample output</h4>
+
+                <pre>
+My name is Randy! I am just an animal!
+===============================
+I eat something... nom nom nom
+===============================
+My name is Warwick! I am a doggo!
+===============================
+woof woof!
+===============================
+GIMME THAT BONE!
+===============================
+You pet Warwick...
+Warwick: woof woof!
+===============================
+My name is Huge Huge! I am a doggo!
+===============================
+WOOF WOOF!
+===============================
+GIMME THAT BONE!
+===============================
+My name is Bomb Bomb! I am a doggo!
+===============================
+woooof woooof!
+===============================
+GIMME THAT BONE!
+===============================
+You pet Bomb Bomb...
+Bomb Bomb: woof woof!
+===============================
+You pet the fat belly of Bomb Bomb the Corgi...
+Bomb Bomb: woooof woooof!
+===============================
+You pet Latte...
+Latte: woof woof!
+</pre>
+              </ol>
+          </div>
+
+      
+    </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission</h3>
+            <p class="card-text">
+
+              
+                  <p>For this lab, please zip and submit the following:
+                  <ul>
+                    <li>animal.h</li>
+                    <li>animal.cpp</li>
+                    <li>dog.h</li>
+                    <li>dog.cpp</li>
+                    <li>corgi.h</li>
+                    <li>corgi.cpp</li>
+                    <li>greatdane.h</li>
+                    <li>greatdane.cpp</li>
+                  </ul></p>
+                  <p>The Zinc system has been revamped, you may follow the new instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 4" on Zinc. It will be open soon before the weekend.</p>
+
+
+            </p>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+              
+                  Download the <a href="main.cpp">main.cpp</a>. Note that your project contains several cpp files, so you need to use the command <code>g++ -std=c++11 -o programName *.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute <code>./programName</code> in terminal.
+
+
+            </p>
+          </div>
+        </div>
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+
+
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3" style="">
+        <div class="sticky-top">
+
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li><a href="index.html#labtask">Description</a></li>
+                    <li><a href="index.html#submission">Submission</a></li>
+                      
+                      <li><a href="index.html#download">Download (starting code)</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Wallace Mak
+                    </li>
+                    <li>
+                      Email:
+                      <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">
+                        document.write(document.lastModified);
+                      </script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="../../../comp2012.1.html">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    function promptWarning() {
+      var s = confirm(
+        "I know that I should only change the store.cpp file. \nClick \"Cancel\" to proceed. "
+      );
+      if (s == true) {
+        alert("Please read the prompt again.");
+      } else {
+        window.open('source.zip');
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012 Assignment 3: Library Search System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+
+    <!-- Prism syntax highlighter -->
+    <link href="https://course.cse.ust.hk/comp2012/assignments/assignment3/prism.css" rel="stylesheet"/>
+
+    <style>
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f36d33;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+<script src="https://course.cse.ust.hk/comp2012/assignments/assignment3/prism.js"></script>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+            <h2 class="my-4">
+                <span style="color:darkblue">COMP 2012</span>
+                <small>Object-Oriented Programming and Data Structures</small>
+            </h2>
+
+            <!-- ### Change assignment number and title ### -->
+            <h3 class="my-4">Assignment 3
+                <span style="color:#660066">Library Search System</span>
+            </h3>
+
+            <!-- Introduction section -->
+            <!-- ### Complete introduction section for the assignment ### -->
+            <div class="card mb-4">
+
+                <!-- ### Add an image representing the assignment content here ### -->
+                <img class="card-img-top" src="images/hkust-library.jpeg" alt="HKUST Library">
+
+                <div class="card-body" id="introduction">
+                    <h3 class="card-title">Introduction</h3>
+                    <p class="card-text">
+                    <p>In this assignment, you will get a better understanding on how to design and implement a mini
+                        library search system through the use of Template Class, Binary Search Tree (BST), and Hash
+                        Table data structure.
+                    </p>
+                    </p>
+
+                    <h3 class="card-title">Knowledge Required</h3>
+                    <ul>
+                        <li>Inheritance</li>
+                        <li>Generic Programming: Class Template and Operator Overloading</li>
+                        <li>Standard Template Library (STL): list</li>
+                        <li>Binary Search Tree (BST)</li>
+                        <li>Hash Table (Open Addressing: Linear, Double, Quadratic Probing)</li>
+                    </ul>
+
+
+                    <!-- 			  <br/>
+                      <h4>Sub-section heading</h4Small System>
+                      <p>
+                        ...
+                      </p>
+                      <br/>
+
+                      <h4>Sub-section heading</h4>
+                      <p>
+                        ...
+                      </p>	 -->
+                </div>
+                <div class="card-footer text-muted">
+                    <p>We value academic integrity very highly. Please read the <a
+                            href="../../../comp2012.1.html#honorcode">Honor
+                        Code</a> section on our course webpage to
+                        make sure you understand what is considered as plagiarism and what the penalties are. The
+                        following are
+                        some of the highlights:</p>
+                    <ul>
+                        <li>Do NOT try your "luck" - we use some sophisticated plagiarism detection software to find
+                            cheaters. It
+                            is much better than most students think. It has been proven times and times again tricks
+                            don't work.
+                            We also review codes for potential cases manually.
+                        </li>
+                        <li>The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your
+                            assignment
+                            - it
+                            is much more than that. It is simply not worth to cheat at all. You would hurt your friend
+                            and yourself
+                            by doing that. It is obvious that a real friend won't ask you to get involved in a
+                            plagiarism act in
+                            any way due to the consequences. Read the Honor Code again before you even try to think
+                            about cheating.
+                        </li>
+                        <li>Serious offenders will fail the course immediately and there may be additional disciplinary
+                            actions
+                            from the department and university.
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <div class="card mb-4">
+                <div class="card-body" id="ow">
+                    <h3 class="card-title">Overview</h3>
+                    <p class="card-text">
+                    <p>In this assignment, you are going to implement a
+                        mini Library System, which allows library
+                        users to search for books (Library Item).</p>
+
+                    <p>There are 6 classes / class templates / struct.</p>
+                    <ul>
+                        <li><b>LibraryItem</b>: The base class of any borrowable item in the library.</li>
+                        <li><b>Book</b>: Inherits from LibraryItem, which has an extra property physical location.</li>
+                        <li><b>BST</b>: A binary search tree.</li>
+                        <li><b>BSTNode</b>: A node in a BST. It is defined and implemented in BST.</li>
+                        <li><b>HashTable</b>: A customizable hash table. Open addressing and lazy deletion are always
+                            used (see lecture notes). However, the collision resolution strategy is customizable.
+                        </li>
+
+                        <li><b>Library</b>:
+                            A library. It allows users to add a new item into the libraryItemArray. The item will
+                            hash into the hash table entry with the key as name and value as LibraryItem pointer. Also,
+                            it will insert into the binary search tree via key as publishing date and value as
+                            LibraryItem pointer. The reason for establishing indexing is to provide fast retrieval or
+                            search for library items. Library uses the hashTableIndex to store all the item pointer
+                            addresses. Then, the user can search the item by the exact name.
+                            Moreover, bstIndex stores the address of the item ordered by publishing day. Users can use
+                            the bstIndex to search the item's pointer address by publishing date or search list of items
+                            by start publishing date (inclusive) and end publishing date (inclusive). Also, the library
+                            provides
+                            services to borrow or return an item to the library. P.S. Since libraryItemArray,
+                            hashTableIndex, bstIndex are all storing the same set of LibraryItem pointer addresses.
+                            Thus, you <b>only need to release the memory once !!</b>. Therefore, hashTable has a
+                            parameter called isReferenceOnly. It aims to prevent the deallocation
+                            of object.
+                            Finally, you can iterate via the libraryItemArray to deallocate the
+                            libraryItem memory once.
+                            Then, you do not need to conduct other extra operations in the Library destruction function.
+                            Please don't deallocate an object's memory twice. It will probably pop up an error message
+                            and terminate your program.
+                        </li>
+
+                    </ul>
+                    <p>Your solution to this assignment must be based on the given skeleton code provided in the
+                        Download section.</p>
+                    <p>Your task is to complete the following:</p>
+                    <ul>
+                        <li><b>BSTImplementation.h</b></li>
+                        <li><b>HashTableImplementation.h</b></li>
+                        <li><b>Library.cpp</b></li>
+                    </ul>
+                    </p>
+                    <p><b>Suggestion</b>: You can work in this order (one by one with the test cases):
+                        BSTImplementation.h, HashTableImplementation.h, Library.cpp.</p>
+                    <p>
+                        You need to implement those missing functions according to specification
+                        in the header files which are
+                        BST.h, HashTable.h and Library.cpp. You also need to read LibraryItem, Book related files.
+                        <b>These are the only 3 files you are supposed to modify, zip, and then submit to Zinc.</b>
+                    </p>
+                    <br/>
+
+                    <h4>Assumption</h4>
+                    <p>
+                        LibraryItem/Book names are unique. Also, there is only at most one book publishing every day.
+                        Thus, all the names and publishing dates are unique.
+                    </p>
+
+                    <p>Comments in the corresponding header files list out the detailed requirements. The description
+                        below supplements the only missing information. You need to read both the source/header files
+                        and the webpage description carefully to get the whole picture.</p>
+
+                    <p>While you probably will jump back and forth as you read the materials as they reference each
+                        other, we recommend the following general reading order:</p>
+                    <ul>
+                        <li><b>BSTNode.h</b></li>
+                        <li><b>BST.h</b></li>
+                        <li><b>BSTImplementation.h</b></li>
+                        <li><b>HashTable.h</b></li>
+                        <li><b>HashTableImplementation.h</b></li>
+                        <li><b>LibraryItem.h</b></li>
+                        <li><b>Book.h</b></li>
+                        <li><b>Library.h</b></li>
+                        <li><b>Library.cpp</b></li>
+                        <li><b>main*.cpp (different test cases)</b></li>
+                    </ul>
+
+                    <p>Read the FAQ &amp; Clarifications section for some common clarifications. You should check that a
+                        day before the deadline to make sure you don't miss any clarification, even if you have already
+                        submitted your work then.</p>
+
+                    <p>Submission details are in the Submission and Deadline section.</p>
+                    </p>
+
+                    <p>
+                        <b>Optional Info (not related to assignment implementation)</b> : Hash Table allows O(1) access
+                        of an Item via the exact key.
+                        <b>HashTable</b> is suitable for <b>primary keys (unique id) lookups</b>. It allows the user to
+                        retrieve an item by a key.
+                        <b>BSTIndices</b> are suitable to <b>Range Queries/Scan</b> and
+                        HashTable provides O(1) lookup. However, HashTable is not suitable for doing a range search.
+                        Since the nature of HashTable make the item spread into a different portion of the array. Binary
+                        Search Tree is more suitable to do range. They have different advantages in different use cases.
+                        You can find more from this <a
+                            href="https://www.quora.com/Between-hashing-and-b-trees-which-method-is-preferable-for-storing-indexes-in-a-database">link</a>
+                        or searching by keyword "Hash Table and Tree in Database"
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Description section -->
+            <!-- ### Complete description section for the assignment ### -->
+            <div class="card mb-4">
+                <div class="card-body" id="rehashing">
+                    <h3 class="card-title">LoadLimit and Rehashing</h3>
+                    <p class="card-text">
+                    <p>There is a private member <code>loadLimit</code> that determines when rehashing needs to happen.
+                        If adding a new item to the HashTable would result in exceeding the load factor (size of table *
+                        load limit fraction) (i.e. active cells, rehashing will need to be performed first, before
+                        adding the new item. </p>
+                    <p>To perform rehashing, you need to create a new hash table of twice the
+                        size of the current hash table, and insert the items in the current hash
+                        table to the new hash table. The cell
+                        statuses of the cells in the new hash table (expanded table) will be
+                        either ACTIVE or EMPTY.
+                    </p>
+                    <p>The insertion order of the items to the new table is the same as their appearance order in the
+                        old/original <code>table</code> Cell array (i.e. iterate from first element in array till the
+                        last element; rfrom index 0, index 1, index 2, ...)
+                    <p>For simplicity, you may assume the addition of items back to the expanded table will always be
+                        successful.</p>
+                    <p>The following example also appears in the provided main08.cpp . You may check its code and the
+                        corresponding sample output.</p>
+                    <p>Suppose we have a hash table that stores integer keys and data</p>
+                    <ul>
+                        <li>size: 7</li>
+                        <li>loadLimit: 0.5</li>
+                        <li>mode: Linear probing</li>
+                        <li>hash function: h(k)=k+1</li>
+                    </ul>
+                    <p>With the provided print function, the current hash table looks like this:
+                    <pre>
+0: [Active]{6} | 1: [Active]{13} | 2: [Active]{1} | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty]</pre>
+                    <p>Then, if we try to add another item {20,200} to it, the load limit will exceed as having 4 items
+                        in total
+                        is more than the loadLimit*m (0.5*7=3.5). Rehashing is needed.</p>
+                    <p>We will insert the existing items {6,66}, {13,133}, and {1,11} to the expanded table, in that
+                        order, as it is how they are ordered in the table Cell array as shown above.</p>
+                    <p>That is, start with an empty table of double size (i.e. size=14):</p>
+                    <pre>
+0: [Empty] | 1: [Empty] | 2: [Empty] | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty] | 7: [Empty] | 8: [Empty] | 9: [Empty] | 10: [Empty] | 11: [Empty] | 12: [Empty] | 13: [Empty]]</pre>
+                    >
+                    <p>We first add {6,66} to it, so it becomes:</p>
+
+                    <pre>
+0: [Empty] | 1: [Empty] | 2: [Empty] | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty] | 7: [Active]{6} | 8: [Empty] | 9: [Empty] | 10: [Empty] | 11: [Empty] | 12: [Empty] | 13: [Empty]]</pre>
+                    >
+                    <p>Then we add {13,133} to it, it becomes:</p>
+
+                    <pre>
+0: [Active]{13} | 1: [Empty] | 2: [Empty] | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty] | 7: [Active]{6} | 8: [Empty] | 9: [Empty] | 10: [Empty] | 11: [Empty] | 12: [Empty] | 13: [Empty]]</pre>
+
+                    <p>Finally we add {1,11} to it, it becomes:</p>
+
+                    <pre>
+0: [Active]{13} | 1: [Empty] | 2: [Active]{1} | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty] | 7: [Active]{6} | 8: [Empty] | 9: [Empty] | 10: [Empty] | 11: [Empty] | 12: [Empty] | 13: [Empty]</pre>
+
+                    <p>Rehashing is done at this point. Hint: you should of course need to deallocate memory for the old
+                        table accordingly then.</p>
+
+                    <p>After the rehashing, the addition of {20,200} can now be performed. The addition result is:</p>
+
+                    <pre>
+0: [Active]{13} | 1: [Empty] | 2: [Active]{1} | 3: [Empty] | 4: [Empty] | 5: [Empty] | 6: [Empty] | 7: [Active]{6} | 8: [Active]{20} | 9: [Empty] | 10: [Empty] | 11: [Empty] | 12: [Empty] | 13: [Empty]</pre>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="card mb-4">
+                <div class="card-body" id="tips">
+                    <h3 class="card-title">Tips</h3>
+                    <h4>enum class</h4>
+                    <p>Enum classes are basically scoped and strongly typed enums. Two of them
+                        (Mode and CellStatus) can be seen in
+                        HashTable.h. You may check out the given print function to see how it can
+                        be used:</p>
+                    <pre>
+enum class Mode
+{
+   LINEAR,
+   QUADRATIC,
+   DOUBLE
+};
+</pre>
+                    <pre>
+enum class CellStatus
+{
+   EMPTY,
+   ACTIVE,
+   DELETED
+};
+</pre>
+                    <pre>
+//print the hash table to the ostream
+//given; just like the rest of this file, do not modify
+void print(std::ostream& os) const
+{
+  for(int i=0; i&lt;m; i++)
+  {
+    os &lt;&lt; i &lt;&lt; ": ";
+    if(table[i].status == CellStatus::ACTIVE)
+      os &lt;&lt; "[Active]{" &lt;&lt; table[i].key &lt;&lt; "," &lt;&lt; *table[i].data &lt;&lt; "}";
+    else if(table[i].status == CellStatus::EMPTY)
+      os &lt;&lt; "[Empty]";
+    else if(table[i].status == CellStatus::DELETED)
+      os &lt;&lt; "[Deleted]";
+
+    if(i!=m-1)
+      os &lt;&lt; " | ";
+  }
+  os &lt;&lt; std::endl;
+}
+            </pre>
+
+                </div>
+            </div>
+
+
+            <!-- Download section -->
+            <!-- ### Complete download section for the assignment ### -->
+            <div class="card mb-4">
+                <div class="card-body" id="download">
+                    <h3 class="card-title">Download</h3>
+                    <p>
+                        Skeleton code:
+                        <a href="asg3-skeleton-1.zip">skeleton.zip</a>
+                    </p>
+                    <p>
+                        Just do what you did in lab 1 to put the skeleton code in your VS Code
+                        IDE. In VS Code terminal, running
+                        "make" command will create 21 executables: test1.exe, test2.exe, etc. For those 21 given test
+                        cases compiled from their corresponding mainN.cpp file, where N is the test case number,
+                        together with BSTImplementation, HashTableImplementation, and Library.cpp. Run ./testN.exe to
+                        run the program. See the Sample Output and Grading Scheme section for more information about the
+                        test cases.
+                    <pre>
+<code># Clean the built file
+make clean
+# Build the source code
+make
+# Try execute the test case main1.cpp, which corresponding to test1.exe etc
+./test1.exe
+./test21.exe</code></pre>
+
+                    <!-- (<font color="red">updated at 12:40pm, Apr 22th</font>, as announced on Canvas) -->
+                    <!-- <br><br>If you keep getting the old skeleton which still contains bstNode.h, it is due to your browser cache, please try <a href="skeleton2.zip">this link</a> which has the same content.</p> -->
+                    <!--                    <p>Updates:-->
+                    <!--                    <ul>-->
+                    <!--                        <li>-->
+                    <!--                            Apr 22th, 12:40pm: Updated as announced on Canvas. bstNode.h has been removed.-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
+                    </p>
+
+                    <!-- <p>
+                      For Eclipse to handle the tpp file correctly, you need to follow the following steps.
+                    </p>
+                    <ol>
+                      <li>Go to Window -> Preferences</li>
+                      <li>Navigate to General -> Content Types</li>
+                      <li>In the tree view on the right, go to Text -> C Source File -> C++ Source File -> C++ Header File, press Add… at the bottom</li>
+                      <li>Enter <b>*.tpp</b> for Content type, press OK</li>
+                      <li>Do not close the preferences, yet</li>
+                      <li>Navigate to General -> Editors -> File Associations</li>
+                      <li>Press Add… at the top</li>
+                      <li>Enter <b>*.tpp</b> for File type, press OK</li>
+                      <li>The editors list view at the bottom should now contain the C/C++ Editor and Text Editor</li>
+                    </ol> -->
+
+
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body" id="sample-output">
+                    <p>
+                    <h3 class="card-title">Sample Output</h3>
+                    </p>
+                    <br/>
+                    <p>
+                        Your finished program should produce exactly the same output like <a
+                            href="sample_output.zip">this</a>.
+                        Please note that sample output, naturally, does not show all possible cases. It is part of the
+                        assessment for you to design your own test cases to test your program. <b>Be reminded to remove
+                        any debugging message</b> that you might have added before submitting your code.
+                    </p>
+                    <p>
+                        Also, after testing, <b>make sure your submitted code can compile with the unmodified main.cpp
+                        and header files</b>. Put in dummy/empty implementation whenever needed.
+                    </p>
+                    <p>The program should terminate without any memory leak.</p>
+                </div>
+            </div>
+
+            <!-- Submission and deadline section -->
+            <!-- ### Complete submission and deadline section for the assignment ### -->
+            <div class="card mb-4">
+                <div class="card-body" id="submission">
+                    <h3 class="card-title">Submission and Deadline</h3>
+                    <p>
+                        <u>Deadline: 23:59:00 on Dec 05, 2020 (Saturday)</u>
+                    </p>
+                    <br>
+                    <p><b>Notice:</b> ZINC submission for assignment 3 will be open at a later time. Please refer to the
+                        <a href="../assignment1/submission-guide/index.html">ZINC
+                            Submission Guide</a> for how to make a submission to ZINC properly.</p>
+                    <br>
+                    <p>Please zip three cpp files only: <code>BSTImplementation.h</code>, <code>HashTableImplementation.h</code>,
+                        and <code>Library.cpp</code>. Zip only these 3 files, NOT a folder
+                        containing them. Submit the zip file to <a href="http://zinc.cse.ust.hk">ZINC</a>. ZINC usage
+                        instructions can be found <a href="../../zinc-submission/index.html">here</a>.
+                    </p>
+
+                    <p>Notes:</p>
+                    <ul>
+                        <li>You may submit your file multiple times, but only the latest version will be graded.</li>
+                        <li>Submit early to avoid any last-minute problem. Only ZINC submissions will be accepted.</li>
+                    </ul>
+                    <!--       <p> For instance, since the deadline of the assignment is 23:59:00 on Dec
+                               05th, if you submit your solution at 1:00:00 on Dec 06th, there will be a
+       penalty of -61 points
+                               for your assignment.
+                           </p>-->
+
+                    <!--
+                    <p>Note: If you have no idea how to create a zip file, you may see <a href="https://www.laptopmag.com/articles/how-to-zip-files-windows-10">How
+                        to create a zip file in Windows 10</a> or <a href="http://osxdaily.com/2012/01/10/how-to-zip-files-in-mac-os-x/">How
+                        to create a zip file in Mac OS X</a> . <u>Zip just the 2 files, not a folder containing the 2 files.</u></p> -->
+
+                    <br>
+                    <h4 id="virtual_barn">Compilation Requirement</h4>
+
+                    <p>
+                        It is <strong>required</strong> that your submissions can be compiled and run successfully in
+                        our online autograder ZINC. If we cannot even compile your work, it won't be graded. Therefore,
+                        for parts that you cannot finish, just put in dummy implementation so that your whole program
+                        can be compiled for ZINC to grade the other parts that you have done. Empty implementations can
+                        be like:
+                    </p>
+                    <pre class=" language-cpp"><code class=" language-cpp">int SomeClass::SomeFunctionThatIsTooDifficultToImplementForMe()
+{
+    return 0;
+}
+
+void SomeClass::AnotherFunctionThatIsTooDifficultToImplementForMeOhNo()
+{
+}</code></pre>
+                    <br>
+                    <p>
+                    </p><h4>Late submission policy</h4>
+                    <p></p>
+
+                    <p>There will be a penalty of -1 point (out of a maximum 100 points) for
+                        every minute you are late. For instance, since the deadline of the assignment is 23:59:00 on Dec
+                        05th,
+                        if you submit your solution at 1:00:00 on Dec 06th, there will be a
+                        penalty of -61 points for
+                        your
+                        assignment. However, the lowest grade you may get from
+                        an assignment is zero: any negative score after the deduction due to late penalty (and any other
+                        penalties) will be reset to zero.</p>
+
+                </div>
+            </div>
+
+            <!-- FAQ section -->
+            <!-- ### Complete FAQ section for the assignment ### -->
+            <div class="card mb-4">
+                <div class="card-body" id="faq">
+                    <h3 class="card-title">FAQ &amp; Clarifications</h3>
+                    <!--        <p>
+                             <h4>Frequently Asked Questions</h4>
+                           </p> -->
+                    <br>
+
+                    <p>Q: My code doesn't work / there is an error, here is the code. Can you help me fix it?</p>
+                    <p>A: As the assignment is a major course assessment, to be fair, you are supposed to work on it on
+                        your own and we should not finish the tasks for you. We might provide some very general hints to
+                        you, but we shall not fix the problem or debug it for you.</p>
+
+                    <br/>
+                    <p>Q: Can I add extra helper functions?</p>
+                    <p>A: You may do so in the files that you are allowed to modify and submit.</p>
+
+                    <br/>
+                    <p>Q: Can I include additional libraries?</p>
+                    <p>A: No. Everything you need is already included - there is no need for you to add any include
+                        statement (under our official environment).</p>
+
+                    <br/>
+                    <p>Q: What should be the key of Binary Search Tree Index (bstIndex) in Library.h/cpp?</p>
+                    <p>A: The publishDate of LibraryItem will be the key of bstIndex. You need to convert
+                        publishDate(int) to string and insert into bstIndex according to the publishDate(string).
+                        You can use to_string(publishDate) to convert the integer value to string. The string library is
+                        already included. So you do not need to include the string library again. Here is the code
+                        example. You also can find more detail in <a
+                                href="http://www.cplusplus.com/reference/string/to_string/"> cpp documentation </a>.
+                    <pre>
+<code>
+// to_string example
+std::string pi = "pi is " + std::to_string(3.1415926);
+std::string perfect = std::to_string(1+2+4+7+14) + " is a perfect number";
+std::cout << pi << '\n';
+std::cout << perfect << '\n';
+</code>
+</pre>
+                    </p>
+
+                    <br/>
+                    <p>Q: How to check memory leakage?</p>
+                    <p>A: TA Wallace prepared this guideline:
+                        <a href="assignment3/leak-checking/index.html"> https://course.cse.ust.hk/comp2012/assignments/assignment3/assignment3/leak-checking/</a></p>
+
+                    <br/>
+                    <p>Q: How to handle collision in rehashing?</p>
+                    <p>A: The approach will be the same as add a new element. If you try m times and not successful, you
+                        can skip that item without return -1 and continue for the next item.</p>
+
+                    <br/>
+                    <p>Q: Question of runtime checking?</p>
+                    <p>A: We will use a large data size case to test the runtime, which doesn't pass the runtime test. I
+                        will read the source code implementation of BST, HashTable get, insert, delete, and validate is
+                        that exhaustive approach which maintaining runtime N for all(best, average, worst) situation.
+                        (e.g. hashtable, rehashing case is a worst-case, it can exceed O(1) promise.)
+                        <img style="width:100%" src="images/complexity.png"/>
+                        <a href="https://www.bigocheatsheet.com/"> Complexity Reference </a>
+                        Suppose you follow the lecture notes and assignment guidelines. It will be good.</p>
+
+
+                    <br/>
+                    <p>Q: Behavior of borrow and return item in Library Class</p>
+                    <p>A:
+                    <pre>
+<code>
+//search the book via hashTableIndex
+//if not found print "Item {name} was not found" return false
+//if found and check isInStock true print "Borrowed Item {name}" and return true
+//else isInStock false print "Item {name} is not in stock currently" and return false
+bool borrowItem(string name) const;
+
+//search the book via hashTableIndex
+//if not found print "Item {name} was not found" return false
+//if found and check isInStock false print "Returned Item {name}" and return true
+//else isInStock true print "Item {name} is in stock currently" and return false
+bool returnItem(string name) const;
+</code>
+                </pre>
+                    </p>
+
+
+                    <br/>
+                    <p>Q: Do Deep Copy copy the DELETED cell status?</p>
+                    <p>A: You need to copy all cells, even the status is DELETED or EMPTY. For deleted cells, we
+                        recommend you set the data address to nullptr in order to prevent abnormal behavior. Also, if
+                        the cell is activate, you are required to allocated new memory for the active cell data.
+                        <br>
+                        Although isReferenceOnly == true may possibly result in memory leakage. Since we don't specify
+                        that behavior, we will not test memory leakage in that situation.</p>
+
+                    <!--             <br />
+                                <p>Q: In BSTNode.h, the given BSTNode constructor's parameter value should be of type S instead of T, right?</p>
+                                <p>A: Correct. That was a typo, sorry about that. However, even with T it would still work (our solution could compile with that as well) because the BSTNode.h is included inside of the BST class, so T is actually defined as the template parameter of BST. Since we would always use the same value type for the BST and BSTNode anyway, it would still work effectively the same. On the other hand, if one includes the BSTNode.h outside of the BST class, then type S must be used because T would be undefined then.
+                                <br>To avoid confusion, the skeleton has been updated by replacing that T with S on that line at 9:50am of Apr 22th. If you have the old version, you can update the file if you want, but it is not technically necessary as the old version would still compile and work as explained.
+                                </p> -->
+
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: For <code>HashTable&lt;K,T&gt;::HashTable</code>, do we need to initialize the key in each-->
+                    <!--                        cell of the table?</p>-->
+                    <!--                    <p>A: No need. When a cell is not active, logically its key shouldn't be used in any way, so it is-->
+                    <!--                        OK to leave it uninitialized at that point.</p>-->
+
+                    <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>Q: For rehashing, it is said that "The cell statuses of the cells in the expanded table will be&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        either ACTIVE or EMPTY". Does it imply that we should not rehash/insert the deleted items from&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        the original table to the new expanded table?</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>A: Yes, all deleted items shall be gone after rehashing.</p>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>Q: For <code>BST&lt;T&gt;::findMin</code>, should we return the subtree that has the minimum-key&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        node as its root node instead?</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>A: Yes. That function is intended to be used to facilitate the implementation of other parts&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        (just like the find_min function in the BST lecture note), so it should find the minimum key&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        instead of minimum value. The skeleton has been updated on Apr 27th, 6:06pm: Fixed a typo in a&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        comment in bst.h. BST::findMin's description should be "return the subtree that has the&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        <del>minimum-value</del>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        <b>minimum-key</b> node as its root node". If you have downloaded the previous version, there is&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        no need for you to redownload the file. You can just fix the one typo yourself in bst.h. No&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        other changes need to be made. We also won't test this function when we grade your work, as that&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        function is intended to be used as a helper function anyway.&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    </p>&ndash;&gt;-->
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: Can we assume only unique keys will be inserted to the hash table?</p>-->
+                    <!--                    <p>A: Yes. No checking of that is needed in your code.</p>-->
+
+
+                    <br/>
+                    <p>Q: For <code>HashTable&lt;K,T&gt;::get</code>, what if the specified key cannot be found in the
+                        table?</p>
+                    <p>A: You may return nullptr just like the sample output. You can also return nullptr when your
+                        attempt to find the key fails after <i>m</i> collisions/attempts (just like the <code>add</code>
+                        function).</p>
+
+                    <br/>
+                    <p>Q: The difference and use of those two Hash Functions h and h2?</p>
+                    <p>A: There are two Hash Functions inside the HashTable Class. They are h and h2. Hash Function h
+                        takes the type T key as input. Hash Function h2 takes the type int collision count as input.
+                        Hash Function h2 is only utilized when the collision resolving mode is double.</p>
+
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: Are the displayed BSTs rotated 90 degree anti-clockwise (instead of clockwise)?</p>-->
+                    <!--                    <p>A: Yes, they obviously are. Please ignore the typo in the <code>BST&lt;T&gt;::printTree</code>-->
+                    <!--                        comment.</p>-->
+
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: During insertion, can a DELETED cell be reused?</p>-->
+                    <!--                    <p>A: For this assignment, no. You may observe in the given examples in sample output that the-->
+                    <!--                        DELETED cells are skipped (considered as occupied) during insertion. The probing of it also-->
+                    <!--                        counts as a collision, so the collision count has also been increased by 1 in those-->
+                    <!--                        examples.<br>-->
+                    <!--                        However, for your information, in practice, DELETED cells may be reused. There is also a-->
+                    <!--                        technique to further improve the efficiency of the hash table by relocating an element to the-->
+                    <!--                        first location marked for deletion that was probed during the search. All these are not required-->
+                    <!--                        (and should not be done) in the simplified implementation of lazy deletion for this assignment,-->
+                    <!--                        as your program output should be the same as the sample output.</p>-->
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: Do we directly use the data member "count" to see if we need to perform rehashing, by-->
+                    <!--                        comparing it with m*loadLimit?</p>-->
+                    <!--                    <p>A: No. Two key points: 1. we do want you to count the number of occupied (i.e. active + deleted)-->
+                    <!--                        cells to see if rehashing is required, as described on our webpage; 2. data member "count" is-->
+                    <!--                        defined as just the number of "active" cells, so it should not be directly used in rehashing-->
+                    <!--                        consideration.</p>-->
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: Can we assume the type T has a proper copy constructor, which supports deep copy when needed,-->
+                    <!--                        in <code>HashTable&lt;K,T&gt</code>?</p>-->
+                    <!--                    <p>A: Yes. On a related note, the Product's default copy constructor works well.</p>-->
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: Can collisions happen when we add items back to the expanded table during rehashing?</p>-->
+                    <!--                    <p>A: Yes, collisions may happen. On a related noted, please note that it is also mentioned "For-->
+                    <!--                        simplicity, you may assume the addition of items back to the expanded table will always be-->
+                    <!--                        successful.", that means not too many collisions will happen. (i.e. collision count won't reach-->
+                    <!--                        m)</p>-->
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: For the hash table, do we need to handle the case where m is 0?</p>-->
+                    <!--                    <p>A: No.</p>-->
+
+                    <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>Q: For <code>Mall::buildShop</code>, when we create the shop, what h2 to use?</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    <p>A: For a shop in a mall, the LINEAR mode will be used. Hence, it doesn't matter what h2 is, as it&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        will never be used. nullptr is a good choice since h2 is just a pointer after all.</p>&ndash;&gt;-->
+
+
+                    <!--                    <br/>-->
+                    <!--                    <p>Q: When I run valgrind, it gives some error messages. Will my marks get deducted because of-->
+                    <!--                        those?</p>-->
+                    <!--                    <p>A: We do not deduct marks just because valgrind gives "error messages". For memory leak checking,-->
+                    <!--                        having "no leaks are possible" in the report is good enough.-->
+                    <!--                        However, those "errors" may be meaningful to you still, because they can be an indication of-->
+                    <!--                        potential problems that exist in your code, which may (or may not) lead to incorrect answers in-->
+                    <!--                        some of the test cases.-->
+                    <!--                        So you may still want to investigate what those mean yourself, by searching for the meaning of-->
+                    <!--                        those errors, and checking the code/function that is suggested in those error messages.</p>-->
+
+
+                    <!--                    <br>-->
+                    <!--                    <p>Q: When deep copy or deep assignment (operator=) is performed on the HashTable, how should we-->
+                    <!--                        handle the deleted cells? </p>-->
+                    <!--                    <p>A: You can just copy their DELETED statuses, since their data shouldn't be pointing to anything-->
+                    <!--                        useful anyway, and their keys are irrelevant (i.e. no copy is needed for key and data)</p>-->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+            <div class="sticky-top">
+                <!-- Menu Widget -->
+                <div class="card my-12">
+                    <h5 class="card-header">Menu</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="mb-0" type="circle" style="padding-left:20px">
+                                    <li>
+                                        <a href="index.html#introduction">Introduction</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#ow">Overview</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#rehashing">LoadLimit and Rehashing</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#tips">Tips</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#download">Download</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#sample-output">Sample Output</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#submission">Submission &amp; Deadline</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#faq">FAQ &amp; Clarifications</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintainance widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Page maintained by</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        Arthur YAU
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <a href="mailto:ypyau@connect.ust.hk">ypyau@connect.ust.hk</a>
+                                    </li>
+                                    <li>Last Modified:
+                                        <script type="text/javascript">document.write(document.lastModified);</script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Homepage widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Homepage</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="../../../comp2012.1.html">Course Homepage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+            and Engineering</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

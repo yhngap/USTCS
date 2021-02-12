@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Assignment 1: Inventory</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- Prism syntax highlighter
+  <link href="prism.css" rel="stylesheet" /> -->
+
+  <!-- For code highlighting -->
+  <script src="vendor/prism/prism.js" type="text/javascript"></script>
+  <link href="vendor/prism/prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://course.cse.ust.hk/comp2012/assignments/assignment1/prism.js"></script>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h2 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h2>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Assignment 1
+          <span style="color:#660066">Inventory</span>
+        </h3>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+          <!-- ### Add an image representing the assignment content here ### -->
+          <img class="card-img-top" src="images/inventory.jpg" alt="Card image cap">
+
+          <div class="card-body" id="introduction">
+            <h3 class="card-title">Introduction</h3>
+            <p class="card-text">
+              <p>In this assignment, through the implementation of a custom-made data structure called <i>Inventory</i>, you will have practices on various C++/OOP fundamentals, e.g., classes, objects, constructors, destructors, pointers, etc.</p>
+
+
+            </p>
+
+            <!-- 			  <br/>
+			  <h4>Sub-section heading</h4>
+			  <p>
+			    ...
+			  </p>
+			  <br/>
+
+			  <h4>Sub-section heading</h4>
+			  <p>
+			    ...
+			  </p>	 -->
+          </div>
+          <div class="card-footer text-muted">
+            <p>We value academic integrity very highly. Please read the <a href="../../../comp2012.1.html#honorcode">Honor
+                Code</a> section on our course webpage to
+              make sure you understand what is considered as plagiarism and what the penalties are. The following are
+              some of the highlights:</p>
+            <ul>
+              <li>Do NOT try your "luck" - we use sophisticated plagiarism detection software to find cheaters. We also review codes for potential cases manually.</li>
+              <li>The penalty (for <b>BOTH</b> the copier and the copiee) is not just getting a zero in your assignment. Please read the <a href="../../../comp2012.1.html#honorcode">Honor Code</a> thoroughly.</li>
+              <li>Serious offenders will fail the course immediately, and there may be additional disciplinary actions from the department and university, upto and including expulsion.</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="ow">
+            <h3 class="card-title">Overview</h3>
+            <p class="card-text">
+              <p></p>
+              <p>There are 2 classes.</p>
+              <ul>
+                <li><b>Inventory</b>: It is a flexible container of items. It is backed by a dynamic array of Item pointers that point to Item objects. It supports some set-like operations like union.</li>
+                <li><b>Item</b>: It is a representation of an item in an inventory. It has two properites: name and quantity.</li>
+
+              </ul>
+              <p>Your solution to this assignment must be based on the given skeleton code provided in the Download section.</p>
+              <p>Your task is to complete the following:</p>
+                <ul>
+                  <li>Inventory implementation in Inventory.cpp</li>
+                  <li>Item implementation in Item.cpp</li>
+                </ul>
+              </p>
+              <p><b>These are the only 2 files you are supposed to modify, zip, and then submit to Zinc.</b></p>
+
+              <p>Comments in the corresponding header files list out the detailed requirements. The description below supplements only the missing information. You need to read both the source/header files and the webpage description carefully to get the whole picture.</p>
+
+              <p>While you probably will jump back and forth as you read the materials as they reference each others, we recommend the following reading order:</p>
+
+              <ul>
+                <li>Item.h</li>
+                <li>Inventory.h</li>
+                <li>The remaining of this webpage</li>
+                <li>main10.cpp</li>
+                <li>main1.cpp - main9.cpp</li>
+              </ul>
+
+              <p>Read the FAQ page for some common clarifications. You should check that a day before the deadline to make sure you don't miss any clarification, even if you have already submitted your work then.</p>
+
+
+              <p>If you need clarification of the requirements, please feel free to post your question on Piazza with the <u>pa1</u> tag.
+			  However, to avoid cluttering the forum with repeated/trivial questions, please do <b>read all the source code comments, webpage
+			  description, sample output, and the latest FAQ (refresh this page regularly) carefully before you post your questions</b>. You should also check if your question has been asked before posting one. Please note that we won't debug for any student's assignment for fairness.
+      </p>
+
+              <p>Submission details are in the Submission and Deadline section.</p>
+              </p>
+
+          </div>
+        </div>
+
+
+        <!-- Download section -->
+        <!-- ### Complete download section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <ul>
+              <li>Skeleton code:
+                <a href="skeleton0928.zip">skeleton0928.zip</a>
+                <ul>
+                    <li>Minor update on Sep 28th: changed <code>#include "inventory.h"</code> to <code>#include "Inventory.h"</code> in all mainN.cpp files. You don't need to re-download the skeleton if the old one can compile for you, e.g., on Windows at least, the include filename is case-insensitive anyway. You can also edit the old files yourself.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p>This is a Makefile project. Just do what you did in <a href="../../labs/lab1/index.html">lab 1</a> to put that in your VS Code / Eclipse / other IDEs.<br><br>In VS Code terminal, running <code>make</code> will create 10 excuteables: test1.exe, test2.exe, ..., test10.exe for the 10 given test cases which are compiled from their corresponding mainN.cpp file, where N is the test case number, together with Inventory.cpp and Item.cpp. Run <code>./testN.exe</code> to run the program.</p> See the <a href="index.html#sample-output">Sample Output and Grading Scheme</a> section for more information about the test cases.
+
+
+           <!--  <p>
+            For VS Code, basically just follow <a href="https://course.cse.ust.hk/comp2011/labs/vscode/#terminal">creating a project and using the terminal for custom compilation command</a> section on our VS Code usage tutorial. That is, create a folder to hold all the extracted files in your file explorer, then open this folder in VS Code. You can then use the terminal command <code>g++ -std=c++11 *.cpp -o programName.exe</code> to compile all sources in the folder to the program, and <code>./programName</code> to run it afterward.
+            </p>
+            <p>
+              For Eclipse: create a standard Eclipse C++ project (MinGW gcc compiler on Windows, or MacOS gcc on Mac) and add all files from the zip package to it.
+            </p>
+ -->
+
+        </div>
+      </div>
+
+
+       
+
+        
+        <div class="card mb-4">
+          <div class="card-body" id="format">
+            <h3 class="card-title">Output format</h3>
+            
+            <p>In <code>Inventory::print()</code>, you need to follow this format exactly for printing the inventory and the items in it. You should not have any other console output in any other functions that you implement. If you are not sure about the format, check the sample output, or simply try your implementation on the online autograder (feel free to try as the number of submissions is not limited; we only use your last submission for grading at the end).</p>
+            <p>The format is as follows:</p>
+            <pre>{"[FIRST ITEM NAME]":[FIRST ITEM QUANTITY],"[SECOND ITEM NAME]":[SECOND ITEM QUANTITY],"[THIRD ITEM NAME]":[THIRD ITEM QUANTITY],"[FORTH ITEM NAME]":[FORTH ITEM QUANTITY]<font color="green"> AND SO ON...</font>}</pre>
+            <p>Basically, use { and } to contain all items which are separated by a single comma. Each item is represented by a quoted name, followed by a colon, followed by its quantity.</p>
+            <p>At the very end after }, there is a single endl.</p>
+            <p>For example, if we have 10 apples, 20 bananas, and 15 oranges, the print function should print the following line:</p>
+              <pre>{"Apple":10,"Banana":20,"Orange":15}</pre>
+            <p>Tips: the double quote character in C++ has to be escaped, i.e., <code>"\""</code> represents a double quote string while <code>"""</code> is incorrect.</p>
+            
+
+
+        </div>
+      </div>
+
+
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="sample-output">
+            <p>
+              <h3 class="card-title">Sample Output and Grading Scheme</h3>
+            </p>
+            <!--<br />-->
+
+            <p>Test 10 is actually the overall test, while tests 1 to 9 are simply pieces of it. Tests 1 to 9 are there to give you partial credits. You can test all these 10 given test cases on Zinc anytime.</p>
+<p>
+  Your finished program should produce the exact same output as our <a href="sample.zip">sample output</a>. Please note that sample output, naturally, does not show all possible cases. It is part of the assessment for you to design your own test cases to test your program. <b>Be reminded to remove any debugging message</b> that you might have added before submitting your code.
+</p>
+<!-- <p>You may want to use some difference checker such as <a href="https://www.diffchecker.com/">this</a> to compare your output with the sample output since the sample output is pretty long.</p>
+<p>
+  Also, after testing, <b>make sure your submitted code can compile with the unmodified main.cpp and header files that are not supposed to be modified</b>. Put in dummy/empty implementation whenever needed.
+</p> -->
+<p>Your program should terminate without any memory leak. We will have 2 test cases (test case 9 and test case 10) to check for it. Your program will need to have 0 memory leak as well as correct output in order to get credits for test 9 and test 10. We don't care about memory leak in other test cases.</p>
+
+<p>Each of the test cases is worth 4 marks, and there is no partial credit for each case. We will have other additional 15 test cases which are not released to you before the deadline. In total, all 25 test cases (10 given + 15 hidden) will contribute to the 100 total marks of the assignment.</p>
+          </div>
+        </div>
+
+
+
+
+        <!-- Submission and deadline section -->
+        <!-- ### Complete submission and deadline section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission and Deadline</h3>
+            <p>
+              <u>Deadline: 23:59:00 on <strike>Oct 9, 2020 (Friday)</strike> Oct 13, 2020 (Tuesday)</u> 
+            </p>
+            <br />
+            <!-- <p><b>Notice:</b> Zinc submission for assignment 1 will be open at a later time, as the Zinc team is doing some adjustments. If you want to check your program output, you may do so with our provided <a href="https://course.cse.ust.hk/comp2012/secret/Password_Only/assignments/assignment1/sample.zip">sample output</a> yourself meanwhile.</p>
+            <br> -->
+            <p>Please zip two cpp files only: <code>Item.cpp</code> and <code>Inventory.cpp</code>. Zip only these 2 files, NOT a folder containing them. Submit the zip file to <a href="http://zinc.cse.ust.hk">Zinc</a>. <strike>Zinc usage instructions can be found <a href="../../zinc-submission/index.html">here</a>.</strike> <b>New Zinc usage guide can be found <a href="submission-guide/index.html">here</a>.</b></p>
+
+            <p>Notes:</p>
+            <ul>
+                  <li>You may submit your file multiple times, but only the latest version will be graded.</li>
+                  <li>Submit early to avoid any last-minute problem. Only ZINC submissions will be accepted.</li>
+           </ul>
+
+            <!-- 
+            <p>Note: If you have no idea how to create a zip file, you may see <a href="https://www.laptopmag.com/articles/how-to-zip-files-windows-10">How
+                to create a zip file in Windows 10</a> or <a href="http://osxdaily.com/2012/01/10/how-to-zip-files-in-mac-os-x/">How
+                to create a zip file in Mac OS X</a> . <u>Zip just the 2 files, not a folder containing the 2 files.</u></p> -->
+
+		 <br/>
+                 <h4 id="virtual_barn">Compilation Requirement</h4>
+
+      <p>
+        It is <strong>required</strong> that your submissions can be compiled and run successfully in our online autograder Zinc. If we cannot even compile your work, it won't be graded. Therefore, for parts that you cannot finish, just put in dummy implementation so that your whole program can be compiled for Zinc to grade the other parts that you have done. Empty implementations can be like:
+      </p>
+      <pre><code class="language-cpp">int SomeClass::SomeFunctionThatIsTooDifficultToImplementForMe()
+{
+    return 0;
+}
+
+void SomeClass::AnotherFunctionThatIsTooDifficultToImplementForMeOhNo()
+{
+}</code></pre>
+	    <br/>
+            <p>
+              <h4>Late submission policy</h4>
+            </p>
+
+            <p>There will be a penalty of -1 point (out of a maximum 100 points) for
+              every minute you are late. For instance, since the deadline of the assignment is 23:59:00 on Oct 13th,
+              if you submit your solution at 1:00:00 on Oct 14th, there will be a penalty of -61 points for your
+              assignment. However, the lowest grade you may get from
+              an assignment is zero: any negative score after the deduction due to late penalty (and any other
+              penalties) will be reset to zero.</p>
+
+          </div>
+        </div>
+
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+<!--         <div class="card mb-4">
+          <div class="card-body" id="leak">
+            <h3 class="card-title">Checking for memory leak</h3>
+            <p class="card-text">
+      <p>One of our test cases (test case 10) check for memory leak. You can try it on Zinc.</p>
+    
+    </p>
+</div>
+</div> -->
+
+
+        <!-- FAQ section -->
+        <!-- ### Complete FAQ section for the assignment ### -->
+        <div class="card mb-4">
+          <div class="card-body" id="faq">
+            <h3 class="card-title">FAQ</h3>
+            <p>
+              <h4>Frequently Asked Questions</h4>
+            </p>
+	    <br/>
+            <p>Q: My code doesn't work / there is an error, here is the code, can you help me fix it?</p>
+            <p>A: As the assignment is a major course assessment, to be fair, you are supposed to work on it on your own and we should not finish the tasks for you. We might provide some very general hints to you, but we shall not fix the problem or debug for you.</p>
+<br>
+            <p>Q: Can I add extra helper functions?</p>
+            <p>A: You may do so in the files that you are allowed to modify and submit.</p>
+<br>
+            <p>Q: Can I include additional libraries?</p>
+            <p>A: No. Everything you need is already included - there is no need for you to add any include statement (under our official environment).</p>
+<br>
+            <p>Q: Can I use global variable or static variable such as "static int x"?</p>
+            <p>A: No.</p>
+<br>
+            <p>Q: Can I use "auto"?</p>
+            <p>A: No.</p>
+<br>
+            <p>Q: Do I need to keep negative quantities in an inventory? For example, we may have some negative quantities in the result of getDifference?</p>
+            <p>A: No. We should not have negative quantities in an inventory. Just like the sample output, for getDifference, if (item quantity in this - item quantity in another) is negative or 0, just remove the item from the result altogether.</p>
+<br>
+            <p>Q: What is the difference between the destructor ~Inventory and the function emptyInventory?</p>
+            <p>A: They both need to delete all the items, tho technically emptyInventory should do more than just deleting the items (e.g. setting itemCount to 0). That's why we said "you can make use of emptyInventory here" in the destructor. Also note that, destructor is a special function that is automatically invoked when an Inventory obejct is destructed. Destructors are not supposed to to be invoked manually in general. On the other hand, emptyInventory is an ordinary function which must be invoked manually, and you are free to invoke it any number of times. You can see we used emptyInventory in some of our test cases.</p>
+<br>
+
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+        <!-- Menu Widget -->
+        <div class="card my-12">
+          <h5 class="card-header">Menu</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="mb-0" type="circle" style="padding-left:20px">
+                  <li>
+                    <a href="index.html#introduction">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="index.html#ow">Overview</a>
+                  </li>
+                  <li>
+                    <a href="index.html#download">Download</a>
+                  </li>
+                  <li>
+                    <a href="index.html#format">Output Format</a>
+                  </li>
+                  
+                  <li>
+                    <a href="index.html#sample-output">Sample Output and Grading Scheme</a>
+                  </li>
+                  
+                  <li>
+                    <a href="index.html#submission">Submission &amp; Deadline</a>
+                  </li>
+           <!--        <li>
+                    <a href="#leak">Checking for memory leak</a>
+                  </li> -->
+                  <li>
+                    <a href="index.html#faq">FAQ</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maintainance widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Page maintained by</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    Wallace Mak
+                  </li>
+                  <li>
+                    Email:
+                    <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a>
+                  </li>
+                  <li>Last Modified:
+                    <script type="text/javascript">document.write(document.lastModified);</script>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Homepage widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Homepage</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="../../../comp2012.1.html">Course Homepage</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    SyntaxHighlighter.highlight();
+  </script>
+</body>
+
+</html>

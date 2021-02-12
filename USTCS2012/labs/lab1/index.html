@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 1: Makefile and Separate Compilation</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4 !important;
+      border: 1px solid #ddd !important;
+      border-left: 3px solid #f36d33 !important;
+      color: #666 !important;
+      page-break-inside: avoid !important;
+      font-family: monospace !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1.6em !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+      padding: 1em 1.5em !important;
+      display: block !important;
+      word-wrap: break-word !important;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 1
+          <span style="color:#660066">Makefile and Separate Compilation</span>
+        </h3>
+	<div class="mb-4">
+	<img src="img/front.png" width=100%>
+	</div>
+
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+          <div class="card-body" id="CSDaccount">
+            <h3 class="card-title">Some intructions for the labs</h3>
+            <p class="card-text">
+The lab TA will go through them in the session. You may find them <a href="../../misc/lab.pdf">here</a>.
+
+        </p>
+      </div>
+    </div>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+          <div class="card-body" id="CSDaccount">
+            <h3 class="card-title">CSD account</h3>
+            <p class="card-text">
+
+<p>A CSD account is required to access the lab rooms (when they are open) and use the lab machines. If you do not have a CSD account yet, you may create it with the instructions <a target="_blank" href="https://cssystem.cse.ust.hk/home.php?docbase=UGuides/hkust_only&req_url=UGuides/hkust_only/activation.html">here</a>. (note: pay attention to which two checkboxes you need to check.) You may already have it if you have studied some other COMP courses here.</p>
+
+	    </p>
+	  </div>
+	</div>
+
+
+   <div class="card mb-4">
+
+          <div class="card-body" id="OnlineGrading">
+            <h3 class="card-title">Online grading system</h3>
+            <p class="card-text">
+
+            <p>We will use an online grading system (ZINC) to grade your lab work so that we can have more time to discuss the lab materials and help students with their lab works during the lab session. As this is the first live deployment of ZINC, we apologize in advance for any unexpected problems that may occur, and humbly request for your patience and understanding. In such cases, please contact the TAs and/or Desmond for resolution.</p>
+
+            <p>Please refer to <a href="../../zinc-submission/index.html">the ZINC usage instruction</a> to learn about how to use it for submitting your work. There is no limit on how many times you can submit, so please feel free to try. If you have enrolled into the course in the last few days of the add/drop period, you may not be able to use the ZINC yet as some time is needed for the system to synchronize with the latest enrollment, please wait until Sep 21st (Monday).</p>
+
+            <p>For this lab, there are 15 required files (basically all cpp/h/Makefile files) that should be contained in your submitted zip file:</p>
+            <pre>
+betterMeat.cpp
+bread.cpp
+bread.h
+burger.cpp
+burger.h
+chocolate.cpp
+chocolate.h
+mainBurger.cpp
+mainChocolate.cpp
+mainCombo.cpp
+Makefile
+meat.cpp
+meat.h
+muffin.cpp
+muffin.h
+            </pre>
+            <p>Once again, please be reminded not to include any other non-required files such as the *.o and *.exe files. Also, please only compress/zip the 15 files, NOT a folder containing them.</p>
+
+      </p>
+    </div>
+  </div>
+
+
+   <div class="card mb-4">
+
+          <div class="card-body" id="VSCode">
+            <h3 class="card-title">VSCode or Eclipse or other IDEs</h3>
+            <p class="card-text">
+
+            <p>We introduce a new IDE - VS Code for this semester. You may refer to our <a href="../../../comp2011/labs/vscode/index.html">VS Code tutorial page</a> for setup and usage instructions. However, we understand that many of you came from COMP2011 in a previous semester and you are already familiar with another IDE - Eclipse. Please feel free to continue to use Eclipse if you have any problem with setting VS Code up or just prefer Eclipse. For this lab, if you use Eclipse, please see <a href="../lab1_eclipse.html">lab 1 instrucions for Eclipse</a> instead. The following is for the VS Code users. All 3 lab tasks are the same on both versions. If you use any other IDEs, it is also fine, but you would need to find out how to use Makefile in them yourself.</p>
+
+      </p>
+    </div>
+  </div>
+
+
+
+
+        <div class="card mb-4">
+<div class="card-body" id="SeparateCompilation">
+            <h3 class="card-title">Separate Compilation</h3>
+            <p class="card-text">
+
+<p>While modern IDEs like VS Code can automatically build your program from the
+provided source code in most scenarios, with Makefile you can build your program
+in a highly customizable way that utilizes separate compilation. You will learn
+about the basic usage of Makefile in this lab. Please read <a
+href="../../notes/self-study-makefile-full.pdf">the Makefile
+lecture notes</a>.</p>
+
+<h4>What is separate compilation?</h4>
+
+<p>Suppose you have a program that consists of 3 cpp files: <code>file1.cpp</code>, <code>file2.cpp</code>, and <code>file3.cpp</code>.</p>
+<p>With the g++ command, one can compile the program with the following command that produces an executable named <code>a.out</code></p>
+<pre>g++ -o a.out file1.cpp file2.cpp file3.cpp</pre>
+<p>Any changes to any of the 3 files (e.g., just editing a line in <code>file1.cpp</code>) will require the g++ compiler to compile all 3 cpp files again to generate the updated executable.</p>
+<p>This is inefficient. To alleviate this problem, we can make use of separate compilation.</p>
+<p>To perform separate compilation, we use the following commands instead.</p>
+<pre>
+g++ -c file1.cpp
+g++ -c file2.cpp
+g++ -c file3.cpp
+g++ -o a.out file1.o file2.o file3.o
+</pre>
+<p>Each of the first 3 commands will individually compile <code>fileN.cpp</code>
+into <code>fileN.o</code> - an object file (which is not executable) containing
+the compiled code for the corresponding cpp file. The last command then simply
+links those object files together to generate the final executable a.out.</p>
+<img src="img/link.png">
+<p>Now, say, if a line is edited in <code>file1.cpp</code>, we just need to execute:</p>
+<pre>
+g++ -c file1.cpp
+g++ -o a.out file1.o file2.o file3.o
+</pre>
+<p>And an updated executable would be generated because the existing file2.o and file3.o can simply be reused.</p>
+            </p>
+	</div>
+    </div>
+
+        <div class="card mb-4">
+	    <div class="card-body" id="Makefile">
+            <h3 class="card-title">Makefile</h3>
+            <p class="card-text">
+
+<p>Makefile allows us to create a set of compilation rules for your programming project. It is very useful for separate compilation. A Makefile consists of a number of rules. The rules have the following syntax:</p>
+
+<pre>
+[Name of rule #1]: [List of dependent files, separated by a space]
+[Press a tab character here][Command 1 to be executed]
+[Press a tab character here][Command 2 to be executed]
+...
+[Press a tab character here][Command N to be executed]
+[Empty lines....]
+[Name of rule #2]: [List of dependent files, separated by a space]
+[Press a tab character here][Command 1 to be executed]
+[Press a tab character here][Command 2 to be executed]
+...
+[Press a tab character here][Command N to be executed]
+[Empty lines....]
+</pre>
+
+<p>When a rule is executed, all dependent files will first be generated using the
+rules of the same names (e.g., a dependent file "burger.exe" can be generated by the rule named "burger.exe") unless the files are already there and up-to-date. Then, after all dependent files are generated, the commands under the rule will be executed.</p>
+
+<p>There are two specials rules - the first rule named "all" and the rule named "clean". The rule "all" will be executed when you simply run the command <code>make</code>. The rule "clean" will be executed when you run the command <code>make clean</code> - this is the rule to clean up the products (e.g. executable and object files)</p>
+
+<p>You need these three commands in this lab.</p>
+
+
+<p>To create an object file (e.g., bread.o) from a source file (e.g., bread.cpp):</p>
+<pre>
+g++ -std=c++11 -o <u>Output filename</u> -c <u>Source file name</u>
+</pre>
+<p>To link the object files together to make an executable:</p>
+<pre>
+g++ -std=c++11 -o <u>Output filename</u> <u>Object file name 1</u> <u>Object file name 2</u> ... <u>Object file name N</u>
+</pre>
+<p>To delete files:</p>
+On Windows:
+<pre>
+del <u>File name pattern</u>
+</pre>
+Or, on Linux/MacOS:
+<pre>
+rm -f <u>File name pattern</u>
+</pre>
+<p>Note: it is possible to detect which OS is being used and pick the command automatically in the Makefile , but it is slightly complicated, so just write the command that works for the OS you are using (please edit the provided Makefile accordingly yourself)</p>
+
+<h4>Meta Rule</h4>
+You may notice that we have many .cpp files and most of them are doing exactly the same line. To save up the copy and paste work, we can define a meta rule instead. The following meta rule is used to generate <i>any_name</i>.o file:
+<pre>
+%.o: %.cpp
+	g++ -std=c++11 -c $< -o $@
+</pre>
+The <code>%</code> symbol means any name. So the rule simply says any .o file
+depends on its corresponding .cpp file. The command to be executed under this rule
+is to use g++ to compile the .cpp source file to its .o object file.
+<ul>
+<li> <code>-c $< </code> : Specify the source file name <code>%.cpp</code> as the first dependent file. </li>
+<li> <code>-o $@ </code> : Specify the output file name <code>%.o</code> as the target.</li>
+</ul>
+
+
+
+<p>Note: We usually write the makefile file name "Makefile" with a capital "M" due to a convention. For details, read <a href="http://stackoverflow.com/questions/12669367/should-i-name-makefile-or-makefile/12686411#12686411">this discussion</a>.</p>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+      <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+<p>For this lab, please download the source files <a href="source.zip">HERE</a>.</p>
+
+
+      </p>
+      </div>
+  </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="ow">
+            <h3 class="card-title">Junk Food Store</h3>
+            <p class="card-text">
+<p>
+In this lab we are going to practice separate compilation using Makefile. We are
+going to make some junk food using C++ code. You are given some source codes
+(.h/.cpp) which are almost complete. You will need to work with the Makefile and add a few lines in some files.
+</p>
+
+
+
+
+
+<h4>Adding the source code</h4>
+
+<p>Download the source files from the Download section. Unzip/extract the zip-file and open the extracted folder. See <a href="../../../comp2011/labs/vscode/index.html#terminal">Creating a project and using the terminal for custom compilation command</a> section of our VS Code tutorial on how to open the folder (you don't need to create a new folder because the folder is already there after the extraction). You may also find the instructions there useful in the later part of this lab where you will need to enter some commands in the terminal in VS Code.</p>
+
+<p>Open the Makefile in VS Code and you should see:</p>
+
+<pre>
+all: chocolate.exe burger.exe 
+
+chocolate.exe: chocolate.o mainChocolate.cpp
+  g++ -o $@ -std=c++11 chocolate.o mainChocolate.cpp
+
+burger.exe: burger.o bread.o meat.o mainBurger.cpp
+  g++ -o $@ -std=c++11 burger.o bread.o meat.o mainBurger.cpp
+
+%.o: %.cpp
+  g++ -std=c++11 -c $< -o $@ 
+
+clean:
+  del *.o *.exe
+# On Windows, use: del *.o *.exe
+# On Linux or MacOS, use: rm -f *.o *.exe
+</pre>
+
+<p>Note: change "del *.o *.exe" to "rm -f *.o *.exe" under the "clean" rule if you are using Linux or MacOS.</p>
+
+<p>Beware that the indentations are all just single tab characters as described in the previous section.</p>
+
+
+
+	   
+<h4>Reading the .cpp/.h files</h4>
+
+<p>There are many files to read while most of them contain one or two lines of code only. You are suggested to begin with the files <strong>mainBurger.cpp, mainChocolate.cpp, mainCombo.cpp</strong>.</p>
+
+<pre class="prettyprint">
+//mainBurger.cpp
+#include "burger.h"
+
+int main() {
+
+    Burger b;
+
+    return 0;
+}
+</pre>
+
+<pre class="prettyprint">
+//mainChocolate.cpp
+#include "chocolate.h"
+
+int main() {
+    Chocolate c;
+    return 0;
+}
+</pre>
+
+<pre class="prettyprint">
+//mainCombo.cpp
+#include "burger.h"
+#include "chocolate.h"
+#include "muffin.h"
+#include <iostream>
+using namespace std;
+
+
+int main() {
+
+    cout << "Have a combo! " << endl;
+
+    Burger b;
+    Muffin m;
+    cout << endl;
+    Chocolate c;
+
+    return 0;
+}
+</pre>
+
+
+<p>
+So for example, to produce <code>burger.exe</code>, it needs a class called <code>Burger</code> which is composed of the class <code>Bread</code> and the class <code>Meat</code>. You need to deduce the class dependency and write them in the Makefile.<br/>
+
+
+          </div>
+        </div>
+
+
+        <div class="card mb-4">
+<div class="card-body" id="labtask">
+            <h3 class="card-title">Lab tasks</h3>
+            <p class="card-text">
+
+<h4>Task 1: Make and run the exe files</h4>
+
+<p>In the terminal (see tutorial on how to open the terminal in VS Code), enter the "make" commands to compile the project using the Makefile. Afterward you can enter the command "./chocolate.exe" and "./burger.exe" to run the generated programs.</p>
+
+<p>The program "burger.exe" should show:</p>
+
+<pre>
+Bread!
+Frozen Meat!
+Make Burger!
+</pre>
+
+<p>The program "chocolate.exe" should show:</p>
+
+<pre>
+Chocolate!
+</pre>
+
+<br>
+<br>
+<br>
+<h4>Task 2: Create the betterBurger.exe</h4>
+<p>
+Add a target called <code>betterBurger.exe</code> which "upgrades" <code>burger.exe</code> with a better meat - betterMeat.cpp - which is an upgraded version of <code>meat.cpp</code>. By editing <code>Makefile</code> only, you shall be able to complete the task. (Apart from adding new rules for <code>betterBurger.exe</code>, you also need to add the target <code>betterBurger.exe</code> in the rule <code>all</code> as well). When you build the project an additional file <code>betterBurger.exe</code> should be produced in addition to <code>burger.exe</code> and <code>chocolate.exe</code>. When you run this file, it shows:</p>
+<pre>
+Bread!
+Fresh Meat!
+Make Burger!
+</pre>
+
+<br>
+<br>
+<br>
+<h4>Task 3: Create the combo.exe</h4>
+A "combo" meal contains a burger, a chocolate, and a muffin. The file
+<code>mainCombo.cpp</code> has been written for you. This should be the driver
+program of <code>combo.exe</code>. You need to write a rule for combo.exe in the
+Makefile. On top of it, you will need to add the following code in some header (.h) files.
+<pre>
+//replace XXXX by the name of your .h file; e.g., __BURGER_H
+#ifndef __XXXX_H
+#define __XXXX_H
+
+#endif
+</pre>
+The expected output for combo.exe should be:
+<pre>
+Have a combo!
+Bread!
+Frozen Meat!
+Make Burger!
+
+Chocolate!
+Bread!
+Make Muffin!
+
+
+Chocolate!
+</pre>
+
+
+
+</p>
+	</p>
+	</div>
+	
+
+	</div>
+
+
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+        <!-- Menu Widget -->
+        <div class="card my-12">
+          <h5 class="card-header">Menu</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="mb-0" type="circle" style="padding-left:20px">
+                  <li>
+                    <a href="index.html#CSDaccount">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="index.html#download">Download</a>
+                  </li>
+                  <li>
+                    <a href="index.html#labtask">Lab Task</a>
+                  </li>
+		  <li>
+		    <a href="../../notes/self-study-makefile-full.pdf">Makefile Lecture Notes</a>
+		  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maintainance widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Page maintained by</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="mailto:wallacem@cse.ust.hk">Wallace Mak</a>
+                  </li>
+                  <li>Last Modified:
+                    <script type="text/javascript">document.write(document.lastModified);</script>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Homepage widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Homepage</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="../../../comp2012.1.html">Course Homepage</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

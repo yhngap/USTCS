@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ### Change assignment number ### -->
+    <title>COMP 2012 Lab 7: More on Inheritance</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+    <style>
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f36d33;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+            <h4 class="my-4">
+                <span style="color:darkblue">COMP 2012</span>
+                <small>Object-Oriented Programming and Data Structures</small>
+            </h4>
+
+            <!-- ### Change assignment number and title ### -->
+            <h3 class="my-4">Lab 7
+                <span style="color:#660066">More on Inheritance</span>
+            </h3>
+
+            <!-- Introduction section -->
+            <!-- ### Complete introduction section for the assignment ### -->
+            <!-- <div class="card mb-4">
+              <div class="card-body" id="introduction">
+
+              </div>
+            </div> -->
+
+            <div class="card mb-4">
+                <div class="card-body" id="labtask">
+                    <h3 class="card-title">Vehicle System</h3>
+                    <p class="card-text">
+                    <h4 id="objective">Objective</h4>
+                    <p>
+                        This lab is about using different types of inheritance. You will complete the implementation of a base class and several derived classes. The following skills will be employed and illustrated:
+                        <ul>
+                        <li>Public, protected and private inheritance</li>
+                        <li>Directed and indirected inheritance</li>
+                        </ul>
+                    </p>
+                    <h4 id="description">Description</h4>
+                    <p>
+                    The figure below depicts the structure of four classes: <code>Engine, Vehicle, DeliveryCar and PoliceCar</code>:
+                    </p>
+                    <p>
+                    <center><img src="img/lab7.png" width="100%"></center>
+                    </p>
+
+                    <p>
+                        The figure above is a UML diagram. The diagram is pretty straight-forward, but please be aware that: the plus "+" denotes public members, while the minus "-" denotes private members. If you want, you may learn about the basics of the diagram <a href="http://www.cs.bsu.edu/~pvg/misc/uml/">here</a>.
+                    </p>        
+
+           
+                    <h4 id="class-description">Class Description</h4>
+
+                    <p>There are 4 classes, <code>Engine</code>, <code>Vehicle</code>, <code>DeliveryCar</code>, and <code>PoliceCar</code>. </p>
+
+                    <p>In this part, <code>Engine</code> is the abstract base class. </p>
+                    
+                    <p><code>Vehicle</code> derives from class <code>Engine</code> using private inheritance.</p>
+                    
+                    <p><code>DeliveryCar</code> derives from class <code>Vehicle</code> using protected inheritance. Besides data members and member functions inherited from <code>Vehicle</code>, <code>DeliveryCar</code> also has its own private data member: <code>int chargePerMile</code>, which represents the delivery charge per mile. Two member functions: <code>setCharge()</code> and <code>getCharge()</code> are used to access and mutate the data member <code>chargePerMile</code>.</p>
+
+                    <p><code>PoliceCar</code> is a derived class of <code>Vehicle</code>, public inheritance is used. Besides data members and member functions inherited from <code>Vehicle</code>, <code>PoliceCar</code> also has its own private data member: <code>bool inAction</code>, which indicates whether the police car is in action. Two member functions: <code>getInAction()</code> and <code>setInAction()</code> are used to access and mutate the data member <code>inAction</code>.</p>
+
+                    <p>You are given the class definition of the <b>Engine</b> class (<a href="skeleton/Engine.h">Engine.h</a>), the class definition of <b>Vehicle</b> (<a href="skeleton/Vehicle.h">Vehicle.h</a>) and the class definition of <b>PoliceCar</b> (<a href="skeleton/PoliceCar.h">PoliceCar.h</a>). But you need to make some modification.</p>
+
+                    <p>A main function (<a href="skeleton/main.cpp">main.cpp</a>) is also provided for testing.</p>
+
+                    
+                    <h4 id="task">More Info</h4>
+
+                    <p> 
+                        Casting Base Class Pointers to Derived Class Pointers:
+                         <ul>
+                            <li>Object of a derived class </li>
+                            <ul>
+                                <li>Can be treated as an object of the base class.</li>
+                                <li>Reverse not true - base class objects not a derived-class object.</li>
+                            </ul>
+                        </ul>
+                    </p>
+                    <p> 
+                        Example:
+                        <ul>
+                            <li>DeliveryCar and PoliceCar class derived from the Vehicle class </li>
+                            <li>We can use pointer of type Vehicle to reference a DeliveryCar and PoliceCar object </li>
+                            
+                            <ul>
+                            <li>Vehicle *c = new Vehicle(12,Silver,12000); </li>
+                            <li>PoliceCar *pc = new PoliceCar(8, Black, 100000, false); </li>
+                            <li>c = pc; //Treat a PoliceCar as a Vehicle</li>
+                            </ul>
+                        </ul>
+                        Vehicle *c = new Vehicle(12,Silver,12000);
+                    </p>
+                    
+
+                    <h4 id="task">Tasks</h4>
+
+                    <p> 
+                        Based on the below descriptions and the main() function:
+                         <ul>
+                            <li>Modify Engine.h and complete Engine.cpp</li>
+                            <li>Modify Vehicle.h and complete Vehicle.cpp using private inheritance.</li>
+                            <li>Modify PoliceCar.h and complete PoliceCar.cpp</li>
+                            <li>Complete DeliveryCar.h and DeliveryCar.cpp</li>
+                        </ul>
+                    </p>
+
+                    
+                    <h4 id="output">Sample output</h4>
+<pre>
+Test A
+Engine: 12   Color: Silver   Current Miles: 12000
+
+Vehicle with 12-cylinder engine started.
+Vehicle with 12-cylinder engine stopped.
+Driving distance: 1200
+
+Engine: 12   Color: Silver   Current Miles: 13200
+
+Information of the police car:
+Engine: 8   Color: Black   Current Miles: 100000
+PoliceCar's state: not in action
+
+Vehicle with 8-cylinder engine started.
+
+Current state of the police car: in action
+
+Vehicle with 8-cylinder engine stopped.
+Driving distance: 500
+
+Information of the police car:
+Engine: 8   Color: Black   Current Miles: 100500
+PoliceCar's state: not in action
+
+Calling Vehicle's destructor on the following vehicle:
+Engine: 12   Color: Silver   Current Miles: 13200
+
+Information of the police car:
+Engine: 8   Color: Black   Current Miles: 100500
+PoliceCar's state: not in action
+
+Calling PoliceCar's destructor on the following police car:
+Information of the police car:
+Engine: 8   Color: Black   Current Miles: 100500
+PoliceCar's state: not in action
+
+Calling Vehicle's destructor on the following vehicle:
+Engine: 8   Color: Black   Current Miles: 100500
+
+Test B
+Engine: 6   Color: Red   Current Miles: 1500
+
+Vehicle with 6-cylinder engine started.
+Vehicle with 6-cylinder engine stopped.
+Driving distance: 20
+
+Engine: 6   Color: Red   Current Miles: 1520
+
+Information of the delivery car:
+Engine: 10   Color: White   Current Miles: 7500
+DeliveryCar's charges per mile: 20
+DeliveryCar's calculated charges: 150000
+
+Vehicle with 10-cylinder engine started.
+Vehicle with 10-cylinder engine stopped.
+Driving distance: 120
+
+Information of the delivery car:
+Engine: 10   Color: White   Current Miles: 7620
+DeliveryCar's charges per mile: 15
+DeliveryCar's calculated charges: 114300
+
+
+Calling Vehicle's destructor on the following vehicle:
+Engine: 6   Color: Red   Current Miles: 1520
+
+Calling DeliveryCar's destructor on the following delivery car:
+Information of the delivery car:
+Engine: 10   Color: White   Current Miles: 7620
+DeliveryCar's charges per mile: 15
+DeliveryCar's calculated charges: 114300
+
+Calling Vehicle's destructor on the following vehicle:
+Engine: 10   Color: White   Current Miles: 7620
+</pre>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body" id="submission">
+                    <h3 class="card-title">Submission</h3>
+                    <p class="card-text">
+                        
+                    </p><p>For this lab, please zip and submit the following:
+                    </p><ul>
+                    <li>Engine.h</li>
+                    <li>Engine.cpp</li>
+                    <li>Vehicle.h</li>
+                    <li>Vehicle.cpp</li>
+                    <li>DeliveryCar.h</li>
+                    <li>DeliveryCar.cpp</li>
+                    <li>PoliceCar.h</li>
+                    <li>PoliceCar.cpp</li>
+                </ul><p></p>
+                <p>The Zinc system has been revamped, you may follow the new instruction <a href="../../assignments/assignment1/submission-guide/index.html">here</a>. Of course, you need to choose "Lab 7" on Zinc.</p>
+                <p></p>
+                </div>
+             </div>
+            
+
+            <div class="card mb-4">
+                <div class="card-body" id="download">
+                    <h3 class="card-title">Download</h3>
+                    <p class="card-text">
+Download the <a href="skeleton.zip">HERE</a>. Note that your project contains several cpp files, so you need to use the command <code>g++ -std=c++11 -o programName *.cpp</code> to compile it just like the previous lab, or you can also create a Makefile yourself. To run it, execute <code>./programName</code> in terminal.
+            </p>
+                </div>
+            </div>
+
+            <!-- Description section -->
+            <!-- ### Complete description section for the assignment ### -->
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3" style="">
+            <div class="sticky-top">
+
+                <!-- Menu Widget -->
+                <div class="card my-12">
+                    <h5 class="card-header">Menu</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="mb-0" type="circle" style="padding-left:20px">
+                                    <li>
+                                        <a href="index.html#labtask">Vehicle System</a>
+                                        <ul>
+                                            <li><a href="index.html#objective">Objective</a></li>
+                                            <li><a href="index.html#description">Description</a></li>
+                                            <li><a href="index.html#class-description">Class Declaration</a></li>
+                                            <li><a href="index.html#task">Task</a></li>
+                                            <li><a href="index.html#submission">Submission</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="index.html#download">Download</a>
+                                        <ul>
+                                            <li><a href="index.html#download-source">Source</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintainance widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Page maintained by</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        QUAN, Yuqing
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <a href="mailto:yquanaa@connect.ust.hk">yquanaa@connect.ust.hk</a>
+                                    </li>
+                                    <li>Last Modified:
+                                        <script type="text/javascript">
+                                            document.write(document.lastModified);
+                                        </script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Homepage widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Homepage</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="../../../comp2012.1.html">Course Homepage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+            and Engineering</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function promptWarning() {
+        var s = confirm(
+            "I know that I should not change main.cpp. \nClick \"Cancel\" to proceed. "
+        );
+        if (s == true) {
+            alert("Please read the prompt again.");
+        } else {
+            window.open('lab5-ske.zip');
+        }
+    };
+</script>
+</body>
+
+</html>

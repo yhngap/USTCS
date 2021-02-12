@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 2: Class Construction and Destruction</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 2
+          <span style="color:#660066">Class Construction and Destruction</span>
+        </h3>
+
+ 
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <!-- <div class="card mb-4">
+          <div class="card-body" id="introduction">
+
+          </div>
+        </div> -->
+
+        <div class="card mb-4">
+          <div class="card-body" id="labtask">
+            <h3 class="card-title">Junk Food Store 2</h3>
+            <p class="card-text">
+              <center><img src="img/2.png" height=200px /></center>
+              <h4 id="objective">Objective</h4>
+              <p>
+                In this lab, you are going to practice using class constructors and destructors.
+              </p>
+
+              <h4 id="description">Description</h4>
+
+
+              <p>
+                Johnson is going to open a junk food store which makes profits on burgers. Since cooking burgers requires
+                bread and meat, he needs 3 shelves to store these 3 kinds of foods (bread, meat, and burger).
+              </p>
+
+              <p>
+                He has prepared three shelves for each kind of food: one for
+                bread, one for meat and one for burgers. Each shelf has a capacity <code>maxNumXXXs</code> and an
+                indicator
+                <code>numXXXs</code>
+                indicating the current number of this kind of food. For example, the burger shelf has a capacity
+                of <code>maxNumBurgers</code>, and <code>numBurgers</code> indicates the current number of burgers on
+                the burger shelf.
+              </p>
+
+              <center><img src="img/1.png" height=300px /></center>
+
+              <p>
+                The <code>main.cpp</code> file shows what he is going to do on the first day of his store opening:
+                <ol>
+                  <li>Open the store.</li>
+                  <li>Cook a piece of bread, then try to cook a burger with no meat, failed.</li>
+                  <li>Cook a piece of meat, then try to cook a burger again, succeeded.</li>
+                  <li>Prepare another bread and another meat.</li>
+                  <li>Use the magical laser to clone his store, cook a burger in the cloned store and then
+                    destroy the cloned store.</li>
+                  <li>Destroy the original store.</li>
+                </ol>
+                Your task is to finish the <code>store.cpp</code> file such that your code makes Johnson's first day go
+                smoothly (as described).
+              </p>
+
+              <h4 id="class-declaration">Classes</h4>
+
+              <p>
+                There are totally 4 classes involved: <code>Bread</code>, <code>Meat</code>, <code>Burger</code> and
+                <code>Store</code>.
+                Three of them <code>Bread</code>, <code>Meat</code> and <code>Burger</code> are already implemented.
+                You only need to implement part of the <code>Store</code> class. See the given header files for details. Download them from <a href="index.html#download">the download section</a>.
+              </p>
+
+
+              <p>
+                There are several TODOs in the <code>Store</code> class, you need to implement
+                them by filling your code into the code skeleton (<code>store.cpp</code>). Note that you do not need to
+                modify any file except for <code>store.cpp</code>.
+              </p>
+
+              <h4 id="task">Tasks</h4>
+              <ol>
+                <li> Finish the TODOs in <code>store.cpp</code>.</li>
+                <br>
+                <p>There is a task that involves printing the store summary. Please follow the following format:</p>
+                <pre>
+[owner]'s store now has...
+Bread: [numBreads]/[maxNumBreads]
+Meat: [numMeats]/[maxNumMeats]
+Burger: [numBurgers]/[maxNumBurgers]</pre>
+                <p>For example, if the owner is "Johnson", numBreads is 1, maxNumBreads is 5, numMeats is 2, maxNumMeats is 4, numBurgers is 3, maxNumBurgers is 7, then you should print:</p>
+                <pre>
+Johnson's store now has...
+Bread: 1/5
+Meat: 2/4
+Burger: 3/7</pre>
+                <p>Note: there is one endl at the end. After finishing the task, you can compare your output with our sample (or simply try it on our online grader Zinc [note: lab 2 submission will be open sometime before the weekend]) to be sure if you got the details right.</p>
+                <br>
+                <li>Compile <code>main.cpp</code>
+                  with <code>foods.cpp</code>
+                  and <code>store.cpp</code>
+                  <br>
+                  <p>Note: if you use VS Code, please put all the starting code files (all 5 cpp and h files) to its own project folder, then open that folder in VS Code.<br>To compile, <a href="../../../comp2011/labs/vscode/index.html#terminal">open a terminal</a> and use the command <code>g++ -std=c++11 *.cpp -o programName.exe</code> to compile all cpp source files in the current folder into a program named programName. You may use the command <code>./programName.exe</code> in terminal to run the program then.</p>
+                </li>
+                <li>Run the executable to check with the
+                  expected output below:</li>
+
+                <pre>
+1. Open the store for Johnson!
+Store Constructed!
+Johnson's store now has...
+Bread: 0/5
+Meat: 0/5
+Burger: 0/5
+
+2. Try to cook a burger with only one piece of bread, failed.
+Bread Constructed!
+Johnson's store now has...
+Bread: 1/5
+Meat: 0/5
+Burger: 0/5
+Error: Materials are insufficient for a burger.
+
+3. Cook a piece of meat and then a burger, succeeded.
+Meat Constructed!
+Johnson's store now has...
+Bread: 1/5
+Meat: 1/5
+Burger: 0/5
+Burger Constructed!
+Johnson's store now has...
+Bread: 0/5
+Meat: 0/5
+Burger: 1/5
+
+4. Prepare the bread and meat again.
+Bread Constructed!
+Meat Constructed!
+Johnson's store now has...
+Bread: 1/5
+Meat: 1/5
+Burger: 1/5
+
+5. Clone the store, cook a burger and then destroy the cloned store.
+Bread Copied!
+Meat Copied!
+Bread Copied!
+Meat Copied!
+Burger Copied!
+Store Copied!
+Johnson's store now has...
+Bread: 1/5
+Meat: 1/5
+Burger: 1/5
+Burger Constructed!
+Johnson's store now has...
+Bread: 0/5
+Meat: 0/5
+Burger: 2/5
+Bread Destructed.
+Meat Destructed.
+Burger Destructed.
+Bread Destructed.
+Meat Destructed.
+Burger Destructed.
+Johnson's store Destructed.
+
+6. Destroy the original store.
+Johnson's store now has...
+Bread: 1/5
+Meat: 1/5
+Burger: 1/5
+Just before destruction... OK, let's do it.
+Bread Destructed.
+Meat Destructed.
+Bread Destructed.
+Meat Destructed.
+Burger Destructed.
+Johnson's store Destructed.
+</pre>
+              </ol>
+
+              <h4 id="hint">Hints</h4>
+              <ol>
+                <li>To create a dynamic array for pointer to a food (e.g. burger), use the following:
+                  <pre>burgerShelf = new Burger *[maxNumBurgers];</pre>
+                </li>
+                <li>To delete a dynamic array for pointer to a food (e.g. burger), remember to delete its content
+                  first (if there are), then use the following to delete the dynamic array:
+                  <pre>delete[] burgerShelf;</pre>
+                </li>
+                <li>Reading every file in the source folder will help you understand what is going on.</li>
+                <li>"string" is a very convenient C++ string class. Check our <a href="../../../comp2011_2020S/notes/h.stlstr.pdf">COMP2011 C++ string notes</a> to learn more about it.</li>
+              </ol>
+            </p>
+          </div>
+
+      
+    </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="submission">
+            <h3 class="card-title">Submission</h3>
+            <p class="card-text">
+
+              
+                  We use our online grader <a href="http://zinc.cse.ust.hk">Zinc</a> again this lab. Lab 2 submission will be open sometime before the weekend. Instructions can be found <a href="../../zinc-submission/index.html">here</a>. For this lab, please zip and submit one cpp file <code>store.cpp</code> (yes, please still zip the single cpp file, as required by the current Zinc system). 
+
+                  <br><br>
+
+                  There may be 2 warnings saying the "other" variable is unused for the Meat and Bread copy constructors that are given by us. Don't worry about them. It is intentional as no real copying is needed - we just wanted to output a message in them.
+
+
+            </p>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+              
+                  Download the starting code <a href="source.zip">HERE</a>. 
+
+                  <br>
+                  <br>
+                  Note: removed the use of member initialization list (MIL) from foods.cpp on Sep 27 10pm. MIL will be taught later in the course, so let's not use them for now. You don't need to redownload the source if you have done so already, as both the new version and old version behave exactly the same as far as output is concerned.
+
+
+            </p>
+          </div>
+        </div>
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+
+
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3" style="">
+        <div class="sticky-top">
+
+          <!-- Menu Widget -->
+          <div class="card my-12">
+            <h5 class="card-header">Menu</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="mb-0" type="circle" style="padding-left:20px">
+                    <li>
+                      <a href="index.html#labtask">Junk Food Store 2</a>
+                      <ul>
+                        <li> <a href="index.html#objective">Objective</a></li>
+                        <li><a href="index.html#description">Description</a></li>
+                        <li> <a href="index.html#class-declaration">Classes</a> </li>
+                        <li> <a href="index.html#task">Tasks</a> </li>
+                        <li> <a href="index.html#hint">Hints</a> </li>
+                        <li> <a href="index.html#submission">Submission</a> </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="index.html#download">Download (starting code)</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintainance widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Page maintained by</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      Wallace Mak
+                    </li>
+                    <li>
+                      Email:
+                      <a href="mailto:wallacem@cse.ust.hk">wallacem@cse.ust.hk</a>
+                    </li>
+                    <li>Last Modified:
+                      <script type="text/javascript">
+                        document.write(document.lastModified);
+                      </script>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Homepage widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Homepage</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="../../../comp2012.1.html">Course Homepage</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center 
+text-white">Maintained by COMP 2012 Teaching Team 
+&copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    function promptWarning() {
+      var s = confirm(
+        "I know that I should only change the store.cpp file. \nClick \"Cancel\" to proceed. "
+      );
+      if (s == true) {
+        alert("Please read the prompt again.");
+      } else {
+        window.open('source.zip');
+      }
+    };
+  </script>
+</body>
+
+</html>

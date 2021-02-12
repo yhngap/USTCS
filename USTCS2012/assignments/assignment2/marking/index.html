@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Marking scheme and appeal procedure</title>
+<!-- Bootstrap core CSS -->
+<link href="prev/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="prev/css/simple-sidebar.css" rel="stylesheet">
+<!-- For code highlighting -->
+<script src="js/prism.js" type="text/javascript"></script>
+<link href="css/prism.css" rel="stylesheet" />
+<style>
+blockquote {
+  border: 1px solid #b3b3b3;
+  border-left: 10px solid #b3b3b3;
+  border-radius: 0px;
+  background: #fafafa;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  margin: 10px;
+  padding: 10px 20px;
+}
+ 
+blockquote p {
+  margin: 0;
+  line-height: 30px;
+  padding-bottom: 20px;
+}
+ 
+blockquote .small {
+  display: block;
+  font-size: 80%;
+  color: brown;
+  text-align: right;
+}
+
+img.limit {
+  max-width: 100%
+}
+
+</style>
+</head>
+
+<!--
+# How to auto indent HTML in vim
+:filetype indent on
+:set filetype=html           # abbrev -  :set ft=html
+:set smartindent             # abbrev -  :set si
+gg=G
+  -->
+<body class="language-none">
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sticky-top">
+      <!-- <div class="sidebar-heading">Marking scheme</div> -->
+      <div class="list-group list-group-flush">
+        <a href="index.html#grade_checking" class="list-group-item list-group-item-action bg-light">Grade Checking</a>
+        <a href="index.html#scheme" class="list-group-item list-group-item-action bg-light">Marking scheme</a>
+        <a href="index.html#tests" class="list-group-item list-group-item-action bg-light">Trying the Test Cases</a>
+        <a href="index.html#solution" class="list-group-item list-group-item-action bg-light">Sample solution</a>
+        <a href="index.html#procedure" class="list-group-item list-group-item-action bg-light">Notes and appeal procedure</a>
+        <span class="list-group-item list-group-item-action bg-light">Prepared by: <a href="mailto:mhwongah@connect.ust.hk">Man Hing, WONG</a></span>
+      </div>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="col-sm-9">
+      <span class="navbar-toggler-icon" id="menu-toggle"></span>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      </ul>
+      </div>
+    </nav>
+
+
+    <div class="container-fluid border-bottom my-5">
+      <div class="col-sm-12 col-lg-12 container">
+      <h1>Marking scheme and appeal procedure</h1>
+      </div>
+    </div>
+
+    <div class="container-fluid border-bottom my-5" id="grade_checking">
+      <h2 class="mt-4">Grade Checking</h2>
+      <ul>
+      <li>We have uploaded all test cases to ZINC and regraded your latest submissions.</li>
+      <li>If you want to appeal your grade: <b><font color="red">you MUST read this whole page and follow all procedures correctly. Your appeal will be dropped otherwise and will NOT be processed.</font></b></li>
+      <li>Please ALWAYS check your scores at ZINC. Scores in ZINC exclude penalties resulted from the request for fixing/late submission, for instance.</li>
+      <li>Score after penalty can be checked <a href="http://cgi.cs.ust.hk/~mhwongah/cgi-bin/comp2012-pa2/index_appeal.html">here</a>. It shows you the total score minus any penalty that needs to be applied.</li>
+      <li>For individual test case result and score, please find the updated pa2 grading result on <a href="http://ZINC.cse.ust.hk">ZINC</a>.</li>
+      <li>We will perform plagiarism checking at a later time and marks will be adjusted for those who are caught.</li>
+      <li>Statistics: mean is 72.7 (out of 90) and SD is 23.8 (for submitted works only)</li>
+      </ul>
+    </div>
+
+    <div class="container-fluid border-bottom my-5" id="scheme">
+      <h2 class="mt-4">Marking scheme</h2>
+      <ul>
+        <li>The first 3 test cases are given before the deadline that are not graded, 45 hidden test cases are used for grading post-deadline.</li>
+<li>Each test case is worth 2 marks. No partial credit. </li>
+<li>Total for all 45 cases is 90 marks.</li>
+<li>Memory leak checking is applied on ALL test cases using the <code>-fsanitize=address,leak,undefined flags</code> compilation flag (see <a href="../../assignment1/submission-guide/index.html">submission guide</a>).</li>
+        </ul>
+    </div>
+
+
+
+    <div class="container-fluid border-bottom my-5" id="tests">
+      <h2 class="mt-4">Trying the Test Cases</h2>
+      <p>You can see all the test case results on ZINC in the latest grading report. If you want to try the test case on your own computer, you may do the following.</p>
+      <ul>
+        <li>Download and extract the files in this <a href="tests.zip">test package</a></li>
+        <li>Add them to VSCode or whatever IDE you use. Note that this is a Makefile project.</li>
+        <li>Download your latest submission from ZINC</li>
+        <li>Extract your submitted files and add them to the project.</li>
+        <li>Make and run the test cases.</li>
+        <li>Check the output and read the code of each test case to understand what is being tested. You may find the expected from the ZINC grading report.</li> 
+      </ul>
+
+    </div>
+
+
+    <div class="container-fluid border-bottom my-5" id="solution">
+      <h2 class="mt-4">Sample solution</h2>
+      <ul>
+        <li>A sample solution can be downloaded <a href="pa2_soln.zip">HERE</a> for your reference.</li>
+        <li>Please understand that it is not feasible for us (or any single person) to review all the assignment code of everyone to point out where all the subtle bugs are.</li>
+        <li>The sample solution is useful for you to find out the potential problems in your program yourself by comparing your solution with ours.</li>
+      </ul>
+    </div>
+
+
+    <div class="container-fluid border-bottom my-5" id="procedures">
+      <h2 class="mt-4">Notes and appeal procedure</h2>
+	  <h2 class="mt-4">It differs from PA1. Please read carefully.</h2>
+      <ul>
+
+        <li>Runtime errors, crashes, and inconsistent output due to incorrect memory access / memory allocation / memory deallocation / missing variable initialization / missing return values / out-of-bound array access / etc. may not occur all the time on all machines. However, even you may not encounter the error/crash when you test your program, if your program crashes during any of our testing on ZINC, the corresponding test cases will be considered as failed and will receive 0 marks as your code is indeed faulty.</li>
+
+        <li>If you somehow get a correct output on your own computer but you get a different output on ZINC, it is likely your code is faulty. Refer to the previous comments for possible causes. Verify your code to make sure they aren't faulty and won't produce any runtime error before you appeal those cases. Compare your solution with the sample solution yourself if needed.</li>
+
+        <li>We can run the test cases again for you (after you have verified them yourself), but all grading shall be done objectively in an automatic and consistent way on the very same machine (<b>the ZINC grading machine, not any other machine including yours or ours</b>). However, if your program crashes or gives unreliable results, it is guaranteed that the problem is somewhere in your code, and marks will not be given. For grading, <font color="red"><b>only the result of your program on the ZINC machine matters.</b></font></li>
+
+    <li><b>It is possible that you get a lower mark as we re-run the test cases for you</b> and found additional crashes/mistakes. We re-run all test cases (not just the ones you want to re-run) for all appeals. <u>So proceed carefully at your own risk, not just blindly appeal your grade anyway.</u></li>
+
+    <li>It is mentioned in the assignment instruction that "It is required that your submissions can be compiled and run successfully in our online autograder ZINC. If we cannot even compile your work, it won't be graded. Therefore, for parts that you cannot finish, just put in dummy implementation so that your whole program can be compiled for ZINC to grade the other parts that you have done.."</li>
+
+    <li>For compilation errors/memory leak/incorrect program print outs, you get 0 mark for that test case. To appeal, you should find out how to fix the errors yourself, and then clearly tell us how in the email. If the fix is simple, we will then issue an approval email, detailing the scores you can get from your proposed fix adjusted by the penalty. After receiving the email, you can resubmit your fixed work to ZINC by the deadline designated in the email. We will regrade it with a 30% penalty on the total scores that you gained from that SINGLE fixing case in the appeal. (With a minimum penalty of 10 marks per fixing case/error). The fix should fix simple errors which have large impact on your scores only and must not change the logic of your program. Please do the math before appealling. </li>
+	
+    <li>Please understand that, for fairness, we usually do NOT allow any student to change their submitted code, except only the special case mentioned above.</li>
+	
+    <li>If you are certain that there is a grading mistake <u>after reading this whole page</u>, <u>reading the assignment description/FAQ/Piazza</u>, and <u>reading and trying the test cases yourself</u>, email to <font color="blue"><b>mhwongah@connect.ust.hk</b></font> with the following information. <b>Appeals with incomplete information will not be processed.</b>  
+        <ul>
+            <li>Email subject must be <b>COMP2012 Fall 2020 PA2 Appeal</b></li>
+            <li>Email body contains all of the following:</li>
+            <ul>
+            <li>Your full name as shown on your student ID card</li>
+            <li>Your HKUST itsc username</li>
+            <li>Your student ID number</li>
+            <li>Test cases for which you want to appeal</li>
+            <li>Justification/fixes (if any) for your appeal case
+          </ul></li>
+        </ul>
+    </li>
+    <li>Do not attach any .exe/executable file in the email as they will be blocked by the email server.</li>
+
+    <li>Appeal deadline is <b>Dec 2nd (Wednesday) 23:59pm</b>.
+  <b>No late appeals will be processed</b>.</li>
+    <li>Due to the large number of students that we have, please allow up to 72 hours for your appeal email to be processed and replied. For those requesting for fixing, please resubmit the code by designated deadline otherwise your request will not be entertained and no penalty will be applied. If you do not receive a reply in 72 hours, please re-send your email.</li>
+    <li>Finalized scores will only be uploaded to Canvas after all appeals are processed.</li>
+
+
+
+
+      </ul>
+
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+<!-- /#wrapper -->
+<!-- Bootstrap core JavaScript -->
+<script src="prev/vendor/jquery/jquery.min.js"></script>
+<script src="prev/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    });
+
+  SyntaxHighlighter.highlight();
+</script>
+</body>
+</html>

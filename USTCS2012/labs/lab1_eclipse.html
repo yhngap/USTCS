@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- ### Change assignment number ### -->
+  <title>COMP 2012 Lab 1: Makefile and Separate Compilation</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="https://course.cse.ust.hk/comp2012/labs/css/blog-home.css" rel="stylesheet">
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Entries Column -->
+      <div class="col-md-9">
+
+        <h4 class="my-4">
+          <span style="color:darkblue">COMP 2012</span>
+          <small>Object-Oriented Programming and Data Structures</small>
+        </h4>
+
+        <!-- ### Change assignment number and title ### -->
+        <h3 class="my-4">Lab 1
+          <span style="color:#660066">Makefile and Separate Compilation</span>
+        </h3>
+	<div class="mb-4">
+	<img src="lab1_eclipse/img/front.png" width=100%>
+	</div>
+
+        <!-- Introduction section -->
+        <!-- ### Complete introduction section for the assignment ### -->
+        <div class="card mb-4">
+
+         <!--  <div class="card-body" id="CSDaccount">
+            <h3 class="card-title">CSD account</h3>
+            <p class="card-text">
+
+<p>A CSD account is required to access the lab room and use the lab machines. If you do not have a CSD account yet, please create it with the instructions <a target="_blank" href="https://cssystem.cse.ust.hk/home.php?docbase=UGuides/hkust_only&req_url=UGuides/hkust_only/activation.html">here</a>. You probably already have it if you have studied COMP2011 here.</p>
+
+	    </p>
+	  </div> -->
+	</div>
+        <div class="card mb-4">
+<div class="card-body" id="SeparateCompilation">
+            <h3 class="card-title">Separate Compilation</h3>
+            <p class="card-text">
+
+<p>While modern IDEs like Eclipse can automatically build your program from the
+provided source code in most scenarios, with Makefile you can build your program
+in a highly customizable way that utilizes separate compilation. You will learn
+about the basic usage of Makefile in this lab. Please read <a
+href="../notes/self-study-makefile-full.pdf">the Makefile
+lecture notes</a>.</p>
+
+<h4>What is separate compilation?</h4>
+
+<p>Suppose you have a program that consists of 3 cpp files: <code>file1.cpp</code>, <code>file2.cpp</code>, and <code>file3.cpp</code>.</p>
+<p>With the g++ command, one can compile the program with the following command that produces an executable named <code>a.out</code></p>
+<pre>g++ -o a.out file1.cpp file2.cpp file3.cpp</pre>
+<p>Any changes to any of the 3 files (e.g., just editing a line in <code>file1.cpp</code>) will require the g++ compiler to compile all 3 cpp files again to generate the updated executable.</p>
+<p>This is inefficient. To alleviate this problem, we can make use of separate compilation.</p>
+<p>To perform separate compilation, we use the following commands instead.</p>
+<pre>
+g++ -c file1.cpp
+g++ -c file2.cpp
+g++ -c file3.cpp
+g++ -o a.out file1.o file2.o file3.o
+</pre>
+<p>Each of the first 3 commands will individually compile <code>fileN.cpp</code>
+into <code>fileN.o</code> - an object file (which is not executable) containing
+the compiled code for the corresponding cpp file. The last command then simply
+links those object files together to generate the final executable a.out.</p>
+<img src="lab1_eclipse/img/link.png">
+<p>Now, say, if a line is edited in <code>file1.cpp</code>, we just need to execute:</p>
+<pre>
+g++ -c file1.cpp
+g++ -o a.out file1.o file2.o file3.o
+</pre>
+<p>And an updated executable would be generated because the existing file2.o and file3.o can simply be reused.</p>
+            </p>
+	</div>
+    </div>
+
+        <div class="card mb-4">
+	    <div class="card-body" id="Makefile">
+            <h3 class="card-title">Makefile</h3>
+            <p class="card-text">
+
+<p>Makefile allows us to create a set of compilation rules for your program (or called project in Eclipse). It is very useful for separate compilation. A Makefile consists of a number of rules. The rules have the following syntax:</p>
+
+<pre>
+[Name of rule #1]: [List of dependent files, separated by a space]
+[Press a tab character here][Command 1 to be executed]
+[Press a tab character here][Command 2 to be executed]
+...
+[Press a tab character here][Command N to be executed]
+[Empty lines....]
+[Name of rule #2]: [List of dependent files, separated by a space]
+[Press a tab character here][Command 1 to be executed]
+[Press a tab character here][Command 2 to be executed]
+...
+[Press a tab character here][Command N to be executed]
+[Empty lines....]
+</pre>
+
+<p>When a rule is executed, all dependent files will first be generated using the
+rules of the same names (e.g., a dependent file "burger.exe" can be generated by the rule named "burger.exe") unless the files are already there and up-to-date. Then, after all dependent files are generated, the commands under the rule will be executed.</p>
+
+<p>There are two specials rules for Eclipse - "all" and "clean". Eclipse will execute the rule "all" when you build your project (the hammer button on your Eclipse's tools bar / Project->Build Project) and will execute the rule "clean" when you clean your project (Project->Clean). Note that, however, in general the first rule (not necessarily called "all") is considered as the default rule (what to build when the "make" utility is used) in other environments.</p>
+
+<p>You need these three commands in this lab.</p>
+
+
+<p>To create an object file (e.g., bread.o) from a source file (e.g., bread.cpp):</p>
+<pre>
+g++ -std=c++11 -o <u>Output filename</u> -c <u>Source file name</u>
+</pre>
+<p>To link the object files together to make an executable:</p>
+<pre>
+g++ -std=c++11 -o <u>Output filename</u> <u>Object file name 1</u> <u>Object file name 2</u> ... <u>Object file name N</u>
+</pre>
+<p>To delete files:</p>
+<pre>
+rm -f <u>File name pattern</u>
+</pre>
+
+<h4>Meta Rule</h4>
+You may notice that we have many .cpp files and most of them are doing exactly the same line. To save up the copy and paste work, we can define a meta rule instead. The following meta rule is used to generate <i>any_name</i>.o file:
+<pre>
+%.o: %.cpp
+	g++ -std=c++11 -c $< -o $@
+</pre>
+The <code>%</code> symbol means any name. So the rule simply says any .o file
+depends on its corresponding .cpp file. The command to be executed under this rule
+is to use g++ to compile the .cpp source file to its .o object file.
+<ul>
+<li> <code>-c $< </code> : Specify the source file name <code>%.cpp</code> as the first dependent file. </li>
+<li> <code>-o $@ </code> : Specify the output file name <code>%.o</code> as the target.</li>
+</ul>
+
+<h4>Building your program</h4>
+
+<p>After you have finished your Makefile, just build your program as usual like
+you do with regular Eclipse projects. (E.g., clicking the hammer button.) As you are working with a Makefile project, Eclipse will use the rules you specify in your Makefile to build your program.</p>
+
+<h4>Running the program</h4>
+
+<p>Right click the executable file in the Project Explorer, and choose <code>Run as...</code>  > <code>Local C/C++ Application</code>.</p>
+
+          </div>
+        </div>
+
+
+        <div class="card mb-4">
+          <div class="card-body" id="ow">
+            <h3 class="card-title">Junk Food Store</h3>
+            <p class="card-text">
+<p>
+In this lab we are going to practise separate compilation using Makefile. We are
+going to make some junk food using C++ code. You are given some source codes
+(.h/.cpp) which are almost complete. You will need to work with the Makefile and add a few lines in some files.
+</p>
+
+<p>You are probably familiar with Eclipse already if you have taken COMP2011. If not, you may refer to the basic usage of Eclipse <a href="eclipse_intro/index.html">here</a>.</p>
+<p>Creating a Makefile project is a bit different from creating a regular C++ project. The steps are as follows.</p>
+
+<p>Note: We usually write Makefile with a capital "M" due to a convention. For details, read <a href="http://stackoverflow.com/questions/12669367/should-i-name-makefile-or-makefile/12686411#12686411">this discussion</a>.</p>
+
+
+
+
+<h4>Creating a Makefile project</h4>
+<p>Follow the following steps to create a C++ project called "lab1". In particular, choose "Empty Project" under the "Makefile project" project type and select "MinGW GCC" as the compiler.</p>
+<img src="lab1_eclipse/img/1.png" alt="" />
+
+<br>
+<br>
+<h4>Adding a Makefile</h4>
+
+<p>Add a new file by clicking the project "lab1" under the Project Explorer, then choosing "New" -> "File".</p>
+
+<img src="lab1_eclipse/img/2.png" alt="" />
+
+<p>Name the file as "Makefile".</p>
+
+<img src="lab1_eclipse/img/3.png" alt="" />
+
+<br>
+<br>
+<h4>Adding the source code</h4>
+
+<p>Download the source files from the Download section. Unzip the zip-file and add
+them to your project. (E.g., drag and drop the extracted files to the project in Project Explorer)</p>
+
+<h4>Edit the Makefile</h4>
+
+<p>Open the Makefile you created earlier in Eclipse and put in the following content.</p>
+
+<pre>
+BURGER = burger.o bread.o meat.o
+CHOCOLATE = chocolate.o
+MUFFIN = muffin.o bread.o chocolate.o
+
+#You might want to use the variable $(COMBO) some points later in this lab.
+#The variable will take the union of the set BURGER, CHOCOLATE, and MUFFIN.
+COMBO = $(sort $(BURGER) $(CHOCOLATE) $(MUFFIN))
+
+#@TODO Edit all target
+all: chocolate.exe burger.exe
+
+#@TODO Add new targets
+
+chocolate.exe: $(CHOCOLATE) mainChocolate.cpp
+	g++ -o $@ -std=c++11 $(CHOCOLATE) mainChocolate.cpp
+
+burger.exe: $(BURGER) mainBurger.cpp
+	g++ -o $@ -std=c++11 $(BURGER) mainBurger.cpp
+
+%.o: %.cpp
+	g++ -std=c++11 -c $< -o $@
+
+clean:
+	rm -f *.o *.exe
+</pre>
+
+<p>Beware that the indentations are all just single tab characters as described in the next section.</p>
+
+
+<p>The program "burger.exe" should show:</p>
+
+<pre>
+Bread!
+Frozen Meat!
+Make Burger!
+</pre>
+
+	    </p>
+          </div>
+        </div>
+
+
+        <div class="card mb-4">
+<div class="card-body" id="labtask">
+            <h3 class="card-title">Lab tasks</h3>
+            <p class="card-text">
+
+<h4>Task 1: Create a Makefile Project and Run the exe files</h4>
+Create a makefile project in your IDE to produce "burger.exe" and "chocolate.exe". You should be able to finish this task without writing any code. When you build the project, your console should show:
+<pre>
+g++ -std=c++11 -c chocolate.cpp -o chocolate.o
+g++ -o chocolate.exe -std=c++11 chocolate.o mainChocolate.cpp
+g++ -std=c++11 -c burger.cpp -o burger.o
+g++ -std=c++11 -c bread.cpp -o bread.o
+g++ -std=c++11 -c meat.cpp -o meat.o
+g++ -o burger.exe -std=c++11 burger.o bread.o meat.o mainBurger.cpp
+</pre>
+Verify your result by running the exe files.
+
+<br>
+<br>
+<br>
+<h4>Task 2: Create the betterBurger.exe</h4>
+<p>
+Add a target called <code>betterBurger.exe</code> which "upgrades" <code>burger.exe</code> with a better meat - betterMeat.cpp - which is an upgrade version of <code>meat.cpp</code>. By editing <code>Makefile</code> only, you shall be able to complete the task. (Apart from adding new rules for <code>betterBurger.exe</code>, you also need to add the target <code>betterBurger.exe</code> in the rule <code>all</code> as well). When you build the project an additional file <code>betterBurger.exe</code> should be produced in addition to <code>burger.exe</code> and <code>chocolate.exe</code>. When you run this file, it shows:</p>
+<pre>
+Bread!
+Fresh Meat!
+Make Burger!
+</pre>
+
+<br>
+<br>
+<br>
+<h4>Task 3: Create the combo.exe</h4>
+A "combo" meal contains a burger, a chocolate, and a muffin. The file
+<code>mainCombo.cpp</code> has been written for you. This should be the driver
+program of <code>combo.exe</code>. You need to write a rule for combo.exe in the
+Makefile. On top of it, you will need to add the following code in some header (.h) files.
+<pre>
+//replace XXXX by the name of your .h file; e.g., __BURGER_H
+#ifndef __XXXX_H
+#define __XXXX_H
+
+#endif
+</pre>
+
+The expected output for combo.exe should be:
+<pre>
+Have a combo!
+Bread!
+Frozen Meat!
+Make Burger!
+
+Chocolate!
+Bread!
+Make Muffin!
+
+
+Chocolate!
+</pre>
+
+
+
+<h4>Reading the .cpp/.h files</h4>
+
+<p>There are many files to read while most of them contain one or two lines of code only. You are suggested to begin with the files <strong>mainBurger.cpp, mainChocolate.cpp, mainCombo.cpp</strong>.</p>
+
+<pre>
+//mainBurger.cpp
+#include "burger.h"
+
+int main() {
+
+    Burger b;
+
+    return 0;
+}
+</pre>
+
+<pre>
+//mainChocolate.cpp
+#include "chocolate.h"
+
+int main() {
+    Chocolate c;
+    return 0;
+}
+</pre>
+
+<pre>
+//mainCombo.cpp
+#include "burger.h"
+#include "chocolate.h"
+#include "muffin.h"
+#include <iostream>
+using namespace std;
+
+
+int main() {
+
+    cout << "Have a combo! " << endl;
+
+    Burger b;
+    Muffin m;
+    cout << endl;
+    Chocolate c;
+
+    return 0;
+}
+</pre>
+
+
+<p>
+So for example, to produce <code>burger.exe</code>, it needs a class called <code>Burger</code> which is composed of the class <code>Bread</code> and the class <code>Meat</code>. You need to deduce the class dependency and write them in the Makefile.<br/>
+</p>
+	</p>
+	</div>
+	<div class="card-footer">
+<!-- <h4>Grading Scheme</h4>
+
+<p> You may earn 3 marks for this lab:
+
+<ul>
+
+ <li>Attendance (1 mark)</li>
+ <li>Completion of lab and answer a simple question in your lab session if you are selected. (2 mark). You need to show the following to your TA:
+<ol>
+<li>Click build-clean to remove all exe.</li>
+<li>Click build all to build four exe files: <code>burger.exe</code>, <code>chocolate.exe</code>, <code>betterBurger.exe</code>, <code>combo.exe</code></li>
+<li>Run all exe files</li>
+</ol>
+
+
+</li>
+
+
+</ul>
+
+Please understand that there are many students at the lab waiting for demo their
+works. It may take some time before we can check your work. We will always start
+those seating in the front. Come to the lab earlier and grab a front seat to demo earlier!
+
+<br /><br /> -->
+
+	</div>
+
+	</div>
+
+
+
+        <div class="card mb-4">
+	    <div class="card-body" id="download">
+            <h3 class="card-title">Download</h3>
+            <p class="card-text">
+
+<p>For this lab, you can download the source files here. Unzip the zip file and
+add them to your project. (e.g., drag and drop the extracted files to the project in Project Explorer)</p>
+
+
+<br /><br />
+
+<script>
+function promptWarning() {
+     var s = confirm("I know that I should create a Makefile project instead of an empty project that I use in last year. Click \"Cancel\" to proceed. ");
+     if (s == true) {
+         alert("Please check the instruction again to create a Makefile Project");
+     } else {
+        window.open('source.zip');
+    }
+};
+</script>
+
+<button class="btn btninfo" onclick="promptWarning()">Download Here</button>
+<button class="btn btninfo" onclick='(function(){$("#message").show();})();return false;'>or Download Here</button>
+
+
+<div id="message" style="display: none">
+<p>
+
+I know that I should create a Makefile project instead of an empty project. <br/>
+<a class="dlbutton" href="lab1_eclipse/source.zip"> Click Me </a>
+</p>
+</div>
+
+
+	    </p>
+	    </div>
+	</div>
+
+        <!-- Description section -->
+        <!-- ### Complete description section for the assignment ### -->
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+        <div class="sticky-top">
+        <!-- Menu Widget -->
+        <div class="card my-12">
+          <h5 class="card-header">Menu</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="mb-0" type="circle" style="padding-left:20px">
+                  <li>
+                    <a href="lab1_eclipse.html#SeparateCompilation">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="lab1_eclipse.html#labtask">Lab Task</a>
+                  </li>
+                  <li>
+                    <a href="lab1_eclipse.html#download">Download</a>
+                  </li>
+		  <li>
+		    <a href="../notes/self-study-makefile-full.pdf">Makefile Lecture Notes</a>
+		  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maintainance widget -->
+       <!--  <div class="card my-4">
+          <h5 class="card-header">Page maintained by</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    Kevin Wang
+                  </li>
+                  <li>
+                    Email:
+                    <a href="mailto:kevinw@cse.ust.hk">kevinw@cse.ust.hk</a>
+                  </li>
+                  <li>Last Modified:
+                    <script type="text/javascript">document.write(document.lastModified);</script>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+        <!-- Homepage widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Homepage</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="../../comp2012.1.html">Course Homepage</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Maintained by COMP 2012 Teaching Team &copy; 2020 HKUST Computer Science
+        and Engineering</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
