@@ -1,0 +1,10 @@
+<h1 id="obtain-svg-code-from-inkscape">Obtain SVG code from Inkscape</h1>
+<p>This tutorial shows you how to get SVG code from Inkscape, so that it can be used in your game development.</p>
+<h2 id="steps">Steps</h2>
+<ol>
+<li>Open Inkscape. Before drawing the picture, go to <em>File</em>-&gt;<em>Document Properties</em>, set <em>Display units</em> to px, set <em>Scale x</em> to 1.<br><a href="01-doc-properties.png"><img src="01-doc-properties-small.png" alt="doc-prop" title="Click to view full size image"></a></li>
+<li>Draw the picture. You can scale it to the size you want afterwards.<br><a href="02-draw.png"><img src="02-draw-small.png" alt="draw" title="Click to view full size image"></a></li>
+<li>Go to <em>File</em>-&gt;<em>Document Properties</em>. Resize the page to fit content.<br><a href="03-resize.png"><img src="03-resize-small.png" alt="draw" title="Click to view full size image"></a></li>
+<li>Save the picture to an *.svg file.</li>
+<li>Open the *.svg file with an editor. Copy the attributes of the &lt;svg&gt; tag that starts with &quot;xmlns&quot; to your own &lt;svg&gt; tag. Copy the code between &lt;/metadata&gt; and &lt;/svg&gt; and enclose it with &lt;g&gt; ... &lt;/g&gt; for drawing the object.<br><a href="04-copy-code.png"><img src="04-copy-code-small.png" alt="draw" title="Click to view full size image"></a></li>
+</ol>

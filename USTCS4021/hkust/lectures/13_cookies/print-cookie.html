@@ -1,0 +1,12 @@
+<html>
+<head>
+<script>
+  var today = new Date();
+  now = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+  document.cookie = "last_visit=" + now;
+  document.writeln(document.cookie );
+</script>
+</head> 
+</html>
+

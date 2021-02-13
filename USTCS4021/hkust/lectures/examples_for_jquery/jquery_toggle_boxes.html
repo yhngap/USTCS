@@ -1,0 +1,37 @@
+<html>
+<head>
+<style>
+.boxes {
+    height: 100px; width: 100px;
+    top: 10px; left: 10px;
+}
+#redbox { background-color: red; }
+#greenbox { background-color: green; }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script>
+$ (function() {
+   $("#greenbox").click(function() {
+      $("#greenbox").hide();
+      $("#redbox").show();
+   });
+   $("#redbox").click(function() {
+      $("#redbox").hide();
+      $("#greenbox").show();
+   });
+ });
+</script>
+</head>
+
+<body>
+<div id="redbox" class="boxes" style="float:left"></div><div id="greenbox" class="boxes"
+style="float:right;display:none"></div>
+<h1>COURSE INFO</h1>
+<p>
+Technologies and standards for World Wide Web (WWW), user interfaces and Browsers, authoring tools, Internet protocols,
+Internet servers, database connectivity, Robots, Search engines, server-side programming, client-side programming,
+security and privacy, recent advances.</p>
+</body>
+</html>

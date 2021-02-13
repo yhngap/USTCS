@@ -1,0 +1,158 @@
+<!-- saved from url=(0022)http://internet.e-mail -->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>COMP4021 Lab 2 - jQuery Autocomplete</title>
+    <link rel="stylesheet" type="text/css" href="../lab.css" />
+</head>
+
+<body>
+
+    <h1>
+        <span class="lab">COMP4021 Lab 2</span>
+        <span class="title">jQuery Autocomplete</span>
+    </h1>
+
+    <h2>Overview</h2>
+
+    <ul>
+        <li>In this lab, you will learn how to create a custom autocomplete widget by <tt>jQuery</tt>. This lab
+		is a starting point of project 1.
+        </li>
+        <li>Several files (task_1.html, task_2.html and some libraries and style sheets) are given to you as a starting point
+        	<a href="lab2.zip">here</a>.
+        <ul>
+            <li><tt>task_1.html</tt> demonstrates a basic autocomplete example and it is the starting code for changing the search keyword programmatically when a suggestion is selected.</li>
+            <li><tt>task_2.html</tt> is the starting code for customizing the style of the autocomplete suggestions.</li>
+        </ul>
+        </li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <ul>
+        <li>First, you need to download the files (<a href="lab2.zip">lab2.zip</a>) to your local hard disk and extract the downloaded file.</li>
+        <ul>
+            <li>If you want to use Firefox in CS lab, please go to the following folder and then start <tt>FirefoxPortable.exe</tt>
+            <pre>L:/apps/comp4021/Firefox</pre>
+            </li>
+        </ul>
+        </li>
+		<li>You can use any text editor such as Notepad to build your program
+	        <ul>
+				<li>Alternatively you can use TextPad, which is available in the CS
+					labs, to edit your program</li>
+			</ul>
+		</li>
+    </ul>
+
+    <h2>Lab Content</h2>
+
+    <ol>
+        <li><a href="index.html#section1">Demonstration of default autocomplete widget</a></li>
+        <li><a href="index.html#section2">Change the search keyword programmatically when a suggestion is selected</a></li>
+        <li><a href="index.html#section3">Customize the style of autocomplete suggestions</a></li>
+    </ol>
+
+    <h2><a name="section1"></a>1. Demonstration of default autocomplete widget</h2>
+
+    <ul>
+        <li>Open <tt>default_autocomplete_example.html</tt> in any text editor.</li>
+        <li>You can see an array which is created through javascript by the following code.
+        	<pre>var input_data = [
+      "actionscript",
+      "applescript",
+      "asp",
+      "basic",
+      "c",
+      "c++",
+	  ...
+      "scheme"
+    ];</pre>
+        </li>
+        <li>Right below the array <tt>input_data</tt>, you can see the following code,
+        	<pre>$( "#search" ).autocomplete({
+	source: input_data
+});	</pre>
+		    <ul>
+		    	<li><tt>$( "#search" )</tt> is a jquery selector which is to select the object with id <tt>search</tt>.</li>
+		    	<li><tt>$( "#search" ).autocomplete(...)</tt> is going to create the autocomplete widget for the object with id <tt>search</tt>.</li>
+		    	<li>Inside the <tt>autocomplete( ... )</tt>, there is <tt>source: input_data</tt>, which is to indicate that <tt>input_data</tt> is
+		    		the source data which will be filtered by autocomplete widget and then shows the suggestions.
+		    </ul>
+        </li>
+        <li>Open <tt>task_1.html</tt> in a browser to see the effect of autocomplete widget.</li>
+    </ul>
+
+    <h2><a name="section2"></a>2. Change the search keyword programmatically when a suggestion is selected</h2>
+
+    <ul>
+        <!-- <li>Below is an example display of <tt>task_1.html</tt> after finished this task:
+            <p><a href="images/svg.png"><img src="images/svg_small.png" border="0" alt="The Display" /></a><br />
+            <span class="footnote">Click to see image in original size</span></p>
+        </li> -->
+        <li>Goal: When a suggestion is selected, show the selected suggestion in the input text box with adding double quote (") at the beginning and the end.
+		<li>Below is an example result after finish this task:
+            <p><a href="images/lab2_task1.png"><img src="images/lab2_task1.png" border="0" alt="The Display" /></a><br />
+            <span class="footnote">Click to see image in original size</span></p>
+        </li>
+        <li>Open <tt>task_1.html</tt> in any text editor.</li>
+        <li>Modify the content of <tt>task_1.html</tt> as following:
+        	<pre>...
+...
+...
+function autocompleteItemSelectedHandler( event, ui ) {
+};
+
+$( "#search" ).autocomplete({
+	source: input_data,
+	select: autocompleteItemSelectedHandler
+});
+...
+...
+...
+    </pre>
+        </li>
+        <li><tt>select: autocompleteItemSelectedHandler</tt> indicates the event handler <tt>autocompleteItemSelectedHandler</tt> to handle the <tt>onselect</tt> event of the suggestion in the autocomplete widget.</li>
+        <li>Implement the <tt>autocompleteItemSelectedHandler</tt> to achieve our goal.</li>
+    </ul>
+
+    <h2><a name="section3"></a>3. Customize the style of autocomplete suggestions</h2>
+
+    <ul>
+        <li>Goal: customize the style of the suggestions such that all substrings in each suggestion that matches the search keyword will be shown in blue, bold and italic.</li>
+		<li>Below is an example result after finish this task:
+            <p><a href="images/lab2_task2.png"><img src="images/lab2_task2.png" border="0" alt="The Display" /></a><br />
+            <span class="footnote">Click to see image in original size</span></p>
+        </li>
+        <li>Open <tt>task_2.html</tt> in any text editor.</li>
+        <li>You can see the following code
+        <pre>$.widget( "custom.myautocomplete", $.ui.autocomplete, {
+        _create: myAutoCompleteWidgetConstructor,
+        _renderItem: renderAutoCompleteMenuItem,
+        _renderMenu: renderAutoCompleteMenu
+});</pre>
+		This is to define our custom widget. In this task, it is an autocomplete widget.
+        </li>
+        <!-- <li>Implement the function <tt>myAutoCompleteWidgetConstructor</tt> as the construtor of our custom autocomplete widget.</li> -->
+        <li>Complete the function <tt>renderAutoCompleteMenu</tt> to define how the autocomplete suggestion menu is displayed</li>
+        <li>Complete the function <tt>renderAutoCompleteMenuItem</tt> to define how each suggestion in the menu is displayed</li>
+    </ul>
+
+    <h2>References</h2>
+
+    <ul>
+        <li><a href="https://jqueryui.com/autocomplete/#categories">An example about custom autocomplete widget with categories</a></li>
+        <li><a href="https://jqueryui.com/autocomplete/#maxheight">An example of scrollable autocomplete widget</a></li>
+    </ul>
+
+    <h2>Submission</h2>
+
+    <ul>
+        <li>You do not need to submit this lab</li>
+    </ul>
+
+</body>
+</html>

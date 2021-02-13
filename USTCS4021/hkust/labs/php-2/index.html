@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Lab 8
+</title>
+</head>
+<body>
+<h1 id="lab8thechatroom">Lab 8 The Chatroom</h1>
+
+<p>Starting code: <a href="chatroom.zip">chatroom.zip</a></p>
+
+<h2 id="tasks">Tasks</h2>
+
+<ol>
+<li>Show the messages</li>
+
+<li>Message Color</li>
+
+<li>User name input check</li>
+</ol>
+
+<h2 id="1showthemessages">1. Show the Messages</h2>
+
+<p>After the last lab, the messages are stored in chatroom.xml. In this lab, you need show these messages in the Chat Window on the client side. This means, the content of chatroom.xml need to be sent to the client side (this part is already implemented in the starting code). Then the client side shows the messages based on the receieved content. In order to do this, you need to finish the <em>updateChat(xmlDoc)</em> function in <em>message.php</em>. </p>
+
+<p><em>xmlDoc</em> contains the content of chatroom.xml. It is an <a href="https://www.w3schools.com/xml/dom_document.asp">XML Document Object</a>.</p>
+
+<p>Call <em>showMessage()</em> to add a message to the chat window.</p>
+
+<p>Since <em>showMessage()</em> can only add new messages, you need to use a variable to record the number of messages that are already displayed.</p>
+
+<h2 id="2messagecolor">2. Message Color</h2>
+
+<p>Allow the user to select a color for each message he/she sends.</p>
+
+<p><img src="message-color.png" alt="alt text" title="Message Color" /></p>
+
+<p>Add a color selector to the interface. Refer to this <a href="http://webproject.cse.ust.hk:8046/hidden_fields_examples/01_color_selector.html">example</a>.</p>
+
+<p>Modify <em>add_message.php</em> and add a "color" attribute to each message in the chatroom.xml. (The server side)</p>
+
+<p>Modify the <em>showMessage()</em> function and the <em>updateChat()</em> function in <em>message.php</em> to display eash message in its corresponding color. (The client side)</p>
+
+<h2 id="3usernameinputcheck">3. User Name Input Check</h2>
+
+<p>During user login, check whether the user name provided by the user is valid. We require that the user name cannot be empty, and it cannot contain any illegal characters (including <em>@&lt;>[]{}':;\</em>).</p>
+
+<p>Finish the <em>checkInput()</em> function in login.html</p>
+
+<p>Use <em>e.preventDefault()</em> to stop the form from being submitted.</p>
+
+<p>Alert the user when the user name is invalid.</p>
+
+<p><img src="empty-user-name.png" alt="alt text" title="Empty User Name Alert" /></p>
+
+<h2>Solution</h2>
+<a href="chatroom-solution.zip">chatroom-solution.zip</a>
+</body>
+</html>
