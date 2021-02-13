@@ -1,0 +1,1 @@
+<APPLET CODE="NotHelloWorldApplet.class" CODEBASE="." WIDTH=400 HEIGHT=300></APPLET>

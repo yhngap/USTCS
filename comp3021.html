@@ -1,0 +1,1593 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">	
+    <title>COMP3021 Java Programming (Fall 2020)</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="comp3021/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="comp3021/css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<link rel="icon" href="comp3021/img/cse_icon.png">
+    <style type="text/css">
+        .auto-style1 {
+            width: 390px;
+        }
+        .auto-style3 {
+            width: 23%;
+        }
+        .style1
+        {
+            text-align: center;
+            width: 85px;
+        }
+        .auto-style4 {
+            height: 40px;
+        }
+        .auto-style5 {
+            width: 390px;
+            height: 40px;
+        }
+        .auto-style6 {
+            text-align: center;
+            width: 85px;
+            height: 40px;
+        }
+        .auto-style7 {
+            text-align: center;
+            height: 40px;
+        }
+        .style3
+        {
+            color: red;
+        }
+        .style4
+        {
+            color: black;
+        }
+        </style>
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="padding-top:100px">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="comp3021.html#page-top">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li data-toggle="collapse" data-target=".in" class="hidden">
+                        <a class="page-scroll" href="comp3021.html#page-top"></a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#announcements">Announcements</a>
+                    </li>
+					
+					<li data-toggle="collapse" data-target=".in" class="dropdown"><a href="comp3021.html#" class="dropdown-toggle" data-toggle="dropdown">Course Info<b class="caret"></b></a>                        					
+                        <ul class="dropdown-menu">
+                            <li><a href="comp3021.html#coursedetails" class="page-scroll">Course Details</a></li>
+                            <li><a href="comp3021.html#schedule" class="page-scroll">Schedule</a></li>
+                            <li><a href="comp3021.html#gradingscheme" class="page-scroll">Grading &amp; Bonus Scheme</a></li>
+							<!--<li><a href="#assessmentrubrics" class="page-scroll">Assessment Rubrics</a></li>-->
+						</ul>
+					</li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#people">People</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#lectures">Lectures</a>
+                    </li>
+                    <li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#video">Videos</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#labs">Labs</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#assignments">Assignments</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#quiz">Quiz</a>
+                    </li>						
+                    <li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#exams">Exams</a>
+                    </li>					
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#selflearning">Self-learning Center</a>
+                    </li>					
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#faqs">FAQs</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#honorcode">Honor Code</a>
+                    </li>
+					<li data-toggle="collapse" data-target=".in">
+                        <a class="page-scroll" href="comp3021.html#download">Download</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <section id="intro" class="intro-section">
+		<center>
+		<img src="comp3021/img/java3.jpg" width="73%" style="display:block; margin-top:-70px"></center>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="padding-bottom:30px">
+					<div class="banner">
+						<h3 style="margin-top:50px">COMP3021 Java Programming (Fall 2020) </h3>
+						<p style="padding-left:10px; padding-right:10px; padding-top:10px"><span style="font-weight:bold;">Description:</span><br/><span>Introduction to Java programming. Fundamentals include language syntax, object-oriented programming, inheritance, polymorphism, exception handling, multithreading, lambdas. Standard libraries for input/output, graphics programming, built-in data structures. Programming for events, high order functions, generics.</span></p>
+					</div>                 
+                </div>				
+            </div>
+        </div>
+    </section>
+	
+	<!-- Announcements Section -->
+	<section id="announcements" class="announcements-section">
+        <div class="container" style="margin-top:-50px">
+            <div class="row">
+				<h3 class="titleheader">Announcements</h3>
+                <div class="col-lg-12">                    
+					<ul>
+<!--			<li><span style="color:blue">2019-12-06</span><br />
+                            The solution for PA2 has been released.</li>
+                        <li><span style="color:blue">2019-11-29</span><br />
+                            We sent you an email regarding PA2 demonstration on December 3 (Mon) in our teaching lab 4 (Room 4210). Please follow the instruction in the email to mark your demonstration session <a href="https://docs.google.com/spreadsheets/d/1wZXyfW8tYV6HUlEuLPx7AFJRkQSXdE9ALwNC_i0HcYE/edit?usp=sharing">here</a>. Note: if you have any question on your grading, ask TA during the demo session. There won't be other appeal period.</li> 
+                        <li><span style="color:blue">2019-11-28</span><br />
+                            Revision notes for final examination are available 
+                            <a href="notes/finalreview.pdf">here</a>.</li>
+			<li><span style="color:blue">2019-11-16</span></br> Approved bonus tasks of assignment 2 have been released (see Assignment table, assignment 2, grading scheme, PA2 approved bonus tasks). All classmates are welcome to accomplish the bonus tasks and get the bonus. </li>
+			<li><span style="color:blue">2019-11-11</span><br />
+                            The <a href="https://course.cse.ust.hk/comp3021/assignments/PA1/TA_only_tests.zip">TA_only tests </a>have been uploaded to our course website. <br>You may run these test by yourself, to test your code. If you have any question or you want to appeal, please contact TA by 17th, Nov. Any appeal after that will not be accepted.
+                        </li>
+                        <li><span style="color:blue">2019-10-23</span><br />
+                            Final examination will be held between 12:30pm and 3:30pm on Dec 17 (Monday) at Tsang Shiu Tim Art Hall (neighboring to Starbuck).
+                        </li>
+                        <li><span style="color:blue">2019-10-23</span><br />Assignment 2 was released.</li>
+                        <li><span style="color:blue">2019-10-23</span><br />
+                            Mid-term examination results were released at Canvas. Paper checking session will be held in room 2406 (lift 17/18) on Oct 24 (Wed) between 7pm and 9pm. Appeals, if any, need to be made by email to course TAs and copy it to course instructors by Oct 24. The email should be sent from your ITSC account with details of your appeal and justification. Please contact course TAs if you want to check your paper but are unable to attend the paper checking session.</li>
+                        <li><span style="color:blue">2019-10-17</span><br />
+                            Revision notes for mid-term examination are available 
+                            <a href="notes/Midterm%20Review.pdf">here</a>.</li>
+                        <li><span style="color:blue">2019-10-9</span><br />
+                            Mid-term will take place between 9:30-10:40 on Oct 20. It is to be followed by a makeup COMP3021 lecture between 11:00-12:20. The mid-term and makeup lecture 
+                            are to compensate the cancellation of classes on Nov 6 (Tue) and Nov 8 (Thu) when I will attend a conference. The makeup lecture will be video-taped.</li>
+
+                        <li><span style="color:blue">2019-9-12</span><br />
+                            Quiz will be conducted at the beginning of each lecture starting from September 18 (Tuesday) using 
+                            <a href="https://itsc.ust.hk/services/academic-teaching-support/teaching-tools/prs/iprs">iPRS</a>.</li>
+-->
+                       <li><span class="style3">2020-12-01</span><br />
+                            Please read the instructions for the online examination carefully <a href="comp3021/exam/instructions.html">here</a>. A rehearsal of the examination will take place on December 9 (Wednesday) at 11am. Your meeting ID will be made available by then. Please refer to the Examination Meeting Link in the instructions for details.</li>
+
+                        <li><span style="color:blue">2020-11-12</span><br />
+                            Assignment 3 was released. The deadline of Assignment 3 Submission is 10 Dec. 2020, 23:55. </li>
+<!--
+                        <li><span style="color:blue">2019-9-1</span><br />
+                            <span class="style1"><strong>Mid-term examination will be held at 9:30 in the morning of October 20 (Sat) in Room G010 (CYT buidling)</strong></span>. Please make sure 
+                            that you are available that morning to attend the examination when you decide to 
+                            register this course.</li>
+-->
+                       <li><span class="style3">2020-10-27</span><br />
+                            Preparation for online final examination: (1) Prepare hard copies of course notes for online final examination. Online notes are disallowed for final examination. (2) Install Zoom on a mobile phone that is equipped with good quality of front and rear video cameras. (3) Prepare twelve sheets of white A4 papers and a 
+                            black-colored pen. (4) A laptop or desktop that can access Canvas (do not use a tablet). Please refer to the online examination instructions for details and set up.</li>
+                        
+                        <li><span style="color:blue">2020-9-9</span><br />
+                            Assignment 1 was released. The deadline of Assignment 1 Submission is 2020-10-5, 23:55. </li>
+<!--
+                        <li><span style="color:blue">2019-9-1</span><br />
+                            <span class="style1"><strong>Mid-term examination will be held at 9:30 in the morning of October 20 (Sat) in Room G010 (CYT buidling)</strong></span>. Please make sure 
+                            that you are available that morning to attend the examination when you decide to 
+                            register this course.</li>
+-->
+                        <li><span class="style3">2020-09-01<br />
+                            </span><span class="style4">Please make sure that you have a reliable network 
+                            connection for the online quizzes and examination before registering this course. You 
+                            will need two devices to join the online examination: a mobile phone with 
+                            video camera running Zoom and a laptop/desktop accessing Canvas. Please enable your videos when attending Zoom lectures.</span><li>
+                            <span class="style3">2020-09-01</span><br/>Lectures will be delivered over zoom 
+                            meetings at meeting ID 970 5066 9046 (<a 
+                                href="https://zoom.us/j/97050669046">https://zoom.us/j/97050669046</a> or
+                            <a href="https://zoom.com.cn/j/97050669046">https://zoom.com.cn/j/97050669046</a>) 
+                            until further notice. Lectures will be recorded and released on Canvas. Please download the lab materials and submit the lab assignments by their 
+                            deadlines.</li>
+                        <!-- <li><span style="color:blue">2019-10-24</span><br/><span class="auto-style8"><strong>Final examination will take place on Dec 19 (Thursday) at 8:30 am in LG4 Student Common Rooms (Lift 3).</strong></span></li> -->
+                        <li><span style="color:blue">2020-09-01</span><br/>Welcome to Comp3021!
+						    In this course, we will practice Java programming with Java 14 (SDK 14.x) and IntelliJ (Community Edition v2020.x).<br />
+                            The first lab will start in the first week over Zoom (meeting ID: xxx). Make sure you attend it!
+						    Please check the &quot;raise hand&quot; button if you have questions. TAs will meet you in 
+                            a breakout room. Please self study the course notes below on conversion from C++ to Java at week 0 after you have registered the course.</li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+    <!-- Course Details Section -->
+    <section id="coursedetails" class="coursedetails-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Course Details</h3>
+                <div class="col-lg-6">                    
+					<h4>Course Logistics</h4>
+					<ul>
+						<li>
+						The course consists of, per week,
+							<ul>
+								<li>2 hours and 40 minutes of lectures</li>
+								<li>50 minutes of lab exercises</li>
+							</ul>
+						and it gives you 3 credits for successful completion of the course. </li>
+					</ul>
+					<br/>
+					<h4>Prequisite(s)</h4>
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th>Course Code</th><th>Course Title</th>
+							</td>
+							<tr>
+								<td>COMP 2012</td><td>Object-Oriented Programming and Data Structures</td>
+							</tr>
+							<tr>
+								<td>COMP 2012H</td><td>Honors Object-Oriented Programming and Data Structures</td>
+							</tr>
+						</table>
+					</div>
+					<h4>Exclusion</h4>
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th>Course Code</th><th>Course Title</th>
+							</td>
+							<tr>
+								<td>ISOM 3320</td><td>Internet Applications Development</td>
+							</tr>							
+						</table>
+					</div>
+					<br/>
+					<h4>Course Intended Learning Outcomes (CILOs)</h4>
+					<p>On successful completion of this course, students are expected to be able to:</p>
+					<ol>
+						<li>An ability to develop programs in Java.
+						  <ol>
+						    <li>Be able to implement object-oriented concepts in Java.</li>
+							<li>Be able to organize, compile and deploy Java program files.</li>
+							<li>Be able to program Java exceptions.</li>
+							<li>Be able to define generic functions and classes in Java.</li>
+						  </ol>
+						</li>
+						<br/>
+						<li>An ability to use Java packages in programming.
+							<ol>
+								<li>Be able to design and implement multi-threaded Java applications.</li>
+								<li>Be able to design and implement graphics in Java.</li>
+								<li>Be able to design and implement event handlers in Java.</li>
+								<li>Be able to design and implement functional interfaces.</li>
+							</ol>
+						</li>
+						<br/>
+						<li>An ability to apply tools and practices for Java programming.
+							<ol>
+								<li>Be able to design and implement unit test cases in a unit testing framework.</li>
+								<li>Be able to follow good Java programming practices.</li>
+								<li>Be able to use an integrated development environment for Java application development.</li>
+							</ol>
+						</li>
+					</ol>
+					<br/>					
+					<h4>Key Concepts Covered</h4>
+					<ol>
+						<li>Java language fundamentals
+							<ol>
+								<li>Basics</li>
+								<li>Classes and Objects</li>
+								<li>Java Development Tools (IntelliJ)</li>
+								<li>String Processing and Text Input / Output</li>
+								<li>Inheritance and Polymorphism</li>
+								<li>Interfaces and Inner Classes</li>
+								<li>Unit Testing</li>
+								<li>Exceptions</li>
+							</ol>
+						</li>
+						<br/>
+						<li>GUI Programming
+							<ol>
+								<li>Graphics</li>
+								<li>Event Handling</li>
+							</ol>
+						</li>
+						<br/>
+						<li>Advanced Topics
+							<ol>
+								<li>Multithreading</li>
+								<li>Generic Programming</li>
+								<li>Lambdas and functional programming</li>
+								<li>Built-in Functional Interfaces and Streams</li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+				<br/>
+				<div class="col-lg-6">
+					<h4>Reference Books</h4>
+							<div class="table-responsive invisibletable">
+							<table>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/introtojava.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Introduction to Java Programming and Data Structures: Comprehensive Version, Y Daniel Liang. Pearson, c2019, 11th Edition.
+											</li>
+											<ul>
+												<li>Library copy: Introduction to Java Programming: Comprehensive Version, c2015. 10th Edition. <a href="http://ustlib.ust.hk/record=b1429342">QA76.73.J38 L533 2015</a></li>
+											</ul>
+                                            <ul>
+                                                <li>ISBN: 9780134670942</li>
+                                            </ul>
+										</ul>
+									</td>
+								</tr>								
+							</table>
+							</div>
+                            <div class="table-responsive invisibletable">
+							<table>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/headfirst.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Head First Java, Kathy Sierra and Bert Bates, O'Reilly Media, c2005, 2nd Edition.</li>
+											<ul>
+												<li>Number of pages: 688</li>
+												<li>ISBN: 9780596009205</li>
+											</ul>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/impatient.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Java SE 8 for the Really Impatient, Cay S. Horstmann, Addison-Wesley Professional, c2014, 1st Edition.</li>
+											<ul>
+												<li>Number of pages: 240</li>
+												<li>ISBN: 9780321927767</li>
+											</ul>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/action.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Java 8 in Action: Lambdas, streams, and functional-style programming, Raoul-Gabriel Urma, Mario Fusco and Alan Mycroft, Manning Publications, c2014, 1st Edition.</li>
+											<ul>
+												<li>Number of pages: 424</li>
+												<li>ISBN: 9781617291999</li>
+											</ul>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/core1.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Core Java: Volume I - Fundamentals, Cay S. Horstmann, Prentice Hall, c2019, 11th Edition.</li>
+											<ul>
+												<li>ISBN: <span style="color: rgb(17, 17, 17); font-family: &quot;Amazon Ember&quot;, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">978-0135166307</span></li>
+											</ul>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:5px"><img src="comp3021/img/core2.jpg" style="width:150px;"/></td>
+									<td style="width:5px"></td>
+									<td>
+										<ul>
+											<li>Core Java: Volume II - Advanced Features, Cay S. Horstmann, Prentice Hall, c2019, 11th Edition.</li>
+										    <ul>
+                                                <li>ISBN: <span style="color: rgb(17, 17, 17); font-family: &quot;Amazon Ember&quot;, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">978-0135166314</span></li>
+                                            </ul>
+										</ul>
+									</td>
+								</tr>
+							</table>
+							</div>
+					<h4>Questions</h4>
+					<p>
+						If you have any questions, please check the course <a href="comp3021.html#faqs" class="page-scroll">FAQs page</a>. If you do not find your answer, you may email the TAs or instructor.
+					</p>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Schedule Section -->
+    <section id="schedule" class="schedule-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Schedule</h3>
+                <div class="col-lg-12">
+					<h4>Lecture Schedule</h4>
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th style="text-align:center">Section</th>
+								<th>Date and Time</th>
+								<th>Room</th>
+								<th>Instructor</th>
+							</tr>
+							<tr>
+								<td style="text-align:center">L1</td>
+								<td>Tuesday &amp; Thursday 13:30 - 14:50</td>
+								<td>Zoom ID: 970 5066 9046<br />
+                                    Room 2302 (mixed mode)</td>
+								<td> Shing-Chi Cheung</td>
+							</tr>							
+						</table>
+					</div>
+					<h4>Lab Schedule</h4>
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th style="text-align:center">Section</th>
+								<th>Date and Time</th>
+								<th>Room</th>
+								<th>Teaching Assistants</th>
+							</tr>
+							<tr>
+								<td style="text-align:center">LA1</td>
+								<td>Wednesday 11:00 - 11:50</td>
+								<td>Zoom ID: 950 3710 8712</td>
+								<td>Jialun Cao and Wuqi Zhang</td>								
+							</tr>
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>	
+	
+	<!-- Grading Scheme Section -->	
+    <section id="gradingscheme" class="gradingscheme-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Grading and Bonus Scheme</h3>
+                <div class="col-lg-6">
+					<h4>Grading Scheme</h4>
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th>Item</th>
+								<th style="text-align:center">Percentage</th>								
+							</tr>
+   							<tr>
+								<td>In-class Quizzes and Participation</td>
+								<td style="text-align:center">8%</td>
+							</tr>
+							<tr>
+								<td>Laboratory exercises</td>
+								<td style="text-align:center">8%</td>
+							</tr>
+							<tr>
+								<td>Course assignments</td>
+								<td style="text-align:center">45%</td>
+							</tr>
+							<tr>
+								<td>Examination</td>
+								<td style="text-align:center">39%</td>
+							</tr>
+						</table>
+					</div>
+					<p>Please check your own grades from the <a href="http://canvas.ust.hk">CANVAS system</a>.</p>
+                </div>
+				<br/>
+                <div class="col-lg-6">
+					<h4>Bonus Scheme</h4>					
+					<ul>
+						<li><span style="font-weight: bold;">Objective: </span>Encourage students to further explore beyond the programming assignments</li>
+						<li><span style="font-weight: bold;">Means: </span>When you have completed a bonus task in the assignment, you will get the bonus points accordingly</li>
+						<li><span style="font-weight: bold;">Bonus scheme: </span>Be used as a "safety blanket" on the assignments capped by the maximum score (e.g. 100). It motivates hard-working students without sacrificing the less hard-working students</li>
+						<li><span style="font-weight: bold;">Examples: </span>
+							<ul>
+								<li>If a student got 95 out of 100 for the basic tasks, but he got 6 bonus points, the final score will be: MIN(95+6, 100) = 100
+								</li>
+								<li>If a student got 100 out of 100 and got 0 bonus points, the final score will be: MIN(100+0, 100) = 100</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Assessment Rubrics Section -->	
+    <!--<section id="assessmentrubrics" class="assessmentrubrics-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Assessment Rubrics</h3>
+                <div class="col-lg-12">
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th style="width:20%">Level of Achievement</th>
+								<th style="width:35%">CILO 1 Demonstrate programming skills, with an emphasis on the Java programming language.</th>
+								<th style="width:35%">CILO 2 Design and develop effective solutions to computational problem using Java as a programming tool.</th>
+							</tr>
+							<tr>
+								<td>Exemplary (A- to A+)</td>
+								<td>The student is able to proficiently program in the Java language with no or very few errors, and is able to detect and fix bugs in the code on his/her own. The program can return the correct output on all input instances.</td>
+								<td>Given a problem definition, the student is able to proficiently write a Java program to solve the problem.</td>
+							</tr>
+							<tr>
+								<td>Competent (C to B+)</td>
+								<td>The student is able to program in the Java language satisfactorily. The code may contain a few bugs, but the student is able to identify the majority of the bugs on his/her own. Given some further help, the student is able to identify and fix all the bugs. The program can return the correct output on most input instances, but may miss some special or boundary cases.</td>
+								<td>Given a problem definition, the student is able to write a Java program that solves the problem satisfactorily. The program may crash or behave incorrectly under some harsh tests.</td>
+							</tr>
+							<tr>
+								<td>Needs Work (D to C-)</td>
+								<td>The student is able to barely program in the Java language on his/her own, but with some help, he/she is able to write a program that behaves correctly on typical input instances. The code often contains bugs and the student is hardly able to identify or correct them.</td>
+								<td>Given a problem definition, the student is barely able to write a Java program that solves the problem. The program often crashes or behaves incorrectly.</td>
+							</tr>
+							<tr>
+								<td>Unsatisfactory (F)</td>
+								<td>The student is not able to program in the Java language.</td>
+								<td>Given a problem definition, the student is not able to use Java to solve it.</td>
+							</tr>
+						</table>
+						Download the PDF version <a href="docs/grading-rubrics.pdf">here</a>.
+					</div>
+				</div>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- People Section -->
+    <section id="people" class="people-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">People</h3>
+                <div class="col-lg-12">
+					<h4>Instructor</h4>
+					<div class="table-responsive invisibletable">
+						<table class="table-hover">
+							<tr>
+								<td style="width:20%"><img src="comp3021/img/scc.png" class="peopleimg"/></td>
+								<td style="width:1%"></td>
+								<td style="width:79%;">
+									<strong>Cheung</strong><span style="font-weight: bold">, Shing-Chi </span><br/>
+									<span>Room: Rm 2534</span><br/>
+									<span>Email: <a href="mailto:scc@cse.ust.hk">scc@cse.ust.hk</a></span><br/>
+									<span>Website: <a href="http://www.cse.ust.hk/~scc">http://www.cse.ust.hk/~scc</a></span><br/>
+									<span>Office Hour: 14:50-15:20 (Tue & Thu) at 970 5066 9046 (Zoom) or <a href="http://pathadvisor.ust.hk/interface.php?roomno=2534">Rm 2534</a> (face-to-face by appointment)</span><br/>
+									<span>Find me by PathAdvisor:</span>
+									<a href="http://pathadvisor.ust.hk/interface.php?roomno=2534">Click Here</a>
+								</td>
+							</tr>							
+						</table>
+					</div>
+					<h4>Teaching Assistants</h4>
+					<div class="table-responsive invisibletable">
+						<table class="table-hover">							
+							<tr>
+								<td style="width:20%"><img src="comp3021/img/cao.jpg" class="peopleimg"/></td>
+								<td style="width:1%"></td>
+								<td style="width:79%">
+									<span style="font-weight: bold">CAO, Jialun</span><br/>
+									<span>Room: 3663</span><br/>
+									<span>Email: <a href="mailto:jcaoap@connect.ust.hk">jcaoap@connect.ust.hk</a></span><br/>
+									<span>Office Hour: By email appointment </span><br/>
+									<span>Find me by PathAdvisor:</span>
+									<a href="http://pathadvisor.ust.hk/interface.php?roomno=3663">Click Here</a>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:20%"><img src="comp3021/img/wuqi.png" class="peopleimg"/></td>
+								<td style="width:1%"></td>
+								<td style="width:79%">
+									<span style="font-weight: bold">Zhang, Wuqi (Aaron)</span><br/>
+									<span>Room: 3663</span><br/>
+									<span>Email: <a href="mailto:wuqi.zhang@connect.ust.hk">wuqi.zhang@connect.ust.hk</a></span><br/>
+									<span>Office Hour: By email appointment </span><br/>
+									<span>Find me by PathAdvisor:</span>
+									<a href="http://pathadvisor.ust.hk/interface.php?roomno=3663">Click Here</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Lectures Section -->
+    <section id="lectures" class="lectures-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Lectures</h3>
+                <div class="col-lg-12">
+					<p>The schedule listed below is tentative. Instructor may have some adjustments 
+                        subject to the progress. It is the first time course materials are revamped for 
+                        Java 14 and IntelliJ 2020.x. Please accept my apology if there are minor changes and 
+                        error correction to the slides and programs despite I have run through them a 
+                        couple of times when revamping the materials in summer. Do kindly let me know if 
+                        you find mistakes in my notes and programs. Liang in the Reading column refers to the reference book: Y. Daniel Liang, Introduction to Java Programming 
+                        and Data Structures: Comprehensive Version, c2019. 11th Edition. I am used to rehearse my presentations before classes and adjust some slides slightly based on the class discussions in earlier lectures.</p>
+                    <div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th style="width:8%; text-align:center">Week #</th>
+								<th style="width:30%">Topics</th>
+								<th style="width:12%; text-align:center">Download</th>
+								<th style="text-align:center" class="auto-style3">Reading</th>
+								<th style="width:22%; text-align:center">Code / Additional Materials</th>
+							</tr>
+							<tr>
+								<td style="text-align:center">0</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Conversion from C++ to Java (Self-study)</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/c++2java.pdf">Slides</a></td>
+								<td class="auto-style3"><a href="https://beginnersbook.com/java-tutorial-for-beginners-with-examples/">Java Tutorial for Beginners</a></td>
+								<td style="text-align:center"><a href="comp3021/codes/index.htm">Samples of Java Programs</a><br /><a href="http://www4.ncsu.edu/~kaltofen/courses/Languages/JavaExamples/cpp_vs_java/">Java Cheat Sheet for C++ Programmers</a></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">1</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Introduction to Java Programming</li>
+									</ul>		
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/1-Introduction.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 1-3, 5-8</li>
+                                        <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=1">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center">
+									<a href="comp3021/programs/1-introduction-program.zip">Programs</a><br/>
+									<a href="comp3021/notes/c++-java-comparison.pdf">(C++ vs. Java Syntax Difference)</a>
+								</td>
+							</tr>
+                                                        <tr>
+                                                                <td style="text-align:center">2</td>  
+                                                                <td>
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Classes and Objects</li>
+                                                                                <li>Unit Testing with JUnit</li>
+                                                                        </ul>
+                                                                <td style="text-align:center"><a href="comp3021/notes/2-Classes.pdf">Slides</a></td>
+                                                                <td class="auto-style3">
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Liang Chap. 9 &amp; 10</li>
+                                                                                <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=8">Online self test 1</a></li>
+                                                                                <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=10">Online self test 2</a></li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center"><a href="comp3021/programs/2-classes-objects-program.zip">Programs</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td style="text-align:center">3</td>
+                                                                <td>
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Strings and Wrapper Classes</li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center"><a href="comp3021/notes/3-String.pdf">Slides</a></td>
+                                                                <td class="auto-style3">
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Liang Chap. 4</li>
+                                                                                <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=9">Online self test</a></li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center">
+                                                                        <a href="comp3021/programs/3-strings-program.zip">Programs</a><br/>
+                                                                        <a href="comp3021/notes/java-printf.pdf">(Java's printf Method)</a><br/>
+                                                                        <a href="comp3021/notes/TestPrintf.java">(printf Test Program)</a>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td style="text-align:center">4</td>
+                                                                <td>
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Inheritance and Polymorphism</li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center"><a href="comp3021/notes/4-Inheritance.pdf">Slides</a></td>
+                                                                <td class="auto-style3">
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Liang Chap. 11</li>
+                                                                                <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=11">Online self test</a></li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center">
+                                                                        <a href="comp3021/programs/4-inheritance-program.zip">Programs</a><br/>
+                                                                </td>
+                                                        </tr>
+							<tr>
+								<td style="text-align:center">5&nbsp;</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Abstract Class and Interface</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/6-Interface.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 13</li>
+                                        <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=15">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/6-interface-program.zip">Programs</a></td>
+							</tr>
+                            <tr>
+								<td style="text-align:center">7</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Java GUI</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/7-GUI-programming.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 14</li>
+                                        <li>Self test (<a href="comp3021/notes/Chapter&#32;14&#32;JavaFX&#32;Basics.pdf">Questions</a> & <a href="comp3021/notes/Quiz-Chapter&#32;14&#32;JavaFX&#32;Basics+soln.pdf">Solutions</a>)</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/7-gui-programming-program.zip">Programs</a></td>
+							</tr>
+                            <tr>
+								<td style="text-align:center">8</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Java Event-Driven Programming</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/8-Event.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 15 & 16</li>
+                                        <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=16">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/8-event-driven-animations-program.zip">Programs</a><br> (Supplementary UI control and Multimedia: <a href="comp3021/notes/sup-ui-controls-multimedia-full.pdf">Full</a>/<a href="comp3021/notes/sup-ui-controls-multimedia-4page.pdf">4-page</a>/<a href="comp3021/programs/sup-ui-controls-multimedia-program.zip">Programs</a>)</td>
+							</tr>
+                            <tr>
+								<td style="text-align:center">9</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Exception Handling, Assertion and File I/O</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/5-Exception.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 12</li>
+                                        <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=14">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/5-exceptions-program.zip">Programs</a><br/>
+								(<a href="comp3021/notes/exception-assertion-if-else.pdf">Exceptions vs. Assertions vs. if-else</a>)
+								</td>
+							</tr>
+                                                        <tr>
+                                                                <td style="text-align:center">10</td>
+                                                                <td>
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Java Multi-Threading</li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center"><a href="comp3021/notes/9-Threads.pdf">Slides</a></td>
+                                                                <td class="auto-style3"> 
+                                                                        <ul style="padding-left:20px">
+                                                                                <li>Liang Bonus Chap. 32</li>
+                                                                                <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=32">Online self test</a></li>
+                                                                        </ul>
+                                                                </td>
+                                                                <td style="text-align:center"><a href="comp3021/programs/9-multithreading-program.zip">Programs</a></td>
+                                                        </tr>
+
+							<tr>
+								<td style="text-align:center">12</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Generics</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/10-Generics.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+										<li>Liang Chap. 19</li>
+                                        <li><a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=21">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/10-generics-program.zip">Programs</a></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">13</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Lambda Expressions and High-order Functions</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/11-LamdaExpression.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+                                        <li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">The Java tutorials</a></li>
+                                        <li><a href="https://www.oreilly.com/learning/java-8-functional-interfaces">Built-in Functional interfaces</a></li>
+                                        <li><a href="http://www.topjavatutorial.com/java-quiz/java-quiz-8-lambda-expression/">Online self test</a></li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/11-lambda-expressions-program.zip">Programs</a></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">-</td>
+								<td>
+									<ul style="padding-left:20px"><li>Selected New Java 15 Features</li></ul></td>
+								<td style="text-align:center"><a href="comp3021/notes/11a-Upcoming&#32;Features.pdf">Slides</a></td>
+								<td class="auto-style3">
+									&nbsp;</td>
+								<td style="text-align:center">&nbsp;</td>
+							</tr>
+							<tr>
+								<td style="text-align:center">-</td>
+								<td>
+									<ul style="padding-left:20px">
+										<li>Java Networking (supplementary, not examined)</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/notes/12-Networking.pdf">Slides</a></td>
+								<td class="auto-style3">
+									<ul style="padding-left:20px">
+                                                                        <li> Liang Bonus Chap. 33</li>
+									</ul>
+								</td>
+								<td style="text-align:center"><a href="comp3021/programs/12-networking-program.zip">Programs</a></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">-</td>
+								<td>
+									<ul style="padding-left:20px"><li>Course Review</li></ul></td>
+								<td style="text-align:center"><a href="comp3021/notes/finalreview.pdf">Slides</a></td>
+								<td class="auto-style3">
+									&nbsp;</td>
+								<td style="text-align:center">&nbsp;</td>
+							</tr>
+						</table>
+   <section id ="video" class="video-section">
+            <div class="container">
+                <h4>Lecture Videos (replace zoom.us with zoom.com.cn for accesses from mainland)</h4>
+                <!-- <p>
+                    The Webinar video on 2019-11-26 is available at:<br />
+                    <a href="notes/20191128.zoom_0.mp4">https://course.cse.ust.hk/comp3021/notes/20191128.zoom_0.mp4</a>
+                </p> -->
+           </div>
+    </section>
+	<!-- Labs Section -->
+    <section id="labs" class="labs-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Labs</h3>
+                <div class="col-lg-12">
+					<p><strong>In the lab sessions, we will use IntelliJ as the integrated development environment for Java programming.</strong><p style="font-weight:bold">Notes:
+					<ul>
+						<li>The lab exercises are designed to help you learn Java with on-the-spot advices of Teaching Assistants. It is more a service to you than an exercise for the marks. The marks are only set to encourage you to make good use of the lab time.						
+						</li>
+						<li>
+Make sure you access the labs using "import the project (from existing sources)". Don't just open it directly in Intellij!
+You can always press `alt + enter` after clicking on the error to see if Intellij can fix the problem automatically.
+You can usually find the answer on Google for common configuration problems.
+						</li>
+                        <li>
+                            You may find it convenient to install a Chrome markdown reader extension to read 
+                            .md files. You should be able to find similar extensions for other web browsers.</li>
+                        <li>A successful completion of the lab is subject to the following conditions:<br/>
+							<ol>
+								<li>Attend the lab for at least 15 minutes</li>
+								<li>Finish the requirement / program and submit your work to <strong><a href="cass.html">CASS</a></strong></li>
+							</ol>
+						Each lab gives two points. By attending the lab, you get the attendance point; by completing the lab, you get the grading point. If you are unable to finish the lab, you would get the attendance point. Assigned lab points will be normalized to the 8% marks. You may check your connection time by following the instruction at this link: https://support.zoom.us/hc/en-us/articles/115002542683-Showing-the-meeting-duration-connected-time-. </li>
+						<li>Although we don't expect you to finish the lab exercise before you go to the lab, we expect you to have read the lab's materials and understand what you are required to do.</li>
+						<li>No late lab assignment will be accepted. You must attend your enrolled lab to earn your credits.</li>
+                        <li><a class="page-scroll" href="comp3021.html#honorcode">No plagiarism.</a></li>
+					</ul>
+					</p>
+                    <!--
+					<br/>
+					<p><span style="font-weight:bold">Public Holiday Policy</span><br/><br/>
+					If your lab day falls on a public holiday, you are not required to attend the labs held on that day. 
+                    However, although a student may not need to attend a lab on a day that happens to be a public holiday, we strongly recommend the student to still go over the materials of that lab and try to finish it. Labs help students review what they are taught in lectures and get ready for the next lab.
+					</p>
+					<br/>
+                    -->
+					<p><span style="font-weight:bold">Lab Safety:</span><p/>
+					Please read the lab safety <a href="http://www.ab.ust.hk/hseo/sm06/ch7.htm">here</a>.
+					<br/>
+					
+					<div class="table-responsive regulartable">
+						<table>
+							<tr>
+								<th style="text-align:center">Week #</th>
+								<th>Date (Wednesday)</th>
+								<th class="auto-style1">Topic (Files are to be opened by / imported to IntelliJ)</th>
+								<th class="style1">Deadline</th>
+								<th style="text-align:center">Lab Slide</th>
+								<th style="text-align:center">Solution</th>
+								
+							</tr>
+                            
+							<tr>
+								<td style="text-align:center">1</td>
+								<td style="text-align:center">Sep 9</td>
+								<td class="auto-style1">Lab 1: <a href="comp3021/lab_2020F/lab1/Demo1.zip">IntelliJ &amp; Github</a></td>
+								<td class="style1">Sep 15</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab1/COMP3021_lab1.pptx">slides</a></td>
+								<td class="text-center">-</td>
+							</tr>	                       
+							<tr>
+								<td style="text-align:center">2</td>
+								<td style="text-align:center">Sep 16</td>
+								<td class="auto-style1">Lab 2: <a href="comp3021/lab_2020F/lab2/index.html">From C++ to Java &amp; assignment 1 introduction</a></td>
+								<td class="style1">Sep 22</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab2/COMP3021_lab2.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab2/lab2_sol.zip">solution</a></td>
+							</tr>	                          
+							<tr>
+								<td style="text-align:center">3</td>
+								<td style="text-align:center">Sep 23</td>
+								<td class="auto-style1">Lab 3: <a href="comp3021/lab_2020F/lab3/Lab3.zip">Classes, objects</a></td>
+								<td class="style1">Sep 29</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab3/COMP3021_lab3.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab3/lab3_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">4</td>
+								<td style="text-align:center">Sep 30</td>
+								<td class="auto-style1">Lab 4: <a href="comp3021/lab_2020F/lab4/Lab4.zip">Strings &amp; StringBuilder</a></td>
+								<td class="style1">Oct 6</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab4/COMP3021_lab4.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab4/lab4_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center" class="auto-style4">5</td>
+								<td style="text-align:center" class="auto-style4">Oct 7</td>
+								<td class="auto-style5">Lab 5: <a href="comp3021/lab_2020F/lab5/lab5.zip">Inheritance &amp; polymorphism &amp; assignment 2 introduction</a></td>
+								<td class="auto-style6">Oct 13</td>
+								<td class="auto-style7"><a href="comp3021/lab_2020F/lab5/COMP3021lab5.pptx">slides</a></td>
+								<td class="auto-style7"><a href="comp3021/lab_2020F/lab5/lab5_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">6</td>
+								<td style="text-align:center">Oct 14</td>
+								<td class="auto-style1">Lab 6: <a href="comp3021/lab_2020F/lab6/lab6.zip">Abstract classes, interfaces, private/default interface methods &amp; nested classes</a></td>
+								<td class="style1">Oct 20</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab6/COMP3021lab6.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab6/lab6_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">7</td>
+								<td style="text-align:center">Oct 21</td>
+								<td class="auto-style1">Lab 7: <a href="comp3021/lab_2020F/lab7/lab7_GUI.zip">GUI programming &amp; JavaFX</a></td>
+								<td class="style1">Oct 27</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab7/COMP3021lab7.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab7/lab7_GUI_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">8</td>
+								<td style="text-align:center">Oct 28</td>
+								<td class="auto-style1">Lab 8: <a href="comp3021/lab_2020F/lab8/lab8.zip">Event driven programming</a></td>
+								<td class="style1">Nov 3</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab8/COMP3021lab8.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab8/lab8_sol.zip">solution</a></td>
+							</tr>
+                            
+							<tr>
+								<td style="text-align:center">9</td>
+								<td style="text-align:center">Nov 4</td>
+								<td class="auto-style1">Lab 9: <a href="comp3021/lab_2020F/lab9/Lab9.zip">Exceptions, file i/o &amp; local var inference</a></td>
+								<td class="style1">Nov 10</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab9/COMP3021lab9.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab9/Lab9_Sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">10</td>
+								<td style="text-align:center">Nov 11</td>
+								<td class="auto-style1">Lab 10: <a href="comp3021/lab_2020F/lab10/lab10.zip">Multithreading &amp; synchronization; assignment 3 introduction</a></td>
+								<td class="style1">Nov 17</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab10/COMP3021lab10.pptx">slides</a> 
+								<td class="text-center"><a href="comp3021/lab_2020F/lab10/lab10_sol.zip">solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">11</td>
+								<td style="text-align:center">Nov 18</td>
+								<td class="auto-style1">Lab 11: <a href="comp3021/lab_2020F/lab11/lab11.zip">Generics &amp; bounded generic types</a></td>
+								<td class="style1">Nov 24</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab11/COMP3021lab11.pptx">slides</a>  
+								<td class="text-center"><a href="comp3021/lab_2020F/lab11/lab11_sol.zip"i>solution</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">12</td>
+								<td style="text-align:center">Nov 25</td>
+								<td class="auto-style1">Lab 12: <a href="comp3021/lab_2020F/lab12/lab12.zip">Lambda expressions, function objects &amp; high-order functions</a></td>
+								<td class="style1">Dec 1</td>
+								<td class="text-center"><a href="comp3021/lab_2020F/lab12/COMP3021lab12.pptx">slides</a></td>
+								<td class="text-center"><a href="comp3021.html">-</a></td>
+							</tr>	
+                            
+							<tr>
+								<td style="text-align:center">13</td>
+								<td style="text-align:center">Dec 2</td>
+								<td class="auto-style1">Lab review</td>
+								<td class="style1">-</td>
+								<td class="text-center"><A HREF="comp3021/lab_2020F/lab13/COMP3021_Lab_Review.pptx">slides</a></td>
+								<td class="text-center">&nbsp;</td>
+							</tr>	
+                            </table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Assignments Section -->
+    <section id="assignments" class="assignments-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Assignments</h3>
+                <div class="col-lg-12">
+					<div class="table-responsive regulartable">
+						<table class="table-hover">
+    						<tr>
+								<th>Assignment</th>
+								<th>Grading Scheme</th>
+								<th>TA-in-charge</th>
+								<th>Supplement</th>
+								<th style="text-align:center">Deadline</th>
+								<th>Solution</th>
+							</tr>
+							<tr>
+								<td>Program Assignment 1: Adapted Jeson Mor - Text version <br/> 
+                                    <a style="text-decoration: underline" href="https://github.com/CastleLab/COMP3021-2020Fall-PA1-Student-Version">Assignment Description (PA1/readme.md), code skeleton (PA1), API documentation (Javadoc), and executable jar file (PA1 Obfuscated)</a> 
+                                    <em><br> uncompress the zip file and import the enclosed PA1 folder to IntelliJ</em>
+                                    <br>
+                                    Here is a <a style="text-decoration: underline" href="https://github.com/CastleLab/COMP3021-2020Fall-PA1-Student-Version/blob/master/FAQ.md">markdown file</a> recording the known issues and their solutions.
+                                </td>
+                        <td><a href="https://github.com/CastleLab/COMP3021-2020Fall-PA1-Student-Version#submission-requirements">PA 1 Submission Requirement and Grading Scheme </a></td>        
+			<td>ZHANG, Wuqi (Aaron)<br/>(<a href='mailto:wuqi.zhang@connect.ust.hk'>wuqi.zhang@connect.ust.hk</a>)</td>
+ 								<td><a href="https://github.com/CastleLab/COMP3021-2020Fall-PA1-Student-Version/tree/master/src/test/java/castle/comp3021/assignment">Testcases</a></br></td>	
+				<td>Oct 5, 23:55</td>
+                                <td>Solution</td>		
+							</tr>
+							<tr>
+								<td>Program Assignment 2: Adapted Jeson Mor - GUI version <br/> 
+                                <a style="text-decoration: underline" href="https://github.com/CastleLab/COMP3021-2020Fall-PA2-Student-Version">Assignment Description (PA2/readme.md), code skeleton (PA2), API documentation (PA2 Javadoc), and executable jar file (PA2 Obfuscated)</a><br/>
+                                <!-- <a style="text-decoration: underline" href="">Demo Schedule (Google SpreadSheet)</a></td> -->
+			<td><a href="https://github.com/CastleLab/COMP3021-2020Fall-PA2-Student-Version#submission-requirements">PA 2 Submission Requirement and Grading Scheme </a>
+			    </td>  
+                        <td>CAO, Jialun (Bella)<br/>(<a href='mailto:jcaoap@connect.ust.hk'>jcaoap@connect.ust.hk</a>)</td>
+								<td>-</td>
+								<td>Nov 10, 23:55</td>
+ 								<td>-</td>								
+							</tr>
+							<!-- <tr>
+								<td>Program Assignment 3: Pokemon <br/>
+                                <a style="text-decoration: underline" href="">Assignment Description (PA3/pa3.docs, PA3/pa3.pdf), code skeleton (Pokemon_PA3), and executable jar file (PA3 PA3_Obfuscated)</a></td>
+			<td><a href="">PA 3 Bonus Tasks</a><br/>
+                <a href="">PA 3 Revised Grading Scheme and Submission Details</a></td>  
+                        <td-
+                        </td>
+								<td>23:55 on 19 December 2019 (Thu)</td>
+ 								<td><a href="assignments/PA3/testCase.zip">Test Cases</a></td>								
+							</tr> -->
+						    <tr>
+								<td>Program Assignment 3: Adapted Jeson Mor - Multithreading version <br/> 
+                                <a style="text-decoration: underline" href="https://github.com/CastleLab/COMP3021-2020Fall-PA3-Student-Version">Assignment Description (PA3/readme.md), code skeleton (PA3), API documentation (PA3 Javadoc), and executable jar file (PA3 Obfuscated)</a><br/>
+                                </td>
+			<td><a href="https://github.com/CastleLab/COMP3021-2020Fall-PA3-Student-Version#student-tasks">PA 3 Submission Requirement and Grading Scheme </a></br>
+			    </td>  
+                        <td>CAO, Jialun (Bella)<br/>(<a href="mailto:jcaoap@connect.ust.hk">jcaoap@connect.ust.hk</a>)
+                        <br/>ZHANG, Wuqi (Aaron)(<a href="mailto:wuqi.zhang@connect.ust.hk">wuqi.zhang@connect.ust.hk</a>)</td>
+								<td>-</td>
+								<td>Dec. 10, 23:55</td>
+ 								<td><a href="https://github.com/CastleLab/COMP3021-2020Fall-PA3-Student-Version/tree/TA_version">solution</a>
+								</td>								
+							</tr>
+						</table>
+					</div>
+                </div>
+            </div>
+            Please submit your assignments to <strong><a href="cass.html">CASS</a></strong> by their deadlines. No late submissions will be accepted.
+            <a class="page-scroll" href="comp3021.html#honorcode">Plagiarism and penalty policies adopted by this course.</a></div>
+    </section>
+	
+	<!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">			
+            <div class="row">
+				<h3 class="titleheader">Quiz</h3>
+ 				<div class="col-lg-6">
+					<h4>General Information</h4>
+					<ul>						
+						<li>Please attend classes on time. Quiz will be conducted at the beginning of each class 
+                            starting from Week 3.</li>					
+						<!-- <li>Please remember to bring an iPRS device or a mobile phone that can access our iPRS system.</li> -->
+                        <li>There will be two questions in each class. The objective is to recap key concepts discussed in prior classes before introducing new concepts. It also helps assess how well these key concepts are understood.</li>
+                        <li>You will get full score for each question that you participate even the answer is incorrect.</li>
+                        <li>To accommodate the possibilities that you may be occasionally unable to participate the quizzes, no penalty will be exercised for missing the participation of not more than 10 questions.</li>
+                    </ul>
+					<!-- <p>Note:<br/>If you forget to bring devices to access the iPRS system, you may put down your name, student ID and emails with your answers of the questions on a sheet of paper, and hand the paper to me immediately at the end of the associated class.</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exam Section -->
+    <section id="exams" class="exam-section">
+        <div class="container">			
+            <div class="row">
+				<h3 class="titleheader">Exam</h3>
+                <!-- <div class="col-lg-6">
+					<h4>Midterm Exam // </h4>
+					<ul>
+						<li>Date: 19 October 2019 (Saturday)</li>
+						<li>Time: 10:00-12:00</li>
+						<li>Venue: Room 2404 and 2406</li>
+                        <li>Mode: Open notes (restricted to hard copies of course notes) examination</li>
+						<li>Scope:
+						  <ul> 
+						    <li>Introduction to Java Programming</li>
+							<li>Classes and Objects</li>
+                              <li>Unit Testing</li>
+							<li>Strings and Wrapper Classes</li>
+							<li>Inheritance and Polymorphism</li>
+                              <li>Exception Handling, Assertion and File I/O</li>
+                              <li>Abstract Class and Interface</li>
+						  </ul>
+						</li>
+                        <li><a href="notes/Midterm%20Review.pdf">Revision notes</li></a>
+					</ul>
+				</div> -->
+				<div class="col-lg-6">
+					<h4>Final Exam</h4>
+					<ul>
+						<li>Date: December 18, 2020</li>
+						<li>Time: 16:30 - 19:30</li>
+						<li>Venue: Canvas (using a desktop/laptop) and Zoom (using a mobile phone with video camera)</li>
+                        <li>Mode: Open notes (restricted to hard copies of course notes) examination</li>
+                        <li>Instructions: Examination instructions are available <a href="comp3021/exam/instructions.html">here</a>. A rehearsal of the examination will take place on December 9 (Wednesday) at 11am. Your meeting ID will be made available by then. Please refer to the Examination Meeting Link in the instructions for details.</li>
+						<li>Scope: 
+						  <ul>
+						    <li>Introduction to Java Programming</li>
+							<li>Classes and Objects</li>
+                              <li>Unit Testing</li>
+							<li>Strings and Wrapper Classes</li>
+							<li>Inheritance and Polymorphism</li>
+							<li>Exception Handling, Assertion and File I/O</li>
+							<li>Abstract Class and Interface</li>
+							<li>Graphical User Interface Programming</li>
+							<li>Event-Driven Programming (exclude the supplementary UI control and Multimedia note set)</li>
+							<li>Multi-threading Programming</li>
+							<li>Generics</li>
+							<li>Lambda Expressions</li>
+						  </ul>
+						</li>
+                        <!-- <li><a href="notes/finalreview.pdf">Revision notes</li></a> -->
+						<br/>
+
+					</ul>
+				</div>
+
+				<div class="col-lg-12">
+					<h4>Exam Papers of the Past Years</h4>
+					<p>Some past papers from the previous years will be provided before the midterm exam to serve as a practice. The scope of the exam in the previous semester is not necessary the same as that of the current semester. Moreover the format and level of difficulty will be similar but not necessarily the same as that of this semester.</p>
+					<div class="table-responsive regulartable">
+						<table class="table-hover">
+							<thead>
+								<th></th>
+								<th>Mid-Term Exams</th>
+							</thead>							
+							<tr>   
+								<td>2017S</td>
+								<td><a href="comp3021/past-papers/midterm-spring-2017-paper.pdf">Question</a> | <a href="comp3021/past-papers/midterm-spring-2017-sol.pdf">Solution</a></td>
+							</tr>
+							<tr>
+								<td>2016S</td>
+								<td><a href="comp3021/past-papers/midterm-spring-2016-paper.pdf">Question</a> | <a href="comp3021/past-papers/midterm-spring-2016-sol.pdf">Solution</a></td>
+							</tr>
+
+						</table>
+						<table class="table-hover">
+							<thead>
+								<th></th>
+								<th>Final Exam</th>
+							</thead>							
+							<tr>   
+								<td>2017F</td>
+								<td><a href="comp3021/past-papers/final-fall-2017-paper.pdf">Question</a> | <a href="comp3021/past-papers/final-fall-2017-sol.pdf">Solution</a>| <a href="comp3021/past-papers/MC-hints.txt">Hints to the MC questions</a> </td>
+							</tr>
+							</tr>
+
+						</table>
+					</div>		
+				</div>
+				<div class="col-lg-12">
+					<h4>General Information</h4>
+					<ul>						
+						<li>Please arrive on time</li>
+						<ul>
+							<li>If you arrive late, you will not get any extra time.</li>
+							<li>There will be no make-up exam. Please make sure to come in order to get marks for the exam.</li>
+						</ul>						
+						<li>Please remember to bring</li>
+						<ul>
+							<li>Your HKUST student ID card</li>
+							<li>Pens/pencils</li>
+						</ul>
+						<li>No electronic devices are allowed during physical examination, i.e., computers, PDAs, and mobile phones, etc. are not permitted and need to stay off and away from the desk.</li>
+					</ul>
+					<h4>Revising for the Exam</h4>
+					<ul>
+						<li>The exams are not a test of memorization. They are a test of understanding, so it is important to prepare for the exams:</li>
+						<ul>
+							<li>Go through all the notes and labs and make sure you understand them.</li>
+							<li>Study the review exercises.</li>
+							<li>Download and run the example files to understand them.</li>
+							<li>Try and write your own code/programs to help understand them.</li>
+						</ul>
+					</ul>
+					<p>Note:<br/>Examination will include multiple choice questions, short questions, and some coding questions. For examination preparation, you are encouraged to consolidate the concepts learnt by visiting our self-learning center in addition to our course and lab materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Self-learning Section -->
+    <section id="selflearning" class="self-learning-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Self-learning Center</h3>
+                <div class="col-lg-12">
+					<p>This section contains a list of online references, tutorials categorized by topics. They are optional, but they are useful to help you further extend the knowledge you have learned during the lectures, labs and assignments</p>
+					<ul>
+						<li>Introduction to Computers: Programs and Java
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=1">Quiz on Introduction to Computers, Programs, and Java</a> </li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c1/quiz.html">Quiz on Overview: The Mental Landscape</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c1/index.html">Overview: The Mental Landscape</a></li>
+								<li>(SUN) <a href="http://download.oracle.com/javase/tutorial/getStarted/intro/index.html">Lesson: The Java Technology Phenomenon</a></li>
+								<li>(SUN) <a href="http://download.oracle.com/javase/tutorial/getStarted/application/index.html">Lesson: A Closer Look at the "Hello World!" Application</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Elementary Programming
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=2">Quiz on Elementary Programming</a> </li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c2/quiz.html">Quiz on Names and Things</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c2/s2.html">Variables and the Primitive Types</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c2/s5.html">Details of Expressions</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Control Statements
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=3">Quiz on Control Statements </a> 
+								</li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=4">Quiz on Loop</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/quiz.html">Quiz on Control</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s1.html">Blocks, Loops, and Branches</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s3.html">The while and do..while Statements</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s4.html">The for Statement</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s5.html">The if Statement</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s6.html">The switch Statement</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Methods
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=5">Quiz on Methods</a> </li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c4/quiz.html">Quiz on Subroutines</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c4/index.html">Programming in the Large I: Subroutines</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c9/s1.html">Recursion</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Arrays
+							<ul>								
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=6">Quiz on Arrays</a> 
+								</li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c7/quiz.html">Quiz on Arrays</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c7/index.html">Arrays</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>String and Text I/O
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=9">Quiz on Strings</a></li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=14">Quiz on Text I/O</a> [May skip the quizzes on exception handling and start from Q14.35]</li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c2/s4.html">Text Input and Output</a></li>
+								<li>(SUN) <a href="http://java.sun.com/docs/books/tutorial/essential/io/index.html">Lesson: Basic I/O</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Objects, Classes and Basic Debugging Techniques
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=8">Quiz on Objects and Classes</a> </li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c5/index.html">Quiz on Objects and Classes</a></li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=10">Thinking in Objects</a> </li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=11">Inheritance and Polymorphism</a> </li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=15">Quiz on Abstract Classes and Interfaces</a> </li>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=16">Quiz on Event-Driven Programming</a> 
+								<li>(SUN) <a href="http://java.sun.com/docs/books/tutorial/java/concepts/QandE/questions.html">Questions and Exercises: Object-Oriented Programming Concepts</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c5/index.html">Programming in the Large II: Objects and Classes</a></li>
+								<li>(SUN) Lesson: <a href="http://java.sun.com/docs/books/tutorial/java/concepts/index.html">Object-Oriented Programming Concepts</a></li>
+								<li>(SUN) <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/index.html">Lesson: Classes and Objects</a></li>
+								<li>(SUN) <a href="http://java.sun.com/docs/books/tutorial/java/IandI/index.html">Lesson: Interfaces and Inheritance</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Exceptions
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=14">Quiz on Exceptions and Assertions</a> </li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c8/quiz.html">Quiz on Correctness and Robustness</a></li>
+								<li>(Javanotes) <a href="http://java.sun.com/docs/books/tutorial/essential/exceptions/QandE/questions.html">Questions and Exercises on Exceptions</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c3/s7.html">Introduction to Exceptions and try..catch</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c8/s3.html">Exceptions and try..catch</a></li>
+								<li>(Javanotes) <a href="http://java.sun.com/docs/books/tutorial/essential/exceptions/index.html">Lesson: Exceptions</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Multithreading
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=32">Quiz on Multithreading</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c8/s5.html">Introduction to Threads</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Networking
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=33">Quiz on Networking</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c11/quiz.html">Files and Quiz on Networking</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c11/s4.html">Networking</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c11/s5.html">Networking Programming and Threads</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Generics
+							<ul>
+								<li>(IJPC) <a href="http://tiger.armstrong.edu/selftest/selftest9e?chapter=21">Quiz on Generics</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c10/quiz.html">Quiz on Generic Programming and Collection Classes</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c10/s1.html">Generic Programming</a></li>
+								<li>(Javanotes) <a href="http://math.hws.edu/javanotes/c10/s5.html">Writing Generic Classes and Methods</a></li>
+								<li>(Javanotes) <a href="http://java.sun.com/docs/books/tutorial/extra/generics/index.html">Lesson: Generics</a></li>
+							</ul>
+							<br/>
+						</li>
+						<li>Lambdas and Streams
+							<ul>								
+								<li>(TutorialPoint) <a href="http://www.tutorialspoint.com/java8/java8_lambda_expressions.htm">Lambda Expressions</a></li>
+								<li>(Oracle) <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Lambda expressions</a></li>
+								<li>(Dr Dobbs) <a href="http://www.drdobbs.com/jvm/lambda-expressions-in-java-8/240166764">Lambda expressions in Java 8</a></li>
+								<li>(ViralPatel.net) <a href="http://viralpatel.net/blogs/lambda-expressions-java-tutorial/">Java 8 Lambda Expressions Tutorial with Examples</a></li>
+								<li>(Oracle) <a href="http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html">Processing Data with Java Streams</a></li>
+								<li>(ZeroTurnAround) <a href="http://zeroturnaround.com/rebellabs/java-8-explained-applying-lambdas-to-java-collections/">Using Filters, Maps, Streams and ForEach to apply Lambdas to Java Collections</a></li>
+								<li>(TutorialsPoint) <a href="http://www.tutorialspoint.com/java8/java8_streams.htm">Java 8 - Streams</a></li>
+							</ul>
+							<br/>
+						</li>
+					</ul>
+                </div>				
+                <div class="col-lg-12">
+				<h4>Java Tutorial (background for elementary Java programming)</h4>
+				<a href="https://beginnersbook.com/java-tutorial-for-beginners-with-examples/">Java Tutorial for Beginners with Examples</a>
+				</div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- FAQs Section -->
+    <section id="faqs" class="faqs-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">FAQs</h3>
+                <div class="col-lg-12">
+					<h4 style="padding-top:5px">How hard should I work?</h4>
+					<p>Some people say that a 3-unit course takes 8 to 9 hours/week. You should cultivate an independent learning habit. Here is a guideline:<p>
+					<ul>
+						<li>pre-study (15-30 minutes): what topic/materials will the coming lecture be covering?</li>
+						<li>attend class: The A+ students tell you they pay FULL attention in class and try to understand everything in class so that it is easy to review the class materials.
+							<ul>
+								<li>Our notes provide a guideline; also take your own notes</li>
+								<li>ask questions whenever you don't understand</li>
+							</ul>
+						</li>
+						<li>post-study (3 hours): re-reading the notes, book reading, try out all class examples, and more hands-on practices</li>
+					</ul>
+					<br/>
+					<h4 style="padding-top:5px">How do I learn a new programming language?</h4>
+					<p>Learning a programming language is similar to learning a human language (like Chinese, English, French, etc.) but only easier. Here are some recommendations:</p>
+					<ul>
+						<li>Read more: we are not going to follow the recommended textbook vigorously, and we can't give all the details in our lectures. Read the book!</li>
+						<li>Write more: there are only 2 programming assignments in this class. That is NOT enough! Think of problems around you and try to solve them by writing a computer program.</li>
+					</ul>
+					<br/>
+					<h4 style="padding-top:5px">How can I write a program effectively?</h4>
+					<p>You should spend a lot of time in THINKING (stay away from the computer) before you start WRITING. No matter how beautiful your codes are, if the method you use is wrong, they are still wrong codes. Here is a guideline:</p>
+					<ul>
+						<li>Planning (30 - 40%): algorithm design, code design, documentation</li>
+						<li>Coding (60 - 70%): writing code, debugging, testing</li>
+					</ul>
+					<br/>
+					<h4 style="padding-top:5px">What operating system do I use to program for this class?</h4>
+					<p>The labs will be conducted using the Windows operating system. However, we will be using the IntelliJ programming environment with the Java compiler. This is a multi-platform solution that you can set up on your PC, Mac, and Linux. For information on setting up IntelliJ, please refer to <a href="https://www.jetbrains.com/help/idea/install-and-set-up-product.html">this page</a> and <a href="https://www.jetbrains.com/help/idea/install-and-set-up-product.htm://www.jetbrains.com/help/idea/configuring-intellij-platform-plugin-sdk.html">this page</a>.</p>
+					<br/>
+					<h4 style="padding-top:5px">Where may I get help on programming problems?</h4>
+					<p>God help those who help themselves! But if you can't find your God, try the following, in that order:</p>
+					<ul>
+						<li>Email your question to your TAs. (We do most business using emails here in the university.) Please do not expect an answer right away.</li>
+						<li>Email your question to the instructor.</li>
+						<li>Don't expect the instructor and your TAs to be your debugger! Except for obvious bugs, we won't debug for you.</li>
+						<li>Find it on the Web.</li>
+					</ul>
+					<br/>
+					<h4 style="padding-top:5px">Where may I get more information about the computing facilities in CSE department?</h4>
+					<p>You can't afford to miss the following URL from our cssystem:</p><a href="http://cssystem.cse.ust.hk/home.php?docbase=UGuides&req_url=UGuides/index.html#ug">http://cssystem.cse.ust.hk/home.php?docbase=UGuides&req_url=UGuides/index.html#ug</a>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Honor Code Section -->
+    <section id="honorcode" class="honorcode-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Honor Code</h3>
+                <div class="col-lg-12">
+					<p>All assignments and examinations you submit for grading must represent the results of your own independent efforts. You can discuss methodologies with your classmates, but you must do the work independently. Students who are involved (including the copier and the helper) in an incident of plagiarism will receive a failing grade for the course and the incident will be reported for appropriate disciplinary actions.</p>
+					<ul>
+						<li>Anyone - both the copier and the copiee - caught cheating on their assignments will get zero marks for the assignment.</li>
+						<li>In addition, they both will get an additional 5% deduction from the final grade for the first time of cheating and an additional 10% deduction for the second time (i.e., for a total of 5%+10%=15% deduction)</li>						
+						<li>Cheating on Midterm or Final: an automatic FAIL</li>
+						<li>There can be additional disciplinary actions as well from the department and university</li>
+					</ul>
+					<p>Here are links to the <a href="http://tl.ust.hk/integrity/student-1.html">University's Honor Code</a> and the <a href="http://tl.ust.hk/integrity/student-5.html">University's Penalties for Cheating</a>.</p>
+					<p>If you are not sure what is considered plagiarism, please refer to the followings:
+					</p>
+					<ul style="color:red">
+						<li>Do NOT copy program codes from another student/person.</li>
+						<li>Do NOT look at the actual program codes of another student.</li>
+						<li>Do NOT share actual program codes with other students/people (by paper, emails, blogs, FB, Google Doc, etc.).</li>
+						<li>Do NOT give your program codes to other students who ask for it, and do not ask for a copy of their code either.</li>
+						<li>Do NOT post your program codes anywhere online.</li>
+						<li>Do NOT leave your finished/unfinished program codes unattended.</li>
+						<li>While we encourage discussion among students, you have to write codes on your own.</li>
+						<li>During discussion, you should NOT go to the details such that everyone will end up in the same code.</li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="row">
+				<h3 class="titleheader">Download</h3>
+                <div class="col-lg-12">
+					<h4>J2SE Resources</h4>
+					<p>
+						<ul>
+							<li><a href="https://jdk.java.net/14/">Official download site of JDK 14</a> (local copy for <a href="comp3021/software/openjdk-14.0.1_windows-x64_bin.zip">Windows</a> / <a href="comp3021/software/openjdk-14.0.2_osx-x64_bin.tar.gz">MacOS</a>).</li>
+							<li><a href="comp3021/jdk/HelloWorld.java">Sample Java program "HelloWorld.java"</a></li>
+							<!-- <li><a href="jdk/index.html">Installation guide</a></li> -->
+							<li><a href="https://docs.oracle.com/en/java/javase/14/docs/api/index.html">J2SE 14 API Specification</a></li>
+							<li><a href="https://download.java.net/java/early_access/jdk15/docs/api/">J2SE 15 (Early Access) API Specification</a></li>
+						</ul>
+					</p> 
+					<h4>IntelliJ Resources</h4>
+					<p>
+						<ul>
+							<li><a href="https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC">IntelliJ IDE (Community Edition) for Windows x64</a></li>
+							<li><a href="https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac&code=IIC">IntelliJ IDE (Community Edition) for Mac OS x64</a></li>
+							<li><a href="https://www.jetbrains.com/help/idea/install-and-set-up-product.html">Setup guide</a></li>
+                            <li><a href="https://www.jetbrains.com/help/idea/configuring-intellij-platform-plugin-sdk.html">Configuration guide</a></li>
+						</ul>
+					</p>
+					<h4>JavaFX Resources</h4>
+					<p>
+						<ul>
+							
+                            <li><a href="https://openjfx.io/openjfx-docs/#install-java">Getting started with JavaFX</a> (Pay attention to the section JavaFX and IntelliJ)</li>
+                            <li><a href="https://gluonhq.com/products/scene-builder/">JavaFX Scene Builder</a></li>
+							<li><a href="https://gluonhq.com/products/javafx/">JavaFX SDK</a> (select version 15)</li>
+							<li><a href="https://openjfx.io/javadoc/15/">JavaFX API Specification</a></li>
+						</ul>
+					</p>
+                    <h4>Programming Skills Resources</h4>
+					<p>
+						<ul>
+							<li><a href="https://www.hackerrank.com/domains/java/oop/difficulty/all/page/1">HackerRank</a></li>
+							<li><a href="https://www.codechef.com/">CodeChef</a></li>
+						</ul>
+					</p>
+					<!--<h4>Greenfoot Resources</h4>
+					<p>
+						<ul>
+							<li><a href="https://www.greenfoot.org/download">Greenfoot download page (Windows, Mac OS X, Debian, ... versions)</a></li>
+							<li><a href="software/COMP1022P_GreenfootStartUpProject.zip">Greenfoot Startup project</a></li>
+						</ul>
+					</p>-->
+				</div>
+            </div>
+        </div>
+    </section>
+	<footer class="page-footer">
+		<div class="container">
+            <div class="row">				
+				<div class="col-lg-12">
+					Last modified on <script type="text/javascript">document.write(document.lastModified);</script>
+					<br/>
+					Maintained by COMP3021 Teaching Team © 2020 HKUST Computer Science and Engineering
+				</div>
+			</div>
+		</div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="comp3021/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="comp3021/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="comp3021/js/jquery.easing.min.js"></script>
+    <script src="comp3021/js/scrolling-nav.js"></script>
+</body>
+
+</html>

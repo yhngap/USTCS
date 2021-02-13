@@ -1,0 +1,23 @@
+/* AUTOMATICALLY GENERATED ON Mon May 01 15:40:41 GMT+08:00 2006*/
+/* DO NOT EDIT */
+
+keystore "http://www.cs.ust.hk/~scc/comp201/certs.store", "JKS";
+
+grant codeBase "http://www.cs.ust.hk/~scc/comp201/awt/" {
+  permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+};
+
+grant codeBase "http://www.cs.ust.hk/~scc/comp201/file/" {
+  permission java.io.FilePermission "<<ALL FILES>>", "read";
+  permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+};
+
+grant codeBase "http://www.cs.ust.hk/~scc/comp201/socket/" {
+  permission java.net.SocketPermission "*", "connect";
+  permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+};
+
+grant signedBy "scc" {
+  permission java.net.SocketPermission "*", "connect";
+};
+

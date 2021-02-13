@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>COMP 3021 - Java Programming</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="https://course.cse.ust.hk/comp3021/lab_2020F/lab2/css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://course.cse.ust.hk/comp3021/lab_2020F/lab2/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/customized-table.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">COMP 3021 - Java Programming</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="index.html">Labs</a>
+                </li>
+            </ul>
+        </div>-->
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row" style="margin-top: 20px">
+        <div class="col-lg-12">
+            <h1 class="page-header">Lab 2
+                <small>From C++ to Java</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Side bar -->
+        <!--<div id="comp-side-bar"></div>-->
+        <!-- Content Column -->
+        <div class="col-md-10">
+            <h2>Overview</h2>
+            <ul>
+                <li><a href="index.html#Comparison">Similarities & Differences between C++ and Java</a></li>
+                <li><a href="index.html#Example">Lab File</a></li>
+                <li><a href="index.html#Description">Description</a></li>
+                <li><a href="index.html#Task">Task</a></li>
+                <li><a href="index.html#Deadline">Submission Details and Deadlines</a></li>
+                <li><a href="index.html#Grading">Grading Scheme</a></li>
+            </ul>
+
+            <hr>
+
+            <h2>Procedure</h2>
+            <br/>
+            <h4 id="Comparison">The following table gives the list of Similarities & Differences between C++ and
+                Java</h4>
+            <br/>
+            <div class="table">
+                <div class="row-header">
+                    <div width="20%" class="cell">Features</div>
+                    <div class="cell">C++</div>
+                    <div class="cell">Java</div>
+                </div>
+                <div class="row-odd">
+                    <div class="cell">Programming paradigms</div>
+                    <div class="cell">Hybrid of procedural and object-oriented (possible to declare variables/ function
+                        outside of any class)
+                    </div>
+                    <div class="cell">Object-oriented (everything is inside a class)</div>
+                </div>
+                <div class="row-even">
+                    <div class="cell">Comment</div>
+                    <div class="cell">// or /* something */</div>
+                    <div class="cell">// or /* something */ or /** for javadoc */</div>
+                </div>
+                <div class="row-odd">
+                    <div class="cell">Operators (e.g. +, -, *, /)</div>
+                    <div class="cell">Same</div>
+                    <div class="cell">Same</div>
+                </div>
+                <div class="row-even">
+                    <div class="cell">Control Construct (e.g. if-else, for, while, etc.)</div>
+                    <div class="cell">-</div>
+                    <div class="cell">Same with C++ (except Java also has "for-each" loop)</div>
+                </div>
+                <div class="row-odd">
+                    <div class="cell">Data types</div>
+                    <div class="cell">-</div>
+                    <div class="cell">Similar but not exactly the same type name (e.g. C++: bool vs. Java: boolean)
+                    </div>
+                </div>
+                <div class="row-even">
+                    <div class="cell">Type-checking and type requirements</div>
+                    <div class="cell">-</div>
+                    <div class="cell">Tighter (e.g., conditional expression can be <b>only boolean</b>, not integral)
+                    </div>
+                </div>
+                <div class="row-odd">
+                    <div class="cell">Reference Types</div>
+                    <div class="cell">It refers to an alias of another variable</div>
+                    <div class="cell">It's similar to pointer in C++, but no * is needed for declaration, no arithmetic
+                        can be done (e.g. no x++, where x is a reference variable), and no dereference
+                    </div>
+                </div>
+                <div class="row-even">
+                    <div class="cell">Instantiation using the keyword "new"</div>
+                    <div class="cell">Allowed for all types</div>
+                    <div class="cell"><b>Not allowed</b> for primitive types; <b>It's a MUST</b> for non-primitive types
+                    </div>
+                </div>
+                <div class="row-odd">
+                    <div class="cell">Memory Allocation</div>
+                    <div class="cell">Need to de-allocate dynamically allocated memory</div>
+                    <div class="cell">No need ("Garbage Collection")</div>
+                </div>
+                <div class="row-even">
+                    <div class="cell">GUI I/O</div>
+                    <div class="cell">No built-in support</div>
+                    <div class="cell">With built-in support of platform-independent set of GUI tools through packages
+                    </div>
+                </div>
+            </div>
+            <div>Please feel free to refer to Lecture Note <a href="../../../comp3021.html#lectures">1-Introduction</a>
+                for more detailed explanation.
+            </div>
+            <hr>
+
+            <h4 id="Example">Lab Files</h4>
+            <br/>
+            <ul>
+                <li><a href="c++/main.cpp">C++ file</a>: Download the given sample C++ program for performing a
+                    quick sort on an array of integers.<br/>
+                <li><a href="lab2.zip">Lab2 project</a> You should import this project to your intellij. It has
+                    two source files:
+                    <ul>
+                        <li>src/Main.java: You need to implement TODO in this file, so that your Java project
+                            should run exactly like the compiled C++ program.
+                        </li>
+                        <li>test/QuickSortTests.java: Make sure all the tests are passed.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h4 id="Description">Description</h4>
+            <br/>
+            <ol>
+                <li><b>Note: unlike C++, each variable and method of a Java program needs to be defined in a Java class.
+                    No variable nor method could be defined independently out of all the classes in Java.</b></li>
+                <br/>
+                <li>The given C++ program is a quick sorting program with 4 functions (<i>swap(),
+                    partition(), quickSort() and printArray()</i>) and the <i>main()</i> function.
+                </li>
+                <br/>
+                <li>You are required to read the given C++ code and convert it into the Java code that works exactly in
+                    the same way.
+                </li>
+                <br/>
+                <br>
+                <li>As mentioned earlier, every variable and method in Java is declared inside a class, so we first
+                    start with creating a class:
+                    <br/><br/>
+                    &emsp;<b>public class Main { ... }</b></li>
+                <br/>
+                <li>For the global functions in the C++ program, we declare it as a static function of Main class,
+                    where <b>static</b> is the keyword explained here <sup><a
+                            href="http://beginnersbook.com/2013/05/static-variable/">explanation</a></sup>.
+                </li>
+                <br/>
+                <li>Then we need to define the methods <b><i>swap(), partition(), quickSort() and printArray</i></b> and
+                    <b><i>main()</i></b> according to the C++ program. All these methods are needed to start with <b>public
+                        static void</b> in their headers
+                    (i.e. they should be class methods), otherwise you will need to create an object of the class Lab2
+                    before you can call the methods. <br/><br/> <br><br>
+                    <b>Note: You are required to keep the method name in camel-case</b>.
+                </li>
+            </ol>
+
+            <hr>
+
+            <h4>&emsp;Start</h4>
+            <br/>
+            <ol>
+                <li>We have already created Main class together with <b>quickSort(), printArray() and main()</b>
+                    method for you.
+                </li>
+                <br/>
+                <li>
+                    You are required to complete the Main class so that a quick sort algorithm is implemented.
+                </li>
+                <br>
+
+                <li>
+                    After your implementation, you should run the provided tests in <b>QuickSortTests</b> class.
+                    Be sure to pass all the tests before submission.
+                </li>
+                <br/>
+                <li>It is worthwhile to mention that in C++, the main() function always starts with int main(), in Java,
+                    it always starts like the below:<br><br>
+                    <span style="background-color: #FFFF00"><b>public static void main (String[] args)</b></span>
+                    <br><br> As you may notice yourself, no value could be returned by the main() method in Java.
+                </li>
+                <br/>
+                <li>In C++ we can use <b>sizeof(A)/sizeof(*A)</b> in the main() function to determine the number of
+                    elements in A[] (must not do this after you have passed A as a parameter to a function, because A
+                    will then be reduced to a
+                    pointer, and sizeof() will not be able to get the number of bytes occupied by the whole array), in
+                    Java we can simply use the <b>length</b> attribute on any array A[].<br><br>
+                <li>In C++ the statement <b>int A[10];</b>, will create an int array A[] for holding 10 integers. In
+                    Java, an array is an object (inherits from the java.lang.Object class) we need to use the <b>new</b>
+                    keyword to create an array
+                    as shown below: <br><br>
+                    <span style="background-color: #FFFF00"><b>int [] A=new int[10];</b></span></li>
+                <br/>
+
+
+            </ol>
+
+            <hr>
+
+            <h2 id="Task">Task</h2>
+            <br/>
+            <ol>
+                <li>According to the given C++ program, main.cpp, implement all TODO tasks in Main.java.
+                </li>
+                <li>Make sure your Java program outputs and behaves identically to the C++ program.</li>
+                <li>Make sure all the tests can pass.</li>
+            </ol>
+
+            <hr>
+            <h2 id="Deadline">Submission Details and Deadlines</h2>
+            <br/>
+            You have around one week (6 days) to complete the given task and submit the file <span style="color:red">
+            "Main.java"</span>
+            to CASS. Make sure you submit correctly to
+            the course "COMP3021",and "Lab2". You may check out this <a
+                href="http://cssystem.cse.ust.hk/UGuides/cass/student.html">link</a> for the guidelines of using CASS.
+            The submission deadline is:
+            <br/><br/>
+            <ul>
+                <li>September 22 (Tuesday) 23:55</li>
+                <br>
+            </ul>
+            <br>
+            <h2 id="Grading">Grading Scheme</h2><br>
+            You may get 2 marks for this lab. <br><br>
+            <ul>
+                <li>1 mark for attendance at least 15 minutes.</li>
+                <li>1 mark for successfully completing the lab task before the deadline and passing all tests</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>COMP3021 - Fall 2020 - HKUST</p>
+            </div>
+        </div>
+    </footer>
+    </b>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="https://course.cse.ust.hk/comp3021/lab_2020F/lab2/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://course.cse.ust.hk/comp3021/lab_2020F/lab2/js/bootstrap.min.js"></script>
+
+<script src="https://course.cse.ust.hk/comp3021/lab_2020F/lab2/js/index.js"></script>
+</body>
+
+</html>

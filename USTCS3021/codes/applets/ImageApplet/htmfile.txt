@@ -1,0 +1,1 @@
+<APPLET CODE="ImageApplet.class" ARCHIVE="ImageApplet.jar, swing.jar" WIDTH=400 HEIGHT=300></APPLET>

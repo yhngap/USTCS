@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter V4.1 2004 by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Inheritance&nbsp;of&nbsp;static&nbsp;fields</font><br/>
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.*;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">StaticInherit</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[]&nbsp;</font><font color="#000000">args</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">Manager&nbsp;boss&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Manager</font><font color="#000000">(</font><font color="#2a00ff">&#34;Carl&nbsp;Cracker&#34;</font><font color="#000000">,&nbsp;</font><font color="#990000">75000</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">1987</font><font color="#000000">,</font><font color="#990000">12</font><font color="#000000">,</font><font color="#990000">15</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">boss.setSecretaryName</font><font color="#000000">(</font><font color="#2a00ff">&#34;Harry&nbsp;Hacker&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Employee</font><font color="#000000">[]&nbsp;</font><font color="#000000">staff&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Employee</font><font color="#000000">[</font><font color="#990000">3</font><font color="#000000">]</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">staff</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">=&nbsp;boss;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">staff</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Employee</font><font color="#000000">(</font><font color="#2a00ff">&#34;Harry&nbsp;Hacker&#34;</font><font color="#000000">,&nbsp;</font><font color="#990000">35000</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">1989</font><font color="#000000">,</font><font color="#990000">10</font><font color="#000000">,</font><font color="#990000">1</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">staff</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Employee</font><font color="#000000">(</font><font color="#2a00ff">&#34;Tony&nbsp;Tester&#34;</font><font color="#000000">,&nbsp;</font><font color="#990000">38000</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">1990</font><font color="#000000">,</font><font color="#990000">3</font><font color="#000000">,</font><font color="#990000">15</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;Number&nbsp;of&nbsp;Employee&nbsp;created&#34;&nbsp;</font><font color="#000000">+&nbsp;</font><font color="#2a00ff">&#34;&nbsp;&nbsp;&#34;</font><font color="#000000">+</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Employee.getNumCreated</font><font color="#000000">()&nbsp;)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;Number&nbsp;of&nbsp;Managers&nbsp;created&#34;&nbsp;</font><font color="#000000">+&nbsp;</font><font color="#2a00ff">&#34;&nbsp;&nbsp;&#34;&nbsp;</font><font color="#000000">+</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Manager.getNumCreated</font><font color="#000000">()&nbsp;)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">Employee</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">Employee</font><font color="#000000">(</font><font color="#000000">String&nbsp;n,&nbsp;</font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">s,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">year,&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">month,&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">day</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">name&nbsp;=&nbsp;n;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">salary&nbsp;=&nbsp;s;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">GregorianCalendar&nbsp;calendar</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">GregorianCalendar</font><font color="#000000">(</font><font color="#000000">year,&nbsp;month&nbsp;-&nbsp;</font><font color="#990000">1</font><font color="#000000">,&nbsp;day</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;GregorianCalendar&nbsp;uses&nbsp;0&nbsp;for&nbsp;January</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">hireDay&nbsp;=&nbsp;calendar.getTime</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">numCreated++;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">print</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#000000">name&nbsp;+&nbsp;</font><font color="#2a00ff">&#34;&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;salary&nbsp;+&nbsp;</font><font color="#2a00ff">&#34;&nbsp;&#34;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">+&nbsp;hireYear</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">raiseSalary</font><font color="#000000">(</font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">byPercent</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">salary&nbsp;*=&nbsp;</font><font color="#990000">1&nbsp;</font><font color="#000000">+&nbsp;byPercent&nbsp;/&nbsp;</font><font color="#990000">100</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">hireYear</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">GregorianCalendar&nbsp;calendar</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">GregorianCalendar</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">calendar.setTime</font><font color="#000000">(</font><font color="#000000">hireDay</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">calendar.YEAR;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">getNumCreated</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">numCreated;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">String&nbsp;name;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">salary;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">Date&nbsp;hireDay;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">numCreated&nbsp;=</font><font color="#990000">0</font><font color="#000000">;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">Manager&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Employee</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">n&nbsp;the&nbsp;employee's&nbsp;name</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">s&nbsp;the&nbsp;salary</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">year&nbsp;the&nbsp;hire&nbsp;year</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">month&nbsp;the&nbsp;hire&nbsp;month</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">day&nbsp;the&nbsp;hire&nbsp;day</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">Manager</font><font color="#000000">(</font><font color="#000000">String&nbsp;n,&nbsp;</font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">s,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">year,&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">month,&nbsp;</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">day</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">(</font><font color="#000000">n,&nbsp;s,&nbsp;year,&nbsp;month,&nbsp;day</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">raiseSalary</font><font color="#000000">(</font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">byPercent</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;add&nbsp;1/2%&nbsp;bonus&nbsp;for&nbsp;every&nbsp;year&nbsp;of&nbsp;service</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">bonus&nbsp;=&nbsp;</font><font color="#990000">0.5&nbsp;</font><font color="#000000">*&nbsp;</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">GregorianCalendar</font><font color="#000000">()</font><font color="#000000">.YEAR&nbsp;-&nbsp;hireYear</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.raiseSalary</font><font color="#000000">(</font><font color="#000000">byPercent&nbsp;+&nbsp;bonus</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setSecretaryName</font><font color="#000000">(</font><font color="#000000">String&nbsp;n</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">secretaryName&nbsp;=&nbsp;n;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;getSecretaryName</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">secretaryName;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">String&nbsp;secretaryName;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><font color="#ffffff">
+</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>

@@ -1,0 +1,2 @@
+<APPLET  CODE = "ResourceTest.class" ARCHIVE = "ResourceTest.jar" WIDTH = 300 HEIGHT = 200 >
+</APPLET>

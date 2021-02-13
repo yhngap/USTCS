@@ -1,0 +1,225 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (WinNT; I) [Netscape]">
+   <title>Java Server(TM) Web Development Kit Readme</title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<h1>
+JavaServer Web Development Kit (JSWDK) 1.0.1</h1>
+JSWDK released: October, 1999
+<p>Readme last update: September 21, 1999
+<p>Please read the <a href="https://course.cse.ust.hk/comp3021/codes/ServletJsp/LICENSE">License Agreement</a>&nbsp; that applies
+to this software.
+<p>The JavaServer<sup>TM</sup> Web Development Kit (JSWDK) is the reference
+implementation for JSP and the Java<sup>TM</sup> Servlet API. This release
+of JSWDK supports JSP 1.0 and the Servlet API 2.1.
+<p>The JSWDK contains a simple servlet engine for developing and testing
+servlets, the <tt>javax.servlet</tt> and <tt>javax.servlet.jsp</tt> package
+sources (which are the JSP and Servlet APIs), and API documentation. The
+JSWDK also contains a simple HTTP web server and a JSP-enabled engine.
+<h3>
+Requirements</h3>
+
+<h4>
+Operating System</h4>
+This release has been tested on the following platforms:
+<ul>
+<li>
+Windows NT 4.0 Service Pack 4</li>
+
+<li>
+Solaris 2.6 and 2.7</li>
+
+<li>
+Windows 98</li>
+
+<li>
+Red Hat Linux 6.0 (JDK from http://www.blackdown.org)</li>
+</ul>
+
+<h4>
+JDK version</h4>
+
+<ul>
+<li>
+<a href="http://java.sun.com/products/jdk/1.1/index.html">JDK 1.1.8</a></li>
+
+<li>
+<a href="http://java.sun.com/products/jdk/1.2.1/index.html">JDK 1.2.2</a></li>
+</ul>
+
+<h4>
+Environment variables</h4>
+
+<ol>
+<li>
+Add the full path of the JDK bin directory (where the <tt>java</tt> command
+is located) to the PATH variable.</li>
+
+<br>For Windows NT:
+<p>To set the path permanently, select Start -> Control Panel. Select System,
+select Environment, and look for "Path" in the User Variables and System
+Variables.
+<p>For Window 98 and Windows 95:
+<p>Open and edit the <tt>AUTOEXEC.BAT</tt> file and add or change the PATH
+statement. To do so, click Start-> Run and enter Sysedit.
+<li>
+If you are using JDK 1.2 you also need to do one of the following:</li>
+
+<ol>
+<li>
+Add the <tt>tools.jar</tt> (from the JDK lib directory) file to your CLASSPATH
+variable</li>
+
+<li>
+Set JAVA_HOME to the JDK directory</li>
+</ol>
+</ol>
+
+<h3>
+Installing JSWDK</h3>
+Once you have downloaded the file, move it to the location where you want
+to install the JSWDK and extract the contents of the file. (In Windows,
+simply use Explorer and double-click on the icon for the downloaded file.
+You will need a WinZip-compatible decompression utility.)
+<p>This process automatically creates a subdirectory (by default, <tt>jswdk-1.0</tt>).
+<h3>
+Starting and Stopping the Server</h3>
+The JSWDK includes Unix shell scripts and Windows batch files to start
+and stop the server. These are in the main JSWDK directory. In order to
+view the examples and the default JSWDK page, these scripts need to be
+run from the main JSWDK directory.
+<ul>
+<li>
+For Windows: To start the server, open the directory with Windows Explorer
+and double-click on <tt>STARTSERVER.BAT</tt>.</li>
+
+<br>&nbsp;
+<p>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<p>(If this doesn't work, you can try opening a DOS window and running
+it from there.)
+<p>To stop the server, double-click on the <tt>STOPSERVER.BAT</tt> file.
+For graceful shutdown, use this instead of simply closing the STARTSERVER
+window..
+<li>
+For UNIX: Run the startserver shell script to start the server:</li>
+
+<blockquote><tt>% startserver</tt></blockquote>
+The <tt>stopserver</tt> shell script stops the server. For graceful shutdown,
+use this instead of simply killing the server process.</ul>
+
+<h3>
+Accessing the Server</h3>
+Use any web browser to access the following address:
+<blockquote><tt>http://localhost:8080</tt>, or <tt>http://&lt;your-host-name>:8080</tt></blockquote>
+This lets you browse the server. It includes links to Javadoc documentation
+as well as JSP and Servlet examples.
+<p>You can change the default port from 8080 - see Configuring the Server
+below.
+<h3>
+Configuring the Server</h3>
+The <tt>webserver.xml</tt> file (which is in the base JSWDK directory)
+lets you adjust server and application settings, including default port
+and web application attributes such as document base location and URI request
+mapping.
+<p>The syntax of the different options is described in the file itself.
+<p>To change the default port for the webserver from 8080 to 80 (or some
+other number), add the <tt>port="&lt;portnum>"</tt> statement to the <tt>&lt;Service></tt>
+tag:
+<p>For example:
+<blockquote>
+<pre>&lt;WebServer id="webServer"></pre>
+
+<pre>&lt;Service id="service0" port="80"></pre>
+
+<pre>&lt;WebApplication id="examples" mapping="/examples" docBase="examples"/></pre>
+
+<pre>&lt;/Service></pre>
+
+<pre>&lt;/WebServer></pre>
+</blockquote>
+See the contents of the file for the other options that you can edit.
+<h3>
+Known Bugs/Limitations</h3>
+
+<ol>
+<li>
+Automatic servlet reloading is not implemented in JSWDK.</li>
+
+<li>
+The JSP engine treats buffer size in units of characters instead of bytes.</li>
+</ol>
+
+<h3>
+Troubleshooting</h3>
+
+<ul>
+<li>
+Out of Environment Space error message</li>
+
+<br>On Windows 95/98 systems, you may see an "Out of Environment Space"
+error message when starting the server. This happens if Windows provides
+too small a space for environment variables. To work around this limitation:</ul>
+
+<ol>
+<li>
+Close the DOS window (the error can corrupt its CLASSPATH variable).</li>
+
+<li>
+Open a new DOS window.</li>
+
+<li>
+Click on the MS-DOS icon at the top left of the window.</li>
+
+<li>
+Select the Properties option.</li>
+
+<li>
+Click on the Memory tab.</li>
+
+<li>
+Adjust the "Initial Environment" drop-down box from "Auto" to "2816".</li>
+
+<li>
+Click OK.</li>
+
+<li>
+Start the server.</li>
+</ol>
+
+<ul>
+<li>
+Truncated file names</li>
+
+<br>If you are not using a standard, WinZip-compatible decompression tool,
+it may truncate file names to eight characters on decompressing the files.
+(For example, the startserver.bat file will now be startser.bat.) In this
+case, the scripts, batch files and links will not work. Make sure that
+your unzip utility will support file names longer than eight characters.
+<br>&nbsp;
+<br>&nbsp;
+<li>
+Unhandled error! error message</li>
+
+<br>If the startserver.bat file cannot find the tools.jar file when compiling
+JSP pages, it will report an error message like the following:
+<br>&nbsp;
+<pre>Unhandled error! You might want to consider having an error page to report such errors more gracefully.</pre>
+
+<pre>Java.lang.NoClasssDefFoundError: sun/tools/javac/Main</pre>
+
+<p><br>To fix this problem, add the tools.jar file from the JDK LIB directory
+to the CLASSPATH variable in the starterserver.bat file, or simply add
+it to the CLASSPATH environment variable.</ul>
+
+</body>
+</html>

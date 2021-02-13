@@ -1,0 +1,2 @@
+<APPLET CODE="NHWApplet.class" WIDTH=30 HEIGHT=30>
+</APPLET>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Test</TITLE>
+<LINK REL=STYLESHEET
+      HREF="My-Style-Sheet.css"
+      TYPE="text/css">
+</HEAD>
+
+<BODY BGCOLOR="#3333FF" TEXT="#000000" LINK="#0000EE"
+      VLINK="#551A8B" ALINK="#FF0000">
+
+<CENTER>
+<TABLE BORDER=5 BGCOLOR="#EF8429">
+  <TR><TH CLASS="TITLE">
+     Plugin Test</TABLE>
+</CENTER>
+<P>
+
+
+<jsp:forward page="announce.html" />
+
+</BODY>
+</HTML>
+

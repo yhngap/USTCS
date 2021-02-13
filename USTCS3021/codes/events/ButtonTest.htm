@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter V4.1 2004 by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">1.32&nbsp;2004-05-04</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Cay&nbsp;Horstmann</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.event.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.*;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">ButtonTest</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[]&nbsp;</font><font color="#000000">args</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ButtonFrame&nbsp;frame&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ButtonFrame</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">frame.setDefaultCloseOperation</font><font color="#000000">(</font><font color="#000000">JFrame.EXIT_ON_CLOSE</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">frame.setVisible</font><font color="#000000">(</font><font color="#7f0055"><b>true</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">A&nbsp;frame&nbsp;with&nbsp;a&nbsp;button&nbsp;panel</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">ButtonFrame&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">JFrame</font><br/>
+<font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">ButtonFrame</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setTitle</font><font color="#000000">(</font><font color="#2a00ff">&#34;ButtonTest&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setSize</font><font color="#000000">(</font><font color="#000000">DEFAULT_WIDTH,&nbsp;DEFAULT_HEIGHT</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;add&nbsp;panel&nbsp;to&nbsp;frame</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ButtonPanel&nbsp;panel&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ButtonPanel</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">panel</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">DEFAULT_WIDTH&nbsp;=&nbsp;</font><font color="#990000">300</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">DEFAULT_HEIGHT&nbsp;=&nbsp;</font><font color="#990000">200</font><font color="#000000">;&nbsp;&nbsp;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">A&nbsp;panel&nbsp;with&nbsp;three&nbsp;buttons.</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">ButtonPanel&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">JPanel</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">ButtonPanel</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;create&nbsp;buttons</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;yellowButton&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Yellow&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;blueButton&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Blue&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;redButton&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Red&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;add&nbsp;buttons&nbsp;to&nbsp;panel</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">yellowButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">blueButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">redButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;create&nbsp;button&nbsp;actions</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ColorAction&nbsp;yellowAction&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ColorAction</font><font color="#000000">(</font><font color="#000000">Color.YELLOW</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ColorAction&nbsp;blueAction&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ColorAction</font><font color="#000000">(</font><font color="#000000">Color.BLUE</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ColorAction&nbsp;redAction&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ColorAction</font><font color="#000000">(</font><font color="#000000">Color.RED</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;associate&nbsp;actions&nbsp;with&nbsp;buttons</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">yellowButton.addActionListener</font><font color="#000000">(</font><font color="#000000">yellowAction</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blueButton.addActionListener</font><font color="#000000">(</font><font color="#000000">blueAction</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">redButton.addActionListener</font><font color="#000000">(</font><font color="#000000">redAction</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">An&nbsp;action&nbsp;listener&nbsp;that&nbsp;sets&nbsp;the&nbsp;panel's&nbsp;background&nbsp;color.&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;class&nbsp;</b></font><font color="#000000">ColorAction&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">ActionListener</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">ColorAction</font><font color="#000000">(</font><font color="#000000">Color&nbsp;c</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">backgroundColor&nbsp;=&nbsp;c;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;event</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setBackground</font><font color="#000000">(</font><font color="#000000">backgroundColor</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">Color&nbsp;backgroundColor;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><font color="#ffffff">
+</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>

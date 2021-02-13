@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Reusing JavaBeans in JSP</TITLE>
+<LINK REL=STYLESHEET
+      HREF="My-Style-Sheet.css"
+      TYPE="text/css">
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<TABLE BORDER=5>
+  <TR><TH CLASS="TITLE">
+      Reusing JavaBeans in JSP</TABLE>
+</CENTER>
+<P>
+
+<jsp:useBean id="test" class="jspBean201.SimpleBean" />
+<jsp:setProperty name="test" 
+                 property="message" 
+                 value="Hello WWW" />
+             
+<H1>Message: <I>
+<jsp:getProperty name="test" property="message" />
+</I></H1>
+             
+</BODY>
+</HTML>

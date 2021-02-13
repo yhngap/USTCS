@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter V4.1 2004 by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Nevin&nbsp;Zhang</font><br/>
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.event.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.border.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.net.*;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">ShowPageApplet&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">JApplet</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">ActionListener</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">init</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;UI&nbsp;components</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Container&nbsp;contentPane&nbsp;=&nbsp;getContentPane</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;</font><font color="#000000">JLabel&nbsp;lab&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;Password&nbsp;required&#34;</font><font color="#000000">,&nbsp;SwingConstants.CENTER</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">contentPane.add</font><font color="#000000">(</font><font color="#2a00ff">&#34;North&#34;</font><font color="#000000">,&nbsp;lab</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JPanel&nbsp;p1&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JPanel</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.setLayout</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">GridLayout</font><font color="#000000">(</font><font color="#990000">2</font><font color="#000000">,&nbsp;</font><font color="#990000">2</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.add</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;User&nbsp;name:&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.add</font><font color="#000000">(</font><font color="#000000">username&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JTextField</font><font color="#000000">(</font><font color="#2a00ff">&#34;your&nbsp;account&nbsp;name&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.add</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;Password:&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.add</font><font color="#000000">(</font><font color="#000000">password&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JPasswordField</font><font color="#000000">(</font><font color="#2a00ff">&#34;***&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">contentPane.add</font><font color="#000000">(</font><font color="#2a00ff">&#34;Center&#34;</font><font color="#000000">,&nbsp;p1</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Border&nbsp;b1&nbsp;=&nbsp;BorderFactory.createEmptyBorder</font><font color="#000000">(</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">10</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p1.setBorder</font><font color="#000000">(&nbsp;</font><font color="#000000">b1&nbsp;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Panel&nbsp;p3&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Panel</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">okButton&nbsp;=&nbsp;addButton</font><font color="#000000">(</font><font color="#000000">p3,&nbsp;</font><font color="#2a00ff">&#34;Ok&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">clearButton&nbsp;=&nbsp;addButton</font><font color="#000000">(</font><font color="#000000">p3,&nbsp;</font><font color="#2a00ff">&#34;Clear&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">gobackButton&nbsp;=&nbsp;addButton</font><font color="#000000">(</font><font color="#000000">p3,&nbsp;</font><font color="#2a00ff">&#34;Go&nbsp;Back&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">contentPane.add</font><font color="#000000">(</font><font color="#2a00ff">&#34;South&#34;</font><font color="#000000">,&nbsp;p3</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;helper&nbsp;method</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;addButton</font><font color="#000000">(</font><font color="#000000">Container&nbsp;c,&nbsp;String&nbsp;name</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;button&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#000000">name</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">button.addActionListener</font><font color="#000000">(</font><font color="#7f0055"><b>this</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">c.add</font><font color="#000000">(</font><font color="#000000">button</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">button;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;handling&nbsp;event</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;evt</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><font color="#000000">Object&nbsp;source&nbsp;=&nbsp;evt.getSource</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">source&nbsp;==&nbsp;okButton</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">psswd&nbsp;=&nbsp;password.getPassword</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(&nbsp;</font><font color="#000000">psswd.length&nbsp;==</font><font color="#990000">3&nbsp;</font><font color="#000000">&amp;&amp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">psswd</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">==&nbsp;</font><font color="#990000">'2'&nbsp;</font><font color="#000000">&amp;&amp;&nbsp;psswd</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">==&nbsp;</font><font color="#990000">'0'&nbsp;</font><font color="#000000">&amp;&amp;&nbsp;psswd</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]</font><font color="#000000">==</font><font color="#990000">'1'&nbsp;</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try&nbsp;</b></font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;***&nbsp;ask&nbsp;browser&nbsp;to&nbsp;show&nbsp;a&nbsp;page&nbsp;*******</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;s=</font><font color="#2a00ff">&#34;http://www.yahoo.com/&#34;</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">URL&nbsp;u&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">URL</font><font color="#000000">(</font><font color="#000000">s</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">getAppletContext</font><font color="#000000">()</font><font color="#000000">.showDocument</font><font color="#000000">(</font><font color="#000000">u</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>catch</b></font><font color="#000000">(&nbsp;</font><font color="#000000">MalformedURLException&nbsp;e</font><font color="#000000">)&nbsp;{}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">password.setText</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">username.setText</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else&nbsp;if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">source&nbsp;==&nbsp;clearButton</font><font color="#000000">)&nbsp;{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">password.setText</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">username.setText</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else&nbsp;if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">source&nbsp;==&nbsp;gobackButton</font><font color="#000000">)&nbsp;{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try&nbsp;</b></font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;***&nbsp;ask&nbsp;browser&nbsp;to&nbsp;show&nbsp;a&nbsp;page&nbsp;*******</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;s=</font><font color="#2a00ff">&#34;http://www.cs.ust.hk/course/comp201&#34;</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">URL&nbsp;u&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">URL</font><font color="#000000">(</font><font color="#000000">s</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">getAppletContext</font><font color="#000000">()</font><font color="#000000">.showDocument</font><font color="#000000">(</font><font color="#000000">u</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>catch</b></font><font color="#000000">(&nbsp;</font><font color="#000000">MalformedURLException&nbsp;e</font><font color="#000000">)&nbsp;{}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JMenuItem&nbsp;connectItem;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JMenuItem&nbsp;exitItem;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JButton&nbsp;okButton;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JButton&nbsp;clearButton;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JButton&nbsp;gobackButton;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JPasswordField&nbsp;password;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JTextField&nbsp;username;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff"></font><font color="#ffffff">
+</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>

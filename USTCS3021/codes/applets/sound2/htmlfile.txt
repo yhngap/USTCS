@@ -1,0 +1,2 @@
+<APPLET  CODE = "TmpApplet.class" WIDTH = 150 HEIGHT = 35 >
+</APPLET>

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter V4.1 2004 by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">1.32&nbsp;2004-05-05</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Cay&nbsp;Horstmann</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.event.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.*;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">DataExchangeTest</font><br/>
+<font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[]&nbsp;</font><font color="#000000">args</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DataExchangeFrame&nbsp;frame&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">DataExchangeFrame</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">frame.setDefaultCloseOperation</font><font color="#000000">(</font><font color="#000000">JFrame.EXIT_ON_CLOSE</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">frame.setVisible</font><font color="#000000">(</font><font color="#7f0055"><b>true</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">A&nbsp;frame&nbsp;with&nbsp;a&nbsp;menu&nbsp;whose&nbsp;File-&gt;Connect&nbsp;action&nbsp;shows&nbsp;a</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">password&nbsp;dialog.</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">DataExchangeFrame&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">JFrame&nbsp;</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">DataExchangeFrame</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setTitle</font><font color="#000000">(</font><font color="#2a00ff">&#34;DataExchangeTest&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setSize</font><font color="#000000">(</font><font color="#000000">DEFAULT_WIDTH,&nbsp;DEFAULT_HEIGHT</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;construct&nbsp;a&nbsp;File&nbsp;menu</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JMenuBar&nbsp;mbar&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JMenuBar</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setJMenuBar</font><font color="#000000">(</font><font color="#000000">mbar</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JMenu&nbsp;fileMenu&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JMenu</font><font color="#000000">(</font><font color="#2a00ff">&#34;File&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">mbar.add</font><font color="#000000">(</font><font color="#000000">fileMenu</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;add&nbsp;Connect&nbsp;and&nbsp;Exit&nbsp;menu&nbsp;items</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JMenuItem&nbsp;connectItem&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#2a00ff">&#34;Connect&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">connectItem.addActionListener</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ConnectAction</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fileMenu.add</font><font color="#000000">(</font><font color="#000000">connectItem</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;The&nbsp;Exit&nbsp;item&nbsp;exits&nbsp;the&nbsp;program</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JMenuItem&nbsp;exitItem&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#2a00ff">&#34;Exit&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">exitItem.addActionListener</font><font color="#000000">(</font><font color="#7f0055"><b>new</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ActionListener</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;event</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.exit</font><font color="#000000">(</font><font color="#990000">0</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fileMenu.add</font><font color="#000000">(</font><font color="#000000">exitItem</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textArea&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JTextArea</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JScrollPane</font><font color="#000000">(</font><font color="#000000">textArea</font><font color="#000000">)</font><font color="#000000">,&nbsp;BorderLayout.CENTER</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">DEFAULT_WIDTH&nbsp;=&nbsp;</font><font color="#990000">300</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">DEFAULT_HEIGHT&nbsp;=&nbsp;</font><font color="#990000">200</font><font color="#000000">;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">PasswordChooser&nbsp;dialog&nbsp;=&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JTextArea&nbsp;textArea;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">The&nbsp;Connect&nbsp;action&nbsp;pops&nbsp;up&nbsp;the&nbsp;password&nbsp;dialog.</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;class&nbsp;</b></font><font color="#000000">ConnectAction&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">ActionListener</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;event</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;if&nbsp;first&nbsp;time,&nbsp;construct&nbsp;dialog</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">dialog&nbsp;==&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">PasswordChooser</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;set&nbsp;default&nbsp;values</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.setUser</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">User</font><font color="#000000">(</font><font color="#2a00ff">&#34;yourname&#34;</font><font color="#000000">,&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;pop&nbsp;up&nbsp;dialog</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">dialog.showDialog</font><font color="#000000">(</font><font color="#000000">DataExchangeFrame.this,&nbsp;</font><font color="#2a00ff">&#34;Connect&#34;</font><font color="#000000">))</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;if&nbsp;accepted,&nbsp;retrieve&nbsp;user&nbsp;input</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">User&nbsp;u&nbsp;=&nbsp;dialog.getUser</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textArea.append</font><font color="#000000">(</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;user&nbsp;name&nbsp;=&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;u.getName</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">+&nbsp;</font><font color="#2a00ff">&#34;,&nbsp;password&nbsp;=&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">String</font><font color="#000000">(</font><font color="#000000">u.getPassword</font><font color="#000000">()))</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">+&nbsp;</font><font color="#2a00ff">&#34;\n&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">A&nbsp;password&nbsp;chooser&nbsp;that&nbsp;is&nbsp;shown&nbsp;inside&nbsp;a&nbsp;dialog</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">PasswordChooser&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">JPanel&nbsp;</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">PasswordChooser</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">setLayout</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">BorderLayout</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;construct&nbsp;a&nbsp;panel&nbsp;with&nbsp;user&nbsp;name&nbsp;and&nbsp;password&nbsp;fields</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JPanel&nbsp;panel&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JPanel</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">panel.setLayout</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">GridLayout</font><font color="#000000">(</font><font color="#990000">2</font><font color="#000000">,&nbsp;</font><font color="#990000">2</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">panel.add</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;User&nbsp;name:&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">panel.add</font><font color="#000000">(</font><font color="#000000">username&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JTextField</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">panel.add</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;Password:&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">panel.add</font><font color="#000000">(</font><font color="#000000">password&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JPasswordField</font><font color="#000000">(</font><font color="#2a00ff">&#34;&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">panel,&nbsp;BorderLayout.CENTER</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;create&nbsp;Ok&nbsp;and&nbsp;Cancel&nbsp;buttons&nbsp;that&nbsp;terminate&nbsp;the&nbsp;dialog</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">okButton&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Ok&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">okButton.addActionListener</font><font color="#000000">(</font><font color="#7f0055"><b>new</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ActionListener</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;event</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ok&nbsp;=&nbsp;</font><font color="#7f0055"><b>true</b></font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.setVisible</font><font color="#000000">(</font><font color="#7f0055"><b>false</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JButton&nbsp;cancelButton&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Cancel&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">cancelButton.addActionListener</font><font color="#000000">(</font><font color="#7f0055"><b>new</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ActionListener</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent&nbsp;event</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.setVisible</font><font color="#000000">(</font><font color="#7f0055"><b>false</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;add&nbsp;buttons&nbsp;to&nbsp;southern&nbsp;border</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JPanel&nbsp;buttonPanel&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JPanel</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">buttonPanel.add</font><font color="#000000">(</font><font color="#000000">okButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">buttonPanel.add</font><font color="#000000">(</font><font color="#000000">cancelButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">buttonPanel,&nbsp;BorderLayout.SOUTH</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Sets&nbsp;the&nbsp;dialog&nbsp;defaults.</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">u&nbsp;the&nbsp;default&nbsp;user&nbsp;information</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setUser</font><font color="#000000">(</font><font color="#000000">User&nbsp;u</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">username.setText</font><font color="#000000">(</font><font color="#000000">u.getName</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Gets&nbsp;the&nbsp;dialog&nbsp;entries.</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">a&nbsp;User&nbsp;object&nbsp;whose&nbsp;state&nbsp;represents&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">the&nbsp;dialog&nbsp;entries</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">User&nbsp;getUser</font><font color="#000000">()</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;new&nbsp;</b></font><font color="#000000">User</font><font color="#000000">(</font><font color="#000000">username.getText</font><font color="#000000">()</font><font color="#000000">,&nbsp;password.getPassword</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Show&nbsp;the&nbsp;chooser&nbsp;panel&nbsp;in&nbsp;a&nbsp;dialog</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">parent&nbsp;a&nbsp;component&nbsp;in&nbsp;the&nbsp;owner&nbsp;frame&nbsp;or&nbsp;null</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">title&nbsp;the&nbsp;dialog&nbsp;window&nbsp;title</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">showDialog</font><font color="#000000">(</font><font color="#000000">Component&nbsp;parent,&nbsp;String&nbsp;title</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ok&nbsp;=&nbsp;</font><font color="#7f0055"><b>false</b></font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;locate&nbsp;the&nbsp;owner&nbsp;frame</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Frame&nbsp;owner&nbsp;=&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">parent&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Frame</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">owner&nbsp;=&nbsp;</font><font color="#000000">(</font><font color="#000000">Frame</font><font color="#000000">)&nbsp;</font><font color="#000000">parent;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">owner&nbsp;=&nbsp;</font><font color="#000000">(</font><font color="#000000">Frame</font><font color="#000000">)&nbsp;</font><font color="#000000">SwingUtilities.getAncestorOfClass</font><font color="#000000">(</font><font color="#000000">Frame.class,&nbsp;parent</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;if&nbsp;first&nbsp;time,&nbsp;or&nbsp;if&nbsp;owner&nbsp;has&nbsp;changed,&nbsp;make&nbsp;new&nbsp;dialog</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">dialog&nbsp;==&nbsp;</font><font color="#7f0055"><b>null&nbsp;</b></font><font color="#000000">||&nbsp;dialog.getOwner</font><font color="#000000">()&nbsp;</font><font color="#000000">!=&nbsp;owner</font><font color="#000000">)&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JDialog</font><font color="#000000">(</font><font color="#000000">owner,&nbsp;</font><font color="#7f0055"><b>true</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.add</font><font color="#000000">(</font><font color="#7f0055"><b>this</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.getRootPane</font><font color="#000000">()</font><font color="#000000">.setDefaultButton</font><font color="#000000">(</font><font color="#000000">okButton</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.pack</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;set&nbsp;title&nbsp;and&nbsp;show&nbsp;dialog</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.setTitle</font><font color="#000000">(</font><font color="#000000">title</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">dialog.setVisible</font><font color="#000000">(</font><font color="#7f0055"><b>true</b></font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">ok;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JTextField&nbsp;username;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JPasswordField&nbsp;password;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JButton&nbsp;okButton;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">ok;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">JDialog&nbsp;dialog;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">A&nbsp;user&nbsp;has&nbsp;a&nbsp;name&nbsp;and&nbsp;password.&nbsp;For&nbsp;security&nbsp;reasons,&nbsp;the&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">password&nbsp;is&nbsp;stored&nbsp;as&nbsp;a&nbsp;char[],&nbsp;not&nbsp;a&nbsp;String.</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">User</font><br/>
+<font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">User</font><font color="#000000">(</font><font color="#000000">String&nbsp;aName,&nbsp;</font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">aPassword</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">name&nbsp;=&nbsp;aName;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">password&nbsp;=&nbsp;aPassword;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;getName</font><font color="#000000">()&nbsp;{&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">name;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">getPassword</font><font color="#000000">()&nbsp;{&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">password;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setName</font><font color="#000000">(</font><font color="#000000">String&nbsp;aName</font><font color="#000000">)&nbsp;{&nbsp;</font><font color="#000000">name&nbsp;=&nbsp;aName;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setPassword</font><font color="#000000">(</font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">aPassword</font><font color="#000000">)&nbsp;{&nbsp;</font><font color="#000000">password&nbsp;=&nbsp;aPassword;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">String&nbsp;name;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">password;</font><br/>
+<font color="#000000">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>

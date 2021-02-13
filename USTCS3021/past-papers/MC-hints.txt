@@ -1,0 +1,38 @@
+MC questions explanations:
+
+Question a) 
+   1. abstract class can provide definitions to methods, remember we said that you can have 0 or more abstract methods in an abstract class. (for interfaces, prior to Java 8, you can only have abstract methods, after Java 8 you can have default methods with definitions provided to these default methods)
+   2. creating anonymous inner class are allowed for abstract classes, concrete classes (YES! concrete classes too)  and interfaces, though our lecture put a bigger emphasis on anonymous inner classes for interfaces.
+   3. in the main() method, we are creating two anonymous inner class objects, one is test (belongs to an anonymous class that extends AbstractClassTest() and overrides getValue() of AbstractClassTest) , the other is inner (belongs to an anonymous class that extends InnerAbstractClass and overrides getValue() of InnerAbstractClass).
+
+
+Question b) choices A, B are both creating anonymous inner class objects, choice B adds a new data member "String s" to the anonymous class. Choices C and D are not okay because if you wish to call a constructor with parameter, you need to pass an object (String in this case), you can not pass "String s" as being shown. In choice D Subclass is not an inner class of SuperClass, so so SuperClass.SubClass is illegal, and also even if SubClass is an inner class of SuperClass, choice D is not the correct approach to call the constructor of SubClass.
+
+
+Question c) refer to slide 40 of https://course.cse.ust.hk/comp3021/notes/6-interface-full.pdf
+In general:
+1. a class can "extends" another class and "implements" interface(s)
+2. an interface can "extends" other interface(s). 
+
+
+Question d) Generic ArrayList<T>, T can not be one of the primitive types.
+
+
+Question e) The type information (Integer, Double) has been erased by Java compiler and this information is absent during run time, therefore when we output the result from .getClass() method, both ArrayLists will return java.util.ArrayList
+
+
+Question f) First the return value is of the type MixAndMatch<? super JellyFish>
+this is a collection of types MiXAndMatch<T3> where T3 could be any type that is lower bounded by JellyFish. The compiler will check this during the compile time (recall that in Java, templates are to enable the Java compiler to enforce type checking). A is okay, because null could be assigned to a reference of any type. B and C are okay, because the return value (<? super JellyFish>), includes JellyFish or supertype of JellyFish (i.e SeaCreature). D, E are not Okay because T1 extends SeaCreature and there is no guarantee that it will be JellyFish nor supertype of JellyFish, T2 extends Shark, which is not JellyFish nor supertype of JellyFish.
+
+ 
+Question g) There are two threads running one is a thread started by Java to run the main() method, the other is the thread t, t.join() will let the thread running main() wait for thread t to finish.
+because of that "Hehe" must be the last output of the code because it is after t.join()
+
+
+Question h) Assume one thread is running read(), another thread is running set(). Then choice A doesn't work for sure, there isn't even the synchronized keyword. Choice C only locks a using synchronized(a), but b is not locked. Choice D, only synchronized a in read() and synchronized b in set(), but not both a and b. Choice E has syntax errors.
+
+
+Question i) Lambda expression syntax, choice C, if there isn't a parameter, you need to put () at the left of the -> symbol. Choice D, it is not okay to provide one parameter with the type, yet the other without the type. 
+
+
+Question j) An interface implicitly declared a method for each public method in the Object class (including equals()). For functional interface, you can have exactly *one abstract method*. The abstract method(s) overriding the public method(s) of Object class is not counted towards that. So though there are 2 abstract methods, but only apply() is counted. Lambda expression will automatically be used for defining the abstract method apply(int j), which calculates and returns j*j.

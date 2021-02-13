@@ -1,0 +1,4 @@
+Here is a calculator, just in case you can't find yours.
+
+<APPLET  CODE="PopupCalculatorApplet.class"  ARCHIVE="PopupCalculatorAppletClasses.jar, swing.jar" WIDTH = 60 HEIGHT = 20 >
+</APPLET>

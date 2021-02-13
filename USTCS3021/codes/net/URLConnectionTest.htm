@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter V4.1 2004 by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">version&nbsp;1.10&nbsp;2004-08-04</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">author&nbsp;Cay&nbsp;Horstmann</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.net.*;</font><br/>
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.*;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">This&nbsp;program&nbsp;connects&nbsp;to&nbsp;an&nbsp;URL&nbsp;and&nbsp;displays&nbsp;the&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">response&nbsp;header&nbsp;data&nbsp;and&nbsp;the&nbsp;first&nbsp;10&nbsp;lines&nbsp;of&nbsp;the</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">requested&nbsp;data.&nbsp;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Supply&nbsp;the&nbsp;URL&nbsp;and&nbsp;an&nbsp;optional&nbsp;username&nbsp;and&nbsp;password&nbsp;(for</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">HTTP&nbsp;basic&nbsp;authentication)&nbsp;on&nbsp;the&nbsp;command&nbsp;line.</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">URLConnectionTest</font><br/>
+<font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[]&nbsp;</font><font color="#000000">args</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;urlName;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">args.length&nbsp;&gt;&nbsp;</font><font color="#990000">0</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">urlName&nbsp;=&nbsp;args</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">urlName&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;http://java.sun.com&#34;</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">URL&nbsp;url&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">URL</font><font color="#000000">(</font><font color="#000000">urlName</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">URLConnection&nbsp;connection&nbsp;=&nbsp;url.openConnection</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;set&nbsp;username,&nbsp;password&nbsp;if&nbsp;specified&nbsp;on&nbsp;command&nbsp;line</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">args.length&nbsp;&gt;&nbsp;</font><font color="#990000">2</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;username&nbsp;=&nbsp;args</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;password&nbsp;=&nbsp;args</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;input&nbsp;=&nbsp;username&nbsp;+&nbsp;</font><font color="#2a00ff">&#34;:&#34;&nbsp;</font><font color="#000000">+&nbsp;password;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;encoding&nbsp;=&nbsp;base64Encode</font><font color="#000000">(</font><font color="#000000">input</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">connection.setRequestProperty</font><font color="#000000">(</font><font color="#2a00ff">&#34;Authorization&#34;</font><font color="#000000">,&nbsp;</font><font color="#2a00ff">&#34;Basic&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;encoding</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">connection.connect</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;print&nbsp;header&nbsp;fields</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Map&lt;String,&nbsp;List&lt;String&gt;&gt;&nbsp;headers&nbsp;=&nbsp;connection.getHeaderFields</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for&nbsp;</b></font><font color="#000000">(</font><font color="#000000">Map.Entry&lt;String,&nbsp;List&lt;String&gt;&gt;&nbsp;entry&nbsp;:&nbsp;headers.entrySet</font><font color="#000000">())</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;key&nbsp;=&nbsp;entry.getKey</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for&nbsp;</b></font><font color="#000000">(</font><font color="#000000">String&nbsp;value&nbsp;:&nbsp;entry.getValue</font><font color="#000000">())</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#000000">key&nbsp;+&nbsp;</font><font color="#2a00ff">&#34;:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;value</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;print&nbsp;convenience&nbsp;functions</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;----------&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getContentType:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getContentType</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getContentLength:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getContentLength</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getContentEncoding:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getContentEncoding</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getDate:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getDate</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getExpiration:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getExpiration</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;getLastModifed:&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;connection.getLastModified</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;----------&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Scanner&nbsp;in&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Scanner</font><font color="#000000">(</font><font color="#000000">connection.getInputStream</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;print&nbsp;first&nbsp;ten&nbsp;lines&nbsp;of&nbsp;contents</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for&nbsp;</b></font><font color="#000000">(</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">n&nbsp;=&nbsp;</font><font color="#990000">1</font><font color="#000000">;&nbsp;in.hasNextLine</font><font color="#000000">()&nbsp;</font><font color="#000000">&amp;&amp;&nbsp;n&nbsp;&lt;=&nbsp;</font><font color="#990000">10</font><font color="#000000">;&nbsp;n++</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#000000">in.nextLine</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">in.hasNextLine</font><font color="#000000">())&nbsp;</font><font color="#000000">System.out.println</font><font color="#000000">(</font><font color="#2a00ff">&#34;.&nbsp;.&nbsp;.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>catch&nbsp;</b></font><font color="#000000">(</font><font color="#000000">IOException&nbsp;e</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">e.printStackTrace</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Computes&nbsp;the&nbsp;Base64&nbsp;encoding&nbsp;of&nbsp;a&nbsp;string</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">s&nbsp;a&nbsp;string</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;Base&nbsp;64&nbsp;encoding&nbsp;of&nbsp;s</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">String&nbsp;base64Encode</font><font color="#000000">(</font><font color="#000000">String&nbsp;s</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ByteArrayOutputStream&nbsp;bOut&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ByteArrayOutputStream</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Base64OutputStream&nbsp;out&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Base64OutputStream</font><font color="#000000">(</font><font color="#000000">bOut</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try</b></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.write</font><font color="#000000">(</font><font color="#000000">s.getBytes</font><font color="#000000">())</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.flush</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>catch&nbsp;</b></font><font color="#000000">(</font><font color="#000000">IOException&nbsp;e</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">bOut.toString</font><font color="#000000">()</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">This&nbsp;stream&nbsp;filter&nbsp;converts&nbsp;a&nbsp;stream&nbsp;of&nbsp;bytes&nbsp;to&nbsp;their</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Base64&nbsp;encoding.</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Base64&nbsp;encoding&nbsp;encodes&nbsp;3&nbsp;bytes&nbsp;into&nbsp;4&nbsp;characters.</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">|11111122|22223333|33444444|</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Each&nbsp;set&nbsp;of&nbsp;6&nbsp;bits&nbsp;is&nbsp;encoded&nbsp;according&nbsp;to&nbsp;the</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">toBase64&nbsp;map.&nbsp;If&nbsp;the&nbsp;number&nbsp;of&nbsp;input&nbsp;bytes&nbsp;is&nbsp;not</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">a&nbsp;multiple&nbsp;of&nbsp;3,&nbsp;then&nbsp;the&nbsp;last&nbsp;group&nbsp;of&nbsp;4&nbsp;characters</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">is&nbsp;padded&nbsp;with&nbsp;one&nbsp;or&nbsp;two&nbsp;=&nbsp;signs.&nbsp;Each&nbsp;output&nbsp;line</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">is&nbsp;at&nbsp;most&nbsp;76&nbsp;characters.</font><br/>
+<font color="#3f5fbf">*/</font><br/>
+<font color="#7f0055"><b>class&nbsp;</b></font><font color="#000000">Base64OutputStream&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">FilterOutputStream</font><br/>
+<font color="#000000">{</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">Constructs&nbsp;the&nbsp;stream&nbsp;filter</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">out&nbsp;the&nbsp;stream&nbsp;to&nbsp;filter</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">Base64OutputStream</font><font color="#000000">(</font><font color="#000000">OutputStream&nbsp;out</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">(</font><font color="#000000">out</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">write</font><font color="#000000">(</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">c</font><font color="#000000">)&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]&nbsp;</font><font color="#000000">=&nbsp;c;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">i++;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">i&nbsp;==&nbsp;</font><font color="#990000">3</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[(</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xFC</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">2</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x03</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;&lt;&nbsp;</font><font color="#990000">4</font><font color="#000000">)&nbsp;</font><font color="#000000">|&nbsp;</font><font color="#000000">((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xF0</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">4</font><font color="#000000">)])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x0F</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;&lt;&nbsp;</font><font color="#990000">2</font><font color="#000000">)&nbsp;</font><font color="#000000">|&nbsp;</font><font color="#000000">((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xC0</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">6</font><font color="#000000">)])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x3F</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">col&nbsp;+=&nbsp;</font><font color="#990000">4</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">i&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">col&nbsp;&gt;=&nbsp;</font><font color="#990000">76</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#990000">'\n'</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">col&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">flush</font><font color="#000000">()&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">i&nbsp;==&nbsp;</font><font color="#990000">1</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[(</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xFC</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">2</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[(</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x03</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;&lt;&nbsp;</font><font color="#990000">4</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#990000">'='</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#990000">'='</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else&nbsp;if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">i&nbsp;==&nbsp;</font><font color="#990000">2</font><font color="#000000">)</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[(</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xFC</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">2</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x03</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;&lt;&nbsp;</font><font color="#990000">4</font><font color="#000000">)&nbsp;</font><font color="#000000">|&nbsp;</font><font color="#000000">((</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0xF0</font><font color="#000000">)&nbsp;</font><font color="#000000">&gt;&gt;&nbsp;</font><font color="#990000">4</font><font color="#000000">)])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#000000">toBase64</font><font color="#000000">[(</font><font color="#000000">inbuf</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]&nbsp;</font><font color="#000000">&amp;&nbsp;</font><font color="#990000">0x0F</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;&lt;&nbsp;</font><font color="#990000">2</font><font color="#000000">])</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>super</b></font><font color="#000000">.write</font><font color="#000000">(</font><font color="#990000">'='</font><font color="#000000">)</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>char</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">toBase64&nbsp;=</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">{&nbsp;&nbsp;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">'A'</font><font color="#000000">,&nbsp;</font><font color="#990000">'B'</font><font color="#000000">,&nbsp;</font><font color="#990000">'C'</font><font color="#000000">,&nbsp;</font><font color="#990000">'D'</font><font color="#000000">,&nbsp;</font><font color="#990000">'E'</font><font color="#000000">,&nbsp;</font><font color="#990000">'F'</font><font color="#000000">,&nbsp;</font><font color="#990000">'G'</font><font color="#000000">,&nbsp;</font><font color="#990000">'H'</font><font color="#000000">,&nbsp;</font><font color="#990000">'I'</font><font color="#000000">,&nbsp;</font><font color="#990000">'J'</font><font color="#000000">,&nbsp;</font><font color="#990000">'K'</font><font color="#000000">,&nbsp;</font><font color="#990000">'L'</font><font color="#000000">,&nbsp;</font><font color="#990000">'M'</font><font color="#000000">,&nbsp;</font><font color="#990000">'N'</font><font color="#000000">,&nbsp;</font><font color="#990000">'O'</font><font color="#000000">,&nbsp;</font><font color="#990000">'P'</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">'Q'</font><font color="#000000">,&nbsp;</font><font color="#990000">'R'</font><font color="#000000">,&nbsp;</font><font color="#990000">'S'</font><font color="#000000">,&nbsp;</font><font color="#990000">'T'</font><font color="#000000">,&nbsp;</font><font color="#990000">'U'</font><font color="#000000">,&nbsp;</font><font color="#990000">'V'</font><font color="#000000">,&nbsp;</font><font color="#990000">'W'</font><font color="#000000">,&nbsp;</font><font color="#990000">'X'</font><font color="#000000">,&nbsp;</font><font color="#990000">'Y'</font><font color="#000000">,&nbsp;</font><font color="#990000">'Z'</font><font color="#000000">,&nbsp;</font><font color="#990000">'a'</font><font color="#000000">,&nbsp;</font><font color="#990000">'b'</font><font color="#000000">,&nbsp;</font><font color="#990000">'c'</font><font color="#000000">,&nbsp;</font><font color="#990000">'d'</font><font color="#000000">,&nbsp;</font><font color="#990000">'e'</font><font color="#000000">,&nbsp;</font><font color="#990000">'f'</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">'g'</font><font color="#000000">,&nbsp;</font><font color="#990000">'h'</font><font color="#000000">,&nbsp;</font><font color="#990000">'i'</font><font color="#000000">,&nbsp;</font><font color="#990000">'j'</font><font color="#000000">,&nbsp;</font><font color="#990000">'k'</font><font color="#000000">,&nbsp;</font><font color="#990000">'l'</font><font color="#000000">,&nbsp;</font><font color="#990000">'m'</font><font color="#000000">,&nbsp;</font><font color="#990000">'n'</font><font color="#000000">,&nbsp;</font><font color="#990000">'o'</font><font color="#000000">,&nbsp;</font><font color="#990000">'p'</font><font color="#000000">,&nbsp;</font><font color="#990000">'q'</font><font color="#000000">,&nbsp;</font><font color="#990000">'r'</font><font color="#000000">,&nbsp;</font><font color="#990000">'s'</font><font color="#000000">,&nbsp;</font><font color="#990000">'t'</font><font color="#000000">,&nbsp;</font><font color="#990000">'u'</font><font color="#000000">,&nbsp;</font><font color="#990000">'v'</font><font color="#000000">,</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#990000">'w'</font><font color="#000000">,&nbsp;</font><font color="#990000">'x'</font><font color="#000000">,&nbsp;</font><font color="#990000">'y'</font><font color="#000000">,&nbsp;</font><font color="#990000">'z'</font><font color="#000000">,&nbsp;</font><font color="#990000">'0'</font><font color="#000000">,&nbsp;</font><font color="#990000">'1'</font><font color="#000000">,&nbsp;</font><font color="#990000">'2'</font><font color="#000000">,&nbsp;</font><font color="#990000">'3'</font><font color="#000000">,&nbsp;</font><font color="#990000">'4'</font><font color="#000000">,&nbsp;</font><font color="#990000">'5'</font><font color="#000000">,&nbsp;</font><font color="#990000">'6'</font><font color="#000000">,&nbsp;</font><font color="#990000">'7'</font><font color="#000000">,&nbsp;</font><font color="#990000">'8'</font><font color="#000000">,&nbsp;</font><font color="#990000">'9'</font><font color="#000000">,&nbsp;</font><font color="#990000">'+'</font><font color="#000000">,&nbsp;</font><font color="#990000">'/'</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">;</font><br/>
+<font color="#ffffff"></font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">col&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">i&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br/>
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>int</b></font><font color="#000000">[]&nbsp;</font><font color="#000000">inbuf&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#7f0055"><b>int</b></font><font color="#000000">[</font><font color="#990000">3</font><font color="#000000">]</font><font color="#000000">;</font><br/>
+<font color="#000000">}</font><br/>
+<font color="#ffffff"></font><font color="#ffffff">
+</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>
