@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from course.cse.ust.hk/comp3311/Project/Tasks/QandA/task2-QA.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:41:19 GMT -->
+<head>
+		<title>COMP 3311: Task 2 Q&amp;A</title>
+		<link href="../../../css/mystyles.css" rel="stylesheet" type="text/css">
+	</head>
+	<body class="arial-font">
+		<h2 align="center">COMP 3311: Database Management Systems</h2>
+		<h3 align="center">Task 2: Questions and Answers</h3>
+		<div>
+			<img src="../../../images/line-color.gif" width="100%" height="3" align="bottom" />
+		</div>
+		<h4 align="center">Posted Date</h4>
+		<div align="center">
+<a href="#Oct31">Oct. 31</a>| <a href="#Oct26">Oct. 26</a> |</div>
+		<div>
+	<img src="../../../images/eye-rule.gif" width="100%" height="11" align="bottom" />
+		</div>
+        <p><br />
+        </p>
+        <h4 align="center"><a name="Oct31" id="Oct31"></a>Oct. 31</h4>
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>In the project description states: Only a single supervisor grade should be given for 
+            each graded requirement even if an FYP has more than one supervisor. Is this a constraint that can be 
+            added when we create the table?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>No. It needs to be implemented in the application.</td>
+          </tr>
+    </table>
+    <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td>If a project group is not assigned to an FYP, then are the "assignedFYP", "groupCode" and "reader" 
+        attributes in the ProjectGroup relation  all null?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>Yes.</td>
+      </tr>
+    </table>
+    <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td>Are the default values for "proposalReport", "progressReport", "finalReport" and "presentation" 
+         0 or null in the RequirementGrades relation?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td> They are null until given a value.</td>
+      </tr>
+    </table>
+    <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td><b>Part 1:</b> Do we need to drop all tables before creating them like what is done in the lab DB files?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>No.</td>
+      </tr>
+    </table>
+    <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td><b>Query 1:</b> We need to display two supervisors' names and the title and category of the FYP. 
+        Is it okay to display the two supervisors' names in two rows.</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>Yes.</td>
+      </tr>
+    </table>
+    <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td><b>Query 2:</b> Is there anything I should do for a project group that has been assigned to an FYP, 
+        but has no reader assigned yet? Can I just show the null value for the reader's name?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>You can just show null.</td>
+      </tr>
+    </table>
+    <br>
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td><b>Query 3:</b> It asks to find the number of project groups for each FYP category but asks to order by 
+        the number of FYPs. Does it mean that the result returned should include the FYP category, the number of 
+        project groups and the number of FYPs?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>No, its a typo. It should be &quot;order by number of project groups&quot;, not &quot;order by number of FYPs&quot;. 
+        </td>
+      </tr>
+    </table>
+    <br>
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+      <tr>
+        <td valign="top" width="15"><b>Q:</b></td>
+        <td><b>Query 4:</b> &ldquo;Find the title, supervisor name, names of the students in the project group...&rdquo;. 
+        Here, one FYP title can only join with one ProjectGroup, but inside the ProjectGroup, we can have multiple students. 
+        Does this mean the query returns tuples with respect to each student that belongs to the same project group?</td>
+      </tr>
+      <tr>
+        <td valign="top" width="15"><b>A:</b></td>
+        <td>Yes.</td>
+      </tr>
+    </table>
+    <h4 align="center"><a name="Oct26" id="Oct26"></a>Oct. 26</h4>
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+  <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Do we need to also set the null value constraints for all attributes? 
+            If so, then how can we derive them? 
+            It doesn't seem very obvious when referring to both the Task 2 and Task 1 description. 
+            For example, can either the description or otherRequirements of FYP be null?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>We believe it is possible to determine whether an attribute value can be null from the description 
+            and by applying a little bit of common sense. For the description of an FYP, how can students decide
+            whether to select an FYP if there is no description of it? For other requirements, do you think that 
+            every FYP needs to have some other requirements specified for it? For faculty room number, do you know 
+            of any faculty that does not have an office room number? 
+            Also, the first sentence of the paragraph that describes these attributes states "Required FYP information ..." 
+            Usually "required" means must have a value.</td>
+          </tr>
+        </table>
+        <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Are we supposed to add constraints that can be derived from our common sense, but not specified 
+            in the project description? For example, do I have to add a constraint on CSEStudent's name attribute 
+            as normal people won't have a digit in their names?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes, but please use common sense. If you can find a regular expression on the web that works for 
+            <b>all</b> people's names, then by all means use it. But we bet that you cannot find such a regular
+            expression because people's names can vary and who says it cannot contain a number or a hyphen or a 
+            period, etc.? So, the best we think you can do for a name is  simply to check that it is not null.</td>
+          </tr>
+        </table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>The project description specifies the categories that an FYP can have. 
+                Can there be any other category of FYP other than those in the list (Artificial Intelligence, 
+                Computer Graphics, ..., Theory, Vision and Graphics)?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>These are the only FYP categories allowed.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Can an FYP exist without having a category? For example, what would happen to FYPs that 
+                have &lsquo;Artificial Intelligence&rsquo; as their categories if the FYP category 
+                &lsquo;Artificial Intelligence&rsquo; is deleted? Would they still exist in the database 
+                and wait for another closest category to be assigned?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>An FYP cannot exist with no value for the category. This is part of the required information 
+                for an FYP. If a category is deleted, then the FYP must be deleted. But why would you ever want 
+                to delete an FYP category in the first place?</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>For query 4, if a project group has been assigned to an FYP that they have not indicated 
+                an interest in or have specified an interest with priority equal to 1, then will they be excluded 
+                from the query result? </td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes.</td>
+			</tr>
+		</table>
+	</body>
+
+<!-- Mirrored from course.cse.ust.hk/comp3311/Project/Tasks/QandA/task2-QA.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:41:19 GMT -->
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	
+<!-- Mirrored from course.cse.ust.hk/comp3311/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:40:21 GMT -->
+<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="COMP 3311 Course Website">
+		<meta name="author" content="Frederick Lochovsky">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>COMP 3311 Homepage</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/sidebar.css" rel="stylesheet">
+		<link href="css/hamburger.css" rel="stylesheet">
+		<link href="css/mystyles.css" rel="stylesheet" type="text/css">
+
+	</head>
+
+	<body class="arial-font ml-3">
+		<!-- Page Header -->
+		<div class="imgbox ml-2 mr-2" id="page-header-wrapper" style="overflow-x: hidden">
+			<table>
+				<tr>
+					<td valign="middle">
+					<button class="hamburger hamburger--collapse is-active" type="button" id="sidebar-toggle">
+						<span class="hamburger-box"> <span class="hamburger-inner"> </span> </span>
+					</button></td>
+					<td align="center" width="100%"><img class="center-fit" src="images/CourseHeader.png"/></td>
+				</tr>
+			</table>
+			<hr />
+		</div>
+		<!-- /#page-header-wrapper -->
+
+		<!-- Page Wrapper -->
+		<div class="d-flex" id="wrapper">
+
+			<!-- Sidebar -->
+			<div class="bg-medium border-right" id="sidebar-wrapper">
+				<div class="list-group list-group-flush">
+					<ul class="list-unstyled components">
+						<li>
+							<a href="Info/announcements.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Announcements</a>
+						</li>
+						<li>
+							<a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light dropdown-toggle">Course Information</a>
+							<ul class="collapse list-unstyled" id="courseSubmenu">
+								<li>
+									<a href="Info/general-info.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">&nbsp;&nbsp;&nbsp;General</a>
+								</li>
+								<li>
+									<a href="Info/outline.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">&nbsp;&nbsp;&nbsp;Outline</a>
+								</li>
+								<li>
+									<a href="Info/schedule.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">&nbsp;&nbsp;&nbsp;Schedule</a>
+								</li>
+								<li>
+									<a href="Info/notes-policies.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">&nbsp;&nbsp;&nbsp;Policies</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="Lectures/lecture-notes.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Lecture Notes/Exercises</a>
+						</li>
+						<li>
+							<a href="Labs/lab-schedule.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Lab Schedule</a>
+						</li>
+						<li>
+							<a href="Tutorials/tutorial-schedule.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Tutorial Schedule</a>
+						</li>
+						<li>
+							<a href="Project/project-info.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Project Information</a>
+						</li>
+						<li>
+							<a href="Test-Exam/test-info.html" class="list-group-item list-group-item-action bg-light" target="mainFrame">Test/Exam Information</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /#sidebar-wrapper -->
+
+			<!-- Main Content -->
+			<div class="container-fluid" id="main-content-wrapper">
+				<iframe src="Info/announcements.html" name="mainFrame" frameborder="0" scrolling="auto" height="78%" width="100%"></iframe>
+			</div>
+			<!-- /#main-content-wrapper -->
+		</div>
+		<!-- /#page-wrapper -->
+		<div class="footer">
+			Copyright 2020, Department of Computer Science and Engineering, The Hong Kong University of Science and Technology.
+		</div>
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="js/jquery/jquery.min.js"></script>
+		<script src="js/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+		<!-- Sidebar Toggle Script -->
+		<script>
+			var $hamburger = $(".hamburger");
+			$hamburger.on("click", function(e) {
+				$hamburger.toggleClass("is-active");
+				$("#wrapper").toggleClass("toggled");
+			});
+		</script>
+
+	</body>
+
+
+<!-- Mirrored from course.cse.ust.hk/comp3311/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:40:24 GMT -->
+</html>

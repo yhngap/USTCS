@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from course.cse.ust.hk/comp3311/Project/Tasks/QandA/task1-QA.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:41:19 GMT -->
+<head>
+		<title>COMP 3311: Task 1 Q&amp;A</title>
+		<link href="../../../css/mystyles.css" rel="stylesheet" type="text/css">
+	</head>
+	<body class="arial-font">
+		<h2 align="center">COMP 3311: Database Management Systems</h2>
+		<h3 align="center">Task 1: Questions and Answers</h3>
+		<div>
+			<img src="../../../images/line-color.gif" width="100%" height="3" align="bottom" />
+		</div>
+		<h4 align="center">Posted Date</h4>
+		<div align="center">
+| <a href="#oct01">Oct. 1</a> | <a href="#sep25">Sept. 25</a> |</div>
+		<div>
+	<img src="../../../images/eye-rule.gif" width="100%" height="11" align="bottom" />
+		</div>
+        <br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+<tr>
+				<td align="center" bgcolor="#FFFF00" valign="top"><strong style="color: red">Comment</strong></td>
+			</tr>
+			<tr>
+				<td valign="top">From some of the questions being asked it seems that some of you <strong>do not</strong> 
+                understand what and what not to represent in a database design. This is somewhat understandable if you 
+                have never designed a database before. However, please consider that a database design represents the 
+                (static) data <strong>only</strong>. It <strong>does not</strong> represent the kinds of operations that 
+                users can perform on the data.</td>
+			</tr>
+		</table>
+		<h4 align="center"><a name="oct01" id="oct01"></a>Oct. 1</h4>
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Is it possible to denote an attribute as a discriminator in a weak entity in Oracle Data Modeler?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>It is not possible. Use a note to explain that an attribute is a discriminator or, 
+            after you create the jpg or pdf file of the design, you can use an image/PDF editing 
+            program to add this information.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>How can we show exact cardinality and participation numbers in  Oracle Data Modeler?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>You need to use a note.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Is it necessary to indicate which faculty is the only FYP coordinator?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>This is design decision and as the database designer, it is your decision to make. However, we would ask you what information about the FYP coordinator needs to be stored in the database and why? 
+            If it is only to indicate that this person can access certain information or do certain operations on the database, 
+            then this is not part of the application data, but access rights information that is controlled by the privileges 
+            that are given to certain users.</td>
+          </tr>
+        </table>
+        <br>
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Are we supposed to show foreign keys in the E-R diagram for this task or is it okay to hide the foreign keys?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>You should hide them since foreign keys are a concept that is used only in the relational model. 
+            Oracle Data Modeler shows this information as preparation for the reduction to relational schemas.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Is a group code generated only after an FYP has been assigned to a group? 
+            Does that mean a group does not have any identifying attributes before an FYP is assigned?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes, that is what is stated in the project description.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Can an FYP have 0 faculty members that supervise it?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>No, of course not. Please think about what it would mean for an FYP to have 0 faculty members that supervise it? 
+            An FYP with no supervisor! Does this make any sense to you?</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Do we have to explicitly indicate the maximum cardinality number in the E-R diagram if it is not N?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>How do we represent a composite attribute in Oracle Data Modeler?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>For a composite attribute you first need to create a structured type and then use it as the 
+            data type of the composite attribute. These capabilities are beyond the scope of what we have taught 
+            you in the lab. So, just add a note to explain that an attribute is a composite attribute.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Does an FYP supervisor supervise all project groups assigned to said FYP? 
+            In other words, the project group supervisors can only be the supervisors of the FYP.</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Can we assume we are only designing a database for a specific year and thus do not need to take it into account             when designing the E-R diagram?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes as there is no mention made about different years in the project description. 
+            Each year's database will be self-contained and hold data for that year only.</td>
+          </tr>
+        </table>
+        <br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>May I assume that the &quot;any other requirements that should be satisfied to apply for the FYP&quot; is a           multi-valued attribute?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>We are not here to tell you how to represent a requirement. 
+            You are the database designer so you need to decide how to represent a requirement based on reasonable assumptions.<br>
+            <br>            <b>E-R modeling note: </b>A multi-valued attribute should only be used when the values you want to represent
+              describe similar things (e.g., phone numbers, course majors, skills, etc.). It should not be used as a catch-all
+            attribute to represent disparate things. For such data, a simple string attribute would suffice.</td>
+          </tr>
+        </table>
+<h4 align="center"><a name="sep25" id="sep25"></a>Sept. 25</h4>
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>May I assume the entire FYP management system only stores student information if that student decides to form group?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>No. The FYP management systems stores information about all students that are required to do an FYP whether they want to form a group or not.</td>
+          </tr>
+    </table>
+<br />
+        <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>May I assume the system only stores faculty members that are either a supervisor or reader or both?</td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes.</td>
+          </tr>
+        </table>
+        <br />
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+          <tr>
+            <td valign="top" width="15"><b>Q:</b></td>
+            <td>Here is some common knowledge I would like to confirm:
+              <ol>
+                <li>An FYP can have 0 groups interested in it.</li>
+                <li>An FYP can be assigned to 0 groups.</li>
+                <li>A group can be assigned to 0 FYPs.</li>
+                <li>An FYP can be related to 0 students.</li>
+            </ol></td>
+          </tr>
+          <tr>
+            <td valign="top" width="15"><b>A:</b></td>
+            <td>Yes to all.</td>
+          </tr>
+        </table>
+    <br>
+    <table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Can an FYP coordinator also be an FYP supervisor or a reader?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Can a faculty be a reader of any project group that is not supervised by him/her?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>For FYP category, should an FYP have only one category or can it have more than one?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>It can have only one category.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>For a student who wants to join a thesis type FYP (only allows one student), 
+                he/she will also need to form a project group that only contains himself/herself first? </td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Referring to "project groups should be able to indicate their interest in an FYP 
+                by specifying a priority from 1 (highest) to 5 (lowest) for the FYP" and 
+                "each project group should be able to indicate an interest in more than one FYP, 
+                either with the same or different priority", does it mean it is possible that a 
+                project group indicates 20 FYPs all with priority 1?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes, it is possible. Not sure that supervisors will look very favorably on such a group 
+                as such an indication is practically meaningless as it indicates that such a group really has 
+                no real preference for any project.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Can there be a student that does not belong to any project group?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes. In fact, initially no student belongs to any project group.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Can a project group have multiple readers?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>No. Each project group has only one reader.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Is the FYP coordinator the same as an FYP supervisor?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes and No. The FYP coordinator is the faculty who manages  the FYP management system.
+                However, since the FYP coordinator is also a faculty, then he/she can also supervise FYPs 
+                and he/she can also be a reader.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>The project description states that when a project group is assigned to an FYP, 
+                it should be assigned a unique group code derived from the faculty code of the supervisors. 
+                Does this mean that each project group has a different group code?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>Yes. That is what it means to be unique.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>What does 'FYP thesis should have a minimum and a maximum of one' mean?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>The minimum and maximum refers to the number of students that can be in  a project group. 
+                For a thesis there can be only one student in the project group.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Are we allowed to add an extra identifying attribute to some entities that might not have any candidate key?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>As the database designer, you are allowed to do anything that is legal to do in an E-R schema. 
+                However, as a student in this course you need to justify why you are adding an extra identifying attribute. 
+                Please be reminded that it is <u>not</u> necessary for an entity to have a key, so a really good
+                justification is needed if you want to add an extra identifying attribute especially since such 
+                attributes have no meaning in the application domain.</td>
+			</tr>
+		</table>
+<br />
+		<table align="center" border="1" cellspacing="0" cellpadding="3" width="550">
+			<tr>
+				<td valign="top" width="15"><b>Q:</b></td>
+				<td>Would students in a same project group receive the same grade?</td>
+			</tr>
+			<tr>
+				<td valign="top" width="15"><b>A:</b></td>
+				<td>No, students in the same group can receive different grades depending on their contribution to the project.
+                It is up to the supervisor/reader whether to give the same grade or not.</td>
+			</tr>
+		</table>
+	</body>
+
+<!-- Mirrored from course.cse.ust.hk/comp3311/Project/Tasks/QandA/task1-QA.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Jan 2021 07:41:19 GMT -->
+</html>

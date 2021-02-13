@@ -1,0 +1,54 @@
+@charset "UTF-8";
+.arial-font {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Remove outline for non-keyboard :focus */
+*:focus:not(.focus-visible) {
+  outline: none;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: midnightblue;
+  color: white;
+  font-size: x-small;
+}
+
+.imgbox {
+  display: grid;
+  height: 100%;
+}
+        
+.center-fit {
+  max-height: 100vh;
+  max-width: 100%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 767px)
+{
+  body
+  {
+    font-size: 10px;
+  }
+    p
+  {
+    font-size: 10px;
+  }
+}
+@media only screen and (min-width: 768px)
+{
+  body
+  {
+    font-size: 12px;
+  }
+    p
+  {
+    font-size: 12px;
+  }
+}
